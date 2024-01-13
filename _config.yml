@@ -1,0 +1,35 @@
+remote_theme           : "cs357/jekyll-rtd-theme"
+
+# Site Settings
+locale                   : "en-US"
+title                    : "CS 357 Reference"
+lang                     : "en-US"
+name                     : "CS 357 Reference"
+description              : "Site to view the Epoch Bylaws"
+url                      : "cs357.github.io"
+baseurl                  : "/textbook"
+repository               : "cs357/textbook"
+edit: false
+author: "CS 357 @ UIUC Course Staff"
+courseUrl: https://courses.engr.illinois.edu/cs357/sp2024
+
+addons:
+  - github
+  - gems
+  - analytics
+
+# Reading Files
+exclude:
+  - Makefile
+  - Gemfile
+  - Gemfile.lock
+
+readme_index:
+  with_frontmatter: true
+  
+kramdown:
+  input: GFM
+
+# Sass/SCSS
+sass:
+  style: compressed # https://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style
