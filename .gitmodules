@@ -1,0 +1,3 @@
+[submodule "cs357-rtd-theme"]
+	path = cs357-rtd-theme
+	url = https://github.com/cs357/cs357-rtd-theme
