@@ -24,7 +24,7 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - node_modules
-
+  - README.txt
 readme_index:
   with_frontmatter: true
 

@@ -23,21 +23,21 @@ checkout:
 	@git checkout assets/css/theme.min.css
 
 install:
-	@gem install jekyll bundler
-	@npm install
+	@npm install -g yarn
+	@yarn install
 	@bundle install
 
 format:
-	@npm run format
+	@yarn format
 
 report:
-	@npm run report
+	@yarn report
 
 clean:
 	@bundle exec jekyll clean
 
 dist: format clean
-	@npm run build
+	@yarn build
 
 status: format clean checkout
 	@git status
