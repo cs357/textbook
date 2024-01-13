@@ -10,6 +10,8 @@ repository: "cs357/textbook"
 edit: false
 author: "CS 357 @ UIUC Course Staff"
 
+theme: cs357-rtd-theme
+
 semester: sp2024
 courseUrl: https://courses.engr.illinois.edu/cs357
 
