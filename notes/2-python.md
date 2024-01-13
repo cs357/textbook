@@ -5,12 +5,9 @@ description: An elementary introduction to Python.
 author:
 - Mariana Silva
 - CS 357 Course Staff
-index: 1
 ---
 
-# Python
-
-* * *
+# Introduction to Python
 
 ## Learning Objectives
 
@@ -80,7 +77,7 @@ Here is the [official documentation](https://docs.python.org/3/tutorial/datastru
 
 Sometimes to define a funstion si useful. The keyword "def" followed by a list of parameters is used to define functions. Here is a basic example of function definition:
 
-```pythoon
+```python
 # a function to return the area of a square
 def area(length):
   return length ** 2
@@ -105,4 +102,4 @@ Here are some links to some packages we will be using in CS 357.
 - See this [review link](/cs357/fa2020/reviews/rev-2-python.html)
 
 ## Changelog
-* 2024-01-12 Dev Singh dsingh14@illinois.edu: Port to RTD.
+* 2024-01-12 Dev Singh dsingh14@illinois.edu: Port to 

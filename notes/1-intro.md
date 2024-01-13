@@ -11,5 +11,5 @@ author:
 
 Numerical methods do numerical things.
 
-# Changelog
-- dsingh14: 1/12/2024, created page 
+## Changelog
+* 2024-01-12 Dev Singh dsingh14@illinois.edu: Create page.
