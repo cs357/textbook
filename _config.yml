@@ -1,5 +1,3 @@
-remote_theme           : "cs357/jekyll-rtd-theme"
-
 # Site Settings
 locale                   : "en-US"
 title                    : "CS 357 Reference"

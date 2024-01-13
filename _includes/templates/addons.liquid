@@ -1,0 +1,40 @@
+<div class="addons-wrap d-flex flex-column overflow-y-auto">
+    <div class="status d-flex flex-justify-between p-2">
+        <div class="title p-1">
+            <i class="fa fa-book"></i> {{ site.title }}
+        </div>
+        <div class="branch p-1">
+            <span class="name">
+                {{ site.semester }}
+            </span>
+            <i class="fa fa-caret-down"></i>
+        </div>
+    </div>
+    <div class="addons d-flex flex-column height-full p-2 d-none">
+        <dl>
+            <dt>{{ __.github | default: "Links" }}</dt>
+            <dd>
+                <a href="{{ site.courseUrl }}">
+                    <i class="fa fa-school"></i>
+                    {{ __.homepage | default: "Course Homepage" }}
+                </a>
+            </dd>
+            <dd>
+                <a href="{{ docs.issues_url }}">
+                    <i class="fa fa-question-circle-o"></i>
+                    {{ __.issues | default: "Issues" }}
+                </a>
+            </dd>
+            <dd>
+                <a href="{{ docs.zip_url }}" title="{{ __.size | default: 'Size' }}: {{ rest.size }} Kb">
+                    <i class="fa fa-download"></i>
+                    {{ __.download | default: "Download" }}
+                </a>
+            </dd>
+        </dl>
+        <hr>
+        <div class="license f6 pb-2">
+            {{ site.name }} uses the Jekyll RTD theme provided by <a href="https://github.com/rundocs/jekyll-rtd-theme">RunDocs</a>.
+        </div>
+    </div>
+</div>
