@@ -12,7 +12,6 @@ help:
 	@echo "    clean     Clean the workspace"
 	@echo "    dist      Build the theme css and script"
 	@echo "    status    Display status before push"
-	@echo "    theme     Make theme as gem and install"
 	@echo "    build     Build the test site"
 	@echo "    server    Make a livereload jekyll server to development"
 	@echo "    checkout  Reset the theme minified css and script to last commit"
@@ -24,28 +23,23 @@ checkout:
 
 install:
 	@npm install -g yarn
-	@yarn install
+	@cd cs357-rtd-theme && yarn install
 	@bundle install
 
 format:
-	@yarn format
+	@cd cs357-rtd-theme && yarn format
 
 report:
-	@yarn report
+	@cd cs357-rtd-theme && yarn report
 
 clean:
 	@bundle exec jekyll clean
 
 dist: format clean
-	@yarn build
+	@cd cs357-rtd-theme &&  yarn build
 
 status: format clean checkout
 	@git status
-
-theme: dist
-	@gem uninstall ${ALIAS}
-	@gem build *.gemspec
-	@gem install *.gem && rm -f *.gem
 
 build: dist
 	@${DEBUG} bundle exec jekyll build --safe --profile

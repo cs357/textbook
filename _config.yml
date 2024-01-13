@@ -27,6 +27,7 @@ exclude:
   - Gemfile.lock
   - node_modules
   - README.txt
+  - cs357-rtd-theme
 readme_index:
   with_frontmatter: true
 
