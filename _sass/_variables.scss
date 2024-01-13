@@ -4,15 +4,20 @@ $head-font: "Roboto-Slab", sans-serif;
 $mono-font: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
 
 // theme color
-$theme-blue: #13294B;
+$theme-blue: #13294b;
 $theme-red: #e74c3c;
 $theme-green: #1abc9c;
-$theme-orange: #FF5F05;
+$theme-orange: #ff5f05;
 
 $theme-white: lighten($black, 99%);
 $theme-black: lighten($black, 15%);
 
-$cs357-gradient: linear-gradient(to left, #ee390f 0%, #f9b700 51%, #ee390f 100%);
+$cs357-gradient: linear-gradient(
+  to left,
+  #ee390f 0%,
+  #f9b700 51%,
+  #ee390f 100%
+);
 
 // theme link
 $theme-link: $blue;

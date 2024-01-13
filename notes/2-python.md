@@ -3,23 +3,22 @@ permalink: /notes/python
 title: Python
 description: An elementary introduction to Python.
 author:
-- Mariana Silva
-- CS 357 Course Staff
+  - Mariana Silva
+  - CS 357 Course Staff
 ---
 
 # Introduction to Python
 
 ## Learning Objectives
 
-*   Get familiar with the language of Python 3
-*   Understand the difference between mutable and immutable objects
-*   Remember, the most efficient way to study a language is to practice!
-*   Google is a great resource for any programming language
-
+- Get familiar with the language of Python 3
+- Understand the difference between mutable and immutable objects
+- Remember, the most efficient way to study a language is to practice!
+- Google is a great resource for any programming language
 
 ## Mutable and Immutable Objects
 
-In Python, objects ae divided into **mutable** and **immutable**. Mutable objects can be modified after they are first created, including lists, dictionaries, numpy arrays, etc. Immutable objects cannot be modified once they are created, including tuples, strings, floats, etc. 
+In Python, objects ae divided into **mutable** and **immutable**. Mutable objects can be modified after they are first created, including lists, dictionaries, numpy arrays, etc. Immutable objects cannot be modified once they are created, including tuples, strings, floats, etc.
 
 For example,
 
@@ -39,7 +38,6 @@ myTuple[0] = 1
 myString = "357"
 myString[0] = '1'
 ```
-
 
 ## Dictionary
 
@@ -63,15 +61,15 @@ for x in myDict:
   print(myDict[x])
 for x in myDict.values():
   print(x)
-  
+
 # there are multiple ways to remove an existing entry, here is one example
 myDict.pop("level")
 
 # copy an existing dictionary into a new reference
 anotherDict = myDict.copy()
 ```
-Here is the [official documentation](https://docs.python.org/3/tutorial/datastructures.html#dictionaries) for dictionary and some other useful data structures. 
 
+Here is the [official documentation](https://docs.python.org/3/tutorial/datastructures.html#dictionaries) for dictionary and some other useful data structures.
 
 ## User Defined Functions
 
@@ -84,10 +82,11 @@ def area(length):
 
 print(area(2))
 ```
-Here is the [official documentation](https://docs.python.org/3.8/tutorial/controlflow.html#defining-functions) for function definition. 
 
+Here is the [official documentation](https://docs.python.org/3.8/tutorial/controlflow.html#defining-functions) for function definition.
 
 ## External Links
+
 Here are some links to some packages we will be using in CS 357.
 
 - Documentation for [numpy](https://numpy.org/doc/stable/).
@@ -96,10 +95,10 @@ Here are some links to some packages we will be using in CS 357.
 
 - Documentation for [matplotlib.pyplot](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.html#module-matplotlib.pyplot).
 
-
 ## Review Questions
 
 - See this [review link](/cs357/fa2020/reviews/rev-2-python.html)
 
 ## Changelog
-* 2024-01-12 Dev Singh dsingh14@illinois.edu: Port to 
+
+- 2024-01-12 Dev Singh dsingh14@illinois.edu: Port to

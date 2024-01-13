@@ -1,14 +1,10 @@
 .header {
   color: $theme-white;
-  background-image: $cs357-gradient;
+  background: $theme-blue;
 
   input {
     border-radius: 50px;
     border: 1px solid #2472a4;
     font-size: 80%;
   }
-}
-
-.cs357-gradient-background {
-  background-image: $cs357-gradient !important;
 }

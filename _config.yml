@@ -1,12 +1,12 @@
 # Site Settings
-locale                   : "en-US"
-title                    : "CS 357 Reference"
-lang                     : "en-US"
-name                     : "CS 357 Reference"
-description              : "CS 357 Reference"
-url                      : "cs357.github.io"
-baseurl                  : "/textbook"
-repository               : "cs357/textbook"
+locale: "en-US"
+title: "CS 357 Reference"
+lang: "en-US"
+name: "CS 357 Reference"
+description: "CS 357 Reference"
+url: "cs357.github.io"
+baseurl: "/textbook"
+repository: "cs357/textbook"
 edit: false
 author: "CS 357 @ UIUC Course Staff"
 
@@ -23,10 +23,11 @@ exclude:
   - Makefile
   - Gemfile
   - Gemfile.lock
+  - node_modules
 
 readme_index:
   with_frontmatter: true
-  
+
 kramdown:
   input: GFM
 
