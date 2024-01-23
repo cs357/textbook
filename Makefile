@@ -42,7 +42,7 @@ status: format clean checkout
 	@git status
 
 build: dist
-	@${DEBUG} bundle exec jekyll build --safe --profile
+	@${DEBUG} JEKYLL_ENV=production bundle exec jekyll build --safe --profile
 
 server: dist
 	@${DEBUG} bundle exec jekyll server --safe --livereload
