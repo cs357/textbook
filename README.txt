@@ -1,6 +1,6 @@
 **Development Quick Start**
 
-* This repo has the modified RTD Jekyll theme as a submodule to keep licensing clean, clone with `--recurse-submodules` or `git submodule init && git submodule update`.
+* This repo has the modified RTD Jekyll theme as a submodule to keep licensing clean, clone with `git clone --recurse-submodules https://github.com/cs357/textbook` or `git submodule init && git submodule update`.
 
 * You will need Node.JS since the Sass is compiled with a webpack pipeline. 
 

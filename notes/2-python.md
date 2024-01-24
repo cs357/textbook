@@ -5,6 +5,13 @@ description: An elementary introduction to Python.
 author:
   - Mariana Silva
   - CS 357 Course Staff
+changelog:
+  - 
+    name: Dev Singh
+    netid: dsingh14
+    date: 2024-01-12
+    message: Created page.
+
 ---
 
 # Introduction to Python
@@ -98,7 +105,3 @@ Here are some links to some packages we will be using in CS 357.
 ## Review Questions
 
 - See this [review link](/cs357/fa2020/reviews/rev-2-python.html)
-
-## Changelog
-
-- 2024-01-12 Dev Singh dsingh14@illinois.edu: Port to
