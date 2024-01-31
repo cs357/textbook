@@ -51,7 +51,7 @@ jobs:
         uses: actions/configure-pages@v4
       
       - name: Build site in Docker image
-        shell: docker run --rm --mount type=bind,source="$PWD"/,target=/opt/app ghcr.io/cs357/textbook-devel:latest make build
+        run: docker run --rm --mount type=bind,source="$PWD"/,target=/opt/app ghcr.io/cs357/textbook-devel:latest make build
 
       - name: Upload artifact
         # Automatically uploads an artifact from the './_site' directory by default
