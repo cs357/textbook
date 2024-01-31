@@ -40,4 +40,4 @@ jobs:
           tags: cs357-pr-build:${{ github.sha }}
 
       - name: Run build in Docker
-        shell: docker run --rm --mount type=bind,source="$PWD"/,target=/opt/app ghcr.io/cs357/textbook-devel:latest make build
+        shell: docker run --rm --mount type=bind,source="$PWD"/,target=/opt/app cs357-pr-build:${{ github.sha }} make build
