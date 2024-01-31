@@ -28,6 +28,6 @@ jobs:
         with:
           submodules: 'true'
       - name: Build docker image
-        run: docker build -t local < Dockerfile.devel
+        run: docker build Dockerfile.devel -t local
       - name: Test build
         run: docker run -it local make build
