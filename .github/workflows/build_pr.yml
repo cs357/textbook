@@ -23,11 +23,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
         with:
-          submodules: 'true'
-      - name: Build docker image
-        run: docker build . -t local
-      - name: Test build
-        run: docker run -it local make build
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build
+        uses: docker/build-push-action@v3
+        with:
+          file: Dockerfile.devel
+          push: false
+          tags: cs357-pr-build:${{ github.sha }}
+
+      - name: Run build in Docker
+        shell: docker run --rm --mount type=bind,source="$PWD"/,target=/opt/app ghcr.io/cs357/textbook-devel:latest make build
