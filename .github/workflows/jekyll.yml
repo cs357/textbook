@@ -36,9 +36,6 @@ jobs:
         with:
           submodules: 'true'
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
@@ -54,7 +51,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           file: Dockerfile.devel
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
           tags: ghcr.io/cs357/textbook-devel:latest
 
