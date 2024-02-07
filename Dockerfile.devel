@@ -1,0 +1,22 @@
+FROM ruby:2.7.7
+ENV NODE_VERSION=20.11.0
+RUN apt update && apt install -y curl build-essential
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+ENV NVM_DIR=/root/.nvm
+RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
+RUN . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION}
+RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
+ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
+RUN gem install bundler:2.3.7
+COPY Gemfile .
+COPY Gemfile.lock .
+COPY Makefile .
+
+RUN mkdir cs357-rtd-theme
+COPY cs357-rtd-theme/package.json cs357-rtd-theme/
+COPY cs357-rtd-theme/yarn.lock cs357-rtd-theme/
+COPY cs357-rtd-theme/Gemfile cs357-rtd-theme/
+COPY cs357-rtd-theme/jekyll-rtd-theme.gemspec cs357-rtd-theme/
+COPY cs357-rtd-theme/Makefile cs357-rtd-theme/
+
+RUN make install
