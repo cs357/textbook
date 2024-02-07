@@ -33,9 +33,11 @@ A random number generator has the following properties:
 
 A **_linear congruential generator_** (LCG) is pseudorandom number generator of the form:
 
-<div>\[ x_k = (a x_{k-1} + c) \quad \text{mod} \quad M \]</div>
+<div>$$ x_0 = \text{seed} $$</div>
 
-where <span>\\(a\\)</span> and <span>\\(c\\)</span> are given integers and <span>\\(x_0\\)</span> is called the **_seed_**. The period of an LCG cannot exceed <span>\\(M\\)</span>. The quality depends on both <span>\\(a\\)</span> and <span>\\(c\\)</span>, and the period may be less than <span>\\(M\\)</span> depending on the values of <span>\\(a\\)</span> and <span>\\(c\\)</span>.
+<div>$$ x_{n+1} = (a x_{n} + c) (\text{mod} \phantom{x} M) $$</div>
+
+where <span>\\(a\\) (the multiplier)</span> and <span>\\(c\\) (the increment)</span> are given integers and <span>\\(x_0\\)</span> is called the **_seed_**. The period of an LCG cannot exceed <span>\\(M\\) (the modulus)</span>. The quality depends on both <span>\\(a\\)</span> and <span>\\(c\\)</span>, and the period may be less than <span>\\(M\\)</span> depending on the values of <span>\\(a\\)</span> and <span>\\(c\\)</span>.
 
 ### Example of an LCG
 
@@ -54,7 +56,30 @@ for i in range(100):
   print(x)
   x = lcg_gen_next(M, a, c, x)
 ```
+## Random Variables
+A **_Random Variable_** <span>\\(X\\)</span> can be thought of as a function that maps the outcome of unpredictable (random) processes to numerical quantities.
 
+Examples:
+- How much rain are we getting tomorrow?
+- Will my buttered bread land face-down?
+
+We don’t have an exact number to represent these random processes, 
+but we can get something that represents the average case.
+
+### Discrete Random Variables
+Each **_Discrete Random Variable_** <span>\\(X\\)</span> can take a discrete value, \\(x_i\\) with probability \\(p_i\\) for \\(i = 1,...m\\) and \\(\Sigma_{i=1}^m p_i = 1\\). 
+#### Coin toss example
+Consider a random variable \\(X\\) which is the result of a coin toss that can be heads or tails. 
+<div> $$ X=1\text{: toss is heads} $$ </div>
+<div> $$ X=0\text{: toss is tails} $$ </div>
+For each individual toss, \\(x_i\\) is \\(0\\) or \\(1\\) and each \\(x_i\\) has probability \\(p_i=0.5\\).
+
+The **expected value** of a discrete random variable is defined as:
+<div>$$ E(X) = \Sigma_{i=1}^m p_i x_i $$ </div>
+So, for a coin toss:
+<div>$$ E(X) = 1 * 0.5 + 0 * 0.5 = 0.5$$ </div>
+Now, suppose we toss a “fair” coin 1000 times, and record the number of times we get heads. The recorded number would likely land close to the expected value \\(0.5\\).
+If we run this \\(1000\\) coin toss experiment \\(N\\) times (let’s say \\(N=100\\)), the results will look like a normal distribution, with the majority of the results close to \\(0.5\\).
 ## Monte Carlo
 
 **_Monte Carlo methods_** are algorithms that rely on repeated random sampling to approximate a desired quantity. Monte Carlo methods are typically used in modeling the following types of problems:
@@ -112,7 +137,7 @@ est = (1.0/n * total)*((x_max-x_min)*(y_max-y_min))
 - See this [review link](/cs357/fa2020/reviews/rev-7-random-monte-carlo.html)
 
 ## ChangeLog
-
+*   2024-02-07 Bhargav Chandaka [bhargav9@illinois.edu](mailto:bhargav9@illinois.edu): major reorganziation to match up with content in slides/videos
 *   2018-01-25 Erin Carrier [ecarrie2@illinois.edu](mailto:ecarrie2@illinois.edu): minor fixes throughout, adds review questions
 *   2018-01-25 Yu Meng [yumeng5@illinois.edu](mailto:yumeng5@illinois.edu): first complete draft
 *   2018-01-17 Erin Carrier [ecarrie2@illinois.edu](mailto:ecarrie2@illinois.edu): outline
