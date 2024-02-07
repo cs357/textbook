@@ -38,25 +38,15 @@ $$ |\lambda_1| \geq |\lambda_2| \geq \cdots \geq |\lambda_n|, $$
 
 and we normalize eigenvectors, so that $$\|{\bf x}\| = 1$$.
 
-## Eigenvalues of a Shifted Matrix
+#### Example
 
-Given a matrix $$\mathbf{A}$$, for any constant scalar $$\sigma$$, we define the **_shifted matrix_** is $$\mathbf{A} - \sigma {\bf I}$$. If $$\lambda$$ is an eigenvalue of $$\mathbf{A}$$ with eigenvector $${\bf x}$$ then $$\lambda - \sigma$$ is an eigenvalue of the shifted matrix with the same eigenvector. This can be derived by
+First, we find the eigenvalues by solving for the characteristic polynomial.
 
-$$ \begin{aligned} (\mathbf{A} - \sigma {\bf I}) {\bf x} &= \mathbf{A} {\bf x} - \sigma {\bf I} {\bf x} \\ &= \lambda {\bf x} - \sigma {\bf x} \\ &= (\lambda - \sigma) {\bf x}. \end{aligned} $$
+$$ \bf{A}=\begin{bmatrix} 2 & 1 \\ 4 & 2 \end{bmatrix} \qquad \text{det}(\bf{A}- \bf{I}\lambda)=p(\lambda)=(2-\lambda)^2-4 \rightarrow \lambda_1=4, \lambda_2=0$$
 
-## Eigenvalues of an Inverse
+Second, we find the eigenvectors for each eigenvalue by solving for the trivial solution (the nullspace) of $$\bf A-\bf I\lambda$$. **Note** any multiple of $$\bf x$$ below is a valid eigenvector to its eigenvalue.
 
-An invertible matrix cannot have an eigenvalue equal to zero. Furthermore, the eigenvalues of the inverse matrix are equal to the inverse of the eigenvalues of the original matrix:
-
-$$ \mathbf{A} {\bf x} = \lambda {\bf x}\implies \\ \mathbf{A}^{-1} \mathbf{A} {\bf x} = \lambda \mathbf{A}^{-1} {\bf x} \implies \\ {\bf x} = \lambda \mathbf{A}^{-1} {\bf x}\implies \\ \mathbf{A}^{-1} {\bf x} = \frac{1}{\lambda} {\bf x}.$$
-
-## Eigenvalues of a Shifted Inverse
-
-Similarly, we can describe the eigenvalues for shifted inverse matrices as:
-
-$$ (\mathbf{A} - \sigma {\bf I})^{-1} {\bf x} = \frac{1}{\lambda - \sigma} {\bf x}.$$
-
-It is important to note here, that the eigenvectors remain unchanged for shifted or/and inverted matrices.
+$$\lambda_1: \begin{bmatrix} 2 & 1 \\ 4 & 2 \end{bmatrix}\bf x=0 \rightarrow \bf{x}=\begin{bmatrix} 1  \\  2 \end{bmatrix} \qquad \lambda_1: \begin{bmatrix} -2 & 1 \\ 4 & -2 \end{bmatrix}\bf{x}=0 \rightarrow \bf{x}=\begin{bmatrix} 1  \\  -2 \end{bmatrix}$$
 
 ## Diagonalizability
 
@@ -93,6 +83,25 @@ the matrix $$\mathbf{X}$$ does not have an inverse, so we cannot diagonalize $$\
 *   The eigenvalues of an $$n \times n$$ matrix are not necessarily unique. In fact, we can define the multiplicity of an eigenvalue.
 *   If an $$n \times n$$ matrix has $$n$$ linearly independent eigenvectors, then the matrix is diagonalizable.
 
+## Eigenvalues of a Shifted Matrix
+
+Given a matrix $$\mathbf{A}$$, for any constant scalar $$\sigma$$, we define the **_shifted matrix_** is $$\mathbf{A} - \sigma {\bf I}$$. If $$\lambda$$ is an eigenvalue of $$\mathbf{A}$$ with eigenvector $${\bf x}$$ then $$\lambda - \sigma$$ is an eigenvalue of the shifted matrix with the same eigenvector. This can be derived by
+
+$$ \begin{aligned} (\mathbf{A} - \sigma {\bf I}) {\bf x} &= \mathbf{A} {\bf x} - \sigma {\bf I} {\bf x} \\ &= \lambda {\bf x} - \sigma {\bf x} \\ &= (\lambda - \sigma) {\bf x}. \end{aligned} $$
+
+## Eigenvalues of an Inverse
+
+An invertible matrix cannot have an eigenvalue equal to zero. Furthermore, the eigenvalues of the inverse matrix are equal to the inverse of the eigenvalues of the original matrix:
+
+$$ \mathbf{A} {\bf x} = \lambda {\bf x}\implies \\ \mathbf{A}^{-1} \mathbf{A} {\bf x} = \lambda \mathbf{A}^{-1} {\bf x} \implies \\ {\bf x} = \lambda \mathbf{A}^{-1} {\bf x}\implies \\ \mathbf{A}^{-1} {\bf x} = \frac{1}{\lambda} {\bf x}.$$
+
+## Eigenvalues of a Shifted Inverse
+
+Similarly, we can describe the eigenvalues for shifted inverse matrices as:
+
+$$ (\mathbf{A} - \sigma {\bf I})^{-1} {\bf x} = \frac{1}{\lambda - \sigma} {\bf x}.$$
+
+It is important to note here, that the eigenvectors remain unchanged for shifted or/and inverted matrices.
 
 ## Expressing an Arbitrary Vector as a Linear Combination of Eigenvectors
 
