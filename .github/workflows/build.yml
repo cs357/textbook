@@ -42,4 +42,5 @@ jobs:
         with:
           image: cs357:local
           options: -v ${{ github.workspace }}:/srv/jekyll
-          run: cd /srv/jekyll && make build
+          shell: bash
+          run: cd /srv/jekyll && ls && make build
