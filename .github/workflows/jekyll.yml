@@ -57,30 +57,25 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    needs: imgbuild
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           submodules: 'true'
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1 # v1.161.0
+      - uses: docker/setup-buildx-action@v2
+      - name: Run build
+        uses: addnab/docker-run-action@v3
         with:
-          ruby-version: '3.1' # Not needed with a .ruby-version file
-          cache-version: 0 # Increment this number if you need to re-download cached gems
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18.x'
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@v4
-      - name: Install
-        run: make install
-      - name: Build with Jekyll
-        run: make build
+          image: ghcr.io/cs357/textbook-devel:latest
+          options: -v ${{ github.workspace }}:/srv/jekyll
+          shell: bash
+          run: cd /srv/jekyll && ls && make install && make build
       - name: Upload artifact
-        # Automatically uploads an artifact from the './_site' directory by default
         uses: actions/upload-pages-artifact@v3
+        with:
+          name: github-pages
+          path: ${{ github.workspace }}/_site
 
   # Deployment job
   deploy:
