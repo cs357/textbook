@@ -56,9 +56,9 @@ How to interpret: The first entries of \\(\textrm{data}\\), \\(\textrm{row}\\), 
 
 This method does not store the zero elements.
 
-## Compressed Sparce Row (CSR)
+### Compressed Sparce Row (CSR)
 
-CSR encodes rows offsets, column indices and the corresponding non-zero data values. The row offsets are defined by the followign recursive relationship (starting with \\(\textrm{rowptr}[0] = 0\\)):
+ CSR encodes rows offsets, column indices and the corresponding non-zero data values. The row offsets are defined by the followign recursive relationship (starting with \\(\textrm{rowptr}[0] = 0\\)):
 
 <div>\[ \textrm{rowptr}[j] = \textrm{rowptr}[j-1] + \mathrm{nnz}(\textrm{row}_{j-1}), \\ \]</div>
 
