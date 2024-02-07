@@ -31,7 +31,7 @@ jobs:
       - uses: docker/build-push-action@v4
         with:
           context: .
-          file: "Dockerfile.devel"
+          file: "Dockerfile.cicd"
           tags: cs357:local
           load: true
           cache-from: type=gha
@@ -43,4 +43,4 @@ jobs:
           image: cs357:local
           options: -v ${{ github.workspace }}:/srv/jekyll
           shell: bash
-          run: cd /srv/jekyll && ls && make build
+          run: cd /srv/jekyll && ls && make install && make build
