@@ -1236,6 +1236,7 @@ $$
 
 ## ChangeLog
 
+* 2024-02-07 Kaiyao Ke <kaiyaok2@illinois.edu>: merge slide and video contents to note
 * 2023-10-20 Yuxuan Chen <yuxuan19@illinois.edu>: update lu_decomp() code
 * 2018-02-28 Erin Carrier <ecarrie2@illinois.edu>: fix error in ludecomp() code
 * 2018-02-22 Erin Carrier <ecarrie2@illinois.edu>: update properties for solving using LUP
