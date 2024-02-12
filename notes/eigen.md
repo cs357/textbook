@@ -48,6 +48,21 @@ Second, we find the eigenvectors for each eigenvalue by solving for the trivial 
 
 $$\lambda_1: \begin{bmatrix} 2 & 1 \\ 4 & 2 \end{bmatrix}\bf x=0 \rightarrow \bf{x}=\begin{bmatrix} 1  \\  2 \end{bmatrix} \qquad \lambda_1: \begin{bmatrix} -2 & 1 \\ 4 & -2 \end{bmatrix}\bf{x}=0 \rightarrow \bf{x}=\begin{bmatrix} 1  \\  -2 \end{bmatrix}$$
 
+#### Code Example
+The following code snippet finds and prints the eigenvalues and corresponding eigenvectors of a matrix. Take careful note that eigenvectors are stored as columns of a 2d numpy array.
+
+```python
+import numpy as np
+import numpy.linalg as la
+def solve(A):
+    # A: nxn matrix
+    evals, evecs = la.eig(A)
+    for ev in evals:
+      print(ev) 
+    for i in range(np.shape(evecs)[1]): # print column-wise
+      print(evecs[:, i]) 
+```
+
 ## Diagonalizability
 
 An $$n \times n$$ matrix with <span>$$n$$</span> linearly independent eigenvectors can be expressed as its eigenvalues and eigenvectors as:
@@ -294,11 +309,21 @@ $$ \mathbf{e}_{k+1} \approx \frac{|\lambda_2|}{|\lambda_1|}\mathbf{e}_k$$.
 The convergence rate for (shifted) inverse iteration is also linear, but now depends on the two closest eigenvalues to the shift $$\sigma$$. (Remember that standard inverse iteration corresponds to a shift $$\sigma = 0$$.) The recurrence relationship for the errors is given by:
 $$ \mathbf{e}_{k+1} \approx \frac{|\lambda_\text{closest} - \sigma|}{|\lambda_\text{second-closest} - \sigma|}\mathbf{e}_k.$$
 
-## Cost Summary
+## Cost and Convergence Summary
 
-(a) Power Method $$\boldsymbol{x}_{k+1} = \mathbf{A} \boldsymbol{x}_{k}$$, the cost is $$kn^2$$. \\
-(b) Inverse Power Method $$\mathbf{A} \boldsymbol{x}_{k+1} = \boldsymbol{x}_{k}$$, the cost is $$n^{3} + kn^2$$. \\
-(c) Shifted Inverse Power Method $$(\mathbf{A} - \sigma \mathbf{I}) \boldsymbol{x}_{k+1} = \boldsymbol{x}_{k}$$, the cost is $$n^{3} + kn^2$$.
+| Method                         | Description                                                                             | Cost             | Convergence                                           |
+|--------------------------------|-----------------------------------------------------------------------------------------|------------------|-------------------------------------------------------|
+| Power Method                   | $$\boldsymbol{x}_{k+1} = \mathbf{A} \boldsymbol{x}_{k}$$                               | $$kn^2$$         | $$\left\|\frac{\lambda_2}{\lambda_1}\right\|$$       |
+| Inverse Power Method           | $$\mathbf{A} \boldsymbol{x}_{k+1} = \boldsymbol{x}_{k}$$                                | $$n^{3} + kn^2$$ | $$\left\|\frac{\lambda_n}{\lambda_{n-1}}\right\|$$   |
+| Shifted Inverse Power Method   | $$(\mathbf{A} - \sigma \mathbf{I}) \boldsymbol{x}_{k+1} = \boldsymbol{x}_{k}$$          | $$n^{3} + kn^2$$ | $$\left\|\frac{\lambda_c-\sigma}{\lambda_{c2}-\sigma}\right\|$$ |
+
+
+$$\lambda_1$$: largest eigenvector (in magnitude) \\
+$$\lambda_2$$: second largest eigenvector (in magnitude) \\
+$$\lambda_n$$: smallest eigenvector (in magnitude) \\
+$$\lambda_{n-1}$$: second smallest eigenvector (in magnitude) \\
+$$\lambda_c$$: closest eigenvector to $$\sigma$$ \\
+$$\lambda_{c2}$$: second closest eigenvector to $$\sigma$$
 
 ## Orthogonal Matrices
 
@@ -306,7 +331,8 @@ Square matrices are called **_orthogonal_** if and only if the columns are mutua
 $$\boldsymbol{c}_i^T \boldsymbol{c}_j = 0 \quad \forall \ i \neq j, \quad \|\boldsymbol{c}_i\| = 1 \quad \forall \ i \iff \mathbf{A} \in \mathcal{O}(n),$$
 or
 $$ \langle\boldsymbol{c}_i,\boldsymbol{c}_j \rangle = \begin{cases} 0 \quad \mathrm{if} \ i \neq j, \\ 1 \quad \mathrm{if} \ i = j \end{cases} \iff \mathbf{A} \in \mathcal{O}(n),$$
-where $$\mathcal{O}(n)$$ is the set of all $$n \times n$$ orthogonal matrices called the orthogonal group, $$\boldsymbol{c}_i$$, $$i=1, \dots, n$$, are the columns of <span>$$\mathbf{A}$$</span>, and $$\langle \cdot, \cdot \rangle$$ is the inner product operator. Orthogonal matrices have many desirable properties:\\
+where $$\mathcal{O}(n)$$ is the set of all $$n \times n$$ orthogonal matrices called the orthogonal group, $$\boldsymbol{c}_i$$, $$i=1, \dots, n$$, are the columns of <span>$$\mathbf{A}$$</span>, and $$\langle \cdot, \cdot \rangle$$ is the inner product operator. Orthogonal matrices have many desirable properties:
+
 (a) $$ \mathbf{A}^T \in \mathcal{O}(n) $$\\
 (b) $$ \mathbf{A}^T \mathbf{A} = \mathbf{A} \mathbf{A}^T = \mathbf{I} \implies \mathbf{A}^{-1} = \mathbf{A}^T $$\\
 (c) $$ \det{\mathbf{A}} = \pm 1 $$\\
@@ -324,6 +350,7 @@ where $$\langle \cdot, \cdot \rangle$$ is the inner product operator. Each of th
 
 ## ChangeLog
 
+* 2024-02-11 Pascal Adhikary <pascala2@illinois.edu>: add ev examples, cost table, reorganize
 * 2022-02-28 Yuxuan Chen <yuxuan19@illinois.edu>: added learning objectives, cost summary
 * 2020-03-01 Peter Sentz: added text to include content from slides
 * 2018-10-14 Erin Carrier <ecarrie2@illinois.edu>: removes orthogonal/GS sections
