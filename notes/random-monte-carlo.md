@@ -2,6 +2,27 @@
 title: Random Number Generators and Monte Carlo Method
 description: Properties of RNGs and examples of Monte Carlo method.
 sort: 7
+changelog:
+  - 
+    name: Bhargav Chandaka
+    netid: bhargav9
+    date: 2024-02-13
+    message: major reorganziation to match up with content in slides/videos
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2018-01-25
+    message: minor fixes throughout, adds review questions
+  - 
+    name: Yu Meng
+    netid: yumeng5
+    date: 2018-01-25
+    message: first complete draft
+  - name: Erin Carrier
+    netid: ecarrie2
+    date: 2018-01-17
+    message: outline
+
 ---
 # Random Number Generators and Monte Carlo Method
 
@@ -135,9 +156,3 @@ est = (1.0/n * total)*((x_max-x_min)*(y_max-y_min))
 ## Review Questions
 
 - See this [review link](/cs357/fa2020/reviews/rev-7-random-monte-carlo.html)
-
-## ChangeLog
-*   2024-02-07 Bhargav Chandaka [bhargav9@illinois.edu](mailto:bhargav9@illinois.edu): major reorganziation to match up with content in slides/videos
-*   2018-01-25 Erin Carrier [ecarrie2@illinois.edu](mailto:ecarrie2@illinois.edu): minor fixes throughout, adds review questions
-*   2018-01-25 Yu Meng [yumeng5@illinois.edu](mailto:yumeng5@illinois.edu): first complete draft
-*   2018-01-17 Erin Carrier [ecarrie2@illinois.edu](mailto:ecarrie2@illinois.edu): outline
