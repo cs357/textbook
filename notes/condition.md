@@ -3,7 +3,6 @@ title: Condition Numbers
 description: A way to measure how good a matrix is.
 sort: 11
 author:
-  - Mariana Silva
   - CS 357 Course Staff
 changelog:
   - 
@@ -56,10 +55,12 @@ _Is your method sensitive to errors (perturbation) in the input?_
 
 ## Sensitivity of Solutions of Linear Systems and Error Bound
 
-Suppose we start with a non-singular system of linear equations $${\bf A} \boldsymbol{x} = \boldsymbol{b}$$. If we change the right-hand side vector $$\boldsymbol{b}$$ (the input) by a small amount $$\Delta \boldsymbol{b}$$, how much will the solution $$\boldsymbol{x}$$ (the output) change, i.e., how large is $$\Delta \boldsymbol{x}$$. 
+### Motivation
+Suppose we start with a non-singular system of linear equations $${\bf A} \boldsymbol{x} = \boldsymbol{b}$$. If we change the right-hand side vector $$\boldsymbol{b}$$ (the input) by a small amount $$\Delta \boldsymbol{b}$$, how much will the solution $$\boldsymbol{x}$$ (the output) change, i.e., how large is $$\Delta \boldsymbol{x}$$?
 
 Let's explore this!
 
+### Derivation
 <br>
 Let $$\boldsymbol{x}$$ be the solution of $${\bf A} \boldsymbol{x} = \boldsymbol{b}$$ and $$\hat{\boldsymbol{x}}$$ be the solution of the perturbed problem $${\bf A} \hat{\boldsymbol{x}} = \boldsymbol{b} + \Delta \boldsymbol{b}$$. 
 
@@ -144,7 +145,7 @@ The condition number of a matrix <span>\({\bf A}\)</span> cannot be less than 1 
 
 ## Condition Number
 
-#### Condition Number Definition
+### Condition Number Definition
 
 **_Condition Number_**: a measure of sensitivity of solving a linear system of equations to variations in the input.
 
@@ -161,7 +162,7 @@ This is the smallest possible condition number. Small condition numbers correspo
 
 If <span>$${\bf A}$$</span> is singular ($${\bf A}^{-1}$$ does not exist), we can define $$\text{cond}({\bf A}) = \infty$$ by convention.
 
-#### Recall Induced Matrix Norms
+### Induced Matrix Norms
 
 Recall that the induced matrix norm is given by:
 
@@ -186,7 +187,7 @@ For the 2-norm, $$\sigma_k$$ are the singular values of the matrix $$\boldsymbol
 
 $$\|{\bf A}\|_{2} = \max_k \sigma_k$$
 
-#### Condition Number of Orthogonal Matrices
+### Condition Number of Orthogonal Matrices
 
 What is the 2-norm condition number of an orthogonal matrix $$\boldsymbol{A}$$?
 
@@ -198,7 +199,7 @@ $$
 
 Hence, this means that orthogonal matrices have optimal conditioning.
 
-#### Things to Remember About Condition Numbers
+### Things to Remember About Condition Numbers
 *   For any matrix $${\bf A}$$, $$\text{cond}({\bf A}) \geq 1.$$
 *   For the identity matrix $${\bf I}$$, $$\text{cond}({\bf I}) = 1.$$
 *   For any matrix $${\bf A}$$ and a nonzero scalar $$\gamma$$, $$\text{cond}(\gamma {\bf A}) = \text{cond}({\bf A}).$$
@@ -207,7 +208,7 @@ Hence, this means that orthogonal matrices have optimal conditioning.
 *   The determinant of a matrix is **NOT** a good indicator to check whether a matrix is near singularity.
 
 
-#### Example
+### Example
 
 What is the 2-norm-based condition number of the diagonal matrix
 
@@ -269,7 +270,7 @@ $$\boldsymbol{r} = \boldsymbol{b} - {\bf A} \hat{\boldsymbol{x}} $$. Since $${\b
 
 $$\boldsymbol{r} = \boldsymbol{b} - (\boldsymbol{b} + \Delta \boldsymbol{b}) = -\Delta \boldsymbol{b} $$
 
-Therefore, equation (1) can also be written as
+Therefore, [equation (1)](#matrix-perturbation-and-error-bound) can also be written as
 
 $$\frac{\|\Delta \boldsymbol{x}\|}{\|\boldsymbol{x}\|} \le \text{cond}({\bf A})\frac{\|\boldsymbol{r}\|}{\|\boldsymbol{b}\|} $$
 
@@ -277,9 +278,9 @@ If we define relative residual as $$\frac{\|\boldsymbol{r}\|}{\|\boldsymbol{b}\|
 
 In addition, it's important to note the difference between relative residual and relative error. The relative residual $$\frac{\|\boldsymbol{r}\|}{\|\boldsymbol{b}\|}$$ tells us how well the approximate solution $$\hat{\boldsymbol{x}}$$ satisfies the linear system $${\bf A} \boldsymbol{x} = \boldsymbol{b}$$. The relative error $$\frac{\|\Delta \boldsymbol{x}\|}{\|\boldsymbol{x}\|} $$ tells us how close the approximated solution $$\hat{\boldsymbol{x}}$$ is to the exact solution $$ \boldsymbol{x}$$. Keep in mind that we don't know the exact solution $$ \boldsymbol{x}$$, this is why we started using the residual vector $$ \boldsymbol{r}$$. 
 
-#### Example
+### Example
 
-$$ \mathbf{A} = \begin{bmatrix} 13 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 15 \end{bmatrix}? $$
+$$ \mathbf{A} = \begin{bmatrix} 13 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 15 \end{bmatrix} $$
 
 Suppose we have $${\boldsymbol{x}}$$ as a solution of $${\bf A} \boldsymbol{x} = \boldsymbol{b}$$, and $$\hat {\boldsymbol{x}}$$ as a solution of $${\bf A} \hat{\boldsymbol{x}} = \boldsymbol{b} + \Delta \boldsymbol{b}$$. We define $${\bf r} = {\bf A} \hat{\boldsymbol{x}} - \boldsymbol{b}$$. If we know that the relative residual $$\frac{\|\boldsymbol{r}\|}{\|\boldsymbol{b}\|}$$ is $$10^{-4}$$, determine the upper bound for the output relative error. Assume 2-norm. 
 
@@ -305,7 +306,8 @@ $$\begin{align} \|\Delta \boldsymbol{x}\| &= \|\hat{\boldsymbol{x}} - \boldsymbo
 &= \|\boldsymbol{A}^{-1}(\boldsymbol{A}\hat{\boldsymbol{x}} - \boldsymbol{b})\| \\
 &= \|\boldsymbol{A}^{-1}\boldsymbol{r}\|\\
 &\leq \|\boldsymbol{A}^{-1}\|\cdot \| \boldsymbol{r}\| \\
-&= \|\boldsymbol{A}^{-1}\|\cdot \|\boldsymbol{A}\| \frac{\|\boldsymbol{r}\|}{\|\boldsymbol{A}\|} = \text{cond}(\boldsymbol{A})\frac{\|\boldsymbol{r}\|}{\|\boldsymbol{A}\|}.
+&= \|\boldsymbol{A}^{-1}\|\cdot \|\boldsymbol{A}\| \frac{\|\boldsymbol{r}\|}{\|\boldsymbol{A}\|}  \\
+&= \text{cond}(\boldsymbol{A})\frac{\|\boldsymbol{r}\|}{\|\boldsymbol{A}\|}.
 \end{align}$$
 
 In summary,
@@ -320,9 +322,9 @@ The quantity $$\frac{\|\boldsymbol{r}\|}{\|\boldsymbol{A}\|\cdot\|\boldsymbol{x}
 
 $$\frac{\|\boldsymbol{r}\|}{\|\boldsymbol{A}\|\cdot\|\boldsymbol{x}\|} \leq  \frac{\|\boldsymbol{r}\|}{\|\boldsymbol{b}\|}$$
 
-but are sometimes equal for certain choices of $$\boldsymbol{b}$$.
+*Note that the two sides are sometimes equal for certain choices of $$\boldsymbol{b}$$.*
 
-We can also divide equation (2) by $$\|\hat{\boldsymbol{x}}\|$$ to obtain 
+We can also divide [equation (2)](#alternative-definitions-of-relative-residual) by $$\|\hat{\boldsymbol{x}}\|$$ to obtain 
 
 $$\frac{\|\Delta \boldsymbol{x}\|}{\|\hat{\boldsymbol{x}}\|} \le \text{cond}({\bf A})\frac{\|\boldsymbol{r}\|}{\|\boldsymbol{A}\|\cdot\|\hat{\boldsymbol{x}}\|}.$$
 
@@ -349,13 +351,13 @@ Therefore, Gaussian elimination with partial pivoting yields <b> small relative 
 <br>
 For more details, see [Gaussian Elimination & Roundoff Error](https://math.la.asu.edu/~gardner/lu-round.pdf).
 
-## Accuracy Rule of Thumb for conditioning
+## Accuracy Rule of Thumb for Conditioning
 
 Suppose we apply Gaussian elimination with partial pivoting and back substitution to the linear system $${\bf A} \boldsymbol{x} = \boldsymbol{b}$$ and obtain a computed solution $$\hat{\boldsymbol{x}}$$. If the entries in <span>$${\bf A}$$</span> and $$\boldsymbol{b}$$ are accurate to <span>$$s$$</span> decimal digits, and $$\text{cond}({\bf A}) \approx 10^w$$, then the elements of the solution vector $$\hat{\boldsymbol{x}}$$ will be accurate to about <span>$$s-w$$</span> decimal digits.
 
 For a proof of this rule of thumb, please see [Fundamentals of Matrix Computations by David S. Watkins](https://books.google.com/books?id=xi5omWiQ-3kC&pg=PA165&lpg=PA165&dq=gaussian+elimination+rule+of+thumb&source=bl&ots=KlQVax3zja&sig=o4SHiYPAXodkk39u9yw0NYZe1Zo&hl=en&sa=X&ved=0ahUKEwiopPykkvjWAhWjzIMKHYGpDIsQ6AEIXzAK#v=onepage&q=gaussian%20elimination%20rule%20of%20thumb&f=false).
 
-#### Example
+### Example
 How many accurate decimal digits in the solution can we expect to obtain if we solve a linear system $${\bf A} \boldsymbol{x} = \boldsymbol{b}$$ where $$\text{cond}({\bf A}) = 10^{10}$$ using Gaussian elimination with partial pivoting, assuming we are using IEEE double precision and the inputs are accurate to machine precision?
 
 <details>
@@ -372,4 +374,15 @@ Then, using the rule of thumb, we know the entries in \(\hat{\boldsymbol{x}}\) w
 
 ## Review Questions
 
-- See this [review link](/cs357/fa2020/reviews/rev-10-condition.html)
+<ol>
+  <li> What is the definition of a condition number?</li>
+  <li> What is the condition number of solving \({\bf A}\mathbf{x} = \mathbf{b}\)?</li>
+  <li> What is the condition number of matrix-vector multiplication?</li>
+  <li> Calculate the <span>\(p\)</span>-norm condition number of a matrix for a given <span>\(p\)</span>.</li>
+  <li> Do you want a small condition number or a large condition number?</li>
+  <li> What is the condition number of an orthogonal matrix?</li>
+  <li> If you have <span>\(p\)</span> accurate digits in <span>\({\bf A}\)</span> and \(\mathbf{b}\), how many accurate digits do you have in the solution of \({\bf A}\mathbf{x} = \mathbf{b}\) if the condition number of <span>\({\bf A}\)</span> is \(\kappa\)?</li>
+  <li> When solving a linear system \({\bf A}\mathbf{x} = \mathbf{b}\), does a small residual guarantee an accurate result?</li>
+  <li> Consider solving a linear system \({\bf A}\mathbf{x} = \mathbf{b}\). When does Gaussian elimination with partial pivoting produce a small residual?</li>
+  <li> How does the condition number of a matrix <span>\({\bf A}\)</span> relate to the condition number of <span>\({\bf A}^{-1}\)</span>?</li>
+</ol>
