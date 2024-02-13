@@ -2,6 +2,35 @@
 title: Condition Numbers
 description: A way to measure how good a matrix is.
 sort: 11
+author:
+  - CS 357 Course Staff
+changelog:
+  - 
+    name: Arnav Aggarwal
+    netid: arnava4
+    date: 2024-02-12
+    message: aligned notes with slides and added additional examples
+  - 
+    name: Yuxuan Chen
+    netid: yuxuan19
+    date: 2022-03-19
+    message: added condition number bullet pounts, minor fixes
+  -
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2017-10-27
+    message: adds review questions, minor fixes throughout, revised rule of thumb wording
+  - 
+    name: Yu Meng
+    netid: yumeng5
+    date: 2017-10-27
+    message: first complete draft
+  - 
+    name: Luke Olson
+    netid: lukeo
+    date: 2017-10-17
+    message: outline
+
 ---
 # Condition Numbers
 
@@ -12,33 +41,35 @@ sort: 11
 *   Compute the condition number
 *   Quantify the impact of a high condition number
 
-## Condition Number Definition
+## Numerical experiments
 
-The **_condition number_** of a square nonsingular matrix <span>$${\bf A}$$</span> is defined by
-$$\text{cond}({\bf A}) = \kappa({\bf A}) = \|{\bf A}\| \|{\bf A}^{-1}\| $$
-which is also the condition number associated with solving the linear system $${\bf A} \boldsymbol{x} = \boldsymbol{b}$$. A matrix with a large condition number is said to be **_ill-conditioned_**.
+**Input** has uncertainties:
 
-The condition number can be measured with any <span>$$p$$</span>-norm, so to be precise we typically specify the norm being used, i.e. $$\text{cond}_2$$, $$\text{cond}_1, \text{cond}_{\infty}$$.
+* Errors due to representation with finite precision
+* Error in the sampling
 
-If <span>$${\bf A}$$</span> is singular ($${\bf A}^{-1}$$ does not exist), we can define $$\text{cond}({\bf A}) = \infty$$ by convention.
+Once you select your numerical method, how much error should you expect to see in your output?
 
-The identity matrix is well conditioned. Assuming the inverse of $$\|{\bf A}\|$$ exists, $$\text{cond}({\bf A}) = \|{\bf A}\| \|{\bf A}^{-1}\| \geq \|{\bf A}{\bf A}^{-1}\| = \|{\bf I}\| = 1.$$ This is the smallest possible condition number.
+_Is your method sensitive to errors (perturbation) in the input?_
 
-#### Things to Remember About Condition Numbers
-*   For any matrix $${\bf A}$$, $$\text{cond}({\bf A}) \geq 1.$$
-*   For the identity matrix $${\bf I}$$, $$\text{cond}({\bf I}) = 1.$$
-*   For any matrix $${\bf A}$$ and a nonzero scalar $$\gamma$$, $$\text{cond}(\gamma {\bf A}) = \text{cond}({\bf A}).$$
-*   For any diagonal matrix $${\bf D}$$, $$\text{cond}({\bf D}) $$ = $$\frac{\text{max}\mid d_{i} \mid}{\text{min}\mid d_{i} \mid}.$$
-*   The condition number is a measure of how close a matrix is to being singular: a matrix with large condition number is nearly singular, whereas a matrix with a condition number close to 1 is far from being singular.
-*   The determinant of a matrix is **NOT** a good indicator to check whether a matrix is near singularity.
 
-## Perturbed Matrix Problem and Error Bound
+## Sensitivity of Solutions of Linear Systems and Error Bound
 
-Let $$\boldsymbol{x}$$ be the solution of $${\bf A} \boldsymbol{x} = \boldsymbol{b}$$ and $$\hat{\boldsymbol{x}}$$ be the solution of the perturbed problem $${\bf A} \hat{\boldsymbol{x}} = \boldsymbol{b} + \Delta \boldsymbol{b}$$. Let $$\Delta \boldsymbol{x} = \hat{\boldsymbol{x}} - \boldsymbol{x}$$ be the absolute error in output. Then we have
-$${\bf A} \boldsymbol{x} + {\bf A} \Delta \boldsymbol{x} = \boldsymbol{b} + \Delta \boldsymbol{b}, $$
-so
-$${\bf A} \Delta \boldsymbol{x} = \Delta \boldsymbol{b}. $$
-Now we want to see how the relative error in output $$\left(\frac{\|\Delta \boldsymbol{x}\|}{\|\boldsymbol{x}\|}\right)$$ is related to the relative error in input $$\left(\frac{\|\Delta \boldsymbol{b}\|}{\|\boldsymbol{b}\|}\right)$$:
+### Motivation
+Suppose we start with a non-singular system of linear equations $${\bf A} \boldsymbol{x} = \boldsymbol{b}$$. If we change the right-hand side vector $$\boldsymbol{b}$$ (the input) by a small amount $$\Delta \boldsymbol{b}$$, how much will the solution $$\boldsymbol{x}$$ (the output) change, i.e., how large is $$\Delta \boldsymbol{x}$$?
+
+Let's explore this!
+
+### Derivation
+<br>
+Let $$\boldsymbol{x}$$ be the solution of $${\bf A} \boldsymbol{x} = \boldsymbol{b}$$ and $$\hat{\boldsymbol{x}}$$ be the solution of the perturbed problem $${\bf A} \hat{\boldsymbol{x}} = \boldsymbol{b} + \Delta \boldsymbol{b}$$. 
+
+In addition, let $$\Delta \boldsymbol{x} = \hat{\boldsymbol{x}} - \boldsymbol{x}$$ be the absolute error in output. 
+
+Then we have $${\bf A} \boldsymbol{x} + {\bf A} \Delta \boldsymbol{x} = \boldsymbol{b} + \Delta \boldsymbol{b}, $$ so $${\bf A} \Delta \boldsymbol{x} = \Delta \boldsymbol{b}. $$
+
+
+Using the above equations, we'll see how the relative error in output $$\left(\frac{\|\Delta \boldsymbol{x}\|}{\|\boldsymbol{x}\|}\right)$$ is related to the relative error in input $$\left(\frac{\|\Delta \boldsymbol{b}\|}{\|\boldsymbol{b}\|}\right)$$:
 
 $$
 \begin{align}
@@ -51,27 +82,223 @@ $$
 
 where we used $$\|{\bf A}\boldsymbol{x}\| \le \|{\bf A}\| \|\boldsymbol{x}\|, \forall \boldsymbol{x}.$$
 
+
+#### Matrix Perturbation and Error Bound
+
 Then
 
-$$\frac{\|\Delta \boldsymbol{x}\|}{\|\boldsymbol{x}\|} \le \text{cond}({\bf A})\frac{\|\Delta \boldsymbol{b}\|}{\|\boldsymbol{b}\|}  \qquad (1)$$
+$$\frac{\|\Delta \boldsymbol{x}\|}{\|\boldsymbol{x}\|} \le \text{cond}({\bf A})\frac{\|\Delta \boldsymbol{b}\|}{\|\boldsymbol{b}\|}  \qquad (1)$$ 
+
+<br>
+
+
+Instead of changing the input $$\boldsymbol{b}$$, we can also add a perturbation to the matrix $$\boldsymbol{A}$$ (input) by a small amount $$\boldsymbol{E}$$, such that 
+
+$$
+\begin{align}
+(\boldsymbol{A} + \boldsymbol{E}) \hat{\boldsymbol{x}} = \boldsymbol{b}
+\end{align}
+$$
+
+and in a similar way obtain:
+
+$$\frac{\|\Delta \boldsymbol{x}\|}{\|\boldsymbol{x}\|} \le \text{cond}({\bf A})\frac{\| \boldsymbol{E}\|}{\|\boldsymbol{A}\|}  $$
 
 
 Therefore, if we know the relative error in input, then we can use the condition number of the system to obtain an upper bound for the relative error of our computed solution (output).
 
+
+#### Example
+
+Give an example of a matrix that is very well-conditioned (i.e., has a condition number that is good for computation). Select the best possible condition number(s) of a matrix?
+
+$$
+\begin{flalign} 
+
+ & \text{A) } \text{cond}({\bf A}) < 0 \\ 
+
+ & \text{B) } \text{cond}({\bf A}) = 0 \\ 
+
+ & \text{C) } 0 < \text{cond}({\bf A}) < 1 \\ 
+
+ & \text{D) } \text{cond}({\bf A}) = 1 \\ 
+
+ & \text{E) } \text{cond}({\bf A}) = \text{large numbers} \\ &&
+
+\end{flalign}
+$$
+
+<details>
+    <summary><strong>Answer</strong></summary>
+
+<br>
+
+\(\bf D\)
+
+<br>
+<br> 
+
+The condition number of a matrix <span>\({\bf A}\)</span> cannot be less than 1 and a smaller condition number will minimize the relative error in output \(\left(\frac{\|\Delta \boldsymbol{x}\|}{\|\boldsymbol{x}\|}\right)\). Since we want to minimize the error in computation, choice \( \text{D} \) is the correct answer.
+
+</details>
+
+
+## Condition Number
+
+### Condition Number Definition
+
+**_Condition Number_**: a measure of sensitivity of solving a linear system of equations to variations in the input.
+
+The **_condition number_** of a square nonsingular matrix <span>$${\bf A}$$</span> is defined by
+$$\text{cond}({\bf A}) = \kappa({\bf A}) = \|{\bf A}\| \|{\bf A}^{-1}\| $$. 
+This is also the condition number associated with solving the linear system $${\bf A} \boldsymbol{x} = \boldsymbol{b}$$. A matrix with a large condition number is said to be **_ill-conditioned_**, while a matrix with a small condition is said to be **_well-conditioned_**.
+
+
+The identity matrix is well conditioned. We show this by the following: 
+
+Assuming the inverse of $$\|{\bf A}\|$$ exists, $$\text{cond}({\bf A}) = \|{\bf A}\| \|{\bf A}^{-1}\| \geq \|{\bf A}{\bf A}^{-1}\| = \|{\bf I}\| = 1.$$ 
+
+This is the smallest possible condition number. Small condition numbers correspond to little error amplification. Remember, small condition numbers are good!
+
+If <span>$${\bf A}$$</span> is singular ($${\bf A}^{-1}$$ does not exist), we can define $$\text{cond}({\bf A}) = \infty$$ by convention.
+
+### Induced Matrix Norms
+
+Recall that the induced matrix norm is given by:
+
+$$
+\begin{align}
+\|{\bf A}\|_p := \max_{\|\mathbf{x}\|=1} \|{\bf A}\mathbf{x}\|_p
+\end{align}
+$$
+
+The condition number can be measured with any <span>$$p$$</span>-norm, so to be precise we typically specify the norm being used, i.e. $$\text{cond}_2$$, $$\text{cond}_1, \text{cond}_{\infty}$$.
+<br>
+
+For the 1-norm, we take the maximum absolute column sum of the matrix $$\boldsymbol{A}$$
+
+$$\|{\bf A}\|_1 = \max_j \sum_{i=1}^n \vert a_{ij} \vert.$$
+
+For the $$\infty$$-norm, we take the maximum absolute row sum of the matrix $$\boldsymbol{A}$$
+
+$$\|{\bf A}\|_{\infty} = \max_i \sum_{j=1}^n \vert a_{ij} \vert.$$
+
+For the 2-norm, $$\sigma_k$$ are the singular values of the matrix $$\boldsymbol{A}$$
+
+$$\|{\bf A}\|_{2} = \max_k \sigma_k$$
+
+### Condition Number of Orthogonal Matrices
+
+What is the 2-norm condition number of an orthogonal matrix $$\boldsymbol{A}$$?
+
+$$
+\begin{align}
+\text{cond}({\bf A}) = \|{\bf A}\|_2 \|{\bf A}^{-1}\|_2 = \|{\bf A}\|_2 \|{\bf A}^{T}\|_2 = 1
+\end{align}
+$$
+
+Hence, this means that orthogonal matrices have optimal conditioning.
+
+### Things to Remember About Condition Numbers
+*   For any matrix $${\bf A}$$, $$\text{cond}({\bf A}) \geq 1.$$
+*   For the identity matrix $${\bf I}$$, $$\text{cond}({\bf I}) = 1.$$
+*   For any matrix $${\bf A}$$ and a nonzero scalar $$\gamma$$, $$\text{cond}(\gamma {\bf A}) = \text{cond}({\bf A}).$$
+*   For any diagonal matrix $${\bf D}$$, $$\text{cond}({\bf D}) $$ = $$\frac{\text{max}\mid d_{i} \mid}{\text{min}\mid d_{i} \mid}.$$
+*   The condition number is a measure of how close a matrix is to being singular: a matrix with large condition number is nearly singular, whereas a matrix with a condition number close to 1 is far from being singular.
+*   The determinant of a matrix is **NOT** a good indicator to check whether a matrix is near singularity.
+
+
+### Example
+
+What is the 2-norm-based condition number of the diagonal matrix
+
+$$ \mathbf{A} = \begin{bmatrix} 100 & 0 & 0 \\ 0 & 13 & 0 \\ 0 & 0 & 0.5 \end{bmatrix}? $$
+
+$$
+\begin{flalign} 
+
+ & \text{A) } 1 \\ 
+
+ & \text{B) } 50 \\ 
+
+ & \text{C) } 100 \\ 
+
+ & \text{D) } 200 \\ &&
+
+\end{flalign}
+$$
+
+<details>
+    <summary><strong>Answer</strong></summary>
+
+<br>
+
+\(\bf D\)
+
+<br>
+<br> 
+
+As mentioned above, for any diagonal matrix \({\bf D}\), \(\text{cond}({\bf D}) \) = \(\frac{\text{max}\mid d_{i} \mid}{\text{min}\mid d_{i} \mid}.\)
+Hence, the answer is \( 100 / 0.5 = 200. \)
+
+<br>
+<br>
+
+Another way to go about this question is by obtaining the inverse of the diagonal matrix \({\bf A}\):
+
+<br>
+<br>
+
+\( \mathbf{A^{-1}} = \begin{bmatrix} 1/100 & 0 & 0 \\ 0 & 1/13 & 0 \\ 0 & 0 & 2 \end{bmatrix}? \)
+
+<br>
+<br>
+
+\(
+\begin{align}
+\text{cond}({\bf A}) = \|{\bf A}\|_2 \|{\bf A}^{-1}\|_2 = 100 * 2 = 200
+\end{align}
+\)
+
+</details>
+
+
 ## Residual vs Error
 
 The **_residual vector_** $$\boldsymbol{r}$$ of approximate solution $$\hat{\boldsymbol{x}}$$ for the linear system $${\bf A} \boldsymbol{x} = \boldsymbol{b}$$ is defined as
-$$\boldsymbol{r} = \boldsymbol{b} - {\bf A} \hat{\boldsymbol{x}} $$. In the perturbed matrix problem described above, we have
+$$\boldsymbol{r} = \boldsymbol{b} - {\bf A} \hat{\boldsymbol{x}} $$. Since $${\bf A} \hat{\boldsymbol{x}} = \boldsymbol{b} + \Delta \boldsymbol{b}$$, we have
 
 $$\boldsymbol{r} = \boldsymbol{b} - (\boldsymbol{b} + \Delta \boldsymbol{b}) = -\Delta \boldsymbol{b} $$
 
-Therefore, equation (1) can also be written as
+Therefore, [equation (1)](#matrix-perturbation-and-error-bound) can also be written as
 
 $$\frac{\|\Delta \boldsymbol{x}\|}{\|\boldsymbol{x}\|} \le \text{cond}({\bf A})\frac{\|\boldsymbol{r}\|}{\|\boldsymbol{b}\|} $$
 
-If we define relative residual as $$\frac{\|\boldsymbol{r}\|}{\|\boldsymbol{b}\|}$$, we can see that small relative residual implies small relative error in approximate solution only if <span>$${\bf A}$$</span> is well-conditioned ($$\text{cond}({\bf A})$$ is small).
+If we define relative residual as $$\frac{\|\boldsymbol{r}\|}{\|\boldsymbol{b}\|}$$, we can see that a small relative residual implies small relative error in approximate solution only if <span>$${\bf A}$$</span> is well-conditioned ($$\text{cond}({\bf A})$$ is small).
+
+In addition, it's important to note the difference between relative residual and relative error. The relative residual $$\frac{\|\boldsymbol{r}\|}{\|\boldsymbol{b}\|}$$ tells us how well the approximate solution $$\hat{\boldsymbol{x}}$$ satisfies the linear system $${\bf A} \boldsymbol{x} = \boldsymbol{b}$$. The relative error $$\frac{\|\Delta \boldsymbol{x}\|}{\|\boldsymbol{x}\|} $$ tells us how close the approximated solution $$\hat{\boldsymbol{x}}$$ is to the exact solution $$ \boldsymbol{x}$$. Keep in mind that we don't know the exact solution $$ \boldsymbol{x}$$, this is why we started using the residual vector $$ \boldsymbol{r}$$. 
+
+### Example
+
+$$ \mathbf{A} = \begin{bmatrix} 13 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 15 \end{bmatrix} $$
+
+Suppose we have $${\boldsymbol{x}}$$ as a solution of $${\bf A} \boldsymbol{x} = \boldsymbol{b}$$, and $$\hat {\boldsymbol{x}}$$ as a solution of $${\bf A} \hat{\boldsymbol{x}} = \boldsymbol{b} + \Delta \boldsymbol{b}$$. We define $${\bf r} = {\bf A} \hat{\boldsymbol{x}} - \boldsymbol{b}$$. If we know that the relative residual $$\frac{\|\boldsymbol{r}\|}{\|\boldsymbol{b}\|}$$ is $$10^{-4}$$, determine the upper bound for the output relative error. Assume 2-norm. 
+
+<details>
+    <summary><strong>Answer</strong></summary>
+
+<br>
+
+\(\frac{\|\Delta \boldsymbol{x}\|}{\|\boldsymbol{x}\|} \le \text{cond}({\bf A})\frac{\|\boldsymbol{r}\|}{\|\boldsymbol{b}\|} = \mathbf{15 * 10^{-4}} \)
+
+</details>
 
 ## Alternative Definitions of Relative Residual
+
+As a reminder, the relative residual $$\frac{\|\boldsymbol{r}\|}{\|\boldsymbol{b}\|}$$ tells us how well the approximate solution $$\hat{\boldsymbol{x}}$$ satisfies the linear system $${\bf A} \boldsymbol{x} = \boldsymbol{b}$$.
+
+<br>
+
 There are other closely related quantities that also have the name "relative residual".  Note that
 
 $$\begin{align} \|\Delta \boldsymbol{x}\| &= \|\hat{\boldsymbol{x}} - \boldsymbol{x}\| \\
@@ -79,7 +306,8 @@ $$\begin{align} \|\Delta \boldsymbol{x}\| &= \|\hat{\boldsymbol{x}} - \boldsymbo
 &= \|\boldsymbol{A}^{-1}(\boldsymbol{A}\hat{\boldsymbol{x}} - \boldsymbol{b})\| \\
 &= \|\boldsymbol{A}^{-1}\boldsymbol{r}\|\\
 &\leq \|\boldsymbol{A}^{-1}\|\cdot \| \boldsymbol{r}\| \\
-&= \|\boldsymbol{A}^{-1}\|\cdot \|\boldsymbol{A}\| \frac{\|\boldsymbol{r}\|}{\|\boldsymbol{A}\|} = \text{cond}(\boldsymbol{A})\frac{\|\boldsymbol{r}\|}{\|\boldsymbol{A}\|}.
+&= \|\boldsymbol{A}^{-1}\|\cdot \|\boldsymbol{A}\| \frac{\|\boldsymbol{r}\|}{\|\boldsymbol{A}\|}  \\
+&= \text{cond}(\boldsymbol{A})\frac{\|\boldsymbol{r}\|}{\|\boldsymbol{A}\|}.
 \end{align}$$
 
 In summary,
@@ -94,17 +322,18 @@ The quantity $$\frac{\|\boldsymbol{r}\|}{\|\boldsymbol{A}\|\cdot\|\boldsymbol{x}
 
 $$\frac{\|\boldsymbol{r}\|}{\|\boldsymbol{A}\|\cdot\|\boldsymbol{x}\|} \leq  \frac{\|\boldsymbol{r}\|}{\|\boldsymbol{b}\|}$$
 
-but are sometimes equal for certain choices of $$\boldsymbol{b}$$.
+*Note that the two sides are sometimes equal for certain choices of $$\boldsymbol{b}$$.*
 
-We can also divide equation (2) by $$\|\hat{\boldsymbol{x}}\|$$ to obtain 
+We can also divide [equation (2)](#alternative-definitions-of-relative-residual) by $$\|\hat{\boldsymbol{x}}\|$$ to obtain 
 
 $$\frac{\|\Delta \boldsymbol{x}\|}{\|\hat{\boldsymbol{x}}\|} \le \text{cond}({\bf A})\frac{\|\boldsymbol{r}\|}{\|\boldsymbol{A}\|\cdot\|\hat{\boldsymbol{x}}\|}.$$
 
-The left-hand side is no longer the relative error (the norm of the approximate solution is in the denominator, not the exact solution), but the right-hand side can still provide a reasonable estimate of the relative error.  It is also computable, since the norm of the true solution does not appear on the right-hand side.
+The left-hand side is no longer the relative error (the denominator is the norm of the approximate solution now, not the exact solution), but the right-hand side can still provide a reasonable estimate of the relative error.  It is also computable, since the norm of the true solution does not appear on the right-hand side.
 
 For this reason, the quantity $$\frac{\|\boldsymbol{r}\|}{\|\boldsymbol{A}\|\cdot\|\hat{\boldsymbol{x}}\|}$$ is also known as the relative residual.  This is used in the next section to describe the relationship between the residual and errors in the matrix $$\boldsymbol{A}$$.
 
 While 3 different quantities all being named "relative residual" may be confusing, you should be able to determine which one is being discussed by the context.
+
 
 ## Gaussian Elimination (with Partial Pivoting) is Guaranteed to Produce a Small Residual
 
@@ -117,29 +346,43 @@ where <span>$$E$$</span> is backward error in <span>$${\bf A}$$</span> (which is
 
 Typically <span>$$c$$</span> is small with partial pivoting, but <span>$$c$$</span> can be arbitrarily large without pivoting.
 
-Therefore, Gaussian elimination with partial pivoting yields small relative residual regardless of conditioning of the system.
+Therefore, Gaussian elimination with partial pivoting yields <b> small relative residual regardless of conditioning of the system <b>.
 
+<br>
 For more details, see [Gaussian Elimination & Roundoff Error](https://math.la.asu.edu/~gardner/lu-round.pdf).
 
-## Accuracy Rule of Thumb and Example
+## Accuracy Rule of Thumb for Conditioning
 
-Suppose we apply Gaussian elimination with partial pivoting and back substitution to the linear system $${\bf A} \boldsymbol{x} = \boldsymbol{b}$$ and obtain a computed solution $$\hat{\boldsymbol{x}}$$. If the entries in <span>$${\bf A}$$</span> and $$\boldsymbol{b}$$ are accurate to <span>$$s$$</span> decimal digits, and $$\text{cond}({\bf A}) \approx 10^t$$, then the elements of the solution vector $$\hat{\boldsymbol{x}}$$ will be accurate to about <span>$$s-t$$</span> decimal digits.
+Suppose we apply Gaussian elimination with partial pivoting and back substitution to the linear system $${\bf A} \boldsymbol{x} = \boldsymbol{b}$$ and obtain a computed solution $$\hat{\boldsymbol{x}}$$. If the entries in <span>$${\bf A}$$</span> and $$\boldsymbol{b}$$ are accurate to <span>$$s$$</span> decimal digits, and $$\text{cond}({\bf A}) \approx 10^w$$, then the elements of the solution vector $$\hat{\boldsymbol{x}}$$ will be accurate to about <span>$$s-w$$</span> decimal digits.
 
 For a proof of this rule of thumb, please see [Fundamentals of Matrix Computations by David S. Watkins](https://books.google.com/books?id=xi5omWiQ-3kC&pg=PA165&lpg=PA165&dq=gaussian+elimination+rule+of+thumb&source=bl&ots=KlQVax3zja&sig=o4SHiYPAXodkk39u9yw0NYZe1Zo&hl=en&sa=X&ved=0ahUKEwiopPykkvjWAhWjzIMKHYGpDIsQ6AEIXzAK#v=onepage&q=gaussian%20elimination%20rule%20of%20thumb&f=false).
 
-Example: How many accurate decimal digits in the solution can we expect to obtain if we solve a linear system $${\bf A} \boldsymbol{x} = \boldsymbol{b}$$ where $$\text{cond}({\bf A}) = 10^{10}$$ using Gaussian elimination with partial pivoting, assuming we are using IEEE double precision and the inputs are accurate to machine precision?
+### Example
+How many accurate decimal digits in the solution can we expect to obtain if we solve a linear system $${\bf A} \boldsymbol{x} = \boldsymbol{b}$$ where $$\text{cond}({\bf A}) = 10^{10}$$ using Gaussian elimination with partial pivoting, assuming we are using IEEE double precision and the inputs are accurate to machine precision?
 
-In IEEE double precision, $$\epsilon_{mach} \approx 2.2\times 10^{-16}$$, which means the entries in $${\bf A}$$ and $$\boldsymbol{b}$$ are accurate to $$\vert\log_{10}(2.2\times 10^{-16})\vert \approx 16$$ decimal digits.
+<details>
+    <summary><strong>Answer</strong></summary>
 
-Then, using the rule of thumb, we know the entries in $$\hat{\boldsymbol{x}}$$ will be accurate to about <span>$$16-10 = 6$$</span> decimal digits.
+In IEEE double precision, \(\epsilon_{mach} \approx 2.2\times 10^{-16}\), which means the entries in \({\bf A}\) and \(\boldsymbol{b}\) are accurate to \(\vert\log_{10}(2.2\times 10^{-16})\vert \approx 16\) decimal digits.
+
+<br> 
+<br>
+
+Then, using the rule of thumb, we know the entries in \(\hat{\boldsymbol{x}}\) will be accurate to about <span>\(16-10 = 6\)</span> decimal digits.
+
+</details>
 
 ## Review Questions
 
-- See this [review link](/cs357/fa2020/reviews/rev-10-condition.html)
-
-## ChangeLog
-
-*   2022-03-19 Yuxuan Chen <yuxuan19@illinois.edu>: added condition number bullet pounts, minor fixes
-*   2017-10-27 Erin Carrier <ecarrie2@illinois.edu>: adds review questions, minor fixes throughout, revised rule of thumb wording
-*   2017-10-27 Yu Meng <yumeng5@illinois.edu: first complete draft
-*   2017-10-17 Luke Olson <lukeo.illinois.edu: outline
+<ol>
+  <li> What is the definition of a condition number?</li>
+  <li> What is the condition number of solving \({\bf A}\mathbf{x} = \mathbf{b}\)?</li>
+  <li> What is the condition number of matrix-vector multiplication?</li>
+  <li> Calculate the <span>\(p\)</span>-norm condition number of a matrix for a given <span>\(p\)</span>.</li>
+  <li> Do you want a small condition number or a large condition number?</li>
+  <li> What is the condition number of an orthogonal matrix?</li>
+  <li> If you have <span>\(p\)</span> accurate digits in <span>\({\bf A}\)</span> and \(\mathbf{b}\), how many accurate digits do you have in the solution of \({\bf A}\mathbf{x} = \mathbf{b}\) if the condition number of <span>\({\bf A}\)</span> is \(\kappa\)?</li>
+  <li> When solving a linear system \({\bf A}\mathbf{x} = \mathbf{b}\), does a small residual guarantee an accurate result?</li>
+  <li> Consider solving a linear system \({\bf A}\mathbf{x} = \mathbf{b}\). When does Gaussian elimination with partial pivoting produce a small residual?</li>
+  <li> How does the condition number of a matrix <span>\({\bf A}\)</span> relate to the condition number of <span>\({\bf A}^{-1}\)</span>?</li>
+</ol>
