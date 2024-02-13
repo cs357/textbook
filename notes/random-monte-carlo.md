@@ -89,7 +89,7 @@ but we can get something that represents the average case.
 
 ### Discrete Random Variables
 Each **_Discrete Random Variable_** <span>\\(X\\)</span> can take a discrete value, \\(x_i\\) with probability \\(p_i\\) for \\(i = 1,...m\\) and \\(\Sigma_{i=1}^m p_i = 1\\). 
-#### Coin toss example
+### Coin toss example
 Consider a random variable \\(X\\) which is the result of a coin toss that can be heads or tails. 
 <div> $$ X=1\text{: toss is heads} $$ </div>
 <div> $$ X=0\text{: toss is tails} $$ </div>
@@ -154,5 +154,14 @@ est = (1.0/n * total)*((x_max-x_min)*(y_max-y_min))
 ```
 
 ## Review Questions
-
-- See this [review link](/cs357/fa2020/reviews/rev-7-random-monte-carlo.html)
+1. What is a pseudo-random number generator?
+2. What are properties of good random number generators?
+3. What are advantages/disadvantages of pseudorandom number generators in comparison to using truly random numbers?
+4. What is a linear congruential generator (LCG)?
+5. What is a seed for a random number generator?
+6. Do random number generators repeat? Are they reproducible?
+7. What are Monte Carlo methods and how are they used?
+8. For Monte Carlo, how does the error behave in relation to the number of sampling points?
+9. Given a computed value from Monte Carlo and a sampling error, what sampling error could you expect for a different number of samples?
+10. For a small example problem, use Monte Carlo to estimate the area of a certian domain.
+11. For a small example problem, use Monte Carlo to estimate the integral of a function.
