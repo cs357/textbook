@@ -89,7 +89,7 @@ but we can get something that represents the average case.
 
 ### Discrete Random Variables
 Each **_Discrete Random Variable_** <span>\\(X\\)</span> can take a discrete value, \\(x_i\\) with probability \\(p_i\\) for \\(i = 1,...m\\) and \\(\Sigma_{i=1}^m p_i = 1\\). 
-### Coin toss example
+### Example: Coin Toss
 Consider a random variable \\(X\\) which is the result of a coin toss that can be heads or tails. 
 <div> $$ X=1\text{: toss is heads} $$ </div>
 <div> $$ X=0\text{: toss is tails} $$ </div>
@@ -97,10 +97,18 @@ For each individual toss, \\(x_i\\) is \\(0\\) or \\(1\\) and each \\(x_i\\) has
 
 The **expected value** of a discrete random variable is defined as:
 <div>$$ E(X) = \Sigma_{i=1}^m p_i x_i $$ </div>
-So, for a coin toss:
+
+What is the expected value for this coin toss?
+<details> 
+<b>Answer:</b>
+For a coin toss, the expectation is
 <div>$$ E(X) = 1 * 0.5 + 0 * 0.5 = 0.5$$ </div>
-Now, suppose we toss a “fair” coin 1000 times, and record the number of times we get heads. The recorded number would likely land close to the expected value \\(0.5\\).
-If we run this \\(1000\\) coin toss experiment \\(N\\) times (let’s say \\(N=100\\)), the results will look like a normal distribution, with the majority of the results close to \\(0.5\\).
+</details>
+Now, suppose we toss a “fair” coin 1000 times, and record the number of times we get heads. What would the distribution look like if we run this \\(1000\\) coin toss experiment \\(N\\) times (let’s say \\(N=100\\)) ? 
+<details>
+<b>Answer:</b>
+The recorded number for each 1000 coin toss experiment would likely land close to the expected value \(0.5\). The results of running the experiment \(N\) times would look will look like a normal distribution, with the majority of the results close to \(0.5\).
+</details>
 ## Monte Carlo
 
 **_Monte Carlo methods_** are algorithms that rely on repeated random sampling to approximate a desired quantity. Monte Carlo methods are typically used in modeling the following types of problems:
