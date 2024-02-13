@@ -108,7 +108,7 @@ $$\frac{\|\Delta \boldsymbol{x}\|}{\|\boldsymbol{x}\|} \le \text{cond}({\bf A})\
 Therefore, if we know the relative error in input, then we can use the condition number of the system to obtain an upper bound for the relative error of our computed solution (output).
 
 
-#### Example
+### Example
 
 Give an example of a matrix that is very well-conditioned (i.e., has a condition number that is good for computation). Select the best possible condition number(s) of a matrix?
 
