@@ -2,6 +2,8 @@
 title: Random Number Generators and Monte Carlo Method
 description: Properties of RNGs and examples of Monte Carlo method.
 sort: 7
+author:
+  - CS 357 Course Staff
 changelog:
   - 
     name: Bhargav Chandaka
@@ -28,27 +30,27 @@ changelog:
 
 * * *
 
-## Learning objectives
+## Learning Objectives
 
-*   Understand the properties of random number generators and what properties are desirable in a random number generator
-*   Give examples of problems where you would use Monte Carlo
-*   Characterize the error of Monte Carlo
+*   Understand the properties of random number generators and what properties are desirable in a random number generator.
+*   Give examples of problems where you would use Monte Carlo.
+*   Characterize the error of Monte Carlo.
 
 ## Random Number Generators
 
-**_Random Number Generators (RNG)_** are algorithms or methods that can be used to generate a sequence of numbers that cannot be reasonably predicted. There are usually two principal methods for generating random numbers: **_truly-random method_** and **_pseudorandom method_**. Truly-random methods generate numbers according to some random physical phenomenon. For instance, rolling a fair die will generate truly random numbers between 1 and 6\. Other example sources include atmospheric noise and thermal noise. Pseudorandom methods generate numbers using computational algorithms that produce sequences of apparently random results, which are in fact predictable and reproducible.
+**_Random Number Generators (RNG)_** are algorithms or methods that can be used to generate a sequence of numbers that cannot be reasonably predicted. There are usually two principal methods for generating random numbers: **_truly-random methods_** and **_pseudorandom methods_**. Truly-random methods generate numbers according to some random physical phenomenon. For instance, rolling a fair die will generate truly random numbers between 1 and 6\. Other example sources include atmospheric noise and thermal noise. Pseudorandom methods generate numbers using computational algorithms that produce sequences of apparently random results, which are in fact predictable and reproducible.
 
-When using a pseudorandom method, because only finite number of numbers can be represented in computer, any generated sequence must eventually repeat. The **_period_** of a pseudorandom number generator is defined as the maximum length of the repetition-free prefix of the sequence.
+When using a pseudorandom method, since only a finite quantity of numbers can be represented in computer, any generated sequence must eventually repeat. The **_period_** of a pseudorandom number generator is defined as the maximum length of the repetition-free prefix of the sequence.
 
 ### Properties of Random Number Generators
 
 A random number generator has the following properties:
 
-*   Random pattern: passes statistical tests of randomness
-*   Long period: goes as long as possible before repeating
-*   Efficiency: executes rapidly and requires little storage
-*   Repeatability: produces same sequence if started with same initial conditions
-*   Portability: runs on different kinds of computers and is capable of producing same sequence on each
+*   Random pattern: passes statistical tests of randomness.
+*   Long period: goes as long as possible before repeating.
+*   Efficiency: executes rapidly and requires little storage.
+*   Repeatability: produces same sequence if started with same initial conditions.
+*   Portability: runs on different kinds of computers and is capable of producing same sequence on each.
 
 ### Linear Congruential Generator
 
@@ -62,7 +64,7 @@ where <span>\\(a\\) (the multiplier)</span> and <span>\\(c\\) (the increment)</s
 
 ### Example of an LCG
 
-Below is the python code for an LCG that generates the numbers \\(1,3,7,5,1,3,7,5,\dots\\) given an initial seed of <span>\\(1\\)</span>.
+Below is the Python code for an LCG that generates the numbers \\(1,3,7,5,1,3,7,5,\dots\\) given an initial seed of <span>\\(1\\)</span>.
 
 ```python
 def lcg_gen_next(modulus, a, c, xk):
@@ -89,6 +91,7 @@ but we can get something that represents the average case.
 
 ### Discrete Random Variables
 Each **_Discrete Random Variable_** <span>\\(X\\)</span> can take a discrete value, \\(x_i\\) with probability \\(p_i\\) for \\(i = 1,...m\\) and \\(\Sigma_{i=1}^m p_i = 1\\). 
+
 ### Example: Coin Toss
 Consider a random variable \\(X\\) which is the result of a coin toss that can be heads or tails. 
 <div> $$ X=1\text{: toss is heads} $$ </div>
@@ -100,14 +103,14 @@ The **expected value** of a discrete random variable is defined as:
 
 What is the expected value for this coin toss?
 <details> 
-<b>Answer:</b>
+<summary><strong>Answer</strong></summary>
 For a coin toss, the expectation is
-<div>$$ E(X) = 1 * 0.5 + 0 * 0.5 = 0.5$$ </div>
+<div>$$ E(X) = 1 \cdot 0.5 + 0 \cdot 0.5 = 0.5$$ </div>
 </details>
 Now, suppose we toss a “fair” coin 1000 times, and record the number of times we get heads. What would the distribution look like if we run this \\(1000\\) coin toss experiment \\(N\\) times (let’s say \\(N=100\\)) ? 
 <details>
-<b>Answer:</b>
-The recorded number for each 1000 coin toss experiment would likely land close to the expected value \(0.5\). The results of running the experiment \(N\) times would look will look like a normal distribution, with the majority of the results close to \(0.5\).
+<summary><strong>Answer</strong></summary>
+The recorded number for each 1000 coin toss experiment would likely land close to the expected value \(0.5\). The results of running the experiment \(N\) times would look will look like a normal distribution, with the majority of the results close to \(0.5\). This is also known as the law of large numbers (when N is large).
 </details>
 ## Monte Carlo
 
@@ -139,7 +142,7 @@ Therefore, the asymptotic behavior of the Monte Carlo method is \\(\mathcal{O}(\
 
 ### Example: Applying Monte Carlo
 
-One of the most common applications of Monte Carlo is to approximate the definite integral of a complicated function, often in higher dimensions where other numerical integration techniques are extremely costly. Below is the python code for approximating the intergral of a function <span>\\(f(x,y)\\)</span> over the domain \\([x_{min}, x_{max}] \times [y_{min}, y_{max}]\\):
+One of the most common applications of Monte Carlo is to approximate the definite integral of a complicated function, often in higher dimensions where other numerical integration techniques are extremely costly. Below is the Python code for approximating the intergral of a function <span>\\(f(x,y)\\)</span> over the domain \\([x_{min}, x_{max}] \times [y_{min}, y_{max}]\\):
 
 ```python
 import random
