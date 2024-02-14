@@ -3,21 +3,41 @@ title: Vectors, Matrices and Norms
 description: Different ways to measure vectors and matrices
 sort: 8
 ---
-# Vectors, matrices and norms
+# Vectors, matrices, and norms
 
 * * *
 
 ## Learning Objectives
+You will be able to
+* Understand vector spaces
+* Identify linear transformations
+* Recognize special matrices
+* Perform matrix-vector multiplications
+* Represent linear transformations as matrices
+* Evaluate the magnitudes of vectors and matrices
 
-* Understanding matrix-vector multiplications
-* Special matrix types
-* How we can "measure" vectors
-* How we can "measure" matrices  
+## Vectors
+
+A vector is an array of numbers that represent a magnitude and a direction.
+
+
+$$ \mathbf{v} = \begin{bmatrix} 1 \\ 3 \end{bmatrix}\hspace{5mm} $$
+
+<center>
+<img src="vector_example.png" alt="Vector v graph" width="300" class="center"/>
+</center>
+
+The vector v depicted above is a 2-dimensional vector. Similarly, an n-dimensional vector has n components.
+
+$$ \mathbf{n-vector:\ } \mathbf{x} = \begin{bmatrix} \mathbf{x}_{1} \\ \mathbf{x}_{2}  \\ \vdots \\ \mathbf{x}_{n}\end{bmatrix} $$
+
+A vector is an element of a Vector Space.
+
 
 
 ## Vector Spaces
 
-A **_vector space_** is a set <span>\\(V\\)</span> of vectors and a field <span>\\(F\\)</span> (elements of F are called scalars) with the following two operations:
+A **_vector space_** is a set <span>\\(V\\)</span> of vectors and a field <span>\\(F\\)</span> (elements of <span>\\(F\\)</span> are called scalars) with the following two operations:
 
 1.  Vector addition: \\(\forall \mathbf{v},\mathbf{w} \in V\\), \\(\mathbf{v} + \mathbf{w} \in V\\)
 2.  Scalar multiplication: \\(\forall \alpha \in F, \mathbf{v} \in V\\), \\(\alpha \mathbf{v} \in V\\)
@@ -62,6 +82,7 @@ The standard inner product on \\(\mathbb{R}^n\\) is the dot product :$$ \langle 
 
 To read more about [Inner Product Definition](http://mathworld.wolfram.com/InnerProduct.html)
 
+
 ## Linear Transformations and Matrices
 
 A function \\(f: V \to W\\) between two vector spaces <span>\\(V\\)</span> and <span>\\(W\\)</span> is called **_linear_** if
@@ -75,9 +96,85 @@ If <span>\\(n\\)</span> and <span>\\(m\\)</span> are the dimension of <span>\\(V
 
 $$ \mathbf{A} = \begin{bmatrix} a_{11} & a_{12} & \dots & a_{1n} \\ a_{21} & a_{22} & \dots & a_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ a_{m1} & a_{m2} & \dots & a_{mn} \end{bmatrix}. $$
 
-The numbers in the matrix \\(\mathbf{A}\\) are determined by the basis vectors for the spaces <span>\\(V\\)</span> and <span>\\(W\\)</span>. To see how, we first review matrix vector multiplication.
+Here are some important types of matrices.
 
-### Matrix-vector multiplication
+### Special Matrices
+
+#### Zero Matrices
+
+The \\(m \times n\\) **_zero matrix_** is denoted by <span>\\({\bf 0}_{mn}\\)</span> and has all entries equal to zero. For example, the \\(3 \times 4\\) zero matrix is
+
+$$ {\bf 0}_{34} = \begin{bmatrix} 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \end{bmatrix}. $$
+
+#### Identity Matrices
+
+The \\(n \times n\\) **_identity matrix_** is denoted by <span>\\({\bf I}_n\\)</span> and has all entries equal to zero except for the diagonal, which is all 1\. For example, the \\(4 \times 4\\) identity matrix is
+
+$$ {\bf I}_4 = \begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix}. $$
+
+**Properties of identity matrices:**
+
+Multiplying any square matrix with its corresponding identity matrix results in the original matrix.
+
+$$\mathbf{AI} = \mathbf{A}$$
+
+$$ \begin{bmatrix} 7 & 1 & 6 \\ 4 & 0 & 5 \\ 1 & 2 & 3 \end{bmatrix} \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix} \mathbf{\ =\ } \begin{bmatrix} 7 & 1 & 6 \\ 4 & 0 & 5 \\ 1 & 2 & 3 \end{bmatrix}$$
+
+#### Diagonal Matrices
+
+A \\(n \times n\\) **_diagonal matrix_** has all entries equal to zero except for the diagonal entries. We typically use <span>\\({\bf D}\\)</span> for diagonal matrices. For ecample, \\(4 \times 4\\) diagonal matrices have the form
+
+$$ \begin{bmatrix} d_{11} & 0 & 0 & 0 \\ 0 & d_{22} & 0 & 0 \\ 0 & 0 & d_{33} & 0 \\ 0 & 0 & 0 & d_{44} \end{bmatrix}. $$
+
+#### Triangular Matrices
+
+A **_lower-triangular matrix_** is a square matrix that is entirely zero above the diagonal. We typically use <span>\\({\bf L}\\)</span> for lower-triangular matrices. For example, \\(4 \times 4\\) lower-triangular matrices have the form
+
+$$ {\bf L} = \begin{bmatrix} \ell_{11} & 0 & 0 & 0 \\ \ell_{21} & \ell_{22} & 0 & 0 \\ \ell_{31} & \ell_{32} & \ell_{33} & 0 \\ \ell_{41} & \ell_{42} & \ell_{43} & \ell_{44} \end{bmatrix}. $$
+
+An **_upper triangular matrix_** is a square matrix that is entirely zero below the diagonal. We typically use <span>\\({\bf U}\\)</span> for upper-triangular matrices. For example, \\(4 \times 4\\) upper-triangular matrices have the form
+
+$$ {\bf U} = \begin{bmatrix} u_{11} & u_{12} & u_{13} & u_{14} \\ 0 & u_{22} & u_{23} & u_{24} \\ 0 & 0 & u_{33} & u_{34} \\ 0 & 0 & 0 & u_{44} \end{bmatrix}. $$
+
+**Properties of triangular matrices:**
+
+1.  An \\(n \times n\\) triangular matrix has <span>\\(n(n-1)/2\\)</span> entries that must be zero, and <span>\\(n(n+1)/2\\)</span> entries that are allowed to be non-zero.
+2.  Zero matrices, identity matrices, and diagonal matrices are all both lower triangular and upper triangular.
+
+#### Permutation Matrices
+
+A **_permuation matrix_** is a square matrix that is all zero, except for a single entry in each row and each column which is 1\. We typically use <span>\\({\bf P}\\)</span> for permutation matrices. An example of a \\(4 \times 4\\) permutation matrix is
+
+$$ {\bf P} = \begin{bmatrix} 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 1 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 \end{bmatrix}. $$
+
+The properties of a permutation matrix are:
+
+1.  Exactly <span>\\(n\\)</span> entries are non-zero.
+2.  Multiplying a vector with a permutation matrix permutes (rearranges) the order of the entries in the vector. For example, using <span>\\({\bf P}\\)</span> above and <span>\\(x = [1, 2, 3, 4]^T\\)</span>, the product is <span>\\({\bf Px} = [2, 4, 1, 3]^T\\)</span>.
+3.  If <span>\\(P_{ij} = 1\\)</span> then <span>\\(({\bf Px})_i = x_j\\)</span>.
+4.  The inverse of a permutation matrix is its transpose, so <span>\\({\bf PP}^T = {\bf P}^T{\bf P} = {\bf I}\\)</span>.
+
+#### Matrices in Block Form
+
+A matrix in **_block form_** is a matrix partitioned into blocks. A block is simply a submatrix. For example, consider
+
+$$ {\bf M} = \begin{bmatrix} {\bf A} & {\bf B} \\ {\bf C} & {\bf D} \end{bmatrix} $$
+
+where <span>\\({\bf A}\\)</span>, <span>\\({\bf B}\\)</span>, <span>\\({\bf C}\\)</span>, and <span>\\({\bf D}\\)</span> are submatrices.
+
+There are special matrices in block form as well. For instance, a **_block diagonal_** matrix is a block matrix whose off-diagonal blocks are zero matrices.
+
+## Matrix Rank
+
+The **_rank_** of a matrix is the number of linearly independent columns of the matrix. It can also be shown that the matrix has the same number of linearly indendent rows, as well. If \\(\mathbf{A} \text{ is an } m \times n\\) matrix, then
+
+1.  \\(\text{rank}(\mathbf{A}) \leq \text{min}(m,n)\\).
+2.  If \\(\text{rank}(\mathbf{A}) = \text{min}(m,n)\\), then \\(\mathbf{A}\\) is **_full rank_**. Otherwise, \\(\mathbf{A}\\) is **_rank deficient_**.
+
+A square \\(n\times n\\) matrix \\(\mathbf{A}\\) is **_invertible_** if there exists a square matrix \\(\mathbf{B}\\) such that \\(\mathbf{AB} = \mathbf{BA} = \mathbf{I}\\), where \\(\mathbf{I}\\) is the \\(n\times n\\) identity matrix. The matrix \\(\mathbf{B}\\) is denoted by \\(\mathbf{A}^{-1}\\). A square matrix is invertible if and only if it has full rank. A square matrix that is not invertible is called a **_singular_** matrix.
+
+
+## Matrix-vector multiplication
 
 Let \\(\mathbf{A}\\) be an \\(m\times n\\) matrix of real numbers. We can also write \\(\mathbf{A}\in\mathbb{R}^{m\times n}\\) as shorthand. If \\(\mathbf{x}\\) is a vector in \\(\mathbb{R}^n\\) then the matrix-vector product \\(\mathbf{A}\mathbf{x} = \mathbf{b}\\) is a vector in \\(\mathbf{R}^m\\) defined by:
 
@@ -102,7 +199,7 @@ $$ \mathbf{A}\mathbf{x} = x_1\mathbf{a}_{1} + x_2\mathbf{a}_{2} + \dots x_n\math
 
 It is this representation that allows us to express any linear transformation between finite-dimensional vector spaces with matrices.
 
-### Matrix Representation of Linear Transformations
+## Matrix Representation of Linear Transformations
 
 Let $$\mathbf{e}_1,\mathbf{e}_2,\dots,\mathbf{e}_n$$ be the standard basis of $$\mathbb{R}^n$$. If we define the vector $$\mathbf{z}_j = \mathbf{A}\mathbf{e}_j$$, then using the interpretation of matrix-vector products as linear combinations of the column of $$\mathbf{A}$$, we have that:
 
@@ -145,73 +242,6 @@ Thus, \\(a_{13} = 2,\ a_{23} = 2\\), and the linear transformation <span>\\(f\\)
 $$ \begin{bmatrix} 1 & 5 & 2\\ 0 & -1 & 2\end{bmatrix}. $$
 
 It is important to note that the matrix representation not only depends on <span>\\(f\\)</span>, but also our choice of basis. If we chose different bases for the vector spaces \\(V\text{ and } W\\), the matrix representation of <span>\\(f\\)</span> would change as well.
-
-## Special Matrices
-
-### Zero Matrices
-
-The \\(m \times n\\) **_zero matrix_** is denoted by <span>\\({\bf 0}_{mn}\\)</span> and has all entries equal to zero. For example, the \\(3 \times 4\\) zero matrix is
-
-$$ {\bf 0}_{34} = \begin{bmatrix} 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \end{bmatrix}. $$
-
-### Identity Matrices
-
-The \\(n \times n\\) **_identity matrix_** is denoted by <span>\\({\bf I}_n\\)</span> and has all entries equal to zero except for the diagonal, which is all 1\. For example, the \\(4 \times 4\\) identity matrix is
-
-$$ {\bf I}_4 = \begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix}. $$
-
-### Diagonal Matrices
-
-A \\(n \times n\\) **_diagonal matrix_** has all entries equal to zero except for the diagonal entries. We typically use <span>\\({\bf D}\\)</span> for diagonal matrices. For ecample, \\(4 \times 4\\) diagonal matrices have the form:
-
-$$ \begin{bmatrix} d_{11} & 0 & 0 & 0 \\ 0 & d_{22} & 0 & 0 \\ 0 & 0 & d_{33} & 0 \\ 0 & 0 & 0 & d_{44} \end{bmatrix}. $$
-
-### Triangular Matrices
-
-A **_lower-triangular matrix_** is a square matrix that is entirely zero above the diagonal. We typically use <span>\\({\bf L}\\)</span> for lower-triangular matrices. For example, \\(4 \times 4\\) lower-triangular matrices have the form:
-
-$$ {\bf L} = \begin{bmatrix} \ell_{11} & 0 & 0 & 0 \\ \ell_{21} & \ell_{22} & 0 & 0 \\ \ell_{31} & \ell_{32} & \ell_{33} & 0 \\ \ell_{41} & \ell_{42} & \ell_{43} & \ell_{44} \end{bmatrix}. $$
-
-An **_upper triangular matrix_** is a square matrix that is entirely zero below the diagonal. We typically use <span>\\({\bf U}\\)</span> for upper-triangular matrices. For example, \\(4 \times 4\\) upper-triangular matrices have the form:
-
-$$ {\bf U} = \begin{bmatrix} u_{11} & u_{12} & u_{13} & u_{14} \\ 0 & u_{22} & u_{23} & u_{24} \\ 0 & 0 & u_{33} & u_{34} \\ 0 & 0 & 0 & u_{44} \end{bmatrix}. $$
-
-Properties of triangular matrices:
-
-1.  An \\(n \times n\\) triangular matrix has <span>\\(n(n-1)/2\\)</span> entries that must be zero, and <span>\\(n(n+1)/2\\)</span> entries that are allowed to be non-zero.
-2.  Zero matrices, identity matrices, and diagonal matrices are all both lower triangular and upper triangular.
-
-### Permutation Matrices
-
-A **_permuation matrix_** is a square matrix that is all zero, except for a single entry in each row and each column which is 1\. We typically use <span>\\({\bf P}\\)</span> for permutation matrices. An example of a \\(4 \times 4\\) permutation matrix is
-
-$$ {\bf P} = \begin{bmatrix} 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 1 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 \end{bmatrix}. $$
-
-The properties of a permutation matrix are:
-
-1.  Exactly <span>\\(n\\)</span> entries are non-zero.
-2.  Multiplying a vector with a permutation matrix permutes (rearranges) the order of the entries in the vector. For example, using <span>\\({\bf P}\\)</span> above and <span>\\(x = [1, 2, 3, 4]^T\\)</span>, the product is <span>\\({\bf Px} = [2, 4, 1, 3]^T\\)</span>.
-3.  If <span>\\(P_{ij} = 1\\)</span> then <span>\\(({\bf Px})_i = x_j\\)</span>.
-4.  The inverse of a permutation matrix is its transpose, so <span>\\({\bf PP}^T = {\bf P}^T{\bf P} = {\bf I}\\)</span>.
-
-### Matrices in Block Form
-
-A matrix in **_block form_** is a matrix partitioned into blocks. A block is simply a submatrix. For example, consider
-
-$$ {\bf M} = \begin{bmatrix} {\bf A} & {\bf B} \\ {\bf C} & {\bf D} \end{bmatrix} $$
-
-where <span>\\({\bf A}\\)</span>, <span>\\({\bf B}\\)</span>, <span>\\({\bf C}\\)</span>, and <span>\\({\bf D}\\)</span> are submatrices.
-
-There are special matrices in block form as well. For instance, a **_block diagonal_** matrix is a block matrix whose off-diagonal blocks are zero matrices.
-
-## Matrix Rank
-
-The **_rank_** of a matrix is the number of linearly independent columns of the matrix. It can also be shown that the matrix has the same number of linearly indendent rows, as well. If \\(\mathbf{A} \text{ is an } m \times n\\) matrix, then
-
-1.  \\(\text{rank}(\mathbf{A}) \leq \text{min}(m,n)\\).
-2.  If \\(\text{rank}(\mathbf{A}) = \text{min}(m,n)\\), then \\(\mathbf{A}\\) is **_full rank_**. Otherwise, \\(\mathbf{A}\\) is **_rank deficient_**.
-
-A square \\(n\times n\\) matrix \\(\mathbf{A}\\) is **_invertible_** if there exists a square matrix \\(\mathbf{B}\\) such that \\(\mathbf{AB} = \mathbf{BA} = \mathbf{I}\\), where \\(\mathbf{I}\\) is the \\(n\times n\\) identity matrix. The matrix \\(\mathbf{B}\\) is denoted by \\(\mathbf{A}^{-1}\\). A square matrix is invertible if and only if it has full rank. A square matrix that is not invertible is called a **_singular_** matrix.
 
 ## Matrices as operators
 
@@ -296,9 +326,11 @@ $$\|\mathbf{w}\|_\infty = 5$$
 
 To calculate the error when computing a vector result, you can apply a norm.
 
-Absolute error = \|\|true value - approximate value\|\|
+$$\begin{eqnarray}
+\mathbf{Absolute\ Error} = \|\mathbf{True\ Value} - \mathbf{Approximate\ Value}\|\\
+\mathbf{Relative\ Error} = \frac{\|\mathbf{True\ Value} - \mathbf{Approximate\ Value}\|}{\|\mathbf{True\ Value}\|}
+\end{eqnarray}$$
 
-Relative error = Absolute error / \|\|true value\|\|
 
 ## Matrix Norm
 
@@ -325,47 +357,56 @@ $$\|{\bf A} {\bf B}\| \leq \|{\bf A}\| \|{\bf B}\|$$
 
 #### Frobenius norm
 
-The Frobenius norm is simply the sum of every element of the matrix squared, which is equivalent to applying the vector <span>$$2$$</span>-norm to the flattened matrix,
+The Frobenius norm is simply the square root of the sum of every squared element of the matrix, which is equivalent to applying the vector <span>$$2$$</span>-norm to the flattened matrix,
 
 $$\|{\bf A}\|_F = \sqrt{\sum_{i,j} a_{ij}^2}.$$
 
 The Frobenius norm is an example of a general matrix norm that is not an induced norm.
 
+For example,
+
+
+$${\bf Q =}\begin{bmatrix} 1 & 4 \\ 6 & 5 \end{bmatrix}$$
+
+$$\begin{eqnarray}
+\|{\bf Q}\|_{\bf F} &=& \sqrt{1^2 + 4^2 + 6^2 + 5^2}\\
+&=& \sqrt{78}\\
+&\approx& 8.83
+\end{eqnarray}$$
+
 #### The matrix p-norm
 
 The matrix p-norm is induced by the p-norm of a vector. It is $$\|{\bf A}\|_p := \max_{\|\mathbf{x}\|_p=1} \|{\bf A}\mathbf{x}\|_p$$. There are three special cases:
 
-For the 1-norm, this reduces to the maximum absolute column sum of the matrix, i.e.,
+For the **1-norm**, this reduces to the maximum absolute column sum of the matrix, i.e.,
 
 $$\|{\bf A}\|_1 = \max_j \sum_{i=1}^n \vert a_{ij} \vert.$$
 
-For the 2-norm, this reduces the maximum singular value of the matrix.
-
-$$\|{\bf A}\|_{2} = \max_k \sigma_k$$
-
-For the $$\infty$$-norm this reduces to the maximum absolute row sum of the matrix.
-
-$$\|{\bf A}\|_{\infty} = \max_i \sum_{j=1}^n \vert a_{ij} \vert.$$
-
-#### Matrix Norm Examples
-
-Now we will go through a few examples with a matrix <span>$${\bf C}$$</span>, defined below.
+For example, consider the matrix C
 
 $$ {\bf C} = \begin{bmatrix} 3 & -2 \\ -1 & 3 \\ \end{bmatrix} $$
 
-For the 1-norm:
+The matrix C has absolute column sums
 
-$$\|{\bf C}\|_1 = \max_{\|\mathbf{x}\|_1=1} \|{\bf C}\mathbf{x}\|_1$$
+$$\begin{eqnarray}
+|3| + |-1| = &4& {\ \ and}\\
+|-2| + |3| = &5&\\
+\end{eqnarray}$$
 
-$$\|{\bf C}\|_1 = \max_{1 \leq j \leq 3} \sum_{i=1}^3|C_{ij}|$$
+therefore,
 
-$$\|{\bf C}\|_1 = \max(|3| + |-1|, |-2| + |3|)$$
+$$\begin{eqnarray}
+\|{\bf C}\|_{\bf 1} &=& \max (4, 5)\\
+&=& 5
+\end{eqnarray}$$
 
-$$\|{\bf C}\|_1 = \max(4, 5)$$
+For the **2-norm**, this reduces the maximum singular value of the matrix.
 
-$$\|{\bf C}\|_1 = 5$$
+$$\|{\bf A}\|_{2} = \max_k \sigma_k$$
 
-For the 2-norm:
+Consider the same matrix C,
+
+$$ {\bf C} = \begin{bmatrix} 3 & -2 \\ -1 & 3 \\ \end{bmatrix}. $$
 
 The singular values are the square roots of the eigenvalues of the matrix <span>$${\bf C}^T {\bf C}$$</span>. You can also find the maximum singular values by calculating the Singular Value Decomposition of the matrix.
 
@@ -389,26 +430,39 @@ $$(\lambda-\frac{1}{2}(23+3\sqrt{37}))(\lambda-\frac{1}{2}(23-3\sqrt{37})) = 0$$
 
 $$\|{\bf C}\|_2 = \sqrt{\lambda_{max}} = \sqrt{\frac{1}{2}(23+3\sqrt{37})} \approx 4.54$$
 
-For the $$\infty$$-norm:
+For the **$$\infty$$-norm** this reduces to the maximum absolute row sum of the matrix.
 
-$$\|{\bf C}\|_{\infty} = \max_{\|\mathbf{x}\|_{\infty}=1} \|{\bf C}\mathbf{x}\|_{\infty}$$
+$$\|{\bf A}\|_{\infty} = \max_i \sum_{j=1}^n \vert a_{ij} \vert.$$
 
-$$\|{\bf C}\|_{\infty} = \max_{1 \leq i \leq 3} \sum_{j=1}^3|C_{ij}|$$
+Once again, considering C
 
-$$\|{\bf C}\|_{\infty} = \max(|3| + |-2|, |-1| + |3|)$$
+$$ {\bf C} = \begin{bmatrix} 3 & -2 \\ -1 & 3 \\ \end{bmatrix} $$
 
-$$\|{\bf C}\|_{\infty} = \max(5, 4)$$
+The matrix C has absolute row sums
 
-$$\|{\bf C}\|_{\infty} = 5$$
+$$\begin{eqnarray}
+|3| + |-2| = &5& {\ \ and}\\
+|-1| + |3| = &4&\\
+\end{eqnarray}$$
+
+therefore,
+
+$$\begin{eqnarray}
+\|{\bf C}\|_{\bf 1} &=& \max (4, 5)\\
+&=& 5
+\end{eqnarray}$$
 
 
 ## Review Questions
 
-- See this [review link](/cs357/fa2020/reviews/rev-8-vec-mat.html)
+        Yuxuan can you put the html for the review questions in here? I think it might be easier for you to get it from the github.
 
 
 ## ChangeLog
 
+* 2023-02-10 Apramey Hosahalli <apramey2@illinois.edu>: Replaced placeholders with examples
+* 2023-02-10 Apramey Hosahalli <apramey2@illinois.edu>: added section for vectors
+* 2023-02-03 Apramey Hosahalli <apramey2@illinois.edu>: re-ordered sections according to the lectures and changed learning objectives
 * 2022-03-01 Arnav Shah <arnavss2@illinois.edu>: added norms and errors section
 * 2022-02-22 Arnav Shah <arnavss2@illinois.edu>: added matrices as operators section
 * 2020-04-27 Mariana Silva <mfsilva@illinois.edu>: updated notation and mat-vec section
