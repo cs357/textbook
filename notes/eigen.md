@@ -91,7 +91,7 @@ $$ |\lambda_1| \geq |\lambda_2| \geq \cdots \geq |\lambda_n|, $$
 
 and we normalize eigenvectors, so that $$\|{\bf x}\| = 1$$.
 
-We define the nullspace as the span, or set of all linear combinations, of the solutions for $$\mathbf {Ax}= \mathbf{b}$$.
+We define the nullspace of $$A$$ as the span, or set of all linear combinations, of the solutions for $$\mathbf {Ax}= \mathbf{0}$$.
 
 #### Example: Solving a Small Matrix for Eigenvalues
 
@@ -209,7 +209,7 @@ this implies
 
 $$ \lim_{k\to\infty}\frac{\mathbf{A}^k {\bf x}_0}{\lambda_1^{k}} = \alpha_1 {\bf u}_1.$$
 
-This observation motivates the algorithm known as **_power iteration_**, which is the topic of the next section.
+Plainly, as we repeatedly apply $$\mathbf{A}$$ to an arbitrary vector - which can always be composed as a linear combination of $$n$$ linearly independent eigenvectors spanning $$\mathbb{R}^n$$ - the result converges to a multiple of the dominant eigenvector of $$\mathbf{A}$$: $$\bf{u_1}$$. This observation motivates the algorithm known as **_power iteration_**, which is the topic of the next section.
 
 ## Power Iteration algorithm
 
