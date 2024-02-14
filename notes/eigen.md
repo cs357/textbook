@@ -158,7 +158,7 @@ def diagonalize(A):
 *   Eigenvalues can be real or complex numbers.
 *   An $$n \times n$$ real matrix can have complex eigenvalues.
 *   The eigenvalues of an $$n \times n$$ matrix are not necessarily unique. In fact, we can define the multiplicity of an eigenvalue. The geometric multiplicity of an eigenvector $$\lambda$$ corresponds to the number of linearly independent eigenvectors of $$\lambda$$
-*   If an $$n \times n$$ matrix has $$n$$ linearly independent eigenvectors, then the matrix is diagonalizable. Therefore, a non rank-deficient matrix can still be diagonalizable.
+*   If an $$n \times n$$ matrix has $$n$$ linearly independent eigenvectors, then the matrix is diagonalizable. Therefore, a rank-deficient matrix can still be diagonalizable.
 
 #### Conditions for Diagonalizibility
 *   If an $$n \times n$$ matrix $$\mathbf A$$ has $$n$$ linearly independent eigenvectors $$\mathbf x$$ then $$\mathbf A$$ is diagonalizable.
