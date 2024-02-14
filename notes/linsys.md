@@ -2,6 +2,93 @@
 title: LU Decomposition for Solving Linear Equations
 description: Computing and using LU decomposition.
 sort: 9
+author:
+  - CS 357 Course Staff
+changelog:
+  - 
+    name: Kaiyao Ke
+    netid: kaiyaok2
+    date: 2024-02-13
+    message: aligned notes with slides, added examples and refactored existing notes
+
+  - 
+    name: Yuxuan Chen
+    netid: yuxuan19
+    date: 2023-10-20
+    message: update lu_decomp() code
+
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2018-02-28
+    message: fix error in ludecomp() code
+
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2018-02-22
+    message: update properties for solving using LUP
+
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2018-01-14
+    message: removes demo links
+
+  - 
+    name: John Doherty
+    netid: jjdoher2
+    date: 2017-11-02
+    message: fixed typo in back substitution
+
+  - 
+    name: Arun Lakshmanan
+    netid: lakshma2
+    date: 2017-11-02
+    message: minor fix in lup_solve(), add changelog
+
+  - 
+    name: Nathan Bowman
+    netid: nlbowma2
+    date: 2017-10-25
+    message: added review questions
+
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2017-10-23
+    message: fix links
+
+  - 
+    name: Matthew West
+    netid: mwest
+    date: 2017-10-20
+    message: minor fix in back_sub()
+
+  - 
+    name: Nathan Bowman
+    netid: nlbowma2
+    date: 2017-10-19
+    message: minor existence of LUP
+
+  - 
+    name: Luke Olson
+    netid: lukeo
+    date: 2017-10-17
+    message: update links
+
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2017-10-17
+    message: fixes
+
+  - 
+    name: Matthew West
+    netid: mwest
+    date: 2017-10-16
+    message: first draft complete
+
 ---
 # Linear System of Equations and LU Factorization Algorithm
 
@@ -20,7 +107,7 @@ sort: 9
 - Compute and use LU decompositions using library functions.
 
 ## Basic Idea: The “Undo” button for Linear Operations
-Matrix-vector multiplication: given the data $${\bf x}$$ and the operator $${\bf A}$$, we can find $${\bf x}$$ such that $${\bf y = Ax}$$:
+Matrix-vector multiplication: given the data $${\bf x}$$ and the operator $${\bf A}$$, we can find $${\bf y}$$ such that $${\bf y = Ax}$$:
 
 $$
 \bf{x} \hspace{5mm} {\xRightarrow[transformation]{A}} \hspace{5mm} \bf{y}
@@ -32,7 +119,50 @@ $$
 \bf{y} \hspace{5mm} {\xRightarrow[?]{A^{-1}}} \hspace{5mm} \bf{x}  \hspace{3cm} \textbf{Solve}\hspace{3mm} Ax=y \hspace{3mm}\text{for} \hspace{3mm}\bf{x}
 $$
 
-#### Example:  Image Blurring and Recovery
+For example, consider:
+
+$$
+\textbf{A} =
+\begin{bmatrix}
+1 & 2 \\
+3 & 4
+\end{bmatrix}\hspace{5mm} 
+\textbf{x} =
+\begin{bmatrix}
+x_1 \\
+x_2
+\end{bmatrix} \hspace{5mm} \text{and} \hspace{5mm}
+\textbf{y} =
+\begin{bmatrix}
+5 \\
+11
+\end{bmatrix}
+$$
+
+How can we solve for $$\textbf{x} = [x_1, x_2]^T$$?
+<details>
+We construct the following set of linear equations:
+$$
+\begin{cases}
+    x_1 + 2x_2 = 5\\
+    3x_1 + 4x_2 = 11
+\end{cases} \hspace{5mm}
+$$
+Then the solution is:
+$$
+\begin{cases}
+    x_1 = 1\\
+    x_2 = 2
+\end{cases} \hspace{5mm} \text{, or} \hspace{5mm}
+\textbf{x} =
+\begin{bmatrix}
+1 \\
+2
+\end{bmatrix}
+$$
+</details>
+
+### Example:  Image Blurring and Recovery
 The original image displaying an SSN number is stored as a $$2D$$ array of real numbers between $$0$$ and $$1$$ ($$0$$ represents a white pixel, $$1$$ represents a black pixel).It has $$40$$ rows of pixels and $$100$$ columns of pixels. We can flatten the $$2D$$ array into a $$1D$$ array $$\bf{x}$$ containing the $$1D$$ data with dimension $$4000$$. We can then apply blurring operation to data $$\bf{x}$$, i.e.
 
 $$
@@ -163,6 +293,44 @@ def back_sub(U, b):
     return x
 ```
 
+### Example: Backward-substitution for an Upper Triangular System
+
+$$
+\begin{bmatrix}
+2 & 0 & 0 & 0 \\
+3 & 2 & 0 & 0 \\
+1 & 2 & 6 & 0 \\
+1 & 3 & 4 & 2 \\
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\ x_2 \\ x_3 \\ x_4
+\end{bmatrix}
+=
+\begin{bmatrix}
+2 \\ 2 \\ 6 \\ 4
+\end{bmatrix}.
+$$
+
+How can we solve for $$x = [x_1, x_2, x_3, x_4]^T$$?
+<details>
+
+$$
+2x_1 = 2 \Rightarrow x_1 = 1
+$$
+
+$$
+3x_1 + 2x_2 = 2 \Rightarrow x_2 = \frac{2-3}{2} = -0.5
+$$
+
+$$
+1x_1 + 2x_2 + 6x_3 = 6 \Rightarrow x_3 = \frac{6-1+1}{6} = 1
+$$
+
+$$
+1x_1 + 3x_2 + 4x_3 + 2x_4 = 4 \Rightarrow x_4 = \frac{4-1+1.5-4}{2} = 0.25
+$$
+</details>
+
 
 ## Forward Substitution Algorithm for Lower Triangular Systems
 
@@ -242,7 +410,7 @@ def forward_sub(L, b):
     return x
 ```
 
-#### Example:  Forward-substitution for a Lower Triangular System
+### Example: Forward-substitution for a Lower Triangular System
 
 $$
 \begin{bmatrix}
@@ -260,6 +428,8 @@ x_1 \\ x_2 \\ x_3 \\ x_4
 \end{bmatrix}.
 $$
 
+How can we solve for $$x = [x_1, x_2, x_3, x_4]^T$$?
+<details>
 $$
 2x_1 = 2 \Rightarrow x_1 = 1
 $$
@@ -273,14 +443,13 @@ $$
 $$
 
 $$
-1x_1 + 3x_2 + 4x_3 + 2x_4 = 4 \Rightarrow x_3 = \frac{4-1+1.5-4}{2} = 0.25
+1x_1 + 3x_2 + 4x_3 + 2x_4 = 4 \Rightarrow x_4 = \frac{4-1+1.5-4}{2} = 0.25
 $$
+</details>
 
 ## LU Decomposition Definition
 
-To solve $${\bf A x} = {\bf b}$$ when $$\bf{A}$$ is a non-triangular matrix, We can perform LU factorization: given an $$n \times n$$ matrix $$\bf{A}$$, its obtain lower triangular matrix $$\bf{L}$$ and upper triangular matrix $$\bf{U}$$ such that
-
-The **_LU decomposition_** of a matrix $${\bf A}$$ is the pair of matrices $${\bf L}$$ and $${\bf U}$$ such that:
+To solve $${\bf A x} = {\bf b}$$ when $$\bf{A}$$ is a non-triangular matrix, We can perform LU factorization: given an $$n \times n$$ matrix $$\bf{A}$$, the **_LU decomposition_** of a matrix $${\bf A}$$ is the pair of matrices $${\bf L}$$ and $${\bf U}$$ such that:
 
 1. \\({\bf A} = {\bf LU}\\)
 2. $${\bf L}$$ is a lower-triangular matrix with all diagonal entries equal to 1
@@ -315,6 +484,32 @@ The properties of the LU decomposition are:
 3. The LU decomposition provides an efficient means of solving linear equations.
 4. The reason that $${\bf L}$$ has all diagonal entries set to 1 is that this means the LU decomposition is unique. This choice is somewhat arbitrary (we could have decided that $${\bf U}$$ must have 1 on the diagonal) but it is the standard choice.
 5. We use the terms **_decomposition_** and **_factorization_** interchangeably to mean writing a matrix as a product of two or more other matrices, generally with some defined properties (such as lower/upper triangular).
+
+An example LU decomposition on a $$3 \times 3$$ matrix:
+
+Consider the matrix
+$$
+A =
+\begin{bmatrix}
+1 & 2 & 2 \\
+4 & 4 & 2 \\
+4 & 6 & 4
+\end{bmatrix}
+.$$
+
+The LU factorization is
+$${\bf A} = {\bf LU} =
+\begin{bmatrix}
+1 & 0 & 0 \\
+4 & 1 & 0 \\
+4 & 0.5 & 1
+\end{bmatrix}
+\begin{bmatrix}
+1 & 2 & 2 \\
+0 & -4 & -6 \\
+0 & 0 & -1
+\end{bmatrix}.$$
+
 
 
 
@@ -502,7 +697,7 @@ Number of subtractions: $$(n-1)^2+(n-2)^2+\ldots+1^2=\frac{n^3}{3} - \frac{n^2}{
 
 Hence the number of operations for the recursive leading-row-column LU decomposition algorithm is $$\bf{O(n^3)}$$ as $$n \to \infty$$.
 
-#### Example: LU decomposition
+### Example: LU decomposition
 
 Consider the matrix
 $$
@@ -515,9 +710,16 @@ $$
 \end{bmatrix}
 .$$
 
-Note that we use $${\bf M}$$ to keep track of the matrix (e.g. $${\bf L}_{22} {\bf U}_{22}$$ in the first step) that needs recursive factorization.
+How can we find an LU Decomposition for this matrix?
+<details>
 
-The first row of $$\bf{U}$$ is the first row of $$\bf{A}$$, and the first column of $$\bf{L}$$ is $$\frac{\text{the first column of  }\textbf{A}}{u_{11}}$$. Also, as $${\bf L}_{22} {\bf U}_{22} =  {\bf A}_{22} - \boldsymbol{a}_{21} (a_{11})^{-1} \boldsymbol{a}_{12}$$, we have the following after the first step:
+Note that we use \(\bf {M}\) to keep track of the matrix (e.g. \(\bf {L_{22}U_{22}}\) in the first step) that needs recursive factorization.<br>
+
+The first row of \(\bf{U}\) is the first row of \(\bf{A}\). <br>
+
+The first column of \(\bf{L}\) is \(\frac{\text{the first column of  }\textbf{A}}{u_{11}}\). <br>
+
+Also, as \({\bf L}_{22} {\bf U}_{22} =  {\bf A}_{22} - \boldsymbol{a}_{21} (a_{11})^{-1} \boldsymbol{a}_{12}\), we have the following after the first step (Notice that we use the tensor product operator "\(\otimes\)" to denote the outer product of two vectors):
 
 $$
 \textbf{L} =
@@ -536,7 +738,7 @@ $$
 \end{bmatrix}; \hspace{5mm}
 \textbf{M} = 
 \begin{bmatrix}
-2 & 3 & 1 \\
+2 & 3 & 3 \\
 2 & 6 & 2 \\
 3 & 4 & 2 
 \end{bmatrix} - 
@@ -644,8 +846,9 @@ $$
 0 & 0 & 0 & 0.75
 \end{bmatrix}
 $$
+</details>
 
-#### Example: Matrix for which LU Decomposition Fails
+### Example: Matrix for which LU Decomposition Fails
 
 An example of a matrix which has no LU decomposition is
 
@@ -659,7 +862,10 @@ $$
 \end{bmatrix}
 $$
 
-The first step is:
+Why?
+<details>
+
+The first step of LU Decomposition is:
 
 $$
 \textbf{L} =
@@ -699,7 +905,8 @@ $$
 \end{bmatrix}
 $$
 
-The next update for the lower triangular matrix will result in a division by zero. LU factorization fails, so $${\bf A}$$ does not have a normal LU decomposition.
+The next update for the lower triangular matrix will result in a division by zero. LU factorization fails, so \(\bf A\) does not have a normal LU decomposition.
+</details>
 
 ## Solving Linear Systems Using LU Decomposition
 
@@ -801,107 +1008,107 @@ Just as there are different LU decomposition algorithms, there are also differen
 
 This algorithm is a recursive method for finding $${\bf L}$$, $${\bf U}$$, and $${\bf P}$$ so that $${\bf P A} = {\bf L U}$$. It consists of the following steps.
 
-1) First choose $$i$$ so that row $$i$$ in $${\bf A}$$ has the largest absolute first entry. That is, $$\vert A_{i1}\vert \ge \vert A_{j1}\vert$$ for all $$j$$. Let $${\bf P}_1$$ be the permutation matrix that pivots (shifts) row $$i$$ to the first row, and leaves all other rows in order. We can explicitly write $${\bf P}_1$$ as
+1. First choose $$i$$ so that row $$i$$ in $${\bf A}$$ has the largest absolute first entry. That is, $$\vert A_{i1}\vert \ge \vert A_{j1}\vert$$ for all $$j$$. Let $${\bf P}_1$$ be the permutation matrix that pivots (shifts) row $$i$$ to the first row, and leaves all other rows in order. We can explicitly write $${\bf P}_1$$ as
 
-$$
-{\bf P}_1 =
-\begin{bmatrix}
-0_{1(i-1)}     & 1 & 0_{1(n-i)} \\
-I_{(i-1)(i-1)} & 0 & 0_{(i-1)(n-i)} \\
-0_{(n-i)(i-1)} & 0 & I_{(n-i)(n-i)}
-\end{bmatrix}
-=
-\begin{bmatrix}
-0      & \ldots & 0      & 1      & 0      & \ldots & 0 \\
-1      & \ldots & 0      & 0      & 0      & \ldots & 0 \\
-\vdots & \ddots & \vdots & \vdots & \vdots & \ldots & 0 \\
-0      & \ldots & 1      & 0      & 0      & \ldots & 0 \\
-0      & \ldots & 0      & 0      & 1      & \ldots & 0 \\
-\vdots & \ddots & \vdots & \vdots & \vdots & \ldots & 0 \\
-0      & \ldots & 0      & 0      & 0      & \ldots & 1
-\end{bmatrix}.
-$$
+    $$
+    {\bf P}_1 =
+    \begin{bmatrix}
+    0_{1(i-1)}     & 1 & 0_{1(n-i)} \\
+    I_{(i-1)(i-1)} & 0 & 0_{(i-1)(n-i)} \\
+    0_{(n-i)(i-1)} & 0 & I_{(n-i)(n-i)}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    0      & \ldots & 0      & 1      & 0      & \ldots & 0 \\
+    1      & \ldots & 0      & 0      & 0      & \ldots & 0 \\
+    \vdots & \ddots & \vdots & \vdots & \vdots & \ldots & 0 \\
+    0      & \ldots & 1      & 0      & 0      & \ldots & 0 \\
+    0      & \ldots & 0      & 0      & 1      & \ldots & 0 \\
+    \vdots & \ddots & \vdots & \vdots & \vdots & \ldots & 0 \\
+    0      & \ldots & 0      & 0      & 0      & \ldots & 1
+    \end{bmatrix}.
+    $$
 
-2) Write $$\bar{ {\bf A} }$$ to denote the pivoted $${\bf A}$$ matrix, so $$\bar{ {\bf A} } = {\bf P}_1 {\bf A}$$.
+2. Write $$\bar{ {\bf A} }$$ to denote the pivoted $${\bf A}$$ matrix, so $$\bar{ {\bf A} } = {\bf P}_1 {\bf A}$$.
 
-3) Let $${\bf P}_2$$ be a permutation matrix that leaves the first row where it is, but permutes all other rows. We can write $${\bf P}_2$$ as
-$$
-{\bf P}_2 =
-\begin{bmatrix}
-1              & \boldsymbol{0} \\
-\boldsymbol{0} & P_{22}
-\end{bmatrix},
-$$
+3. Let $${\bf P}_2$$ be a permutation matrix that leaves the first row where it is, but permutes all other rows. We can write $${\bf P}_2$$ as
+    $$
+    {\bf P}_2 =
+    \begin{bmatrix}
+    1              & \boldsymbol{0} \\
+    \boldsymbol{0} & P_{22}
+    \end{bmatrix},
+    $$
 where $${\bf P}_{22}$$ is an $$(n-1) \times (n-1)$$ permutation matrix.
 
-4) Factorize the (unknown) full permutation matrix $${\bf P}$$ as the product of $${\bf P}_2$$ and $${\bf P}_1$$, so $${\bf P} = {\bf P}_2 {\bf P}_1$$. This means that $${\bf P} A = {\bf P}_2 {\bf P}_1 A = {\bf P}_2 \bar{ {\bf A} }$$, which first shifts row $$i$$ of $${\bf A}$$ to the top, and then permutes the remaining rows. This is a completely general permutation matrix $${\bf P}$$, but this factorization is key to enabling a recursive algorithm.
+4. Factorize the (unknown) full permutation matrix $${\bf P}$$ as the product of $${\bf P}_2$$ and $${\bf P}_1$$, so $${\bf P} = {\bf P}_2 {\bf P}_1$$. This means that $${\bf P} A = {\bf P}_2 {\bf P}_1 A = {\bf P}_2 \bar{ {\bf A} }$$, which first shifts row $$i$$ of $${\bf A}$$ to the top, and then permutes the remaining rows. This is a completely general permutation matrix $${\bf P}$$, but this factorization is key to enabling a recursive algorithm.
 
-5) Using the factorization $${\bf P} = {\bf P}_2 {\bf P}_1$$, now write the LUP factorization in block form as
+5. Using the factorization $${\bf P} = {\bf P}_2 {\bf P}_1$$, now write the LUP factorization in block form as
 
-$$
-\begin{aligned}
-{\bf P A} &= {\bf L U} \\
-{\bf P_2} \bar{ {\bf A} } &= {\bf L U} \\
-\begin{bmatrix}
-1              & \boldsymbol{0} \\
-\boldsymbol{0} & {\bf P}_{22}
-\end{bmatrix}
-\begin{bmatrix}
-\bar{a}_{11} & \bar{\boldsymbol{a}}_{12} \\
-\bar{\boldsymbol{a}}_{21} & \bar{ {\bf A} }_{22}
-\end{bmatrix}
-&=
-\begin{bmatrix}
-1 & \boldsymbol{0} \\
-\boldsymbol{\ell}_{21} & {\bf L}_{22}
-\end{bmatrix}
-\begin{bmatrix}
-u_{11} & \boldsymbol{u}_{12} \\
-\boldsymbol{0} & {\bf U}_{22}
-\end{bmatrix}
-\\
-\begin{bmatrix}
-\bar{a}_{11} & \bar{\boldsymbol{a}}_{12} \\
-{\bf P}_{22} \bar{\boldsymbol{a}}_{21} & {\bf P}_{22} \bar{ {\bf A} }_{22}
-\end{bmatrix}
-&=
-\begin{bmatrix}
-u_{11} & \boldsymbol{u}_{12} \\
-u_{11} \boldsymbol{\ell}_{21} & (\boldsymbol{\ell}_{21} \boldsymbol{u}_{12} + {\bf L}_{22} {\bf U}_{22})
-\end{bmatrix}
-\end{aligned}
-$$
+    $$
+    \begin{aligned}
+    {\bf P A} &= {\bf L U} \\
+    {\bf P_2} \bar{ {\bf A} } &= {\bf L U} \\
+    \begin{bmatrix}
+    1              & \boldsymbol{0} \\
+    \boldsymbol{0} & {\bf P}_{22}
+    \end{bmatrix}
+    \begin{bmatrix}
+    \bar{a}_{11} & \bar{\boldsymbol{a}}_{12} \\
+    \bar{\boldsymbol{a}}_{21} & \bar{ {\bf A} }_{22}
+    \end{bmatrix}
+    &=
+    \begin{bmatrix}
+    1 & \boldsymbol{0} \\
+    \boldsymbol{\ell}_{21} & {\bf L}_{22}
+    \end{bmatrix}
+    \begin{bmatrix}
+    u_{11} & \boldsymbol{u}_{12} \\
+    \boldsymbol{0} & {\bf U}_{22}
+    \end{bmatrix}
+    \\
+    \begin{bmatrix}
+    \bar{a}_{11} & \bar{\boldsymbol{a}}_{12} \\
+    {\bf P}_{22} \bar{\boldsymbol{a}}_{21} & {\bf P}_{22} \bar{ {\bf A} }_{22}
+    \end{bmatrix}
+    &=
+    \begin{bmatrix}
+    u_{11} & \boldsymbol{u}_{12} \\
+    u_{11} \boldsymbol{\ell}_{21} & (\boldsymbol{\ell}_{21} \boldsymbol{u}_{12} + {\bf L}_{22} {\bf U}_{22})
+    \end{bmatrix}
+    \end{aligned}
+    $$
 
-6) Equating the entries in the above matrices gives the equations
+6. Equating the entries in the above matrices gives the equations
 
-$$
-\begin{aligned}
-\bar{a}_{11} &= u_{11} \\
-\bar{\boldsymbol{a}}_{12} &= \boldsymbol{u}_{12} \\
-{\bf P}_{22} \bar{\boldsymbol{a}}_{21} &= u_{11} \boldsymbol{\ell}_{21} \\
-{\bf P}_{22} \bar{A}_{22} &= \boldsymbol{\ell}_{21} \boldsymbol{u}_{12} + {\bf L}_{22} {\bf U}_{22}.
-\end{aligned}
-$$
+    $$
+    \begin{aligned}
+    \bar{a}_{11} &= u_{11} \\
+    \bar{\boldsymbol{a}}_{12} &= \boldsymbol{u}_{12} \\
+    {\bf P}_{22} \bar{\boldsymbol{a}}_{21} &= u_{11} \boldsymbol{\ell}_{21} \\
+    {\bf P}_{22} \bar{A}_{22} &= \boldsymbol{\ell}_{21} \boldsymbol{u}_{12} + {\bf L}_{22} {\bf U}_{22}.
+    \end{aligned}
+    $$
 
-7) Substituting the first three equations above into the last one and rearranging gives
+7. Substituting the first three equations above into the last one and rearranging gives
 
-$$
-{\bf P}_{22} \underbrace{\Bigl(\bar{A}_{22} - \bar{\boldsymbol{a}}_{21} (\bar{a}_{11})^{-1} \bar{\boldsymbol{a}}_{12}\Bigr)}_{\text{Schur complement } {\bf S}_{22}} = {\bf L}_{22} {\bf U}_{22}.
-$$
+    $$
+    {\bf P}_{22} \underbrace{\Bigl(\bar{A}_{22} - \bar{\boldsymbol{a}}_{21} (\bar{a}_{11})^{-1} \bar{\boldsymbol{a}}_{12}\Bigr)}_{\text{Schur complement } {\bf S}_{22}} = {\bf L}_{22} {\bf U}_{22}.
+    $$
 
-8) Recurse to find the LUP decomposition of $$S_{22}$$, resulting in $${\bf L}_{22}$$, $${\bf U}_{22}$$, and $${\bf P}_{22}$$ that satisfy the above equation.
+8. Recurse to find the LUP decomposition of $$S_{22}$$, resulting in $${\bf L}_{22}$$, $${\bf U}_{22}$$, and $${\bf P}_{22}$$ that satisfy the above equation.
 
-9) Solve for the first rows and columns of $${\bf L}$$ and $${\bf U}$$ with the above equations to give
+9. Solve for the first rows and columns of $${\bf L}$$ and $${\bf U}$$ with the above equations to give
 
-$$
-\begin{aligned}
-u_{11} &= \bar{a}_{11} \\
-\boldsymbol{u}_{12} &= \bar{\boldsymbol{a}}_{12} \\
-\boldsymbol{\ell}_{21} &= \frac{1}{\bar{a}_{11}} {\bf P}_{22} \bar{\boldsymbol{a}}_{21}.
-\end{aligned}
-$$
+    $$
+    \begin{aligned}
+    u_{11} &= \bar{a}_{11} \\
+    \boldsymbol{u}_{12} &= \bar{\boldsymbol{a}}_{12} \\
+    \boldsymbol{\ell}_{21} &= \frac{1}{\bar{a}_{11}} {\bf P}_{22} \bar{\boldsymbol{a}}_{21}.
+    \end{aligned}
+    $$
 
-10) Finally, reconstruct the full matrices $${\bf L}$$, $${\bf U}$$, and $${\bf P}$$ from the component parts.
+10. Finally, reconstruct the full matrices $${\bf L}$$, $${\bf U}$$, and $${\bf P}$$ from the component parts.
 
 In code the **_recursive leading-row-column LUP algorithm_** for finding the LU decomposition of $${\bf A}$$ with partial pivoting is:
 
@@ -983,7 +1190,7 @@ def linear_solve(A, b):
     return x
 ```
 
-#### Example: LUP Decomposition
+### Example: LUP Decomposition
 
 Consider the matrix
 $$
@@ -996,7 +1203,10 @@ $$
 \end{bmatrix}
 .$$
 
-Note that we use $${\bf {\overline{M}}}$$ to keep track of the matrix (e.g. $${\bf L}_{22} {\bf U}_{22}$$ in the first step) that needs recursive factorization.
+How can we find an LUP Decomposition for this matrix?
+<details>
+
+Note that we use \({\bf {\overline{M}}}\) to keep track of the matrix (e.g. \(\bf L_{22} U_{22}\) in the first step) that needs recursive factorization.
 
 In the first step:
 $$
@@ -1191,10 +1401,11 @@ $$
 1 & 0 & 0 & 0
 \end{bmatrix}
 $$
+</details>
 
-#### Example: Matrix for which LUP Decomposition Succeeds but LU Decomposition Fails
+### Example: Matrix for which LUP Decomposition Succeeds but LU Decomposition Fails
 
-Recall our example of a matrix which has no LU decomposition:
+Consider a matrix which has no LU decomposition:
 
 $$
 {\bf A} = \begin{bmatrix}
@@ -1203,7 +1414,10 @@ $$
 \end{bmatrix}.
 $$
 
-To find the LUP decomposition of $${\bf A}$$, we first write the permutation matrix $${\bf P}$$ that shifts the second row to the top, so that the top-left entry has the largest possible magnitude. This gives
+How can we find an LUP Decomposition for this matrix?
+<details>
+
+To find the LUP decomposition of \(\bf A\), we first write the permutation matrix \({\bf P}\) that shifts the second row to the top, so that the top-left entry has the largest possible magnitude. This gives
 
 $$
 \overbrace{\begin{bmatrix}
@@ -1229,24 +1443,27 @@ $$
 0 & 1
 \end{bmatrix}}^{U}.
 $$
+</details>
 
 ## Review Questions
-
-- See this [review link](/cs357/fa2020/reviews/rev-9-linsys.html)
-
-## ChangeLog
-
-* 2024-02-07 Kaiyao Ke <kaiyaok2@illinois.edu>: merge slide and video contents to note
-* 2023-10-20 Yuxuan Chen <yuxuan19@illinois.edu>: update lu_decomp() code
-* 2018-02-28 Erin Carrier <ecarrie2@illinois.edu>: fix error in ludecomp() code
-* 2018-02-22 Erin Carrier <ecarrie2@illinois.edu>: update properties for solving using LUP
-* 2018-01-14 Erin Carrier <ecarrie2@illinois.edu>: removes demo links
-* 2017-11-02 John Doherty <jjdoher2@illinois.edu>: fixed typo in back substitution
-* 2017-11-02 Arun Lakshmanan <lakshma2@illinois.edu>: minor fix in lup_solve(), add changelog
-* 2017-10-25 Nathan Bowman <nlbowma2@illinois.edu>: added review questions
-* 2017-10-23 Erin Carrier <ecarrie2@illinois.edu>: fix links
-* 2017-10-20 Matthew West <mwest@illinois.edu>: minor fix in back_sub()
-* 2017-10-19 Nathan Bowman <nlbowma2@illinois.edu>: minor existence of LUP
-* 2017-10-17 Luke Olson <lukeo@illinois.edu>: update links
-* 2017-10-17 Erin Carrier <ecarrie2@illinois.edu>: fixes
-* 2017-10-16 Matthew West <mwest@illinois.edu>: first complete draft
+<ol>
+  <li> Given a factorization <span>\({\bf P A} = {\bf LU}\)</span>, how would you solve the system <span>\({\bf A}\mathbf{x} = \mathbf{b}\)</span>?</li>
+  <li> Understand the process of solving a triangular system. Solve an example triangular system.</li>
+  <li> Recognize and understand Python code implementing forward substitution, back substitution, and LU factorization.</li>
+  <li> When does an LU factorization exist?</li>
+  <li> When does an LUP factorization exist?</li>
+  <li> What special properties do <span>\({\bf P}\), \({\bf L}\)</span> and <span>\({\bf U}\)</span> have?</li>
+  <li> Can we find an LUP factorization of a singular matrix?</li>
+  <li> What happens if we try to solve a system <span>\({\bf A}\mathbf{x} = \mathbf{b}\)</span> with a singular matrix <span>\({\bf A}\)</span>?</li>
+  <li> Compute the LU factorization of a small matrix by hand.</li>
+  <li> Why do we use pivoting when solving linear systems?</li>
+  <li> How do we choose a pivot element?</li>
+  <li> What effect does a given permutation matrix have when multiplied by another matrix?</li>
+  <li> What is the cost of matrix-matrix multiplication?</li>
+  <li> What is the cost of computing an LU or LUP factorization?</li>
+  <li> What is the cost of forward or back substitution?</li>
+  <li> What is the cost of solving <span>\({\bf A}\mathbf{x} = \mathbf{b}\)</span> for a general matrix?</li>
+  <li> What is the cost of solving <span>\({\bf A}\mathbf{x} = \mathbf{b}\)</span> for a triangular matrix?</li>
+  <li> What is the cost of solving <span>\({\bf A}\mathbf{x} = \mathbf{b_i}\)</span> with the same matrix <span>\({\bf A}\)</span> and several right-hand side vectors <span>\(\mathbf{b}_i\)</span>?</li>
+  <li>Given a process that takes time <span>\(\mathcal{O}(n^k)\)</span>, what happens to the runtime if we double the input size (i.e. double <span>\(n\)</span>)? What if we triple the input size?</li>
+</ol>
