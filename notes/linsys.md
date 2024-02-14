@@ -215,31 +215,7 @@ b_1 \\ b_2 \\ \vdots \\ b_n
 \end{bmatrix}.
 $$
 
-We can write $${\bf U}x = b$$ as a linear combination of the columns of $$\bf{U}$$:
-
-$$
-x_1 \hspace{1mm} \textbf{U}[:\hspace{1mm},1] + x_2 \hspace{1mm} \textbf{U}[:\hspace{1mm},2] + \ldots + x_{n} \hspace{1mm} \textbf{U}[:\hspace{1mm},n] = \textbf{b}
-$$
-
-Hence we can write the solution as:
-
-$$
-U_{nn} \hspace{2mm} x_n = b_n
-$$
-
-$$
-x_1 \hspace{1mm} \textbf{U}[:\hspace{1mm},1] + \ldots + x_{n-1} \hspace{1mm} \textbf{U}[:\hspace{1mm},n-1] = \textbf{b} -  x_{n} \hspace{1mm} \textbf{U}[:\hspace{1mm},n] \Longrightarrow U_{n-1,n-1} \hspace{1mm} x_{n-1} = b_{n-1} - U_{n-1,n} \hspace{1mm} x_{n}
-$$
-
-$$
-x_1 \textbf{U}[:,1] + \ldots + x_{n-2}  \textbf{U}[:,n-2] = \textbf{b} -  x_{n} \textbf{U}[:,n] - x_{n-1} \textbf{U}[:,n-1] \Rightarrow U_{n-2,n-2} x_{n-2} = b_{n-2} - U_{n-2,n}  x_{n} - U_{n-2,n-1} x_{n-1}
-$$
-
-$$
-\vdots
-$$
-
-Alternatively, the upper-triangular system $${\bf U}x = b$$ can be written as the set of linear equations:
+Observe that the upper-triangular system $${\bf U}x = b$$ can be written as the set of linear equations:
 
 $$
 \begin{matrix}
@@ -265,6 +241,30 @@ So the general form of solution is:
 
 $$
 x_n = \frac{b_n}{U_{nn}}; \hspace{1cm} x_i = \frac{b_i - \sum_{j=i+1}^n U_{ij} x_j}{U_{ii}} \hspace{5mm} \text{for i = n-1, n-2, ..., 1}
+$$
+
+Alternatively, we can also write $${\bf U}x = b$$ as a linear combination of the columns of $$\bf{U}$$:
+
+$$
+x_1 \hspace{1mm} \textbf{U}[:\hspace{1mm},1] + x_2 \hspace{1mm} \textbf{U}[:\hspace{1mm},2] + \ldots + x_{n} \hspace{1mm} \textbf{U}[:\hspace{1mm},n] = \textbf{b}
+$$
+
+Using matrix column notations, we can write the solution as:
+
+$$
+U_{nn} \hspace{2mm} x_n = b_n
+$$
+
+$$
+x_1 \hspace{1mm} \textbf{U}[:\hspace{1mm},1] + \ldots + x_{n-1} \hspace{1mm} \textbf{U}[:\hspace{1mm},n-1] = \textbf{b} -  x_{n} \hspace{1mm} \textbf{U}[:\hspace{1mm},n] \Longrightarrow U_{n-1,n-1} \hspace{1mm} x_{n-1} = b_{n-1} - U_{n-1,n} \hspace{1mm} x_{n}
+$$
+
+$$
+x_1 \textbf{U}[:,1] + \ldots + x_{n-2}  \textbf{U}[:,n-2] = \textbf{b} -  x_{n} \textbf{U}[:,n] - x_{n-1} \textbf{U}[:,n-1] \Rightarrow U_{n-2,n-2} x_{n-2} = b_{n-2} - U_{n-2,n}  x_{n} - U_{n-2,n-1} x_{n-1}
+$$
+
+$$
+\vdots
 $$
 
 Notice that there are $$n$$ divisions, $$\frac{n(n-1)}{2}$$ subtractions / additions, and $$\frac{n(n-1)}{2}$$ multiplications, hence the **computational complexity** is $$\bf{O(n^2)}$$.
