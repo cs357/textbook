@@ -1,9 +1,9 @@
 # Site Settings
 locale: "en-US"
-title: "CS 357 Reference"
+title: "CS 357 Textbook"
 lang: "en-US"
-name: "CS 357 Reference"
-description: "CS 357 Reference"
+name: "CS 357 Textbook"
+description: "CS 357 @ UIUC Textbook"
 url: "cs357.github.io"
 baseurl: "/textbook"
 repository: "cs357/textbook"
