@@ -131,7 +131,7 @@ the matrix $$\mathbf{X}$$ does not have an inverse, so we cannot diagonalize $$\
 
 #### Example: Diagonalizing a Matrix (Code Snippet)
 
-The following code snippet finds and prints the eigenvalues and corresponding eigenvectors of a matrix. Take careful note that eigenvectors are stored as columns of a 2d numpy array.
+The following code snippet diagonalizes a square matrix, if possible. Take careful note that eigenvectors are stored as columns of a 2d numpy array.
 
 ```python
 import numpy as np
