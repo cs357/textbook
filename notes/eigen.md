@@ -2,6 +2,59 @@
 title: Eigenvalues and Eigenvectors
 description: 
 sort: 12
+author:
+  - CS 357 Course Staff
+changelog:
+  - 
+    name: Pascal Adhikary
+    netid: pascala2
+    date: 2024-02-13
+    message: add info/examples from slides, reorganize
+  - 
+    name: Yuxuan Chen
+    netid: yuxuan19
+    date: 2022-02-28
+    message: added learning objectives, cost summary
+  -
+    name: Peter Sentz
+    netid: 
+    date: 2020-03-01
+    message: added text to include content from slides
+  -
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2018-10-14
+    message: removes orthogonal/GS sections
+  -
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2018-01-14
+    message: removes demo links
+  -
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2017-11-10
+    message: adds costs of methods
+  -
+    name: Matthew West
+    netid: mwest
+    date: 2017-10-26
+    message: rewrote eval/evec definitions
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2017-10-25
+    message: minor fixes, added review questions
+  - 
+    name: Arun Lakshmanan
+    netid: lakshma2
+    date: 2017-10-14
+    message: first complete draft
+  - 
+    name: Luke Olson
+    netid: lukeo
+    date: 2017-10-16
+    message: outline
 ---
 
 # Eigenvalues and Eigenvectors
@@ -38,30 +91,17 @@ $$ |\lambda_1| \geq |\lambda_2| \geq \cdots \geq |\lambda_n|, $$
 
 and we normalize eigenvectors, so that $$\|{\bf x}\| = 1$$.
 
-#### Example
+We define the nullspace as the span, or set of all linear combinations, of the solutions for $$\mathbf {Ax}= \mathbf{b}$$.
 
-First, we find the eigenvalues by solving for the characteristic polynomial.
+#### Example: Solving a Small Matrix for Eigenvalues
+
+If the matrix is reasonably small, we can find the determinant and solve for the characteristic polynomial efficiently. 
 
 $$ \bf{A}=\begin{bmatrix} 2 & 1 \\ 4 & 2 \end{bmatrix} \qquad \text{det}(\bf{A}- \bf{I}\lambda)=p(\lambda)=(2-\lambda)^2-4 \rightarrow \lambda_1=4, \lambda_2=0$$
 
 Second, we find the eigenvectors for each eigenvalue by solving for the trivial solution (the nullspace) of $$\bf A-\bf I\lambda$$. **Note** any multiple of $$\bf x$$ below is a valid eigenvector to its eigenvalue.
 
 $$\lambda_1: \begin{bmatrix} 2 & 1 \\ 4 & 2 \end{bmatrix}\bf x=0 \rightarrow \bf{x}=\begin{bmatrix} 1  \\  2 \end{bmatrix} \qquad \lambda_1: \begin{bmatrix} -2 & 1 \\ 4 & -2 \end{bmatrix}\bf{x}=0 \rightarrow \bf{x}=\begin{bmatrix} 1  \\  -2 \end{bmatrix}$$
-
-#### Code Example
-The following code snippet finds and prints the eigenvalues and corresponding eigenvectors of a matrix. Take careful note that eigenvectors are stored as columns of a 2d numpy array.
-
-```python
-import numpy as np
-import numpy.linalg as la
-def solve(A):
-    # A: nxn matrix
-    evals, evecs = la.eig(A)
-    for ev in evals:
-      print(ev) 
-    for i in range(np.shape(evecs)[1]): # print column-wise
-      print(evecs[:, i]) 
-```
 
 ## Diagonalizability
 
@@ -89,14 +129,42 @@ $$ \overbrace{\begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix}}^{\mathbf{A}} \overbr
 
 the matrix $$\mathbf{X}$$ does not have an inverse, so we cannot diagonalize $$\mathbf{A}$$ by applying an inverse. In fact, for any non-singular matrix $$\mathbf{P}$$, the product $$\mathbf{P}^{-1}\mathbf{AP}$$ is not diagonal.
 
+#### Example: Diagonalizing a Matrix (Code Snippet)
+
+The following code snippet finds and prints the eigenvalues and corresponding eigenvectors of a matrix. Take careful note that eigenvectors are stored as columns of a 2d numpy array.
+
+```python
+import numpy as np
+import numpy.linalg as la
+def diagonalize(A):
+    # A: nxn matrix
+    m, n = np.shape(A)
+    if (m != n)
+      return None
+
+    evals, evecs = la.eig(A) # eigenvectors as columns
+    if (la.matrix_rank(evecs) != n):
+      return None
+      
+    D = np.diag(evals)
+    X = evecs
+    return (D, X) 
+```
+
 #### Things to Remember About Eigenvalues
 
 *   Eigenvalues can have zero value.
 *   Eigenvalues can be negative.
 *   Eigenvalues can be real or complex numbers.
 *   An $$n \times n$$ real matrix can have complex eigenvalues.
-*   The eigenvalues of an $$n \times n$$ matrix are not necessarily unique. In fact, we can define the multiplicity of an eigenvalue.
-*   If an $$n \times n$$ matrix has $$n$$ linearly independent eigenvectors, then the matrix is diagonalizable.
+*   The eigenvalues of an $$n \times n$$ matrix are not necessarily unique. In fact, we can define the multiplicity of an eigenvalue. The geometric multiplicity of an eigenvector $$\lambda$$ corresponds to the number of linearly independent eigenvectors of $$\lambda$$
+*   If an $$n \times n$$ matrix has $$n$$ linearly independent eigenvectors, then the matrix is diagonalizable. Therefore, a non rank-deficient matrix can still be diagonalizable.
+
+#### Conditions for Diagonalizibility
+*   If an $$n \times n$$ matrix $$\mathbf A$$ has $$n$$ linearly independent eigenvectors $$\mathbf x$$ then $$\mathbf A$$ is diagonalizable.
+*   If an $$n \times n$$ matrix has less than $$n$$ eigenvectors, the matrix is called defective (and therefore not diagonalizable).
+*   If an $$n \times n$$ matrix has $$n$$ distinct eigenvalues then A is diagonalizable. 
+
 
 ## Eigenvalues of a Shifted Matrix
 
@@ -106,7 +174,7 @@ $$ \begin{aligned} (\mathbf{A} - \sigma {\bf I}) {\bf x} &= \mathbf{A} {\bf x} -
 
 ## Eigenvalues of an Inverse
 
-An invertible matrix cannot have an eigenvalue equal to zero. Furthermore, the eigenvalues of the inverse matrix are equal to the inverse of the eigenvalues of the original matrix:
+An invertible matrix cannot have an eigenvalue equal to zero. An eigenvalue equal to zero would imply a trivial solution to $$\mathbf{Ax}=\mathbf{b}$$, a nullspace of nonzero dimension, and therefore a non invertible matrix. Furthermore, the eigenvalues of the inverse matrix are equal to the inverse of the eigenvalues of the original matrix:
 
 $$ \mathbf{A} {\bf x} = \lambda {\bf x}\implies \\ \mathbf{A}^{-1} \mathbf{A} {\bf x} = \lambda \mathbf{A}^{-1} {\bf x} \implies \\ {\bf x} = \lambda \mathbf{A}^{-1} {\bf x}\implies \\ \mathbf{A}^{-1} {\bf x} = \frac{1}{\lambda} {\bf x}.$$
 
@@ -116,7 +184,7 @@ Similarly, we can describe the eigenvalues for shifted inverse matrices as:
 
 $$ (\mathbf{A} - \sigma {\bf I})^{-1} {\bf x} = \frac{1}{\lambda - \sigma} {\bf x}.$$
 
-It is important to note here, that the eigenvectors remain unchanged for shifted or/and inverted matrices.
+It is important to note here that the eigenvectors remain unchanged for shifted or/and inverted matrices.
 
 ## Expressing an Arbitrary Vector as a Linear Combination of Eigenvectors
 
@@ -347,16 +415,3 @@ where $$\langle \cdot, \cdot \rangle$$ is the inner product operator. Each of th
 ## Review Questions
 
 - See this [review link](/cs357/fa2020/reviews/rev-12-eigen.html)
-
-## ChangeLog
-
-* 2024-02-11 Pascal Adhikary <pascala2@illinois.edu>: add ev examples, cost table, reorganize
-* 2022-02-28 Yuxuan Chen <yuxuan19@illinois.edu>: added learning objectives, cost summary
-* 2020-03-01 Peter Sentz: added text to include content from slides
-* 2018-10-14 Erin Carrier <ecarrie2@illinois.edu>: removes orthogonal/GS sections
-* 2018-01-14 Erin Carrier <ecarrie2@illinois.edu>: removes demo links
-* 2017-11-10 Erin Carrier <ecarrie2@illinois.edu>: adds costs of methods
-* 2017-10-26 Matthew West <mwest@illinois.edu>: rewrote eval/evec definitions
-* 2017-10-25 Erin Carrier <ecarrie2@illinois.edu>: minor fixes, added review questions
-* 2017-10-14 Arun Lakshmanan <lakshma2@illinois.edu>: first complete draft
-* 2017-10-16 Luke Olson <lukeo@illinois.edu>: outline
