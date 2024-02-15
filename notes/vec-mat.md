@@ -2,7 +2,81 @@
 title: Vectors, Matrices and Norms
 description: Different ways to measure vectors and matrices
 sort: 8
+author:
+  - CS 357 Course Staff
+changelog:
+  - 
+    name: Apramey Hosahalli
+    netid: apramey2
+    date: 2024-02-15
+    message: improved transitions, added example for matrix vector multiplication, and brief explanations for matrices as operators
+  - 
+    name: Apramey Hosahalli
+    netid: apramey2
+    date: 2024-02-13
+    message: added section for vectors and examples for Frobenius and p-norm sections
+  - 
+    name: Apramey Hosahalli
+    netid: apramey2
+    date: 2024-02-10
+    message: re-ordered sections according to the lectures and changed learning objectives
+  - 
+    name: Arnav Shah
+    netid: arnavss2
+    date: 2022-03-01
+    message: added norms and errors section
+  - 
+    name: Arnav Shah
+    netid: arnavss2
+    date: 2022-02-22
+    message: added matrices as operators section
+  - 
+    name: Mariana Silva
+    netid: mfsilva
+    date: 2020-04-27
+    message: updated notation and mat-vec section
+  - 
+    name: Peter Sentz
+    date: 2020-02-01
+    message: added more text from current slide deck
+  - 
+    name: Adam Stewart
+    netid: adamjs5
+    date: 2018-03-14
+    message: clarifying definition of Frobenius norm
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2017-11-10
+    message: fixing index range for example, adds linear function definition
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2017-10-29
+    message: changing inner product notation, additional comments on induced vs general norms
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2017-10-29
+    message: adds review questions, completes vector space definition, rewords matrix norm section, minor other revisions    
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2017-10-29
+    message: adds block form   
+  - 
+    name: John Doherty
+    netid: jjdoher2
+    date: 2017-10-28
+    message: first complete draft
+  - 
+    name:  Matthew West
+    netid: mwest
+    date: 2017-10-16
+    message: first complete draft
+
 ---
+
 # Vectors, matrices, and norms
 
 * * *
@@ -16,7 +90,9 @@ You will be able to
 * Represent linear transformations as matrices
 * Evaluate the magnitudes of vectors and matrices
 
-## Vectors
+## Vectors and Vector Spaces
+
+### Vectors
 
 A vector is an array of numbers that represent a magnitude and a direction.
 
@@ -35,7 +111,7 @@ A vector is an element of a Vector Space.
 
 
 
-## Vector Spaces
+### Vector Spaces
 
 A **_vector space_** is a set <span>\\(V\\)</span> of vectors and a field <span>\\(F\\)</span> (elements of <span>\\(F\\)</span> are called scalars) with the following two operations:
 
@@ -67,7 +143,7 @@ $$ \mathbf{e}_1 = \begin{bmatrix} 1\\ 0 \\ \vdots \\ 0 \end{bmatrix}\hspace{5mm}
 
 A set of vectors \\(\mathbf{v}_1,\dots,\mathbf{v}_k\\) is called **_linearly independent_** if the equation \\(\alpha_1\mathbf{v}_1 + \alpha_2\mathbf{v}_2 + \dots + \alpha_k\mathbf{v}_k = \mathbf{0}\\) in the unknowns \\(\alpha_1,\dots,\alpha_k\\), has only the **_trivial solution_** \\(\alpha_1=\alpha_2 = \dots = \alpha_k = 0\\). Otherwise the vectors are **_linearly dependent_**, and at least one of the vectors can be written as a linear combination of the other vectors in the set. A basis is always linearly independent.
 
-## Inner Product
+### Inner Product
 
 Let <span>\\(V\\)</span> be a real vector space. Then, an **_inner product_** is a function \\(\langle\cdot, \cdot \rangle: V \times V \rightarrow \mathbb{R}\\) (i.e., it takes two vectors and returns a real number) which satisfies the following four properties, where \\(\mathbf{u}, \mathbf{v}, \mathbf{w} \in V\\) and \\(\alpha, \beta \in \mathbb{R}\\):
 
@@ -164,7 +240,7 @@ where <span>\\({\bf A}\\)</span>, <span>\\({\bf B}\\)</span>, <span>\\({\bf C}\\
 
 There are special matrices in block form as well. For instance, a **_block diagonal_** matrix is a block matrix whose off-diagonal blocks are zero matrices.
 
-## Matrix Rank
+### Matrix Rank
 
 The **_rank_** of a matrix is the number of linearly independent columns of the matrix. It can also be shown that the matrix has the same number of linearly indendent rows, as well. If \\(\mathbf{A} \text{ is an } m \times n\\) matrix, then
 
@@ -174,7 +250,7 @@ The **_rank_** of a matrix is the number of linearly independent columns of the 
 A square \\(n\times n\\) matrix \\(\mathbf{A}\\) is **_invertible_** if there exists a square matrix \\(\mathbf{B}\\) such that \\(\mathbf{AB} = \mathbf{BA} = \mathbf{I}\\), where \\(\mathbf{I}\\) is the \\(n\times n\\) identity matrix. The matrix \\(\mathbf{B}\\) is denoted by \\(\mathbf{A}^{-1}\\). A square matrix is invertible if and only if it has full rank. A square matrix that is not invertible is called a **_singular_** matrix.
 
 
-## Matrix-vector multiplication
+### Matrix-vector multiplication
 
 Let \\(\mathbf{A}\\) be an \\(m\times n\\) matrix of real numbers. We can also write \\(\mathbf{A}\in\mathbb{R}^{m\times n}\\) as shorthand. If \\(\mathbf{x}\\) is a vector in \\(\mathbb{R}^n\\) then the matrix-vector product \\(\mathbf{A}\mathbf{x} = \mathbf{b}\\) is a vector in \\(\mathbf{R}^m\\) defined by:
 
@@ -199,7 +275,22 @@ $$ \mathbf{A}\mathbf{x} = x_1\mathbf{a}_{1} + x_2\mathbf{a}_{2} + \dots x_n\math
 
 It is this representation that allows us to express any linear transformation between finite-dimensional vector spaces with matrices.
 
-## Matrix Representation of Linear Transformations
+#### Example
+
+
+$$\begin{eqnarray}
+{\bf Ax} &=& \begin{bmatrix} 1 & 7 & 8 & 4\\ -5 & 3 & 2 & 2\\ 0 & 5 & 6 & 6\end{bmatrix} \begin{bmatrix}1 \\ 2 \\ 0 \\ -4\end{bmatrix} \\
+\\
+&=& 1 \begin{bmatrix} 1 \\ -5 \\ 0 \end{bmatrix} + 2 \begin{bmatrix} 7 \\ 3 \\ 5 \end{bmatrix} + 0 \begin{bmatrix} 8 \\ 2 \\ 6 \end{bmatrix} + -4 \begin{bmatrix} 4 \\ 2 \\ 6 \end{bmatrix} \\
+\\
+&=& \begin{bmatrix} 1 \\ -5 \\ 0 \end{bmatrix} + \begin{bmatrix} 14 \\ 6 \\ 10 \end{bmatrix} + \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix} + \begin{bmatrix} -16 \\ -8 \\ -24 \end{bmatrix} \\
+\\
+&=& \begin{bmatrix} 1 + 14 + 0 -16 \\ -5 + 6 + 0 - 8\\ 0 + 10 + 0 - 24\end{bmatrix} \\
+\\
+&=& \begin{bmatrix} -1 \\ -13\\ -14\end{bmatrix}
+\end{eqnarray}$$
+
+### Matrix Representation of Linear Transformations
 
 Let $$\mathbf{e}_1,\mathbf{e}_2,\dots,\mathbf{e}_n$$ be the standard basis of $$\mathbb{R}^n$$. If we define the vector $$\mathbf{z}_j = \mathbf{A}\mathbf{e}_j$$, then using the interpretation of matrix-vector products as linear combinations of the column of $$\mathbf{A}$$, we have that:
 
@@ -243,21 +334,29 @@ $$ \begin{bmatrix} 1 & 5 & 2\\ 0 & -1 & 2\end{bmatrix}. $$
 
 It is important to note that the matrix representation not only depends on <span>\\(f\\)</span>, but also our choice of basis. If we chose different bases for the vector spaces \\(V\text{ and } W\\), the matrix representation of <span>\\(f\\)</span> would change as well.
 
-## Matrices as operators
+### Matrices as operators
 
-### Rotation operator
+#### Rotation operator
+
+This rotation matrix rotates points through $$\theta$$ in the counterclockwise direction.
 
 $${y_1 \choose y_2} = \begin{bmatrix} {\bf \cos(\theta)} & {\bf -\sin(\theta)} \\ {\bf \sin(\theta)} & {\bf \cos(\theta)} \end{bmatrix} {x_1 \choose x_2}$$
 
-### Scale operator
+#### Scale operator
+
+The scale operator scales or shrinks points by a in the x-direction and by b in the y-direction.
 
 $${y_1 \choose y_2} = \begin{bmatrix} a & { 0} \\ { 0} & { b} \end{bmatrix} {x_1 \choose x_2}$$
 
-### Reflection operator
+#### Reflection operator
 
-$${y_1 \choose y_2} = \begin{bmatrix} { -a} & { 0} \\ { 0} & { -b} \end{bmatrix} {x_1 \choose x_2}$$
+The reflection matrix reflects points across the x or y axes. The example below reflects points across both the x and y axes.
 
-### Translation operator
+$${y_1 \choose y_2} = \begin{bmatrix} { -1} & { 0} \\ { 0} & { -1} \end{bmatrix} {x_1 \choose x_2}$$
+
+#### Translation operator
+
+The translation or shift operator moves points by a units in the x-direction and b units in the y-direction. This is not a linear transformation.
 
 $${y_1 \choose y_2} = \begin{bmatrix} { 1} & { 0} \\ { 0} & { 1} \end{bmatrix} {x_1 \choose x_2} + {a \choose b}$$
 
@@ -272,7 +371,7 @@ A **_vector norm_** is a function $$\| \mathbf{u} \|: V \rightarrow \mathbb{R}^+
 
 A norm is a generalization of "absolute value" and measures the "magnitude" of the input vector.
 
-#### The p-norm
+### The p-norm
 
 The **_p-norm_** is defined as
 
@@ -282,7 +381,7 @@ The definition is a valid norm when $$p \geq 1$$. If $$0 \leq p \lt 1$$ then it 
 
 When <span>$$p=2$$</span> (2-norm), this is called the **_Euclidean norm_** and it corresponds to the length of the vector.
 
-#### Vector Norm Examples
+### Vector Norm Examples
 
 Consider the case of $$\mathbf{w} = [-3, 5, 0, 1]$$, in this part we will show how to calculate the 1, 2, and $$\infty$$ norm of $$\mathbf{w}$$.
 
@@ -355,7 +454,7 @@ $$\| {\bf A} \mathbf{x} \| \leq \|{\bf A}\| \|\mathbf{x}\|$$
 
 $$\|{\bf A} {\bf B}\| \leq \|{\bf A}\| \|{\bf B}\|$$
 
-#### Frobenius norm
+### Frobenius norm
 
 The Frobenius norm is simply the square root of the sum of every squared element of the matrix, which is equivalent to applying the vector <span>$$2$$</span>-norm to the flattened matrix,
 
@@ -374,7 +473,7 @@ $$\begin{eqnarray}
 &\approx& 8.83
 \end{eqnarray}$$
 
-#### The matrix p-norm
+### The matrix p-norm
 
 The matrix p-norm is induced by the p-norm of a vector. It is $$\|{\bf A}\|_p := \max_{\|\mathbf{x}\|_p=1} \|{\bf A}\mathbf{x}\|_p$$. There are three special cases:
 
@@ -458,23 +557,4 @@ $$\begin{eqnarray}
         Yuxuan can you put the html for the review questions in here? I think it might be easier for you to get it from the github.
 
 
-## ChangeLog
 
-* 2023-02-10 Apramey Hosahalli <apramey2@illinois.edu>: Replaced placeholders with examples
-* 2023-02-10 Apramey Hosahalli <apramey2@illinois.edu>: added section for vectors
-* 2023-02-03 Apramey Hosahalli <apramey2@illinois.edu>: re-ordered sections according to the lectures and changed learning objectives
-* 2022-03-01 Arnav Shah <arnavss2@illinois.edu>: added norms and errors section
-* 2022-02-22 Arnav Shah <arnavss2@illinois.edu>: added matrices as operators section
-* 2020-04-27 Mariana Silva <mfsilva@illinois.edu>: updated notation and mat-vec section
-* 2020-02-01 Peter Sentz: added more text from current slide deck
-* 2018-3-14 Adam Stewart <adamjs5@illinois.edu>: clarifying definition of Frobenius norm
-* 2017-11-10 Erin Carrier <ecarrie2@illinois.edu>: fixing index range for example,
-  adds linear function definition
-* 2017-10-29 Erin Carrier <ecarrie2@illinois.edu>: changing inner product notation,
-  additional comments on induced vs general norms
-* 2017-10-29 Erin Carrier <ecarrie2@illinois.edu>: adds review questions,
-  completes vector space definition, rewords matrix norm section,
-  minor other revisions    
-* 2017-10-29 Erin Carrier <ecarrie2@illinois.edu>: adds block form
-* 2017-10-28 John Doherty <jjdoher2@illinois.edu>: first complete draft
-* 2017-10-16 Matthew West <mwest@illinois.edu>: first complete draft
