@@ -414,4 +414,31 @@ where $$\langle \cdot, \cdot \rangle$$ is the inner product operator. Each of th
 
 ## Review Questions
 
-- See this [review link](/cs357/fa2020/reviews/rev-12-eigen.html)
+<ol class="review">
+<li> What is the definition of an eigenvalue/eigenvector pair?</li>
+<li> If \(\mathbf{v}\) is an eigenvector of \(\mathbf{A}\), what can we say about \(c\mathbf{v}\) for any nonzero scalar <span>\(c\)</span>?</li>
+<li> What is the relationship between the eigenvalues of \(\mathbf{A}\) and the eigenvalues of \(\\\)
+ 1) \(c\mathbf{A}\) for some scalar <span>\(c\)</span>, \(\\\)
+ 2) \((\mathbf{A} - \sigma \mathbf{I})\) for some scalar \(\sigma\),\(\\\)
+ 3) \(\mathbf{A}^{-1}\)?</li>
+<li> What is the relationship between the eigenvectors of \(\mathbf{A}\) and the eigenvectors of \(\\\)
+ 1) \(c\mathbf{A}\) for some scalar <span>\(c\)</span>, \(\\\)
+ 2) \((\mathbf{A} - \sigma \mathbf{I})\) for some scalar \(\sigma\), \(\\\)
+ 3) \(\mathbf{A}^{-1}\)?</li>
+<li> Be able to run a few steps of normalized power iteration.</li>
+<li> To what eigenvector of \(\mathbf{A}\) does power iteration converge?</li>
+<li> To what eigenvector of \(\mathbf{A}\) does inverse power iteration converge?</li>
+<li> To what eigenvector of \(\mathbf{A}\) does inverse power iteration with a shift converge?</li>
+<li> Describe the cost of inverse iteration.</li>
+<li> Describe the cost of inverse iteration if we are given an LU-factorization of \((\mathbf{A} - \sigma \mathbf{I})\).</li>
+<li> When can power iteration (or normalized power iteration) fail?</li>
+<li> How can we approximate an eigenvalue of \(\mathbf{A}\) given an approximate eigenvector?</li>
+<li> What happens if we do not normalize our iterates during power iteration?</li>
+<li> What is the Rayleigh quotient?</li>
+<li> What happens to the result of power iteration if the initial guess does not have any components of the dominant eigenvector? Does this depend on whether we are using finite or infinite precision?</li>
+<li> What is the convergence rate of power iteration?</li>
+<li> How does the convergence of power iteration depend on the eigenvalues?</li>
+<li> How can we find eigenvalues of a matrix other than the dominant eigenvalue?</li>
+<li> What does it mean for a matrix to be diagonalizable?</li>
+<li> Are all matrices diagonalizable?</li>
+</ol>
