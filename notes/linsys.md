@@ -119,7 +119,9 @@ $$
 \bf{y} \hspace{5mm} {\xRightarrow[?]{A^{-1}}} \hspace{5mm} \bf{x}  \hspace{3cm} \textbf{Solve}\hspace{3mm} Ax=y \hspace{3mm}\text{for} \hspace{3mm}\bf{x}
 $$
 
-For example, consider:
+### Example: Undoing the Transformation
+
+Suppose we have known operator $${\bf A}$$, known data $${\bf y}$$, and unkown data $${\bf x}$$ that satisfies the relationship $${\bf y = Ax}$$. The values of $${\bf A}$$ and $${\bf y}$$ are given below.
 
 $$
 \textbf{A} =
@@ -137,10 +139,14 @@ x_2
 5 \\
 11
 \end{bmatrix}
+.
 $$
 
 How can we solve for $$\textbf{x} = [x_1, x_2]^T$$?
+
 <details>
+    <summary><strong>Answer</strong></summary>
+
 We construct the following set of linear equations:
 $$
 \begin{cases}
@@ -160,6 +166,7 @@ $$
 2
 \end{bmatrix}
 $$
+
 </details>
 
 ### Example:  Image Blurring and Recovery
@@ -243,31 +250,13 @@ $$
 x_n = \frac{b_n}{U_{nn}}; \hspace{1cm} x_i = \frac{b_i - \sum_{j=i+1}^n U_{ij} x_j}{U_{ii}} \hspace{5mm} \text{for i = n-1, n-2, ..., 1}
 $$
 
+Notice that there are $$n$$ divisions, $$\frac{n(n-1)}{2}$$ subtractions / additions, and $$\frac{n(n-1)}{2}$$ multiplications, hence the **computational complexity** is $$\bf{O(n^2)}$$.
+
 Alternatively, we can also write $${\bf U}x = b$$ as a linear combination of the columns of $$\bf{U}$$:
 
 $$
 x_1 \hspace{1mm} \textbf{U}[:\hspace{1mm},1] + x_2 \hspace{1mm} \textbf{U}[:\hspace{1mm},2] + \ldots + x_{n} \hspace{1mm} \textbf{U}[:\hspace{1mm},n] = \textbf{b}
 $$
-
-Using matrix column notations, we can write the solution as:
-
-$$
-U_{nn} \hspace{2mm} x_n = b_n
-$$
-
-$$
-x_1 \hspace{1mm} \textbf{U}[:\hspace{1mm},1] + \ldots + x_{n-1} \hspace{1mm} \textbf{U}[:\hspace{1mm},n-1] = \textbf{b} -  x_{n} \hspace{1mm} \textbf{U}[:\hspace{1mm},n] \Longrightarrow U_{n-1,n-1} \hspace{1mm} x_{n-1} = b_{n-1} - U_{n-1,n} \hspace{1mm} x_{n}
-$$
-
-$$
-x_1 \textbf{U}[:,1] + \ldots + x_{n-2}  \textbf{U}[:,n-2] = \textbf{b} -  x_{n} \textbf{U}[:,n] - x_{n-1} \textbf{U}[:,n-1] \Rightarrow U_{n-2,n-2} x_{n-2} = b_{n-2} - U_{n-2,n}  x_{n} - U_{n-2,n-1} x_{n-1}
-$$
-
-$$
-\vdots
-$$
-
-Notice that there are $$n$$ divisions, $$\frac{n(n-1)}{2}$$ subtractions / additions, and $$\frac{n(n-1)}{2}$$ multiplications, hence the **computational complexity** is $$\bf{O(n^2)}$$.
 
 The properties of the back substitution algorithm are:
 
@@ -293,7 +282,7 @@ def back_sub(U, b):
     return x
 ```
 
-### Example: Backward-substitution for an Upper Triangular System
+### Example: Back Substitution for an Upper Triangular System
 
 $$
 \begin{bmatrix}
@@ -312,8 +301,9 @@ x_1 \\ x_2 \\ x_3 \\ x_4
 $$
 
 How can we solve for $$x = [x_1, x_2, x_3, x_4]^T$$?
-<details>
 
+<details>
+    <summary><strong>Answer</strong></summary>
 $$
 2x_1 = 2 \Rightarrow x_1 = 1
 $$
@@ -334,7 +324,7 @@ $$
 
 ## Forward Substitution Algorithm for Lower Triangular Systems
 
-The **_forward substitution algorithm_** solves the linear system $${\bf Lx} = {\bf b}$$ where $${\bf L}$$ is a lower triangular matrix. It is the reversed version of backward substitution.
+The **_forward substitution algorithm_** solves the linear system $${\bf Lx} = {\bf b}$$ where $${\bf L}$$ is a lower triangular matrix. It is the reversed version of back substitution.
 
 A lower-triangular linear system $${\bf L}{\bf x} = {\bf b}$$ can be written in matrix form:
 
@@ -429,7 +419,10 @@ x_1 \\ x_2 \\ x_3 \\ x_4
 $$
 
 How can we solve for $$x = [x_1, x_2, x_3, x_4]^T$$?
+
 <details>
+    <summary><strong>Answer</strong></summary>
+
 $$
 2x_1 = 2 \Rightarrow x_1 = 1
 $$
@@ -445,6 +438,7 @@ $$
 $$
 1x_1 + 3x_2 + 4x_3 + 2x_4 = 4 \Rightarrow x_4 = \frac{4-1+1.5-4}{2} = 0.25
 $$
+
 </details>
 
 ## LU Decomposition Definition
@@ -485,9 +479,9 @@ The properties of the LU decomposition are:
 4. The reason that $${\bf L}$$ has all diagonal entries set to 1 is that this means the LU decomposition is unique. This choice is somewhat arbitrary (we could have decided that $${\bf U}$$ must have 1 on the diagonal) but it is the standard choice.
 5. We use the terms **_decomposition_** and **_factorization_** interchangeably to mean writing a matrix as a product of two or more other matrices, generally with some defined properties (such as lower/upper triangular).
 
-An example LU decomposition on a $$3 \times 3$$ matrix:
+### Example: LU Decomposition
 
-Consider the matrix
+Consider a $$3 \times 3$$ matrix
 $$
 A =
 \begin{bmatrix}
@@ -537,11 +531,11 @@ $$
 By solving two triangular systems:
 
 $$
-\bf{Ly=b} \hspace{5mm} {\xRightarrow{\text{Solve for } \bf{y}}} \hspace{5mm} \text{Forward-substitution with complexity } O(n^2)
+\bf{Ly=b} \hspace{5mm} {\xRightarrow{\text{Solve for } \bf{y}}} \hspace{5mm} \text{Forward substitution with complexity } O(n^2)
 $$
 
 $$
-\bf{Ux=y} \hspace{5mm} {\xRightarrow{\text{Solve for } \bf{x}}} \hspace{5mm} \text{Backward-substitution with complexity } O(n^2)
+\bf{Ux=y} \hspace{5mm} {\xRightarrow{\text{Solve for } \bf{x}}} \hspace{5mm} \text{Back substitution with complexity } O(n^2)
 $$
 
 
@@ -712,6 +706,7 @@ $$
 
 How can we find an LU Decomposition for this matrix?
 <details>
+    <summary><strong>Answer</strong></summary>
 
 Note that we use \(\bf {M}\) to keep track of the matrix (e.g. \(\bf {L_{22}U_{22}}\) in the first step) that needs recursive factorization.<br>
 
@@ -719,7 +714,7 @@ The first row of \(\bf{U}\) is the first row of \(\bf{A}\). <br>
 
 The first column of \(\bf{L}\) is \(\frac{\text{the first column of  }\textbf{A}}{u_{11}}\). <br>
 
-Also, as \({\bf L}_{22} {\bf U}_{22} =  {\bf A}_{22} - \boldsymbol{a}_{21} (a_{11})^{-1} \boldsymbol{a}_{12}\), we have the following after the first step (Notice that we use the tensor product operator "\(\otimes\)" to denote the outer product of two vectors):
+Also, as \({\bf L}_{22} {\bf U}_{22} =  {\bf A}_{22} - \boldsymbol{a}_{21} (a_{11})^{-1} \boldsymbol{a}_{12}\), we have the following after the first step (notice that we use the tensor product operator "\(\otimes\)" to denote the outer product of two vectors):
 
 $$
 \textbf{L} =
@@ -758,7 +753,6 @@ $$
 -1 & 2 & 1.5 
 \end{bmatrix}
 $$
-
 
 Similarly, in the second (recursive) step:
 
@@ -863,9 +857,11 @@ $$
 $$
 
 Why?
-<details>
 
-The first step of LU Decomposition is:
+<details>
+    <summary><strong>Answer</strong></summary>
+
+The first step of LU Decomposition is (notice that we use the tensor product operator "\(\otimes\)" to denote the outer product of two vectors):
 
 $$
 \textbf{L} =
@@ -910,7 +906,7 @@ The next update for the lower triangular matrix will result in a division by zer
 
 ## Solving Linear Systems Using LU Decomposition
 
-We can put the above sections together to produce an algorithm for solving the system $${\bf A x} = {\bf b}$$, where we first compute the LU decomposition of $${\bf A}$$ and then use forward and backward substitution to solve for $${\bf x}$$.
+We can put the above sections together to produce an algorithm for solving the system $${\bf A x} = {\bf b}$$, where we first compute the LU decomposition of $${\bf A}$$ and then use forward and back substitution to solve for $${\bf x}$$.
 
 The properties of this algorithm are:
 
@@ -918,7 +914,6 @@ The properties of this algorithm are:
 2. The number of operations in the algorithm is $$\mathcal{O}(n^3)$$ as $$n \to \infty$$.
 
 The code for the **_linear solver using LU decomposition_** is:
-import numpy as np
 ```python
 import numpy as np
 def linear_solve_without_pivoting(A, b):
@@ -968,7 +963,7 @@ The properties of the LUP decomposition are:
 3. The LUP decomposition of a matrix $${\bf A}$$ is not unique.
 4. The LUP decomposition provides a more robust method of solving linear systems than LU decomposition without pivoting, and it is approximately the same cost.
 
-LU factorization with partial pivoting can be completed for any matrix A: Suppose you are at stage k and there is no non-zero entry on or below the diagonal in column k. At this point, there is nothing else you can do, so the algorithm leaves a zero in the diagonal entry of U. Note that the matrix U is singular, and so is the matrix A. Subsequent backward substitutions using U will fail, but the LU factorization itself is still completed.
+LU factorization with partial pivoting can be completed for any matrix A: Suppose you are at stage k and there is no non-zero entry on or below the diagonal in column k. At this point, there is nothing else you can do, so the algorithm leaves a zero in the diagonal entry of U. Note that the matrix U is singular, and so is the matrix A. Subsequent back substitutions using U will fail, but the LU factorization itself is still completed.
 
 ## Solving LUP decomposition linear systems
 
@@ -1204,9 +1199,11 @@ $$
 .$$
 
 How can we find an LUP Decomposition for this matrix?
-<details>
 
-Note that we use \({\bf {\overline{M}}}\) to keep track of the matrix (e.g. \(\bf L_{22} U_{22}\) in the first step) that needs recursive factorization.
+<details>
+    <summary><strong>Answer</strong></summary>
+
+Note that we use \({\bf {\overline{M}}}\) to keep track of the matrix (e.g. \(\bf L_{22} U_{22}\) in the first step) that needs recursive factorization, and the tensor product operator "\(\otimes\)" to denote the outer product of two vectors.
 
 In the first step:
 $$
@@ -1415,7 +1412,9 @@ $$
 $$
 
 How can we find an LUP Decomposition for this matrix?
+
 <details>
+    <summary><strong>Answer</strong></summary>
 
 To find the LUP decomposition of \(\bf A\), we first write the permutation matrix \({\bf P}\) that shifts the second row to the top, so that the top-left entry has the largest possible magnitude. This gives
 
