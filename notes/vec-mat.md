@@ -6,6 +6,11 @@ author:
   - CS 357 Course Staff
 changelog:
   - 
+    name: Yuxuan Chen
+    netid: yuxuan19
+    date: 2024-02-16
+    message: improved example structure, updated review questions
+  - 
     name: Apramey Hosahalli
     netid: apramey2
     date: 2024-02-15
@@ -94,22 +99,19 @@ You will be able to
 
 ### Vectors
 
-A vector is an array of numbers that represent a magnitude and a direction.
+A **_vector_** is an array of numbers that represent a magnitude and a direction. An n-dimensional vector has n components. A vector is an element of a vector space.
 
+$$ \text{n-vector: } \mathbf{x} = \begin{bmatrix} \mathbf{x}_{1} \\ \mathbf{x}_{2}  \\ \vdots \\ \mathbf{x}_{n}\end{bmatrix} $$
+
+#### Example
+
+This is an example of a 2-dimensional vector.
 
 $$ \mathbf{v} = \begin{bmatrix} 1 \\ 3 \end{bmatrix}\hspace{5mm} $$
 
 <center>
-<img src="vector_example.png" alt="Vector v graph" width="300" class="center"/>
+<img src="../assets/img/figs/vector_example.png" alt="Vector v graph" width="300" class="center"/>
 </center>
-
-The vector v depicted above is a 2-dimensional vector. Similarly, an n-dimensional vector has n components.
-
-$$ \mathbf{n-vector:\ } \mathbf{x} = \begin{bmatrix} \mathbf{x}_{1} \\ \mathbf{x}_{2}  \\ \vdots \\ \mathbf{x}_{n}\end{bmatrix} $$
-
-A vector is an element of a Vector Space.
-
-
 
 ### Vector Spaces
 
@@ -277,6 +279,12 @@ It is this representation that allows us to express any linear transformation be
 
 #### Example
 
+$$ {\bf A} = \begin{bmatrix} 1 & 7 & 8 & 4\\ -5 & 3 & 2 & 2\\ 0 & 5 & 6 & 6\end{bmatrix}, {\bf x} = \begin{bmatrix}1 \\ 2 \\ 0 \\ -4\end{bmatrix} $$
+
+Perform a matrix-vector multiplication $${\bf Ax}$$.
+
+<details>
+    <summary><strong>Answer</strong></summary>
 
 $$\begin{eqnarray}
 {\bf Ax} &=& \begin{bmatrix} 1 & 7 & 8 & 4\\ -5 & 3 & 2 & 2\\ 0 & 5 & 6 & 6\end{bmatrix} \begin{bmatrix}1 \\ 2 \\ 0 \\ -4\end{bmatrix} \\
@@ -289,6 +297,8 @@ $$\begin{eqnarray}
 \\
 &=& \begin{bmatrix} -1 \\ -13\\ -14\end{bmatrix}
 \end{eqnarray}$$
+
+</details>
 
 ### Matrix Representation of Linear Transformations
 
@@ -303,7 +313,7 @@ In other words, if $$\mathbf{z}_j = \mathbf{A}\mathbf{e}_j$$ is written as a lin
 
 #### Example
 
-Let's try an example. Suppose that <span>\\(V\\)</span> is a vector space with basis \\(\mathbf{v}_1,\mathbf{v}_2,\mathbf{v}_3\\), and <span>\\(W\\)</span> is a vector space with basis \\(\mathbf{w}_1,\mathbf{w}_2\\). Then <span>\\(V\\)</span> and <span>\\(W\\)</span> have dimension 3 and 2, respectively. Thus any linear transformation \\(f: V \to W\\) can be represented by a \\(2\times 3\\) matrix. We can introduce column vector notation, so that vectors \\(\mathbf{v} = \alpha_1\mathbf{v}_1 + \alpha_2\mathbf{v}_2 + \alpha_3\mathbf{v}_3\\) and \\(\mathbf{w} = \beta_1\mathbf{w}_1 + \beta_2\mathbf{w}_2\\) can be written as
+Suppose that <span>\\(V\\)</span> is a vector space with basis \\(\mathbf{v}_1,\mathbf{v}_2,\mathbf{v}_3\\), and <span>\\(W\\)</span> is a vector space with basis \\(\mathbf{w}_1,\mathbf{w}_2\\). Then <span>\\(V\\)</span> and <span>\\(W\\)</span> have dimension 3 and 2, respectively. Thus any linear transformation \\(f: V \to W\\) can be represented by a \\(2\times 3\\) matrix. We can introduce column vector notation, so that vectors \\(\mathbf{v} = \alpha_1\mathbf{v}_1 + \alpha_2\mathbf{v}_2 + \alpha_3\mathbf{v}_3\\) and \\(\mathbf{w} = \beta_1\mathbf{w}_1 + \beta_2\mathbf{w}_2\\) can be written as
 
 $$ \mathbf{v} = \begin{bmatrix}\alpha_1 \\ \alpha_2 \\ \alpha_3\end{bmatrix},\hspace{6mm} \mathbf{w} = \begin{bmatrix}\beta_1 \\ \beta_2\end{bmatrix}. $$
 
@@ -315,24 +325,31 @@ Suppose that the following facts are known about the linear transformation <span
 *   \\(f(\mathbf{v}_2) = 5\mathbf{w}_1 - \mathbf{w}_2\\)
 *   \\(f(\mathbf{v}_3) = 2\mathbf{w}_1 + 2\mathbf{w}_2\\)
 
-This is enough information to completely determine the matrix representation of <span>\\(f\\)</span>. The first equation tells us
+Using the information provided above, determine the matrix representation of <span>\\(f\\)</span>. 
+
+<details>
+    <summary><strong>Answer</strong></summary>
+    
+The first equation tells us
 
 $$ \mathbf{w}_1 = f(\mathbf{v}_1) \implies \begin{bmatrix} 1 \\ 0\end{bmatrix} = \begin{bmatrix} a_{11} & a_{12} & a_{13}\\ a_{21} & a_{22} & a_{23}\end{bmatrix}\begin{bmatrix} 1 \\ 0 \\ 0\end{bmatrix} = \begin{bmatrix} a_{11} \\ a_{21} \end{bmatrix}. $$
 
-So we know $$a_{11} = 1,\ a_{21} = 0$$. The second equation tells us that
+So we know $$a_{11} = 1,\ a_{21} = 0.$$ The second equation tells us that
 
 $$ 5\mathbf{w}_1 - \mathbf{w}_2 = f(\mathbf{v}_2) \implies \begin{bmatrix} 5 \\ -1\end{bmatrix} = \begin{bmatrix} 1 & a_{12} & a_{13}\\ 0 & a_{22} & a_{23}\end{bmatrix}\begin{bmatrix} 0 \\ 1 \\ 0\end{bmatrix} = \begin{bmatrix} a_{12} \\ a_{22} \end{bmatrix}.
 $$
 
-So we know $$a_{12} = 5,\ a_{22} = -1$$. Finally, the third equation tells us
+So we know $$a_{12} = 5,\ a_{22} = -1.$$ Finally, the third equation tells us
 
 $$ 2\mathbf{w}_1 + 2\mathbf{w}_2 = f(\mathbf{v}_2) \implies \begin{bmatrix} 2 \\ 2\end{bmatrix} = \begin{bmatrix} 1 & 5 & a_{13}\\ 0 & -1 & a_{23}\end{bmatrix}\begin{bmatrix} 0 \\ 0 \\ 1\end{bmatrix} = \begin{bmatrix} a_{13} \\ a_{23} \end{bmatrix}. $$
 
-Thus, \\(a_{13} = 2,\ a_{23} = 2\\), and the linear transformation <span>\\(f\\)</span> can be represented by the matrix:
+Thus, \(a_{13} = 2,\ a_{23} = 2\), and the linear transformation <span>\(f\)</span> can be represented by the matrix:
 
 $$ \begin{bmatrix} 1 & 5 & 2\\ 0 & -1 & 2\end{bmatrix}. $$
 
-It is important to note that the matrix representation not only depends on <span>\\(f\\)</span>, but also our choice of basis. If we chose different bases for the vector spaces \\(V\text{ and } W\\), the matrix representation of <span>\\(f\\)</span> would change as well.
+It is important to note that the matrix representation not only depends on <span>\(f\)</span>, but also our choice of basis. If we chose different bases for the vector spaces \(V\text{ and } W\), the matrix representation of <span>\(f\)</span> would change as well.
+
+</details>
 
 ### Matrices as operators
 
@@ -383,7 +400,10 @@ When <span>$$p=2$$</span> (2-norm), this is called the **_Euclidean norm_** and 
 
 ### Vector Norm Examples
 
-Consider the case of $$\mathbf{w} = [-3, 5, 0, 1]$$, in this part we will show how to calculate the 1, 2, and $$\infty$$ norm of $$\mathbf{w}$$.
+Consider the case of $$\mathbf{w} = [-3, 5, 0, 1]$$. Calculate the 1, 2, and $$\infty$$ norm of $$\mathbf{w}$$.
+
+<details>
+    <summary><strong>Answer</strong></summary>
 
 For the 1-norm:
 
@@ -409,7 +429,7 @@ $$\|\mathbf{w}\|_2 = \sqrt{9 + 25 + 0 + 1}$$
 
 $$\|\mathbf{w}\|_2 = \sqrt{35} \approx 5.92$$
 
-For the $$\infty$$-norm:
+For the \(\infty\)-norm:
 
 $$\|\mathbf{w}\|_\infty = \lim_{p\to\infty}(\sum_{i=1}^N |w_i|^p)^{\frac{1}{p}}$$
 
@@ -420,6 +440,8 @@ $$\|\mathbf{w}\|_\infty = \max(|-3|, |5|, |0|, |1|)$$
 $$\|\mathbf{w}\|_\infty = \max(3, 5, 0, 1)$$
 
 $$\|\mathbf{w}\|_\infty = 5$$
+
+</details>
 
 ### Norms and Errors
 
@@ -462,16 +484,22 @@ $$\|{\bf A}\|_F = \sqrt{\sum_{i,j} a_{ij}^2}.$$
 
 The Frobenius norm is an example of a general matrix norm that is not an induced norm.
 
-For example,
+#### Example
 
+$${\bf Q }=\begin{bmatrix} 1 & 4 \\ 6 & 5 \end{bmatrix}$$
 
-$${\bf Q =}\begin{bmatrix} 1 & 4 \\ 6 & 5 \end{bmatrix}$$
+Calculate the Frobenius norm of $${\bf Q}.$$
+
+<details>
+    <summary><strong>Answer</strong></summary>
 
 $$\begin{eqnarray}
 \|{\bf Q}\|_{\bf F} &=& \sqrt{1^2 + 4^2 + 6^2 + 5^2}\\
 &=& \sqrt{78}\\
 &\approx& 8.83
 \end{eqnarray}$$
+
+</details>
 
 ### The matrix p-norm
 
@@ -554,7 +582,20 @@ $$\begin{eqnarray}
 
 ## Review Questions
 
-        Yuxuan can you put the html for the review questions in here? I think it might be easier for you to get it from the github.
+<ol>
+  <li> What is a vector space?</li>
+  <li> What is an inner product?</li>
+  <li> Given a specific function \(f(\mathbf{x})\), can \(f(\mathbf{x})\) be considered an inner product?</li>
+  <li> What is a vector norm? (What properties must hold for a function to be a vector norm?)</li>
+  <li> Given a specific function \(f(\mathbf{x})\), can \(f(\mathbf{x})\) be considered a norm?</li>
+  <li> What is the definition of an induced matrix norm? What do they measure?</li>
+  <li> What properties do induced matrix norms satisfy? Which ones are the submultiplicative properties? Be able to apply all of these properties.</li>
+  <li> For an induced matrix norm, given \(\|\mathbf{x}\|\) and \(\|{\bf A}\mathbf{x}\|\) for a few vectors, can you determine a lower bound on \(\|{\bf A}\|\)?</li>
+  <li> What is the Frobenius matrix norm?</li>
+  <li> For a given vector, compute the 1, 2 and \(\infty\) norm of the vector.</li>
+  <li> For a given matrix, compute the 1, 2 and \(\infty\) norm of the matrix.</li>
+  <li> Know what the norms of special matrices are (e.g., norm of diagonal matrix, orthogonal matrix, etc.)</li>
+</ol>
 
 
 
