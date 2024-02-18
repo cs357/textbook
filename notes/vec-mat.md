@@ -92,7 +92,7 @@ changelog:
 * * *
 
 ## Learning Objectives
-You will be able to
+
 * Understand vector spaces
 * Identify linear transformations
 * Recognize special matrices
@@ -460,8 +460,7 @@ $$\begin{eqnarray}
 
 #### Example
 
-$$True\ Vector =\begin{bmatrix} 0 \\ 6 \\ 4 \end{bmatrix}\ \ \ \  Approximate\ Vector =\begin{bmatrix} 0 \\ 5 \\ 3 \end{bmatrix}$$
-
+$$True\ Vector =\begin{bmatrix} 0 \\ 6 \\ -4 \end{bmatrix}\ \ \ \  Approximate\ Vector =\begin{bmatrix} 0 \\ 5 \\ -3 \end{bmatrix}$$
 
 Calculate the 1-norm error given the true and approximate vectors above.
 
@@ -477,7 +476,7 @@ Absolute\ Error &=& \|\begin{bmatrix} 0 \\ 6 \\ -4 \end{bmatrix} - \begin{bmatri
 \\
 &=& 2
 \end{eqnarray}$$
-\\
+
 $$\begin{eqnarray}
 Relative\ Error &=& \frac{\|\begin{bmatrix} 0 \\ 6 \\ -4 \end{bmatrix} - \begin{bmatrix} 0 \\ 5 \\ -3 \end{bmatrix}\|_{1}}{\|\begin{bmatrix} 0 \\ 6 \\ -4 \end{bmatrix}\|_{1}}\\
 \\
@@ -544,7 +543,7 @@ $$\begin{eqnarray}
 
 The matrix p-norm is induced by the p-norm of a vector. It is 
 
-$$\|{\bf A}\|_p := \max_{\|\mathbf{x}\|_p=1} \|{\bf A}\mathbf{x}\|_p$$. 
+$$\|{\bf A}\|_p := \max_{\|\mathbf{x}\|_p=1} \|{\bf A}\mathbf{x}\|_p.$$ 
 
 There are three special cases:
 
@@ -554,47 +553,41 @@ The 1-norm reduces to the maximum absolute column sum of the matrix, i.e.,
 
 $$\|{\bf A}\|_1 = \max_j \sum_{i=1}^n \vert a_{ij} \vert.$$
 
-##### Example
-
-$$ {\bf C} = \begin{bmatrix} 3 & -2 \\ -1 & 3 \\ \end{bmatrix} $$
-
-Calculate the 1-norm of matrix $${\bf C}.$$
-
-<details>
-    <summary><strong>Answer</strong></summary>
-
-The matrix C has absolute column sums
-
-$$\begin{eqnarray}
-|3| + |-1| = &4& {\ \ and}\\
-|-2| + |3| = &5&\\
-\end{eqnarray}$$
-
-therefore,
-
-$$\begin{eqnarray}
-\|{\bf C}\|_{\bf 1} &=& \max (4, 5)\\
-&=& 5
-\end{eqnarray}$$
-
-</details>
-
 #### 2-norm
+
 The 2-norm reduces to the maximum singular value of the matrix.
 
 $$\|{\bf A}\|_{2} = \max_k \sigma_k$$
 
-##### Example
-Consider the same matrix C,
+#### $$\infty$$-norm
 
-$$ {\bf C} = \begin{bmatrix} 3 & -2 \\ -1 & 3 \\ \end{bmatrix}. $$
+The $$\infty$$-norm reduces to the maximum absolute row sum of the matrix.
 
-Calculate the 2-norm of matrix $${\bf C}.$$
+$$\|{\bf A}\|_{\infty} = \max_i \sum_{j=1}^n \vert a_{ij} \vert.$$
+
+#### Example
+
+$$ {\bf C} = \begin{bmatrix} 3 & -2 \\ -1 & 3 \\ \end{bmatrix} $$
+
+Calculate the 1-norm, 2-norm, and $$\infty$$-norm of matrix $${\bf C}.$$
 
 <details>
     <summary><strong>Answer</strong></summary>
 
-The singular values are the square roots of the eigenvalues of the matrix <span>$${\bf C}^T {\bf C}$$</span>. You can also find the maximum singular values by calculating the Singular Value Decomposition of the matrix.
+The matrix ${\bf C}$ has absolute column sums
+
+$$
+|3| + |-1| = 4, |-2| + |3| = 5.
+$$
+
+Therefore,
+
+$$\begin{eqnarray}
+\|{\bf C}\|_1 &=& \max (4, 5)\\
+&=& 5.
+\end{eqnarray}$$
+
+The singular values are the square roots of the eigenvalues of the matrix <span>$${\bf C}^T {\bf C}.$$</span> You can also find the maximum singular values by calculating the Singular Value Decomposition of the matrix.
 
 $$\|{\bf C}\|_2 = \max_{\|\mathbf{x}\|_2=1} \|{\bf C}\mathbf{x}\|_2$$
 
@@ -614,37 +607,19 @@ $$\lambda^2 - 23\lambda + 49 = 0$$
 
 $$(\lambda-\frac{1}{2}(23+3\sqrt{37}))(\lambda-\frac{1}{2}(23-3\sqrt{37})) = 0$$
 
-$$\|{\bf C}\|_2 = \sqrt{\lambda_{max}} = \sqrt{\frac{1}{2}(23+3\sqrt{37})} \approx 4.54$$
-</details>
+$$\|{\bf C}\|_2 = \sqrt{\lambda_{max}} = \sqrt{\frac{1}{2}(23+3\sqrt{37})} \approx 4.54.$$
 
-#### $$\infty$$-norm
-The $$\infty$$-norm reduces to the maximum absolute row sum of the matrix.
+The matrix ${\bf C}$ has absolute row sums
 
-$$\|{\bf A}\|_{\infty} = \max_i \sum_{j=1}^n \vert a_{ij} \vert.$$
+$$
+|3| + |-2| = 5, |-1| + |3| = 4.
+$$
 
-##### Example
-
-Once again, considering C
-
-$$ {\bf C} = \begin{bmatrix} 3 & -2 \\ -1 & 3 \\ \end{bmatrix}. $$
-
-Calculate the $$\infty$$-norm of matrix $${\bf C}.$$
-
-<details>
-    <summary><strong>Answer</strong></summary>
-
-The matrix C has absolute row sums
+Therefore,
 
 $$\begin{eqnarray}
-|3| + |-2| = &5& {\ \ and}\\
-|-1| + |3| = &4&\\
-\end{eqnarray}$$
-
-therefore,
-
-$$\begin{eqnarray}
-\|{\bf C}\|_{\bf 1} &=& \max (4, 5)\\
-&=& 5
+\|{\bf C}\|_{\infty} &=& \max (4, 5)\\
+&=& 5.
 \end{eqnarray}$$
 
 </details>
