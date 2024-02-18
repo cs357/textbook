@@ -574,7 +574,7 @@ Calculate the 1-norm, 2-norm, and $$\infty$$-norm of matrix $${\bf C}.$$
 <details>
     <summary><strong>Answer</strong></summary>
 
-The matrix ${\bf C}$ has absolute column sums
+The matrix \(\bf C\) has absolute column sums
 
 $$
 |3| + |-1| = 4, |-2| + |3| = 5.
@@ -609,7 +609,7 @@ $$(\lambda-\frac{1}{2}(23+3\sqrt{37}))(\lambda-\frac{1}{2}(23-3\sqrt{37})) = 0$$
 
 $$\|{\bf C}\|_2 = \sqrt{\lambda_{max}} = \sqrt{\frac{1}{2}(23+3\sqrt{37})} \approx 4.54.$$
 
-The matrix ${\bf C}$ has absolute row sums
+The matrix \(\bf C\) has absolute row sums
 
 $$
 |3| + |-2| = 5, |-1| + |3| = 4.
