@@ -286,10 +286,10 @@ def back_sub(U, b):
 
 $$
 \begin{bmatrix}
-2 & 0 & 0 & 0 \\
-3 & 2 & 0 & 0 \\
-1 & 2 & 6 & 0 \\
-1 & 3 & 4 & 2 \\
+2 & 3 & 1 & 1 \\
+0 & 2 & 2 & 3 \\
+0 & 0 & 6 & 4 \\
+0 & 0 & 0 & 2 \\
 \end{bmatrix}
 \begin{bmatrix}
 x_1 \\ x_2 \\ x_3 \\ x_4
@@ -300,24 +300,24 @@ x_1 \\ x_2 \\ x_3 \\ x_4
 \end{bmatrix}.
 $$
 
-How can we solve for $$x = [x_1, x_2, x_3, x_4]^T$$?
+How can we solve for $$ x = [x_1, x_2, x_3, x_4]^T $$?
 
 <details>
     <summary><strong>Answer</strong></summary>
 $$
-2x_1 = 2 \Rightarrow x_1 = 1
+2x_4 = 4 \Rightarrow x_4 = \frac{4}{2} = 2
 $$
 
 $$
-3x_1 + 2x_2 = 2 \Rightarrow x_2 = \frac{2-3}{2} = -0.5
+6x_3 + 4x_4 = 6 \Rightarrow x_3 = \frac{6 - 4(2)}{6} = -\frac{2}{3}
 $$
 
 $$
-1x_1 + 2x_2 + 6x_3 = 6 \Rightarrow x_3 = \frac{6-1+1}{6} = 1
+2x_2 + 2x_3 + 3x_4 = 2 \Rightarrow x_2 = \frac{2 - 2(-\frac{2}{3}) - 3(2)}{2} = -\frac{10}{3}
 $$
 
 $$
-1x_1 + 3x_2 + 4x_3 + 2x_4 = 4 \Rightarrow x_4 = \frac{4-1+1.5-4}{2} = 0.25
+2x_1 + 3x_2 + x_3 + x_4 = 2 \Rightarrow x_1 = \frac{2 - 3(-\frac{10}{3}) + (-\frac{2}{3}) + 2}{2} = \frac{22}{3}
 $$
 </details>
 
