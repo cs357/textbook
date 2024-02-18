@@ -6,7 +6,7 @@ changelog:
   - 
     name: Bhargav Chandaka
     netid: bhargav9
-    date: 2024-02-13
+    date: 2024-02-17
     message: major reorganziation to match up with content in slides/videos
   - 
     name: Erin Carrier
@@ -63,14 +63,25 @@ where <span>\\(a\\) (the multiplier)</span> and <span>\\(c\\) (the increment)</s
 ### Example of an LCG
 
 Below is the python code for an LCG that generates the numbers \\(1,3,7,5,1,3,7,5,\dots\\) given an initial seed of <span>\\(1\\)</span>.
-
+To follow the pattern, we double the previous number, add \\(1\\), and mod by 10, so \\(a=2\\), \\(c=1\\), and \\(M=10\\). 
 ```python
 def lcg_gen_next(modulus, a, c, xk):
+  """ Uses an LCG to generate a pseudo-random number
+  
+  Args:
+    modulus (int): the period of the LCG
+    a (int): the multiplier
+    c (int): the increment
+    xk (int): the previously generated random number(or the seed)
+
+  Returns:
+    int: the next pseudo-random number, xk_p1 
+  """ 
   xk_p1 = (a * xk + c) % modulus
   return xk_p1
 
-x = 1
-M = 10
+x = 1 # initial seed
+M = 10 
 a = 2
 c = 1
 for i in range(100):
@@ -116,6 +127,10 @@ The recorded number for each 1000 coin toss experiment would likely land close t
 *   Nondeterministic processes
 *   Complicated deterministic systems and deterministic problems with high dimensionality (e.g., Monte Carlo integration)
 
+One of the most common applications of Monte Carlo is to approximate an area/volume for a given shape. For example, to approximate the area of a circle, we can first uniformly sample a large number of points in a square region around the circle. Then, we check which points are inside the circle to get a percentage of points in the circle, \\(p\\). Finally, we approximate the circle's area by multiplying \\(p\\) by the square's area. The reason Monte Carlo works in this scenario is:
+1. **Uniform random sampling** means that we ensure points are scattered throughout region and cover it well
+2. Based on the **law of large numbers**, as we increase the number of samples, the average area value will converge to the true area value. So, using a large number of samples improves our estimate. 
+
 ### Convergence/Error
 
 Consider using Monte Carlo to estimate an integral \\(I = \int_a^b f(x) dx\\). Let <span>\\(X\\)</span> be a uniformly distributed random variable on <span>\\([a, b]\\)</span>. Then, \\(I = (b-a) \mathbb{E}[f(X)]\\). Using Monte Carlo with <span>\\(n\\)</span> samples, our estimate of the expected value is:
@@ -138,8 +153,7 @@ when \\(n \to \infty\\).
 Therefore, the asymptotic behavior of the Monte Carlo method is \\(\mathcal{O}(\frac{1}{\sqrt{n}})\\), where <span>\\(n\\)</span> is the number of samples.
 
 ### Example: Applying Monte Carlo
-
-One of the most common applications of Monte Carlo is to approximate the definite integral of a complicated function, often in higher dimensions where other numerical integration techniques are extremely costly. Below is the python code for approximating the intergral of a function <span>\\(f(x,y)\\)</span> over the domain \\([x_{min}, x_{max}] \times [y_{min}, y_{max}]\\):
+ We can use Monte Carlo to efficiently approximate the definite integral of a complicated function, which is especially useful in higher dimensions when other numerical integration techniques are extremely costly.  Below is the python code for approximating the intergral of a function <span>\\(f(x,y)\\)</span> over the domain \\([x_{min}, x_{max}] \times [y_{min}, y_{max}]\\):
 
 ```python
 import random
@@ -160,7 +174,6 @@ for i in range(n):
 # estimated integral value
 est = (1.0/n * total)*((x_max-x_min)*(y_max-y_min))
 ```
-
 ## Review Questions
 1. What is a pseudo-random number generator?
 2. What are properties of good random number generators?
