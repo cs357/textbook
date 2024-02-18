@@ -6,6 +6,11 @@ author:
   - CS 357 Course Staff
 changelog:
   - 
+    name: Apramey Hosahalli
+    netid: apramey2
+    date: 2024-02-17
+    message: added error example, formatted matrix p-norm examples
+  - 
     name: Yuxuan Chen
     netid: yuxuan19
     date: 2024-02-16
@@ -449,8 +454,42 @@ To calculate the error when computing a vector result, you can apply a norm.
 
 $$\begin{eqnarray}
 \mathbf{Absolute\ Error} = \|\mathbf{True\ Value} - \mathbf{Approximate\ Value}\|\\
+\\
 \mathbf{Relative\ Error} = \frac{\|\mathbf{True\ Value} - \mathbf{Approximate\ Value}\|}{\|\mathbf{True\ Value}\|}
 \end{eqnarray}$$
+
+#### Example
+
+$$True\ Vector =\begin{bmatrix} 0 \\ 6 \\ 4 \end{bmatrix}\ \ \ \  Approximate\ Vector =\begin{bmatrix} 0 \\ 5 \\ 3 \end{bmatrix}$$
+
+
+Calculate the 1-norm error given the true and approximate vectors above.
+
+<details>
+    <summary><strong>Answer</strong></summary>
+
+$$\begin{eqnarray}
+Absolute\ Error &=& \|\begin{bmatrix} 0 \\ 6 \\ -4 \end{bmatrix} - \begin{bmatrix} 0 \\ 5 \\ -3 \end{bmatrix}\|_{1}\\
+\\
+&=& \|\begin{bmatrix} 0 \\ 1 \\ -1 \end{bmatrix}\|_{1}\\
+\\
+&=& |0| + |1| + |-1|\\
+\\
+&=& 2
+\end{eqnarray}$$
+\\
+$$\begin{eqnarray}
+Relative\ Error &=& \frac{\|\begin{bmatrix} 0 \\ 6 \\ -4 \end{bmatrix} - \begin{bmatrix} 0 \\ 5 \\ -3 \end{bmatrix}\|_{1}}{\|\begin{bmatrix} 0 \\ 6 \\ -4 \end{bmatrix}\|_{1}}\\
+\\
+&=& \frac{2}{|0| + |6| + |-4|}\\
+\\
+&=& \frac{2}{2}\\
+\\
+&=& 1
+\\
+\end{eqnarray}$$
+
+</details>
 
 
 ## Matrix Norm
@@ -503,15 +542,26 @@ $$\begin{eqnarray}
 
 ### The matrix p-norm
 
-The matrix p-norm is induced by the p-norm of a vector. It is $$\|{\bf A}\|_p := \max_{\|\mathbf{x}\|_p=1} \|{\bf A}\mathbf{x}\|_p$$. There are three special cases:
+The matrix p-norm is induced by the p-norm of a vector. It is 
 
-For the **1-norm**, this reduces to the maximum absolute column sum of the matrix, i.e.,
+$$\|{\bf A}\|_p := \max_{\|\mathbf{x}\|_p=1} \|{\bf A}\mathbf{x}\|_p$$. 
+
+There are three special cases:
+
+#### 1-norm
+
+The 1-norm reduces to the maximum absolute column sum of the matrix, i.e.,
 
 $$\|{\bf A}\|_1 = \max_j \sum_{i=1}^n \vert a_{ij} \vert.$$
 
-For example, consider the matrix C
+##### Example
 
 $$ {\bf C} = \begin{bmatrix} 3 & -2 \\ -1 & 3 \\ \end{bmatrix} $$
+
+Calculate the 1-norm of matrix $${\bf C}.$$
+
+<details>
+    <summary><strong>Answer</strong></summary>
 
 The matrix C has absolute column sums
 
@@ -527,13 +577,22 @@ $$\begin{eqnarray}
 &=& 5
 \end{eqnarray}$$
 
-For the **2-norm**, this reduces the maximum singular value of the matrix.
+</details>
+
+#### 2-norm
+The 2-norm reduces to the maximum singular value of the matrix.
 
 $$\|{\bf A}\|_{2} = \max_k \sigma_k$$
 
+##### Example
 Consider the same matrix C,
 
 $$ {\bf C} = \begin{bmatrix} 3 & -2 \\ -1 & 3 \\ \end{bmatrix}. $$
+
+Calculate the 2-norm of matrix $${\bf C}.$$
+
+<details>
+    <summary><strong>Answer</strong></summary>
 
 The singular values are the square roots of the eigenvalues of the matrix <span>$${\bf C}^T {\bf C}$$</span>. You can also find the maximum singular values by calculating the Singular Value Decomposition of the matrix.
 
@@ -556,14 +615,23 @@ $$\lambda^2 - 23\lambda + 49 = 0$$
 $$(\lambda-\frac{1}{2}(23+3\sqrt{37}))(\lambda-\frac{1}{2}(23-3\sqrt{37})) = 0$$
 
 $$\|{\bf C}\|_2 = \sqrt{\lambda_{max}} = \sqrt{\frac{1}{2}(23+3\sqrt{37})} \approx 4.54$$
+</details>
 
-For the **$$\infty$$-norm** this reduces to the maximum absolute row sum of the matrix.
+#### $$\infty$$-norm
+The $$\infty$$-norm reduces to the maximum absolute row sum of the matrix.
 
 $$\|{\bf A}\|_{\infty} = \max_i \sum_{j=1}^n \vert a_{ij} \vert.$$
 
+##### Example
+
 Once again, considering C
 
-$$ {\bf C} = \begin{bmatrix} 3 & -2 \\ -1 & 3 \\ \end{bmatrix} $$
+$$ {\bf C} = \begin{bmatrix} 3 & -2 \\ -1 & 3 \\ \end{bmatrix}. $$
+
+Calculate the $$\infty$$-norm of matrix $${\bf C}.$$
+
+<details>
+    <summary><strong>Answer</strong></summary>
 
 The matrix C has absolute row sums
 
@@ -579,6 +647,7 @@ $$\begin{eqnarray}
 &=& 5
 \end{eqnarray}$$
 
+</details>
 
 ## Review Questions
 
