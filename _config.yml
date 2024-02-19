@@ -9,6 +9,7 @@ baseurl: "/textbook"
 repository: "cs357/textbook"
 edit: false
 author: "CS 357 @ UIUC Course Staff"
+issuesUrl: https://github.com/cs357/textbook/issues
 
 theme: cs357-rtd-theme
 
