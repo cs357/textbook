@@ -40,17 +40,17 @@ changelog:
 
 **_Random Number Generators (RNG)_** are algorithms or methods that can be used to generate a sequence of numbers that cannot be reasonably predicted. There are usually two principal methods for generating random numbers: **_truly-random methods_** and **_pseudorandom methods_**. Truly-random methods generate numbers according to some random physical phenomenon. For instance, rolling a fair die will generate truly random numbers between 1 and 6\. Other example sources include atmospheric noise and thermal noise. Pseudorandom methods generate numbers using computational algorithms that produce sequences of apparently random results, which are in fact predictable and reproducible.
 
-When using a pseudorandom method, since only a finite quantity of numbers can be represented in computer, any generated sequence must eventually repeat. The **_period_** of a pseudorandom number generator is defined as the maximum length of the repetition-free prefix of the sequence.
+When using a pseudorandom method, any generated sequence must eventually repeat since only a finite quantity of numbers can be represented in computer. The **_period_** of a pseudorandom number generator is defined as the maximum length of the repetition-free prefix of the sequence.
 
 ### Properties of Random Number Generators
 
 A random number generator has the following properties:
 
-*   Random pattern: passes statistical tests of randomness.
-*   Long period: goes as long as possible before repeating.
-*   Efficiency: executes rapidly and requires little storage.
-*   Repeatability: produces same sequence if started with same initial conditions.
-*   Portability: runs on different kinds of computers and is capable of producing same sequence on each.
+*   *Random pattern*: passes statistical tests of randomness.
+*   *Efficiency*: executes rapidly and requires little storage.
+*   *Long period*: goes as long as possible before repeating.
+*   *Repeatability*: produces same sequence if started with same initial conditions.
+*   *Portability*: runs on different kinds of computers and is capable of producing same sequence on each.
 
 ### Linear Congruential Generator
 
@@ -60,15 +60,15 @@ A **_linear congruential generator_** (LCG) is pseudorandom number generator of 
 
 <div>$$ x_{n+1} = (a x_{n} + c) (\text{mod} \phantom{x} M) $$</div>
 
-where <span>\\(a\\) (the multiplier)</span> and <span>\\(c\\) (the increment)</span> are given integers and <span>\\(x_0\\)</span> is called the **_seed_**. The period of an LCG cannot exceed <span>\\(M\\) (the modulus)</span>. The quality depends on both <span>\\(a\\)</span> and <span>\\(c\\)</span>, and the period may be less than <span>\\(M\\)</span> depending on the values of <span>\\(a\\)</span> and <span>\\(c\\)</span>.
+where <span>\\(a\\) (the multiplier)</span> and <span>\\(c\\) (the increment)</span> are given integers, and <span>\\(x_0\\)</span> is called the **_seed_**. The period of an LCG cannot exceed <span>\\(M\\) (the modulus)</span>. The period may be less than <span>\\(M\\)</span> depending on the values of <span>\\(a\\)</span> and <span>\\(c\\)</span>. The quality depends on both <span>\\(a\\)</span> and <span>\\(c\\)</span>. 
 
 ### Example of an LCG
 
-Below is the Python code for an LCG that generates the numbers \\(1,3,7,5,1,3,7,5,\dots\\) given an initial seed of <span>\\(1\\)</span>.
+Below is the Python code for an example LCG that generates the numbers \\(1,3,7,5,1,3,7,5,\dots\\) given an initial seed of <span>\\(1\\)</span>.
 To follow the pattern, we double the previous number, add \\(1\\), and mod by 10, so \\(a=2\\), \\(c=1\\), and \\(M=10\\). 
 ```python
-def lcg_gen_next(modulus, a, c, xk):
-  """ Uses an LCG to generate a pseudo-random number
+def lcg_gen_next(modulus: int, a: int, c: int, xk: int) -> int:
+  """ Uses an LCG to generate a pseudo-random number.
   
   Args:
     modulus (int): the period of the LCG
@@ -91,26 +91,25 @@ for i in range(100):
   x = lcg_gen_next(M, a, c, x)
 ```
 ## Random Variables
-A **_Random Variable_** <span>\\(X\\)</span> can be thought of as a function that maps the outcome of unpredictable (random) processes to numerical quantities.
+A **_random variable_** <span>\\(X\\)</span> can be thought of as a function that maps the outcome of unpredictable (random) processes to numerical quantities. If you have previous statistics experience, you are likely familiar with this concept.
 
-Examples:
+Examples of random variables include:
 - How much rain are we getting tomorrow?
 - Will my buttered bread land face-down?
 
-We don’t have an exact number to represent these random processes, 
-but we can get something that represents the average case.
+We don’t have an exact number to represent these random processes, but we can approximate the long-run outcome of random variables through the [law of large numbers](https://en.wikipedia.org/wiki/Law_of_large_numbers).
 
 ### Discrete Random Variables
-Each **_Discrete Random Variable_** <span>\\(X\\)</span> can take a discrete value, \\(x_i\\) with probability \\(p_i\\) for \\(i = 1,...m\\) and \\(\Sigma_{i=1}^m p_i = 1\\). 
+Each **_discrete random variable_** <span>\\(X\\)</span> can take a discrete value, \\(x_i\\) with probability \\(p_i\\) for \\(i = 1,...m\\) and \\(\Sigma_{i=1}^m p_i = 1\\) (i.e. the possible values are countable). This is in contrast to continuous random variables, where the possible values are uncountably infinite.
 
-### Example: Coin Toss
+#### Expected Value of a Discrete Random Variable
+The **expected value** of a discrete random variable, $$E(x)$$, is defined as $$\Sigma_{i=1}^m p_i x_i$$. This concept can be thought of as the "average outcome". 
+
+### Example of a Discrete Random Variable: Coin Toss
 Consider a random variable \\(X\\) which is the result of a coin toss that can be heads or tails. 
 <div> $$ X=1\text{: toss is heads} $$ </div>
 <div> $$ X=0\text{: toss is tails} $$ </div>
 For each individual toss, \\(x_i\\) is \\(0\\) or \\(1\\) and each \\(x_i\\) has probability \\(p_i=0.5\\).
-
-The **expected value** of a discrete random variable is defined as:
-<div>$$ E(X) = \Sigma_{i=1}^m p_i x_i $$ </div>
 
 What is the expected value for this coin toss?
 <details> 
@@ -127,14 +126,15 @@ The recorded number for each 1000 coin toss experiment would likely land close t
 
 **_Monte Carlo methods_** are algorithms that rely on repeated random sampling to approximate a desired quantity. Monte Carlo methods are typically used in modeling the following types of problems:
 
-*   Nondeterministic processes
-*   Complicated deterministic systems and deterministic problems with high dimensionality (e.g., Monte Carlo integration)
+*   Nondeterministic processes,
+*   Complicated deterministic systems and deterministic problems with high dimensionality (e.g. integration of non-trivial functions).
 
-One of the most common applications of Monte Carlo is to approximate an area/volume for a given shape. For example, to approximate the area of a circle, we can first uniformly sample a large number of points in a square region around the circle. Then, we check which points are inside the circle to get a percentage of points in the circle, \\(p\\). Finally, we approximate the circle's area by multiplying \\(p\\) by the square's area. The reason Monte Carlo works in this scenario is:
+One of the most common applications of Monte Carlo is to approximate the area/volume for a given shape. For example, to approximate the area of a circle, we can first uniformly sample a large number of points in a square region around the circle. Then, we check which points are inside the circle to get a percentage of points in the circle, \\(p\\). Finally, we approximate the circle's area by multiplying \\(p\\) by the square's area. Monte Carlo works in this scenario because:
 1. **Uniform random sampling** means that we ensure points are scattered throughout region and cover it well
 2. Based on the **law of large numbers**, as we increase the number of samples, the average area value will converge to the true area value. So, using a large number of samples improves our estimate. 
 
-### Convergence/Error
+
+### Integration with Monte Carlo
 
 Consider using Monte Carlo to estimate an integral \\(I = \int_a^b f(x) dx\\). Let <span>\\(X\\)</span> be a uniformly distributed random variable on <span>\\([a, b]\\)</span>. Then, \\(I = (b-a) \mathbb{E}[f(X)]\\). Using Monte Carlo with <span>\\(n\\)</span> samples, our estimate of the expected value is:
 
@@ -149,21 +149,32 @@ According to central limit theorem, as \\(n \to \infty\\),
 <div>\[ \sqrt{n} (S_n - \mu) \to N(0, \sigma^2) \]</div>
 where \\(N(0, \sigma^2)\\) is a normal distribution; \\(\mu = \mathbb{E}[f(X)]\\) and \\(\sigma^2 = Var[X]\\).
 
-Let <span>\\(Z\\)</span> be a random variable with normal distribution \\(N(0, \sigma^2)\\), then the error of Monte Carlo estimate, \\(err = S_n - \mu\\), can be written as
+### Error/Convergence
+
+Let <span>\\(Z\\)</span> be a random variable with normal distribution \\(N(0, \sigma^2)\\). Then the error of Monte Carlo estimate, \\(err = S_n - \mu\\), can be written as
 <div>\[ err \to \frac{1}{\sqrt{n}} Z \]</div>
 when \\(n \to \infty\\).
 
 Therefore, the asymptotic behavior of the Monte Carlo method is \\(\mathcal{O}(\frac{1}{\sqrt{n}})\\), where <span>\\(n\\)</span> is the number of samples.
 
+
 ### Example: Applying Monte Carlo
- We can use Monte Carlo to efficiently approximate the definite integral of a complicated function, which is especially useful in higher dimensions when other numerical integration techniques are extremely costly.  Below is the Python code for approximating the intergral of a function <span>\\(f(x,y)\\)</span> over the domain \\([x_{min}, x_{max}] \times [y_{min}, y_{max}]\\):
+ We can use Monte Carlo to efficiently approximate the definite integral of a complicated function, which is especially useful in higher dimensions when other numerical integration techniques are extremely costly.  Below is the Python code for approximating the intergral of a function <span>\\(f(x,y) = x+y\\)</span> over the domain \\([x_{min}, x_{max}] \times [y_{min}, y_{max}]\\):
 
 ```python
 import random
 
-# function definition goes here
-def f(x, y):
-  # return function value
+def f(x: float, y: float) -> float:
+  """ Returns the value for function *f* at point (x, y).
+  
+  Args:
+    x: float: the point x.
+    y: float: the point y.
+
+  Returns:
+    float: f(x, y)
+  """ 
+  return x + y
 
 # set x_min, x_max, y_min and y_max for integral interval
 total = 0.0
