@@ -7,3 +7,7 @@ node_modules/
 Gemfile.lock
 
 .DS_Store
+
+
+# CBTF render 
+cbtf-gen/output
