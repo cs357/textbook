@@ -62,7 +62,7 @@ A **_linear congruential generator_** (LCG) is pseudorandom number generator of 
 
 where <span>\\(a\\) (the multiplier)</span> and <span>\\(c\\) (the increment)</span> are given integers, and <span>\\(x_0\\)</span> is called the **_seed_**. The period of an LCG cannot exceed <span>\\(M\\) (the modulus)</span>. The period may be less than <span>\\(M\\)</span> depending on the values of <span>\\(a\\)</span> and <span>\\(c\\)</span>. The quality depends on both <span>\\(a\\)</span> and <span>\\(c\\)</span>. 
 
-### Example of an LCG
+### Example of a LCG
 
 Below is the Python code for an example LCG that generates the numbers \\(1,3,7,5,1,3,7,5,\dots\\) given an initial seed of <span>\\(1\\)</span>.
 To follow the pattern, we double the previous number, add \\(1\\), and mod by 10, so \\(a=2\\), \\(c=1\\), and \\(M=10\\). 
