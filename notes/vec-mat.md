@@ -1,5 +1,5 @@
 ---
-title: Vectors, Matrices and Norms
+title: Vectors, Matrices, and Norms
 description: Different ways to measure vectors and matrices
 sort: 8
 author:
@@ -92,7 +92,7 @@ changelog:
 
 ---
 
-# Vectors, matrices, and norms
+# Vectors, Matrices, and Norms
 
 * * *
 
