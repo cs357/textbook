@@ -29,6 +29,7 @@ exclude:
   - README.txt
   - cs357-rtd-theme
   - _cbtf
+  - vendor
 readme_index:
   with_frontmatter: true
 
