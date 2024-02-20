@@ -32,8 +32,7 @@ exclude:
 readme_index:
   with_frontmatter: true
 
-kramdown:
-  input: GFM
+markdown: kramdown
 
 # Sass/SCSS
 sass:
