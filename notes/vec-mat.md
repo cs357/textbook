@@ -1,10 +1,15 @@
 ---
-title: Vectors, Matrices and Norms
+title: Vectors, Matrices, and Norms
 description: Different ways to measure vectors and matrices
 sort: 8
 author:
   - CS 357 Course Staff
 changelog:
+  - 
+    name: Dev Singh
+    netid: dsingh14
+    date: 2024-02-20
+    message: add warning about additivity of norms 
   - 
     name: Apramey Hosahalli
     netid: apramey2
@@ -87,7 +92,7 @@ changelog:
 
 ---
 
-# Vectors, matrices, and norms
+# Vectors, Matrices, and Norms
 
 * * *
 
@@ -458,6 +463,9 @@ $$\begin{eqnarray}
 \mathbf{Relative\ Error} = \frac{\|\mathbf{True\ Value} - \mathbf{Approximate\ Value}\|}{\|\mathbf{True\ Value}\|}
 \end{eqnarray}$$
 
+> <span style="color:red">**Caution:** Norms are not additive!<sub><a href="#footnote-1">1</a></sub></span> \
+> $$ \|\mathbf{True\ Value} - \mathbf{Approximate\ Value}\|\\ \neq  \|\mathbf{True\ Value} \| - \|\mathbf{Approximate\ Value} \|$$
+
 #### Example
 
 $$True\ Vector =\begin{bmatrix} 0 \\ 6 \\ -4 \end{bmatrix}\ \ \ \  Approximate\ Vector =\begin{bmatrix} 0 \\ 5 \\ -3 \end{bmatrix}$$
@@ -468,9 +476,9 @@ Calculate the 1-norm error given the true and approximate vectors above.
     <summary><strong>Answer</strong></summary>
 
 $$\begin{eqnarray}
-Absolute\ Error &=& \|\begin{bmatrix} 0 \\ 6 \\ -4 \end{bmatrix} - \begin{bmatrix} 0 \\ 5 \\ -3 \end{bmatrix}\|_{1}\\
+Absolute\ Error &=& \left\|\begin{bmatrix} 0 \\ 6 \\ -4 \end{bmatrix} - \begin{bmatrix} 0 \\ 5 \\ -3 \end{bmatrix}\right\|_{1}\\
 \\
-&=& \|\begin{bmatrix} 0 \\ 1 \\ -1 \end{bmatrix}\|_{1}\\
+&=& \left\|\begin{bmatrix} 0 \\ 1 \\ -1 \end{bmatrix}\right\|_{1}\\
 \\
 &=& |0| + |1| + |-1|\\
 \\
@@ -478,7 +486,7 @@ Absolute\ Error &=& \|\begin{bmatrix} 0 \\ 6 \\ -4 \end{bmatrix} - \begin{bmatri
 \end{eqnarray}$$
 
 $$\begin{eqnarray}
-Relative\ Error &=& \frac{\|\begin{bmatrix} 0 \\ 6 \\ -4 \end{bmatrix} - \begin{bmatrix} 0 \\ 5 \\ -3 \end{bmatrix}\|_{1}}{\|\begin{bmatrix} 0 \\ 6 \\ -4 \end{bmatrix}\|_{1}}\\
+Relative\ Error &=& \frac{\left\|\begin{bmatrix} 0 \\ 6 \\ -4 \end{bmatrix} - \begin{bmatrix} 0 \\ 5 \\ -3 \end{bmatrix}\right\|_{1}}{\left\|\begin{bmatrix} 0 \\ 6 \\ -4 \end{bmatrix}\right\|_{1}}\\
 \\
 &=& \frac{2}{|0| + |6| + |-4|}\\
 \\
@@ -642,4 +650,5 @@ $$\begin{eqnarray}
 </ol>
 
 
-
+## Footnotes
+<p id="footnote-1">1. Over a convex space (which the real, and complex, numbers are).</p>

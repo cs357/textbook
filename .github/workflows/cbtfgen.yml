@@ -1,0 +1,26 @@
+name: Build CBTF Artifact from public site
+
+on:
+  workflow_dispatch:
+
+jobs:
+  # Build job
+  download:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: 'true'
+      - uses: docker/setup-buildx-action@v2
+      - name: Run build
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ghcr.io/cs357/textbook-devel:latest
+          options: -v ${{ github.workspace }}:/srv/jekyll
+          shell: bash
+          run: cd /srv/jekyll/_cbtf && ls && ./create.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: /srv/jekyll/_cbtf/output/ # or path/to/artifact

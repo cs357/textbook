@@ -17,7 +17,6 @@ semester: sp2024
 courseUrl: https://courses.engr.illinois.edu/cs357
 
 addons:
-  - github
   - gems
   - analytics
 
@@ -29,11 +28,12 @@ exclude:
   - node_modules
   - README.txt
   - cs357-rtd-theme
+  - _cbtf
+  - vendor
 readme_index:
   with_frontmatter: true
 
-kramdown:
-  input: GFM
+markdown: kramdown
 
 # Sass/SCSS
 sass:
