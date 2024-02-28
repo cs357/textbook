@@ -2,6 +2,59 @@
 title: Eigenvalues and Eigenvectors
 description: 
 sort: 12
+author:
+  - CS 357 Course Staff
+changelog:
+  - 
+    name: Pascal Adhikary
+    netid: pascala2
+    date: 2024-02-13
+    message: add info/examples from slides, reorganize
+  - 
+    name: Yuxuan Chen
+    netid: yuxuan19
+    date: 2022-02-28
+    message: added learning objectives, cost summary
+  -
+    name: Peter Sentz
+    netid: 
+    date: 2020-03-01
+    message: added text to include content from slides
+  -
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2018-10-14
+    message: removes orthogonal/GS sections
+  -
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2018-01-14
+    message: removes demo links
+  -
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2017-11-10
+    message: adds costs of methods
+  -
+    name: Matthew West
+    netid: mwest
+    date: 2017-10-26
+    message: rewrote eval/evec definitions
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2017-10-25
+    message: minor fixes, added review questions
+  - 
+    name: Arun Lakshmanan
+    netid: lakshma2
+    date: 2017-10-14
+    message: first complete draft
+  - 
+    name: Luke Olson
+    netid: lukeo
+    date: 2017-10-16
+    message: outline
 ---
 
 # Eigenvalues and Eigenvectors
@@ -38,25 +91,17 @@ $$ |\lambda_1| \geq |\lambda_2| \geq \cdots \geq |\lambda_n|, $$
 
 and we normalize eigenvectors, so that $$\|{\bf x}\| = 1$$.
 
-## Eigenvalues of a Shifted Matrix
+We define the nullspace of $$A$$ as the span, or set of all linear combinations, of the solutions for $$\mathbf {Ax}= \mathbf{0}$$.
 
-Given a matrix $$\mathbf{A}$$, for any constant scalar $$\sigma$$, we define the **_shifted matrix_** is $$\mathbf{A} - \sigma {\bf I}$$. If $$\lambda$$ is an eigenvalue of $$\mathbf{A}$$ with eigenvector $${\bf x}$$ then $$\lambda - \sigma$$ is an eigenvalue of the shifted matrix with the same eigenvector. This can be derived by
+#### Example: Solving a Small Matrix for Eigenvalues
 
-$$ \begin{aligned} (\mathbf{A} - \sigma {\bf I}) {\bf x} &= \mathbf{A} {\bf x} - \sigma {\bf I} {\bf x} \\ &= \lambda {\bf x} - \sigma {\bf x} \\ &= (\lambda - \sigma) {\bf x}. \end{aligned} $$
+If the matrix is reasonably small, we can find the determinant and solve for the characteristic polynomial efficiently. 
 
-## Eigenvalues of an Inverse
+$$ \bf{A}=\begin{bmatrix} 2 & 1 \\ 4 & 2 \end{bmatrix} \qquad \text{det}(\bf{A}- \bf{I}\lambda)=p(\lambda)=(2-\lambda)^2-4 \rightarrow \lambda_1=4, \lambda_2=0$$
 
-An invertible matrix cannot have an eigenvalue equal to zero. Furthermore, the eigenvalues of the inverse matrix are equal to the inverse of the eigenvalues of the original matrix:
+Second, we find the eigenvectors for each eigenvalue by solving for the trivial solution (the nullspace) of $$\bf A-\bf I\lambda$$. **Note** any multiple of $$\bf x$$ below is a valid eigenvector to its eigenvalue.
 
-$$ \mathbf{A} {\bf x} = \lambda {\bf x}\implies \\ \mathbf{A}^{-1} \mathbf{A} {\bf x} = \lambda \mathbf{A}^{-1} {\bf x} \implies \\ {\bf x} = \lambda \mathbf{A}^{-1} {\bf x}\implies \\ \mathbf{A}^{-1} {\bf x} = \frac{1}{\lambda} {\bf x}.$$
-
-## Eigenvalues of a Shifted Inverse
-
-Similarly, we can describe the eigenvalues for shifted inverse matrices as:
-
-$$ (\mathbf{A} - \sigma {\bf I})^{-1} {\bf x} = \frac{1}{\lambda - \sigma} {\bf x}.$$
-
-It is important to note here, that the eigenvectors remain unchanged for shifted or/and inverted matrices.
+$$\lambda_1: \begin{bmatrix} 2 & 1 \\ 4 & 2 \end{bmatrix}\bf x=0 \rightarrow \bf{x}=\begin{bmatrix} 1  \\  2 \end{bmatrix} \qquad \lambda_1: \begin{bmatrix} -2 & 1 \\ 4 & -2 \end{bmatrix}\bf{x}=0 \rightarrow \bf{x}=\begin{bmatrix} 1  \\  -2 \end{bmatrix}$$
 
 ## Diagonalizability
 
@@ -84,15 +129,62 @@ $$ \overbrace{\begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix}}^{\mathbf{A}} \overbr
 
 the matrix $$\mathbf{X}$$ does not have an inverse, so we cannot diagonalize $$\mathbf{A}$$ by applying an inverse. In fact, for any non-singular matrix $$\mathbf{P}$$, the product $$\mathbf{P}^{-1}\mathbf{AP}$$ is not diagonal.
 
+#### Example: Diagonalizing a Matrix (Code Snippet)
+
+The following code snippet diagonalizes a square matrix, if possible. Take careful note that eigenvectors are stored as columns of a 2d numpy array.
+
+```python
+import numpy as np
+import numpy.linalg as la
+def diagonalize(A):
+    # A: nxn matrix
+    m, n = np.shape(A)
+    if (m != n)
+      return None
+
+    evals, evecs = la.eig(A) # eigenvectors as columns
+    if (la.matrix_rank(evecs) != n):
+      return None
+      
+    D = np.diag(evals)
+    X = evecs
+    return (D, X) 
+```
+
 #### Things to Remember About Eigenvalues
 
 *   Eigenvalues can have zero value.
 *   Eigenvalues can be negative.
 *   Eigenvalues can be real or complex numbers.
 *   An $$n \times n$$ real matrix can have complex eigenvalues.
-*   The eigenvalues of an $$n \times n$$ matrix are not necessarily unique. In fact, we can define the multiplicity of an eigenvalue.
-*   If an $$n \times n$$ matrix has $$n$$ linearly independent eigenvectors, then the matrix is diagonalizable.
+*   The eigenvalues of an $$n \times n$$ matrix are not necessarily unique. In fact, we can define the multiplicity of an eigenvalue. The geometric multiplicity of an eigenvector $$\lambda$$ corresponds to the number of linearly independent eigenvectors of $$\lambda$$
+*   If an $$n \times n$$ matrix has $$n$$ linearly independent eigenvectors, then the matrix is diagonalizable. Therefore, a rank-deficient matrix can still be diagonalizable.
 
+#### Conditions for Diagonalizibility
+*   If an $$n \times n$$ matrix $$\mathbf A$$ has $$n$$ linearly independent eigenvectors $$\mathbf x$$ then $$\mathbf A$$ is diagonalizable.
+*   If an $$n \times n$$ matrix has less than $$n$$ eigenvectors, the matrix is called defective (and therefore not diagonalizable).
+*   If an $$n \times n$$ matrix has $$n$$ distinct eigenvalues then A is diagonalizable. 
+
+
+## Eigenvalues of a Shifted Matrix
+
+Given a matrix $$\mathbf{A}$$, for any constant scalar $$\sigma$$, we define the **_shifted matrix_** is $$\mathbf{A} - \sigma {\bf I}$$. If $$\lambda$$ is an eigenvalue of $$\mathbf{A}$$ with eigenvector $${\bf x}$$ then $$\lambda - \sigma$$ is an eigenvalue of the shifted matrix with the same eigenvector. This can be derived by
+
+$$ \begin{aligned} (\mathbf{A} - \sigma {\bf I}) {\bf x} &= \mathbf{A} {\bf x} - \sigma {\bf I} {\bf x} \\ &= \lambda {\bf x} - \sigma {\bf x} \\ &= (\lambda - \sigma) {\bf x}. \end{aligned} $$
+
+## Eigenvalues of an Inverse
+
+An invertible matrix cannot have an eigenvalue equal to zero. An eigenvalue equal to zero would imply a trivial solution to $$\mathbf{Ax}=\mathbf{b}$$, a nullspace of nonzero dimension, and therefore a non invertible matrix. Furthermore, the eigenvalues of the inverse matrix are equal to the inverse of the eigenvalues of the original matrix:
+
+$$ \mathbf{A} {\bf x} = \lambda {\bf x}\implies \\ \mathbf{A}^{-1} \mathbf{A} {\bf x} = \lambda \mathbf{A}^{-1} {\bf x} \implies \\ {\bf x} = \lambda \mathbf{A}^{-1} {\bf x}\implies \\ \mathbf{A}^{-1} {\bf x} = \frac{1}{\lambda} {\bf x}.$$
+
+## Eigenvalues of a Shifted Inverse
+
+Similarly, we can describe the eigenvalues for shifted inverse matrices as:
+
+$$ (\mathbf{A} - \sigma {\bf I})^{-1} {\bf x} = \frac{1}{\lambda - \sigma} {\bf x}.$$
+
+It is important to note here that the eigenvectors remain unchanged for shifted or/and inverted matrices.
 
 ## Expressing an Arbitrary Vector as a Linear Combination of Eigenvectors
 
@@ -117,7 +209,7 @@ this implies
 
 $$ \lim_{k\to\infty}\frac{\mathbf{A}^k {\bf x}_0}{\lambda_1^{k}} = \alpha_1 {\bf u}_1.$$
 
-This observation motivates the algorithm known as **_power iteration_**, which is the topic of the next section.
+Plainly, as we repeatedly apply $$\mathbf{A}$$ to an arbitrary vector - which can always be composed as a linear combination of $$n$$ linearly independent eigenvectors spanning $$\mathbb{R}^n$$ - the result converges to a multiple of the dominant eigenvector of $$\mathbf{A}$$: $$\bf{u_1}$$. This observation motivates the algorithm known as **_power iteration_**, which is the topic of the next section.
 
 ## Power Iteration algorithm
 
@@ -264,6 +356,8 @@ For large <span>$$k$$</span>, $$\lambda^{-k}\mathbf{A}\mathbf{x}_0$$ approximate
 To obtain an eigenvector corresponding to the **_smallest_** eigenvalue $$\lambda_n$$ of a non-singular matrix, we can apply power iteration to $$\mathbf{A}^{-1}$$. The following recurrence relationship describes inverse iteration algorithm:
 $$\boldsymbol{x}_{k+1} = \frac{\mathbf{A}^{-1} \boldsymbol{x}_k}{\|\mathbf{A}^{-1} \boldsymbol{x}_k\|}.$$ Do not forget to nomalize each $$\boldsymbol{x}_{k+1}.$$
 
+In practice, instead of taking the inverse and using it for power iteration, we perform the LU factorization of $$\mathbf{A}$$ and perform an LU factorization for each iteration, decreasing our runtime from $$O(n^3)$$ per iteration to $$O(n^2)$$ per iteration, still with $$O(n^3)$$ preprocessing.
+
 ## Inverse Iteration with Shift
 
 To obtain an eigenvector corresponding to the eigenvalue closest to some value $$\sigma$$, $$\mathbf{A}$$ can be shifted by $$\sigma$$ and inverted in order to solve it similarly to the power iteration algorithm. The following recurrence relationship describes inverse iteration algorithm:
@@ -285,11 +379,21 @@ $$ \mathbf{e}_{k+1} \approx \frac{|\lambda_2|}{|\lambda_1|}\mathbf{e}_k$$.
 The convergence rate for (shifted) inverse iteration is also linear, but now depends on the two closest eigenvalues to the shift $$\sigma$$. (Remember that standard inverse iteration corresponds to a shift $$\sigma = 0$$.) The recurrence relationship for the errors is given by:
 $$ \mathbf{e}_{k+1} \approx \frac{|\lambda_\text{closest} - \sigma|}{|\lambda_\text{second-closest} - \sigma|}\mathbf{e}_k.$$
 
-## Cost Summary
+## Cost and Convergence Summary
 
-(a) Power Method $$\boldsymbol{x}_{k+1} = \mathbf{A} \boldsymbol{x}_{k}$$, the cost is $$kn^2$$. \\
-(b) Inverse Power Method $$\mathbf{A} \boldsymbol{x}_{k+1} = \boldsymbol{x}_{k}$$, the cost is $$n^{3} + kn^2$$. \\
-(c) Shifted Inverse Power Method $$(\mathbf{A} - \sigma \mathbf{I}) \boldsymbol{x}_{k+1} = \boldsymbol{x}_{k}$$, the cost is $$n^{3} + kn^2$$.
+| Method                         | Description                                                                             | Cost             | Convergence                                           |
+|--------------------------------|-----------------------------------------------------------------------------------------|------------------|-------------------------------------------------------|
+| Power Method                   | $$\boldsymbol{x}_{k+1} = \mathbf{A} \boldsymbol{x}_{k}$$                               | $$kn^2$$         | $$\left\|\frac{\lambda_2}{\lambda_1}\right\|$$       |
+| Inverse Power Method           | $$\mathbf{A} \boldsymbol{x}_{k+1} = \boldsymbol{x}_{k}$$                                | $$n^{3} + kn^2$$ | $$\left\|\frac{\lambda_n}{\lambda_{n-1}}\right\|$$   |
+| Shifted Inverse Power Method   | $$(\mathbf{A} - \sigma \mathbf{I}) \boldsymbol{x}_{k+1} = \boldsymbol{x}_{k}$$          | $$n^{3} + kn^2$$ | $$\left\|\frac{\lambda_c-\sigma}{\lambda_{c2}-\sigma}\right\|$$ |
+
+
+$$\lambda_1$$: largest eigenvector (in magnitude) \\
+$$\lambda_2$$: second largest eigenvector (in magnitude) \\
+$$\lambda_n$$: smallest eigenvector (in magnitude) \\
+$$\lambda_{n-1}$$: second smallest eigenvector (in magnitude) \\
+$$\lambda_c$$: closest eigenvector to $$\sigma$$ \\
+$$\lambda_{c2}$$: second closest eigenvector to $$\sigma$$
 
 ## Orthogonal Matrices
 
@@ -297,7 +401,8 @@ Square matrices are called **_orthogonal_** if and only if the columns are mutua
 $$\boldsymbol{c}_i^T \boldsymbol{c}_j = 0 \quad \forall \ i \neq j, \quad \|\boldsymbol{c}_i\| = 1 \quad \forall \ i \iff \mathbf{A} \in \mathcal{O}(n),$$
 or
 $$ \langle\boldsymbol{c}_i,\boldsymbol{c}_j \rangle = \begin{cases} 0 \quad \mathrm{if} \ i \neq j, \\ 1 \quad \mathrm{if} \ i = j \end{cases} \iff \mathbf{A} \in \mathcal{O}(n),$$
-where $$\mathcal{O}(n)$$ is the set of all $$n \times n$$ orthogonal matrices called the orthogonal group, $$\boldsymbol{c}_i$$, $$i=1, \dots, n$$, are the columns of <span>$$\mathbf{A}$$</span>, and $$\langle \cdot, \cdot \rangle$$ is the inner product operator. Orthogonal matrices have many desirable properties:\\
+where $$\mathcal{O}(n)$$ is the set of all $$n \times n$$ orthogonal matrices called the orthogonal group, $$\boldsymbol{c}_i$$, $$i=1, \dots, n$$, are the columns of <span>$$\mathbf{A}$$</span>, and $$\langle \cdot, \cdot \rangle$$ is the inner product operator. Orthogonal matrices have many desirable properties:
+
 (a) $$ \mathbf{A}^T \in \mathcal{O}(n) $$\\
 (b) $$ \mathbf{A}^T \mathbf{A} = \mathbf{A} \mathbf{A}^T = \mathbf{I} \implies \mathbf{A}^{-1} = \mathbf{A}^T $$\\
 (c) $$ \det{\mathbf{A}} = \pm 1 $$\\
@@ -311,16 +416,31 @@ where $$\langle \cdot, \cdot \rangle$$ is the inner product operator. Each of th
 
 ## Review Questions
 
-- See this [review link](/cs357/fa2020/reviews/rev-12-eigen.html)
-
-## ChangeLog
-
-* 2022-02-28 Yuxuan Chen <yuxuan19@illinois.edu>: added learning objectives, cost summary
-* 2020-03-01 Peter Sentz: added text to include content from slides
-* 2018-10-14 Erin Carrier <ecarrie2@illinois.edu>: removes orthogonal/GS sections
-* 2018-01-14 Erin Carrier <ecarrie2@illinois.edu>: removes demo links
-* 2017-11-10 Erin Carrier <ecarrie2@illinois.edu>: adds costs of methods
-* 2017-10-26 Matthew West <mwest@illinois.edu>: rewrote eval/evec definitions
-* 2017-10-25 Erin Carrier <ecarrie2@illinois.edu>: minor fixes, added review questions
-* 2017-10-14 Arun Lakshmanan <lakshma2@illinois.edu>: first complete draft
-* 2017-10-16 Luke Olson <lukeo@illinois.edu>: outline
+<ol class="review">
+<li> What is the definition of an eigenvalue/eigenvector pair?</li>
+<li> If \(\mathbf{v}\) is an eigenvector of \(\mathbf{A}\), what can we say about \(c\mathbf{v}\) for any nonzero scalar <span>\(c\)</span>?</li>
+<li> What is the relationship between the eigenvalues of \(\mathbf{A}\) and the eigenvalues of \(\\\)
+ 1) \(c\mathbf{A}\) for some scalar <span>\(c\)</span>, \(\\\)
+ 2) \((\mathbf{A} - \sigma \mathbf{I})\) for some scalar \(\sigma\),\(\\\)
+ 3) \(\mathbf{A}^{-1}\)?</li>
+<li> What is the relationship between the eigenvectors of \(\mathbf{A}\) and the eigenvectors of \(\\\)
+ 1) \(c\mathbf{A}\) for some scalar <span>\(c\)</span>, \(\\\)
+ 2) \((\mathbf{A} - \sigma \mathbf{I})\) for some scalar \(\sigma\), \(\\\)
+ 3) \(\mathbf{A}^{-1}\)?</li>
+<li> Be able to run a few steps of normalized power iteration.</li>
+<li> To what eigenvector of \(\mathbf{A}\) does power iteration converge?</li>
+<li> To what eigenvector of \(\mathbf{A}\) does inverse power iteration converge?</li>
+<li> To what eigenvector of \(\mathbf{A}\) does inverse power iteration with a shift converge?</li>
+<li> Describe the cost of inverse iteration.</li>
+<li> Describe the cost of inverse iteration if we are given an LU-factorization of \((\mathbf{A} - \sigma \mathbf{I})\).</li>
+<li> When can power iteration (or normalized power iteration) fail?</li>
+<li> How can we approximate an eigenvalue of \(\mathbf{A}\) given an approximate eigenvector?</li>
+<li> What happens if we do not normalize our iterates during power iteration?</li>
+<li> What is the Rayleigh quotient?</li>
+<li> What happens to the result of power iteration if the initial guess does not have any components of the dominant eigenvector? Does this depend on whether we are using finite or infinite precision?</li>
+<li> What is the convergence rate of power iteration?</li>
+<li> How does the convergence of power iteration depend on the eigenvalues?</li>
+<li> How can we find eigenvalues of a matrix other than the dominant eigenvalue?</li>
+<li> What does it mean for a matrix to be diagonalizable?</li>
+<li> Are all matrices diagonalizable?</li>
+</ol>
