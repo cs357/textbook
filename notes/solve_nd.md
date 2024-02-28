@@ -380,59 +380,59 @@ Let's start with $$x_0 = 1$$ and $$x_{-1} = 2$$.
 
 First, find an approximate for the derivative (slope):
 
-$$\begin{align*}
-f'(x_0) &\approx \frac{f(x_0) - f(x_{-1})}{x_0 - x_{-1}} \\
-    &= \frac{f(1) - f(2)}{1 - 2} \\
+$$\begin{flalign*}
+\hspace{2cm}f'(x_0) &\approx \frac{f(x_0) - f(x_{-1})}{x_0 - x_{-1}} \\
+    &= \frac{f(1) - f(2)}{1 - 2} &\\
     &= \frac{(1^3 - 1 - 1) - (2^3 - 2 - 1)}{1 - 2} \\
     &= \frac{(-1) - (5)}{1 - 2} \\
     &= 6
-\end{align*}$$
+\end{flalign*}$$
 
 Then, use this for Newton's Method:
 
-$$\begin{align*}
-x_1 &= x_0 - \frac{f(x_0)}{f'(x_0)} \\
-    &= 1   - \frac{f(1)}{f'(1)} \\
+$$\begin{flalign*}
+\hspace{2cm}x_1 &= x_0 - \frac{f(x_0)}{f'(x_0)} \\
+    &= 1   - \frac{f(1)}{f'(1)} &\\
     &= 1   - \frac{1^3 - 1 - 1}{6} \\
     &= 1   + \frac{1}{6} \\
     &= 1.1666666666666667
-\end{align*}$$
+\end{flalign*}$$
 
 ##### Iteration 2
 
-$$\begin{align*}
-f'(x_1) &\approx \frac{f(x_1) - f(x_0)}{x_1 - x_0} \\
-    &= \frac{f(1.1666666666666667) - f(1)}{1.1666666666666667 - 1} \\
+$$\begin{flalign*}
+\hspace{2cm}f'(x_1) &\approx \frac{f(x_1) - f(x_0)}{x_1 - x_0} \\
+    &= \frac{f(1.1666666666666667) - f(1)}{1.1666666666666667 - 1} &\\
     &= \frac{(1.1666666666666667^3 - 1.1666666666666667 - 1) - (1^3 - 1 - 1)}{1.1666666666666667 - 1} \\
     &= \frac{(-0.5787037037037035) - (-1)}{1.1666666666666667 - 1} \\
     &= 2.5277777777777777
-\end{align*}$$
+\end{flalign*}$$
 
-$$\begin{align*}
-x_2 &= x_1 - \frac{f(x_1)}{f'(x_1)} \\
-    &= 1.1666666666666667 - \frac{f(1.1666666666666667)}{f'(1.1666666666666667)} \\
+$$\begin{flalign*}
+\hspace{2cm}x_2 &= x_1 - \frac{f(x_1)}{f'(x_1)} \\
+    &= 1.1666666666666667 - \frac{f(1.1666666666666667)}{f'(1.1666666666666667)} &\\
     &= 1.1666666666666667 - \frac{1.1666666666666667^3 - 1.1666666666666667 - 1}{2.5277777777777777} \\
     &= 1.1666666666666667 - \frac{-0.5787037037037035}{2.5277777777777777} \\
     &= 1.3956043956043955
-\end{align*}$$
+\end{flalign*}$$
 
 ##### Iteration 3
 
-$$\begin{align*}
-f'(x_2) &\approx \frac{f(x_2) - f(x_1)}{x_2 - x_1} \\
-    &= \frac{f(1.3956043956043955) - f(1.1666666666666667)}{1.3956043956043955 - 1.1666666666666667} \\
+$$\begin{flalign*}
+\hspace{2cm}f'(x_2) &\approx \frac{f(x_2) - f(x_1)}{x_2 - x_1} \\
+    &= \frac{f(1.3956043956043955) - f(1.1666666666666667)}{1.3956043956043955 - 1.1666666666666667} &\\
     &= \frac{(1.3956043956043955^3 - 1.3956043956043955 - 1) - (1.1666666666666667^3 - 1.1666666666666667 - 1)}{1.3956043956043955 - 1.1666666666666667} \\
     &= \frac{(0.3226305152401032) - (-0.5787037037037035)}{1.3956043956043955 - 1.1666666666666667} \\
     &= 3.9370278683465503
-\end{align*}$$
+\end{flalign*}$$
 
-$$\begin{align*}
-x_3 &= x_2 - \frac{f(x_2)}{f'(x_2)} \\
-    &= 1.3956043956043955 - \frac{f(1.3956043956043955)}{f'(1.3956043956043955)} \\
+$$\begin{flalign*}
+\hspace{2cm}x_3 &= x_2 - \frac{f(x_2)}{f'(x_2)} \\
+    &= 1.3956043956043955 - \frac{f(1.3956043956043955)}{f'(1.3956043956043955)} &\\
     &= 1.3956043956043955 - \frac{1.3956043956043955^3 - 1.3956043956043955 - 1}{3.9370278683465503} \\
     &= 1.3956043956043955 - \frac{0.3226305152401032}{3.9370278683465503} \\
     &= 1.3136566609098987
-\end{align*}$$
+\end{flalign*}$$
 
 ...
 
@@ -556,41 +556,42 @@ In this example, as the Jacobian is a $$2 \times 2$$ matrix with
 a simple inverse, we work explicitly with the inverse, even though
 we would not explicitly compute the inverse for a real problem.
 
-##### Iteration 1
-
 Let's start at $$\boldsymbol{x_0} = \begin{bmatrix}1 \\ 1\end{bmatrix}$$.
 
-$$\begin{align*}
-\boldsymbol{x_1} &= \boldsymbol{x_0} - {\bf J}_f(\boldsymbol{x_0})^{-1} \boldsymbol{f(x_0)} \\
+##### Iteration 1
+
+
+$$\begin{flalign*}
+\hspace{2cm}\boldsymbol{x_1} &= \boldsymbol{x_0} - {\bf J}_f(\boldsymbol{x_0})^{-1} \boldsymbol{f(x_0)} \\
     &= \begin{bmatrix}1 \\ 1\end{bmatrix}
         - \frac{1}{1 - 2}\begin{bmatrix}-2 & \frac{1}{2} \\ \frac{1}{2} & - \frac{1}{4}\end{bmatrix}
-        \begin{bmatrix}1 \\ 1\end{bmatrix} \\
+        \begin{bmatrix}1 \\ 1\end{bmatrix} &\\
     &= \begin{bmatrix}1 \\ 1\end{bmatrix} + \begin{bmatrix}-1.5 \\ 0.25\end{bmatrix} \\
     &= \begin{bmatrix}-0.5 \\ 1.25\end{bmatrix}
-\end{align*}$$
+\end{flalign*}$$
 
 ##### Iteration 2
 
-$$\begin{align*}
-\boldsymbol{x_2} &= \boldsymbol{x_1} - {\bf J}_f(\boldsymbol{x_1})^{-1} \boldsymbol{f(x_1)} \\
+$$\begin{flalign*}
+\hspace{2cm}\boldsymbol{x_2} &= \boldsymbol{x_1} - {\bf J}_f(\boldsymbol{x_1})^{-1} \boldsymbol{f(x_1)} \\
     &= \begin{bmatrix}-0.5 \\ 1.25\end{bmatrix}
         - \frac{1}{-0.5 - 2.5}\begin{bmatrix}-2.5 & \frac{1}{2} \\ - \frac{1}{4} & - \frac{1}{4}\end{bmatrix}
-        \begin{bmatrix}0 \\ 2.5\end{bmatrix} \\
+        \begin{bmatrix}0 \\ 2.5\end{bmatrix} &\\
     &= \begin{bmatrix}-0.5 \\ 1.25\end{bmatrix} + \frac{1}{3}\begin{bmatrix}1.25 \\ -0.625\end{bmatrix} \\
     &= \begin{bmatrix}-0.08333333 \\ 1.04166667\end{bmatrix}
-\end{align*}$$
+\end{flalign*}$$
 
 ##### Iteration 3
 
-$$\begin{align*}
-\boldsymbol{x_3} &= \boldsymbol{x_2} - {\bf J}_f(\boldsymbol{x_2})^{-1} \boldsymbol{f(x_2)} \\
+$$\begin{flalign*}
+\hspace{2cm}\boldsymbol{x_3} &= \boldsymbol{x_2} - {\bf J}_f(\boldsymbol{x_2})^{-1} \boldsymbol{f(x_2)} \\
     &= \begin{bmatrix}-0.08333333 \\ 1.04166667\end{bmatrix}
         - \frac{1}{-0.08333333 - 2.08333334}\begin{bmatrix}-2.08333334 & 0.5 \\ -0.041666665 & -0.25\end{bmatrix}
-        \begin{bmatrix}9.99999993922529 \cdot 10^{-9} \\ 0.34722224944444413\end{bmatrix} \\
+        \begin{bmatrix}9.99999993922529 \cdot 10^{-9} \\ 0.34722224944444413\end{bmatrix} &\\
     &= \begin{bmatrix}-0.08333333 \\ 1.04166667\end{bmatrix}
         + \frac{1}{2.1666666699999997}\begin{bmatrix}0.1736111 \\ -0.08680556\end{bmatrix} \\
     &= \begin{bmatrix}-0.00320513 \\ 1.00160256\end{bmatrix}
-\end{align*}$$
+\end{flalign*}$$
 
 ...
 
