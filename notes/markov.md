@@ -2,6 +2,54 @@
 title: Markov chains
 description: An application of eigenvalues
 sort: 13
+author:
+  - CS 357 Course Staff
+changelog:
+  - 
+    name: Pascal Adhikary
+    netid: pascala2
+    date: 2024-03-03
+    message: add slide info, page rank
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2018-04-01
+    message: minor reorg and formatting changes
+  - 
+    name: Yu Meng
+    netid: yumeng5
+    date: 2018-03-25
+    message: adds Markov chains
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2018-03-01
+    message: adds more review questions
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2018-01-14
+    message: removes demo links
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2017-11-02
+    message: adds changelog, fix COO row index error
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2017-10-25
+    message: adds review questions, minor fixes and formatting changes
+  - 
+    name: Arun Lakshmanan
+    netid: lakshma2
+    date: 2017-10-25
+    message: first complete draft
+  - 
+    name: Luke Olson
+    netid: lukeo
+    date: 2017-10-16
+    message: outline
 ---
 # Graphs and Markov chains
 
@@ -13,6 +61,10 @@ sort: 13
 *   Identify the performance benefits of a sparse matrix.
 
 ## Graphs
+
+#### Graphs as Matrices:
+
+A graph, at an abstract level, is a set of objects in which pairs of objects are in some sense related. Here, graphs manifest simply as nodes (vertices) and edges which connect them. It can be very helpful to store this information - the relationships between nodes - in a matrix. To do so, we use an **adjacency matrix**.
 
 #### Undirected Graphs:
 
@@ -40,7 +92,7 @@ The adjacency matrix, <span>\\({\bf A}\\)</span>, for directed graphs is defined
 
 <div>\[ a_{ij} = \begin{cases} 1 \quad \mathrm{if} \ \mathrm{node}_i \leftarrow \mathrm{node}_j \\ 0 \quad \mathrm{otherwise} \end{cases}, \]</div>
 
-where <span>\\(a_{ij}\\)</span> is the <span>\\((i,j)\\)</span> element of <span>\\({\bf A}\\)</span>. The adjacency matrix which describes the example graph above is:
+where <span>\\(a_{ij}\\)</span> is the <span>\\((i,j)\\)</span> element of <span>\\({\bf A}\\)</span>. This matrix is typically asymmetric, so it is important to adhere to the definition. The adjacency matrix which describes the example graph above is:
 
 <div>\[ {\bf A} = \begin{bmatrix} 0 & 0 & 0 & 1 & 0 & 0 \\ 1 & 1 & 0 & 0 & 0 & 0 \\ 1 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 1 & 0 & 1 \end{bmatrix}.\]</div>
 
@@ -76,7 +128,9 @@ A steady state vector \\({\bf x}^*\\) is a probability vector (entries are non-n
 <div>\[ {\bf M} {\bf x}^* = {\bf x}^* \]</div>
 Therefore, the steady state vector \\({\bf x}^*\\) is an eigenvector corresponding to the eigenvalue \\(\lambda=1\\) of matrix <span>\\({\bf M}\\)</span>. If there is more than one eigenvector with \\(\lambda=1\\), then a weighted sum of the corresponding steady state vectors will also be a steady state vector. Therefore, the steady state vector of a Markov chain may not be unique and could depend on the initial state vector.
 
-## Markov Chain Example
+In summary, repeated multiplication of a state vector <span>\\({\bf x}\\)</span> from the left by a Markov matrix <span>\\({\bf M}\\)</span>converges to a vector of eigenvalue \\(\lambda=1\\). This should remind you of the Power Iteration method. The largest eigenvalue of a Markov matrix by magnitude is always 1. 
+
+## Markov Chain Example: Weather
 
 Suppose we want to build a Markov Chain model for weather predicting in UIUC during summer. We observed that:
 
@@ -98,17 +152,44 @@ and we can determine the probability vector for day <span>\\(1\\)</span> by
 The probability distribution for the weather on day <span>\\(n\\)</span> is given by
 <div>\[ {\bf x}_n = {\bf M}^{n} {\bf x}_0. \]</div>
 
+## Markov Chain Example: Page Rank
+Page Rank is a straightforward algorithm which was popularized by Google Search to rank webpages. It attempts to model user behavior by assuming a random surfer continuously clicks links at random. So, the importance of a web page is determined by the probability of a random user ending up at that page. 
+
+<div class="figure"> <img src="{{ site.baseurl }}/assets/img/figs/page_rank.png" height=300 width=200/> </div>
+
+Let the above graph represent websites as nodes and outgoing links as directed eges. First, we create an adjacency matrix. 
+
+<div>\[ {\bf A} = \begin{bmatrix}
+0 & 0 & 0 & 1 & 0 & 1 \\
+1 & 0 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 1 & 1 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 & 0 \\
+1 & 0 & 1 & 0 & 1 & 0 \\
+\end{bmatrix} \]</div>
+
+Next, we take the accumulated weight (influence) going into a given page, and redistribute it evenly across each outgoing link. This is a Markov matrix. As before, we can perform repeated iteration on a random state vector until steady-state to find what page the user will most likely end up at. 
+
+<div>\[ {\bf A} = \begin{bmatrix}
+0 & 0 & 0 & 1.0 & 0 & 1.0 \\
+0.5 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0.5 & 0 & 0 & 0 & 0 \\
+0 & 0.5 & 0.33 & 0 & 0 & 0 \\
+0 & 0 & 0.33 & 0 & 0 & 0 \\
+0.5 & 0 & 0.33 & 0 & 1.0 & 0 \\
+\end{bmatrix} \]</div>
+
+#### Naive Page Rank: Shortcomings
+A weakpoint of this naive implementation of Page Rank is that a unique solution is not guaranteed. **Brin-Page (1990s)** proposed:
+> "PageRank can be thought of as a model of user behavior
+> We assume there is a random surfer who is given a web
+> page at random and keeps clicking on links, never
+> hitting "back", **but eventually gets bored and starts on another random page**."   
+
+<div>\[{\bf{M}} = 0.85 {\bf{A}} + \frac{0.15}{n}\bf{1} \]</div>
+
+We choose abitrary constants which sum to 1. Here, a surfer clicks on a link on the current page with probability 0.85 and opens a random page with probability 0.15. This model makes all entries of M greater than zero, and guarantees a unique solution.
+
 ## Review Questions
 
 - See this [review link](/cs357/fa2020/reviews/rev-13-markov.html)
-
-## ChangeLog
-
-*   2018-04-01 Erin Carrier <ecarrie2@illinois.edu>: Minor reorg and formatting changes
-*   2018-03-25 Yu Meng <yumeng5@illinois.edu>: adds Markov chains
-*   2018-03-01 Erin Carrier <ecarrie2@illinois.edu>: adds more review questions
-*   2018-01-14 Erin Carrier <ecarrie2@illinois.edu>: removes demo links
-*   2017-11-02 Erin Carrier <ecarrie2@illinois.edu>: adds changelog, fix COO row index error
-*   2017-10-25 Erin Carrier <ecarrie2@illinois.edu>: adds review questions, minor fixes and formatting changes
-*   2017-10-25 Arun Lakshmanan <lakshma2@illinois.edu>: first complete draft
-*   2017-10-16 Luke Olson <lukeo@illinois.edu>: outline
