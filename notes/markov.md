@@ -57,8 +57,7 @@ changelog:
 
 ## Learning Objectives
 
-*   Express a graph as a sparse matrix.
-*   Identify the performance benefits of a sparse matrix.
+*   **TODO**
 
 ## Graphs
 
