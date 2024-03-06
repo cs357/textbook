@@ -9,7 +9,7 @@ changelog:
     name: Kriti Chandak
     netid: kritic3
     date: 2024-02-24
-    message: added information from slides and additional examples
+    message: added information from slides and videos and added additional examples
   - 
     name: Mariana Silva
     netid: mfsilva
@@ -47,16 +47,19 @@ We define the forward finite difference approximation, \\(df(x)\\), to the first
 
 where <span>\\(h\\)</span> is often called a "perturbation", i.e., a "small" change to the variable <span>\\(x\\)</span> (small when compared to the magnitude of <span>\\(x\\)</span>). 
 
-By the Taylor's theorem, we can write
+By Taylor's theorem, we can write
 
 <div>\[f(x+h) = f(x) + f'(x)\, h + f''(x) \frac{h^2}{2}  + f'''(x) \frac{h^3}{6} + ... \]</div>
 
 <div>\[f(x+h) =f(x) + f'(x)\, h + O(h^2) \]</div>
 <div>\[f'(x) = \frac{f(x+h)-f(x)}{h} + O(h)  \]</div>
 
-Rearranging the above, we get the derivative \\(f'(x)\\) as a function of the forward finite difference approximation \\(d(f(x)\\):
+Rearranging the above, we get the derivative \\(f'(x)\\) as a function of the forward finite difference approximation \\(df(x)\\):
 
 <div>\[f'(x) = df(x) + O(h)  \]</div>
+
+#### Error
+
 Therefore, the truncation error of the forward finite difference approximation is bounded by:
 <div>\[Mh \geq |f'(x) - df(x)| \]</div>
 
@@ -65,10 +68,17 @@ Therefore, the truncation error of the forward finite difference approximation i
 If \\(h\\) is very small, we will have cancellation errors, which is bounded by:
 <div>\[\frac{\epsilon_m|f(x)|}{h} \geq df(x) \]</div>
 
+where \\(\epsilon_m\\) is machine epsilon.
+
 To find the \\(h\\) that minimizes the total error:
 <div>\[error \approx \frac{\epsilon_m|f(x)|}{h} + Mh \]</div>
 <div>\[h = \sqrt{\frac{\epsilon_m |f(x)|}{M}} \]</div>
 
+Using the forward finite different approximation on \\(f(x) = e^x - 2\\), we can see the values of total error, truncation error, and rounding error depending on the chosen perturbation \\(h\\) in the graph below.
+<center>
+<img src="../assets/img/figs/finite_diff_errors.png" alt="Vector v graph" width="300" class="center"/>
+</center>
+Therefore, we can see that the optimal \\(h\\) that minimizes the total error is where the truncation error and rounding error intersect.
 
 Using a similar approach, we can summarize the following finite difference approximations:
 
@@ -209,7 +219,7 @@ Consider a differentiable function \\(f = \begin{bmatrix}
            \frac{\partial f_1}{\partial x_1} & \frac{\partial f_1}{\partial x_2} & \dots & \frac{\partial f_1}{\partial x_n}\\
            \frac{\partial f_2}{\partial x_1} & \frac{\partial f_2}{\partial x_2} & \dots & \frac{\partial f_2}{\partial x_n} \\
            & \ddots \\
-           \frac{\partial f_n}{\partial x_1} & \frac{\partial f_n}{\partial x_2} & \dots & \frac{\partial f_n}{\partial x_n}
+           \frac{\partial f_m}{\partial x_1} & \frac{\partial f_m}{\partial x_2} & \dots & \frac{\partial f_m}{\partial x_n}
          \end{bmatrix} \]</div>
 
 We define the Jacobian finite difference approximation as
@@ -218,7 +228,7 @@ We define the Jacobian finite difference approximation as
            df_1(x_1) & df_1(x_2) & \dots & df_1(x_n)\\
            df_2(x_1) & df_2(x_2) & \dots & df_2(x_n) \\
            & \ddots \\
-           df_n(x_1) & df_n(x_2) & \dots & df_n(x_n)
+           df_m(x_1) & df_m(x_2) & \dots & df_m(x_n)
          \end{bmatrix} \]</div>
 
 where \\(df_i(x_j) \\) is the approximation of \\(f_i\\) at \\(x_j\\) using any finite difference method.
@@ -277,7 +287,7 @@ We can find the absolute truncation error by:
 
 4. How can you approximate the integral of a function using Taylor series?
 
-5. Given an function and a cneter, can you write out the \\(n\\)-th degree Taylor polynomial?
+5. Given an function and a center, can you write out the \\(n\\)-th degree Taylor polynomial?
 
 6. For an \\(n\\)-th degree Taylor polynomial, what is the bound on the error of your approximation as a function of distance from the center?
 
