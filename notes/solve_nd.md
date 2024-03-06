@@ -28,6 +28,7 @@ changelog:
 
 ---
 
+TODO: Adjust examples to similar to last time
 
 # Solving Nonlinear Equations
 
@@ -62,7 +63,7 @@ the quadratic formula memorized. However, polynomials of higher degree and
 non-polynomial functions are much more difficult to solve. The simplest technique
 for solving these types of equations is to use an iterative root-finding technique.
 Instead of finding out where $$f(x) = 0$$ directly, we will start with an initial guess
-and improve it over multiple steps until our _residual_ $$f(x)$$ is sufficiently small
+and improve it over multiple steps until our _residual_ $$f(x)$$ is sufficiently small.
 
 We will try out the following techniques using the function:
 
@@ -94,9 +95,11 @@ interval is less than the tolerance to which we want to know the root.
 
 The bisection method does not estimate $$x_{k}$$, the approximation of the desired root $$x$$. It instead finds an interval (smaller than a given tolerance), that contains the root.
 
-Therefore, the error at iteration k is defined to be the length of the interval at k iterations
+Therefore, the error at iteration k is defined to be the length of the interval at k iterations.
 
-
+TODO: Convergence its own subtopic
+TODO: Examples of power iteration convergence
+TODO: What does linear or quadratic convergence mean
 #### Convergence
 
 An iterative method converges with rate $$\mathbf r$$ if:
@@ -215,6 +218,8 @@ def f(x):
 root = opt.bisect(f, a=1, b=2)
 ```
 
+TODO: Separate algorithm equations
+TODO: Add def for newton step and update
 ### Newton's Method
 
 The Newton-Raphson Method (a.k.a. Newton's Method) uses a Taylor series
@@ -249,6 +254,8 @@ With Newton's method, at each iteration we must evaluate
 both $$f(x)$$ and $$f'(x)$$.
 
 #### Convergence
+TODO: Add more information about convergence
+
 
 Typically, Newton's Method has quadratic convergence.
 
