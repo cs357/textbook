@@ -1,5 +1,5 @@
 ---
-title: Least Squares Data Fitting
+title: Least Squares Fitting
 description: Solving Least Squares problems with different methods
 sort: 17
 author:
@@ -8,65 +8,65 @@ changelog:
   - 
     name: Bhargav Chandaka
     netid: bhargav9
-    date: 2024-03-6
+    date: 2024-03-06
     message: major reorganziation to match up with content in slides/videos
   - 
     name: Yuxuan Chen
     netid: yuxuan19
-    date: 2023-4-28
+    date: 2023-04-28
     message: adding computational complexity using reduced SVD
   - 
     name: Arnav Shah
     netid: arnavss2
-    date: 2022-04-9
+    date: 2022-04-09
     message: add few comments from slides asked in homework
   - 
     name: Jerry Yang
     netid: jiayiy7
-    date: 2020-08-8
+    date: 2020-08-08
     message: adds formal proof link for solving least-squares using SVD
   - 
     name: Mariana Silva
     netid: mfsilva
-    date: 2020-4-26
+    date: 2020-04-26
     message: improved text overall; removed theory of the nonlinear least-squares
-  # - 
-  #   name: Erin Carrier
-  #   netid: ecarrie2
-  #   date: 2018-11-14
-  #   message: fix typo in lstsq res sum range
   - 
     name: Erin Carrier
     netid: ecarrie2
-    date: 2018-1-14
+    date: 2018-11-14
+    message: fix typo in lstsq res sum range
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2018-01-14
     message: removes demo links
-  # - 
-  #   name: Erin Carrier
-  #   netid: ecarrie2
-  #   date: 2017-11-29
-  #   message: fixes typos in lst-sq code, jacobian desc in nonlinear lst-sq
-  # - 
-  #   name: Erin Carrier
-  #   netid: ecarrie2
-  #   date: 2017-11-17
-  #   message: fixes incorrect link
-  # - 
-  #   name: Erin Carrier
-  #   netid: ecarrie2
-  #   date: 2017-11-16
-  #   message: adds review questions, minor formatting changes throughout for consistency, adds normal equations and interp vs lst-sq sections,  removes Gauss-Newton from nonlinear least squares
-#   - 
-#     name: Yu Meng
-#     netid: yumeng5
-#     date: 2017-11-12
-#     message: first complete draft
-  # - 
-  #   name: Luke Olson
-  #   netid: lukeo
-  #   date: 2017-10-17
-  #   message: outline
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2017-11-29
+    message: fixes typos in lst-sq code, jacobian desc in nonlinear lst-sq
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2017-11-17
+    message: fixes incorrect link
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2017-11-16
+    message: adds review questions, minor formatting changes throughout for consistency, adds normal equations and interp vs lst-sq sections,  removes Gauss-Newton from nonlinear least squares
+  - 
+    name: Yu Meng
+    netid: yumeng5
+    date: 2017-11-12
+    message: first complete draft
+  - 
+    name: Luke Olson
+    netid: lukeo
+    date: 2017-10-17
+    message: outline
 ---
-# Least Squares Data Fitting
+# Least Squares Fitting
 
 * * *
 
@@ -106,11 +106,11 @@ For an overdetermined system \\({\bf A x}\cong {\bf b}\\), we are typically look
 
 $$\min_{ {\bf x} } \|{\bf r}\|_2^2 = \min_{ {\bf x} } \|{\bf b} - {\bf A}  {\bf x}\|_2^2.$$
 
-This problem \\(A {\bf x} \cong {\bf b}\\) is called a **_linear least-squares problem_**, and the solution \\({\bf x}\\) is called **_least-squares solution_**. $${\bf A}$$ is an $${m \times n}$$ matrix where $${m \ge n}$$,  $${m}$$ is the number of data pair points and $${n}$$ is the number of parameters of the "best fit" function. The Linear Least Squares problem, \\(A {\bf x} \cong {\bf b}\\), **_always_** has a solution.And, this solution is unique if and only if $${rank({\bf A})= n}$$. 
+This problem \\(A {\bf x} \cong {\bf b}\\) is called a **_linear least-squares problem_**, and the solution \\({\bf x}\\) is called the **_least-squares solution_**. $${\bf A}$$ is an $${m \times n}$$ matrix where $${m \ge n}$$,  $${m}$$ is the number of data pair points and $${n}$$ is the number of parameters of the "best fit" function. The Linear Least Squares problem, \\(A {\bf x} \cong {\bf b}\\), **_always_** has a solution. This solution is unique if and only if $${rank({\bf A})= n}$$. 
 
 ## Normal Equations
 
-Consider the least squares problem, \\({\bf A}  {\bf x} \cong {\bf b}\\), where <span>\\({\bf A} \\)</span> is \\(m \times n\\) real matrix (with <span>\\(m > n\\)</span>). As stated above, the least squares solution minimizes the squared 2-norm of the residual.
+Consider the least squares problem \\({\bf A}  {\bf x} \cong {\bf b}\\), where <span>\\({\bf A} \\)</span> is \\(m \times n\\) real matrix (with <span>\\(m > n\\)</span>). As stated above, the least squares solution minimizes the squared 2-norm of the residual.
 Hence, we want to find the \\(\mathbf{x}\\) that minimizes the function:
 
 $$\phi(\mathbf{x}) = \|\mathbf{r}\|_2^2 = (\mathbf{b} - {\bf A} \mathbf{x})^T (\mathbf{b} - {\bf A} \mathbf{x}) = \mathbf{b}^T \mathbf{b} - 2\mathbf{x}^T {\bf A} ^T \mathbf{b} + \mathbf{x}^T {\bf A} ^T {\bf A}  \mathbf{x}.$$
@@ -160,7 +160,7 @@ where <span>\\(x_0, x_1,\\)</span> and <span>\\(x_2\\)</span> are the unknowns w
 
 Since the system of normal equations yield a square and symmetric matrix, the least-squares solution can be computed using efficient methods such as Cholesky factorization. Note that the overall computational complexity of the factorization is $$\mathcal{O}(n^3)$$. However, the construction of the matrix $${\bf A} ^T {\bf A}$$ has complexity $$\mathcal{O}(mn^2)$$.
 
-In typical data fitting problems, $$ m >> n$$ and hence the overall complexity of the Normal Equations method is $${\bf \mathcal{O}(mn^2)}$$.
+In typical data fitting problems, $$ m >> n$$, so the overall time complexity of the Normal Equations method is $${\bf \mathcal{O}(mn^2)}$$.
 
 ## Solving Least-Squares Problems Using SVD
 
@@ -174,11 +174,11 @@ where the squared norm of the residual becomes:
 
 <div>\[ \begin{align} \|{\bf b} - {\bf A} {\bf x}\|_2^2 &= \|{\bf b} - {\bf U \Sigma V}^T {\bf x}\|_2^2 & (1)\\ &= \|{\bf U}^T ({\bf b} - {\bf U \Sigma V}^T {\bf x})\|_2^2 & (2)\\ &= \|{\bf U}^T {\bf b} - {\bf \Sigma V}^T {\bf x}\|_2^2 \end{align} \]</div>
 
-We can go from (1) to (2) because multiplying a vector by an orthogonal matrix does not change the 2-norm of the vector. Now let
+We can go from (1) to (2) because multiplying a vector by an orthogonal matrix does not change the 2-norm of the vector. Now, let
 
 <div>\[ {\bf y} = {\bf V}^T {\bf x} \]</div>
 <div>\[ {\bf z} = {\bf U}^T {\bf b}, \]</div>
-then we are looking for \\({\bf y}\\) that minimizes
+We are now looking for \\({\bf y}\\) that minimizes
 <div>\[ \|{\bf z} - \Sigma {\bf y}\|_2^2. \]</div>
 
 Note that
@@ -242,10 +242,7 @@ where \\({\bf u}_i\\) represents the <span>\\(i\\)</span>th column of <span>\\({
 [this video.](https://mediaspace.illinois.edu/media/t/1_w6u83js8/158464041))
 
 
-
-
-
-#### Example of a Least-squares solution using SVD
+### Example of a Least-Squares solution using SVD
 
 Assume we have <span>\\(3\\)</span> data points, \\(\{(t_i,y_i)\}=\{(1,1.2),(2,1.9),(3,1)\}\\), we want to find the coefficients for a line, $${y = x_0 + x_1 t}$$, that best fits these data points. The code for using SVD to solve this least-squares problem is:
 
@@ -270,9 +267,9 @@ x = np.dot(V,y)
 print("The function of the best line is: y = " + str(x[0]) + "x + " + str(x[1]))
 ```
 
-## Non-linear Least-squares Problem vs. Linear Least-squares Problem
+## Non-linear Least-Squares Problems vs. Linear Least-Squares Problems
 
-The above linear least-squares problem is associated with an overdetermined linear system \\(A {\bf x} \cong {\bf b}.\\) This problem is called "linear"  because the fitting function we are looking for is linear in the components of \\({\bf x}\\). For example, if we are looking for a polynomial fitting function
+The above linear least-squares problem is associated with an overdetermined linear system \\(A {\bf x} \cong {\bf b}.\\) This problem is called "linear" because the fitting function we are looking for is linear in the components of \\({\bf x}\\). For example, if we are looking for a polynomial fitting function
 <div>\[ f(t,{\bf x}) = x_1 + x_2t + x_3t^2 + \dotsb + x_nt^{n-1} \]</div>
 to fit the data points \\(\{(t_i,y_i), i = 1, ...,  m\}\\) and (<span>\\(m > n\\)</span>), the problem can be solved using the linear least-squares method, because \\(f(t,{\bf x})\\) is linear in the components of \\({\bf x}\\) (though \\(f(t,{\bf x})\\) is nonlinear in <span>\\(t\\)</span>).
 
@@ -280,8 +277,10 @@ If the fitting function \\(f(t,{\bf x})\\) for data points $$(t_i,y_i), i = 1, .
 <div>\[ f(t,{\bf x}) = x_1 e^{x_2 t} + x_2 e^{x_3 t} + \dotsb + x_{n-1} e^{x_n t} \]</div>
 is a **_non-linear least-squares problem_**.
 
+Linear least-squares problems have a closed form solution while nonlinear least-squares problems do not have a closed form solution and requires numerical methods to solve.
+
 ## Review Questions
-1. What does the least-squares solution minimize?
+1. What value does the least-squares solution minimize?
 2. For a given model and given data points, can you form the system $${\bf A x} \cong {\bf b} $$ for a least squares problem?
 3. For a small problem, given some data points and a model, can you determine the least squares solution?
 4. In general, what can we say about the value of the residual for the least squares solution?
@@ -293,4 +292,3 @@ is a **_non-linear least-squares problem_**.
 10. Which costs less: solving a least squares problem via the normal equations or solving a least squares problem using the SVD?
 11. What is the difference between a linear and a nonlinear least squares problem? What sort of model makes it a nonlinear problem? For data points 
 $${\left(t_i, y_i\right)}$$, is fitting $${y = a*cos(t) + b}$$ where $${a}$$ and $${b}$$ are the coefficients we are trying to determine a linear or nonlinear least squares problem?
-- See this [review link](/cs357/fa2020/reviews/rev-17-least-squares.html)
