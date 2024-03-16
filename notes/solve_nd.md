@@ -9,6 +9,12 @@ changelog:
     name: Apramey Hosahalli
     netid: apramey2
     date: 2024-02-24
+    message: changed example formatting, added convergence section 
+  - 
+
+    name: Apramey Hosahalli
+    netid: apramey2
+    date: 2024-02-24
     message: aligned equations, added description of convergence from lecture, and added summary image 
   - 
     name: Erin Carrier
