@@ -28,7 +28,6 @@ changelog:
 
 ---
 
-TODO: Adjust examples to similar to last time
 
 # Solving Nonlinear Equations
 
@@ -65,11 +64,45 @@ for solving these types of equations is to use an iterative root-finding techniq
 Instead of finding out where $$f(x) = 0$$ directly, we will start with an initial guess
 and improve it over multiple steps until our _residual_ $$f(x)$$ is sufficiently small.
 
-We will try out the following techniques using the function:
 
-$$f(x) = x^3 - x - 1$$
+### Convergence
 
-<div class="figure"> <img src="{{ site.baseurl }}/assets/img/figs/cubic.png" width=500 /> </div>
+An iterative method converges with rate $$\mathbf r$$ if:
+
+$$\lim_{k\to\infty} \frac{\|e_{k + 1}\|}{\|e_{k}\|^{\mathbf r}} = C, \quad 0 < C < \infty$$
+
+where $$e_k$$ is the error at iteration k.
+
+$$\begin{eqnarray}
+\mathbf{r} &=& 1: linear\ convergence\\
+\\
+1 < \mathbf{r} &<& 2: superlinear\ convergence\\
+\\
+\mathbf{r} &=& 2: quadratic\ convergence\\
+\end{eqnarray}$$ 
+
+
+**Linear convergence** gains a constant number of accurate digits each step (the error shrinks linearly). 
+When $$C$$ is close to 1 convergence is slow.
+
+**Quadratic convergence** doubles the number of accurate digits in each step (the error shrinks quadratically). However it only starts making sense once $$\|e^k\|$$ is small, and C does not matter much.
+
+
+#### Example
+
+What is the convergence rate of **Power Iteration**?
+
+<details>
+    <summary><strong>Answer</strong></summary>
+
+Recall from the power iteration method
+
+$$\lim_{k\to\infty} \frac{\|e_{k + 1}\|}{\|e_{k}\|^{\mathbf 1}} = |\frac{\lambda_{2}} {\lambda_{1}}| = C$$
+
+We see that when <strong>r</strong> = 1, we get a constant for the ratio between two consecutive iterations. Therefore power iteration has linear convergence.
+
+
+</details>
 
 
 ### Bisection Method
@@ -91,37 +124,11 @@ contain the root each time.  We can repeat this process until the length of the
 interval is less than the tolerance to which we want to know the root.
 
 
-#### Error
+#### Convergence
 
 The bisection method does not estimate $$x_{k}$$, the approximation of the desired root $$x$$. It instead finds an interval (smaller than a given tolerance), that contains the root.
 
-Therefore, the error at iteration k is defined to be the length of the interval at k iterations.
-
-TODO: Convergence its own subtopic
-TODO: Examples of power iteration convergence
-TODO: What does linear or quadratic convergence mean
-#### Convergence
-
-An iterative method converges with rate $$\mathbf r$$ if:
-
-$$\lim_{k\to\infty} \frac{\|e_{k + 1}\|}{\|e_{k}\|^{\mathbf r}} = C, \quad 0 < C < \infty$$
-
-$$\begin{eqnarray}
-\mathbf{r} &=& 1: linear\ convergence\\
-\\
-\mathbf{r} &>& 1: superlinear\ convergence\\
-\\
-\mathbf{r} &=& 2: quadratic\ convergence\\
-\end{eqnarray}$$ 
-
-
-**Linear convergence** gains a constant number of accurate digits each step and C < 1 matters! 
-
-**Quadratic convergence** doubles the number of accurate digits in each step. However it only starts making sense once $$\|e^k\|$$ is small, and C does not matter much.
-
-
-
-Considering the bisection method, the length of the interval at iteration k is $$\frac{(b - a)}{2^k} $$.
+Therefore, the error at iteration k is defined to be the length of the interval at k iterations or $$\frac{(b - a)}{2^k} $$.
 
 $$\lim_{k\to\infty} \frac{\|e_{k + 1}\|}{\|e_{k}\|^{\mathbf r}} = \lim_{k\to\infty} \frac{\|\frac{(b - a)}{2^{k + 1}}\|}{\|\frac{(b - a)}{2^k}\|}  = 0.5$$
 
@@ -153,73 +160,93 @@ $$x^2$$, as it never crosses the x-axis and becomes negative.
 
 #### Example
 
-From the graph above, we can see that $$f(x)$$ has a root somewhere between 1 and 2.
+$$f(x) = x^3 - x - 1$$
+
+<details>
+    <summary><strong>Answer</strong></summary>
+
+<p align=center> <img src="{{ site.baseurl }}/assets/img/figs/cubic.png" width=500 /> </p>
+
+From the graph above, we can see that the function has a root somewhere between 1 and 2.
 It is difficult to tell exactly what the root is, but we can use the bisection
-method to approximate it. Specifically, we can set $$a = 1$$ and $$b = 2$$.
-
-##### Iteration 1
-
-
+method to approximate it. Specifically, we can set 
 $$\begin{flalign*}
-& a = 1 \hspace{5.5cm} f(a) = f(1) = 1^3 - 1 - 1 = -1 &\\
-& b = 2 \hspace{5.5cm} f(b) = f(2) = 2^3 - 2 - 1 = 5 & \\
-& c = \frac{a + b}{2} = \frac{3}{2} = 1.5 \hspace{2.1cm} f(c) = f(1.5) = 1.5^3 - 1.5 - 1 = 0.875&
+a = 1\\
+b = 2
 \end{flalign*}$$
 
-Since $$f(b)$$ and $$f(c)$$ are both positive, we will replace $$b$$ with $$c$$ and
-further narrow our interval.
-
-##### Iteration 2
+<br>
+<br>
+<strong> Iteration 1 </strong>
 
 $$\begin{flalign*}
-&a = 1 \hspace{5.5cm} f(a) = f(1) = -1&\\
-&b = 1.5 \hspace{5.1cm} f(b) = f(1.5)  = 0.875&\\
-&c = \frac{a + b}{2} = \frac{2.5}{2} = 1.25 \hspace{1.45cm} f(c) = f(1.25) = 1.25^3 - 1.25 - 1 = -0.296875&
+&a = 1 \hspace{7.0cm} f(a) = f(1) = 1^3 - 1 - 1 = -1 &\\
+&b = 2 \hspace{7.02cm} f(b) = f(2) = 2^3 - 2 - 1 = 5 & \\
+&c = \frac{a + b}{2} = \frac{3}{2} = 1.5 \hspace{3.67cm} f(c) = f(1.5) = 1.5^3 - 1.5 - 1 = 0.875&
+\end{flalign*}$$
+
+Since f(b) and f(c) are both positive, we will replace b with c and
+further narrow our interval.
+
+<br>
+<br>
+<strong> Iteration 2 </strong>
+
+$$\begin{flalign*}
+&\hspace{0.4cm}a = 1 \hspace{6.5cm} f(a) = f(1) = -1&\\
+&\hspace{0.4cm}b = 1.5 \hspace{6.2cm} f(b) = f(1.5)  = 0.875&\\
+&\hspace{0.4cm}c = \frac{a + b}{2} = \frac{2.5}{2} = 1.25 \hspace{2.5cm} f(c) = f(1.25) = 1.25^3 - 1.25 - 1 = -0.296875&
 \end{flalign*}$$
 
 
-Since $$f(a)$$ and $$f(c)$$ are both negative, we will replace $$a$$ with $$c$$ and
+Since f(a) and f(c) are both negative, we will replace a with c and
 further narrow our interval.
 
-Note that as described above, we didn't need to recalculate $$f(a)$$ or $$f(b)$$
+Note that as described above, we didn't need to recalculate f(a) or f(b)
 as we had already calculated them during the previous iteration.
 Reusing these values can be a significant cost savings.
 
-##### Iteration 3
+<br>
+<br>
+<strong> Iteration 3 </strong>
 
 $$\begin{flalign*}
-&a = 1.25 \hspace{6.5cm} f(a) = f(1.25)  = -0.296875&\\
-&b = 1.5 \hspace{6.8cm} f(b) = f(1.5)   = 0.875&\\
-&c = \frac{a + b}{2} = \frac{1.25 + 1.5}{2} = 1.375 \hspace{1.5cm} f(c) = f(1.375) = 1.375^3 - 1.375 - 1 = 0.224609375&
+&\hspace{0.4cm}a = 1.25 \hspace{6.0cm} f(a) = f(1.25)  = -0.296875&\\
+&\hspace{0.4cm}b = 1.5 \hspace{6.25cm} f(b) = f(1.5)   = 0.875&\\
+&\hspace{0.4cm}c = \frac{a + b}{2} = \frac{1.25 + 1.5}{2} = 1.375 \hspace{0.9cm} f(c) = f(1.375) = 1.375^3 - 1.375 - 1 = 0.224609375&
 \end{flalign*}$$
 
-Since $$f(b)$$ and $$f(c)$$ are both positive, we will replace $$b$$ with $$c$$ and
-further narrow our interval.
+Since f(b) and f(c) are both positive, we will replace b with c and
+further narrow our interval.<br>
 
-...
-
-##### Iteration $$n$$
-
+<br>
+<strong>...</strong>
+<br>
+<br>
+<strong> Iteration n </strong>
+<br>
+<br>
 When running the code for bisection method given below, the resulting
 approximate root determined is 1.324717957244502.  With bisection,
 we can approximate the root to a desired tolerance (the value above is
 for the default tolerances).
+<br>
+<br> <strong> Code </strong> <br>
 
-#### Code
+The following Python code calls SciPy's <code>bisect</code> method:
 
-The following Python code calls SciPy's `bisect` method:
-
-```python
+<pre><code>
 import scipy.optimize as opt
 
 def f(x):
     return x**3 - x - 1
 
 root = opt.bisect(f, a=1, b=2)
-```
+</code></pre>
 
-TODO: Separate algorithm equations
-TODO: Add def for newton step and update
+</details>
+
+
 ### Newton's Method
 
 The Newton-Raphson Method (a.k.a. Newton's Method) uses a Taylor series
@@ -234,18 +261,22 @@ $$f(x_k + h) \approx f(x_k) + f'(x_k)h$$
 Starting with the Taylor series above, we can find the root of this new
 function like so:
 
+
 $$f(x_k) + f'(x_k)h = 0$$
+
 $$h = - \frac{f(x_k)}{f'(x_k)}$$
 
-This value of $$h$$ can now be used to find a value of $$x$$ closer to the
-root of $$f$$:
+This value of $$h$$ is known as the **Newton step**. Now, $$h$$ can be used to perform a **Newton update**, to find a value of $$x$$ closer to the root of $$f$$:
 
-$$x_{k+1} = x_k + h = x_k - \frac{f(x_k)}{f'(x_k)}$$
+$$\begin{eqnarray}
+x_{k+1} &=& x_k + h \\
+&=& x_k - \frac{f(x_k)}{f'(x_k)}
+\end{eqnarray}$$
 
 Geometrically, $$(x_{k+1}, 0)$$ is the intersection of the x-axis and the
 tangent of the graph at $$(x_k, f(x_k))$$.
 
-By repeatedly this procedure, we can get closer and closer to
+By repeating this procedure, we can get closer and closer to
 the actual root.
 
 #### Computational Cost
@@ -254,36 +285,39 @@ With Newton's method, at each iteration we must evaluate
 both $$f(x)$$ and $$f'(x)$$.
 
 #### Convergence
-TODO: Add more information about convergence
 
+Although Newton's method is more costly than the bisection method, it converges quicker.
 
-Typically, Newton's Method has quadratic convergence.
+$$\lim_{k\to\infty} \frac{\|e_{k + 1}\|}{\|e_{k}\|^{\mathbf 2}} = C$$
+
+Which gives us quadratic convergence. However, as we see in the next section, this can depend on the initial guess.
+
 
 #### Drawbacks
 
-Although Newton's Method converges quickly, the additional cost of
-evaluating the derivative makes each iteration slower to compute.
-Many functions are not easily differentiable, so Newton's Method
-is not always possible.  Even in cases when it is possible to
-evaluate the derivative, it may be quite costly.
+The additional cost of evaluating the derivative makes each iteration slower to compute.
 
-Convergence only works well if you are already close to the root.
-Specifically, if started too far from the root Newton's method may
-not converge at all.
+Many functions are not easily differentiable, so Newton's Method is not always possible.  Even in cases when it is possible to evaluate the derivative, it may be quite costly.
+
+Convergence only works well if you are already close to the root. Specifically, if started too far from the root Newton's method may not converge at all.
 
 #### Example
-
-We will need the following equations:
 
 $$\begin{align*}
 f(x)  &= x^3 - x - 1 \\
 f'(x) &= 3x^2 - 1
 \end{align*}$$
 
-From the graph above, we can see that the root is somewhere near
-$$x = 1$$. We will use this as our starting position, $$x_0$$.
+<details>
+    <summary><strong>Answer</strong></summary>
 
-##### Iteration 1
+<p align=center> <img src="{{ site.baseurl }}/assets/img/figs/cubic.png" width=500 /> </p>
+From the graph above, we can see that the root is somewhere near
+$$x = 1.$$ We will use x<sub>0</sub> as our starting position.
+
+<br>
+<br>
+<strong> Iteration 1 </strong>
 
 $$\begin{flalign*}
 \hspace{2cm} x_1 &= x_0 - \frac{f(x_0)}{f'(x_0)} \\
@@ -292,8 +326,9 @@ $$\begin{flalign*}
     &= 1   + \frac{1}{2} \\
     &= 1.5
 \end{flalign*}$$
-
-##### Iteration 2
+<br>
+<br>
+<strong> Iteration 2 </strong>
 
 $$\begin{flalign*}
 \hspace{2cm} x_2 &= x_1 - \frac{f(x_1)}{f'(x_1)} \\
@@ -302,34 +337,38 @@ $$\begin{flalign*}
     &= 1.5 - \frac{0.875}{5.75} \\
     &= 1.3478260869565217
 \end{flalign*}$$
+<br>
+<br>
+<strong> Iteration 3 </strong>
 
-##### Iteration 3
-
-$$\begin{align*}
-\hspace{1cm} x_3 &= x_2 - \frac{f(x_2)}{f'(x_2)} \\
-    &= 1.3478260869565217 - \frac{f(1.3478260869565217)}{f'(1.3478260869565217)} \\
+$$\begin{flalign*}
+\hspace{2cm} x_3 &= x_2 - \frac{f(x_2)}{f'(x_2)} \\
+    &= 1.3478260869565217 - \frac{f(1.3478260869565217)}{f'(1.3478260869565217)}& \\
     &= 1.3478260869565217 - \frac{1.3478260869565217^3 - 1.3478260869565217 - 1}{3 \cdot 1.3478260869565217^2 - 1} \\
     &= 1.3478260869565217 - \frac{0.10068217309114824}{4.449905482041588} \\
     &= 1.325200398950907
-\end{align*}$$
+\end{flalign*}$$
 
 As you can see, Newton's Method is already converging significantly
 faster than the Bisection Method.
-
-...
-
-##### Iteration $$n$$
-
+<br>
+<br>
+<strong>...</strong>
+<br>
+<br>
+<strong> Iteration n </strong>
+<br>
+<br>
 When running the code for Newton's method given below, the resulting
 approximate root determined is 1.324717957244746.
+<br>
+<br>
+<strong> Code </strong> <br>
 
-#### Code
+The following Python code calls SciPy's <code>newton</code> method:
 
-The following Python code calls SciPy's `newton` method:
-
-```python
+<pre><code>
 import scipy.optimize as opt
-
 
 def f(x):
     return x**3 - x - 1
@@ -338,7 +377,10 @@ def fprime(x):
     return 3 * x**2 - 1
 
 root = opt.newton(f, x0=1, fprime=fprime)
-```
+</code></pre>
+
+
+</details>
 
 ### Secant Method
 
@@ -381,10 +423,21 @@ Newton's Method. It also requires two starting guesses near the root.
 
 #### Example
 
-Let's start with $$x_0 = 1$$ and $$x_{-1} = 2$$.
+$$f(x) = x^3 - x - 1$$
 
-##### Iteration 1
+<details>
+    <summary><strong>Answer</strong></summary>
 
+<p align=center> <img src="{{ site.baseurl }}/assets/img/figs/cubic.png" width=500 /> </p>
+
+Let's start with 
+$$x_0 = 1$$ 
+$$x_{-1} = 2$$
+
+<br>
+<strong> Iteration 1 </strong>
+<br>
+<br>
 First, find an approximate for the derivative (slope):
 
 $$\begin{flalign*}
@@ -404,8 +457,9 @@ $$\begin{flalign*}
     &= 1   + \frac{1}{6} \\
     &= 1.1666666666666667
 \end{flalign*}$$
-
-##### Iteration 2
+<br>
+<br>
+<strong> Iteration 2 </strong>
 
 $$\begin{flalign*}
 \hspace{2cm}f'(x_1) &\approx \frac{f(x_1) - f(x_0)}{x_1 - x_0} \\
@@ -422,8 +476,9 @@ $$\begin{flalign*}
     &= 1.1666666666666667 - \frac{-0.5787037037037035}{2.5277777777777777} \\
     &= 1.3956043956043955
 \end{flalign*}$$
-
-##### Iteration 3
+<br>
+<br>
+<strong> Iteration 3 </strong>
 
 $$\begin{flalign*}
 \hspace{2cm}f'(x_2) &\approx \frac{f(x_2) - f(x_1)}{x_2 - x_1} \\
@@ -441,31 +496,42 @@ $$\begin{flalign*}
     &= 1.3136566609098987
 \end{flalign*}$$
 
-...
 
-##### Iteration $$n$$
-
+<br>
+<strong>...</strong>
+<br>
+<br>
+<strong> Iteration n </strong>
+<br>
+<br>
 When running the code for secant method given below, the resulting
 approximate root determined is 1.324717957244753.
 
-#### Code
-
-SciPy's `newton` method serves double-duty. If given a function $$f$$ and a
-first derivative $$f'$$, it will use Newton's Method. If it is not given a
+<br>
+<br>
+<strong> Code </strong>
+<br>
+<br>
+SciPy's <code>newton</code> method serves double-duty. If given a function f and a
+first derivative f', it will use Newton's Method. If it is not given a
 derivative, it will instead use the Secant Method to approximate it:
 
-```python
+<pre><code>
 import scipy.optimize as opt
-
 
 def f(x):
     return x**3 - x - 1
 
 root = opt.newton(f, x0=1)
-```
+</code></pre>
+</details>
+
+### 1D Summary
 <center>
 <img src="../assets/img/figs/1Dsummaries.png" alt="1D methods" class="center"/>
 </center>
+
+
 ## Nonlinear System of Equations
 
 Similar to root-finding in 1 dimension, we can also perform root-finding
@@ -494,7 +560,7 @@ We can think of each equation as a function that describes a surface.
 We are looking for vectors that describe the intersection of these
 surfaces.
 
-### Definition of Jacobian Matrix
+### The Jacobian Matrix
 
 Given $$\boldsymbol{f} : \mathbb{R}^n \to \mathbb{R}^n$$ we define the Jacobian matrix $${\bf J}_f$$ as:
 
@@ -540,12 +606,16 @@ system at each iteration.
 
 #### Example
 
-Let's find a root for:
+Find a root for
 
 $$\boldsymbol{f}(x, y) = \begin{bmatrix}
 x + 2y - 2 \\
 x^2 + 4y^2 - 4
 \end{bmatrix}$$
+
+
+<details>
+    <summary><strong>Answer</strong></summary>
 
 The corresponding Jacobian and inverse Jacobian are:
 
@@ -559,13 +629,14 @@ $${\bf J}_f^{-1} = \frac{1}{x - 2y} \begin{bmatrix}
 \frac{x}{2} & - \frac{1}{4}
 \end{bmatrix}$$
 
-In this example, as the Jacobian is a $$2 \times 2$$ matrix with
+In this example, as the Jacobian is a 2 x 2 matrix with
 a simple inverse, we work explicitly with the inverse, even though
 we would not explicitly compute the inverse for a real problem.
 
 Let's start at $$\boldsymbol{x_0} = \begin{bmatrix}1 \\ 1\end{bmatrix}$$.
-
-##### Iteration 1
+<br>
+<br>
+<strong> Iteration 1 </strong>
 
 
 $$\begin{flalign*}
@@ -576,8 +647,9 @@ $$\begin{flalign*}
     &= \begin{bmatrix}1 \\ 1\end{bmatrix} + \begin{bmatrix}-1.5 \\ 0.25\end{bmatrix} \\
     &= \begin{bmatrix}-0.5 \\ 1.25\end{bmatrix}
 \end{flalign*}$$
-
-##### Iteration 2
+<br>
+<br>
+<strong> Iteration 2 </strong>
 
 $$\begin{flalign*}
 \hspace{2cm}\boldsymbol{x_2} &= \boldsymbol{x_1} - {\bf J}_f(\boldsymbol{x_1})^{-1} \boldsymbol{f(x_1)} \\
@@ -587,8 +659,9 @@ $$\begin{flalign*}
     &= \begin{bmatrix}-0.5 \\ 1.25\end{bmatrix} + \frac{1}{3}\begin{bmatrix}1.25 \\ -0.625\end{bmatrix} \\
     &= \begin{bmatrix}-0.08333333 \\ 1.04166667\end{bmatrix}
 \end{flalign*}$$
-
-##### Iteration 3
+<br>
+<br>
+<strong> Iteration 3 </strong>
 
 $$\begin{flalign*}
 \hspace{2cm}\boldsymbol{x_3} &= \boldsymbol{x_2} - {\bf J}_f(\boldsymbol{x_2})^{-1} \boldsymbol{f(x_2)} \\
@@ -600,20 +673,27 @@ $$\begin{flalign*}
     &= \begin{bmatrix}-0.00320513 \\ 1.00160256\end{bmatrix}
 \end{flalign*}$$
 
-...
+<br>
+<strong>...</strong>
+<br>
+<br>
+<strong> Iteration n </strong>
+<br>
+<br>
 
-##### Iteration $$n$$
 
+<br>
+<br>
+<strong> Code </strong>
+<br>
+<br>
 When running the code for Newton's method given below, the resulting
 approximate root determined is
-$$\begin{bmatrix}-2.74060567 \cdot 10^{-16} & 1\end{bmatrix}^\top$$.
+$$\begin{bmatrix}-2.74060567 \cdot 10^{-16} & 1\end{bmatrix}^\top.$$
 
-#### Code
-
-```python
+<pre><code>
 import numpy as np
 import scipy.optimize as opt
-
 
 def f(xvec):
     x, y = xvec
@@ -631,8 +711,8 @@ def Jf(xvec):
 
 sol = opt.root(f, x0=[1, 1], jac=Jf)
 root = sol.x
-```
-
+</code></pre>
+</details>
 ## Review Questions
 
 - See this [review link](/cs357/fa2020/reviews/rev-14-solve_nd.html)
