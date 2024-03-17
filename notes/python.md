@@ -8,7 +8,7 @@ changelog:
   - 
     name: Arnav Aggarwal
     netid: arnava4
-    date: 2024-02-27
+    date: 2024-03-17
     message: aligned notes with slides and added additional examples
 ---
 
@@ -472,6 +472,184 @@ anotherDict = myDict.copy()
 ```
 Here is the [official documentation](https://docs.python.org/3/tutorial/datastructures.html#dictionaries) for dictionaries and some other useful data structures. 
 
+
+## Type Annotations
+
+Python is a dynamically typed language, meaning that the variable type is determined at runtime. As you've likely noticed, this is why we have the luxury to declare and initialize variables without assigning a type to the variable. This wouldn't be allowed in languages like C++ or Java. 
+
+<strong> Type Annotations</strong>, however, provide a way for developers to specify the type of a variable, function parameter, or function result. While it doesn't really improve performance, it helps developers get a better understanding of the type of data they're dealing with, whether that be in the form of variables or inputs and outputs of a function call. Here's an example of what a type-annotated variable/function definition might look like: 
+
+```python
+# simple variable declaration (the type we're used to)
+a = 5
+
+# type annotated variable declaration
+a: int = 5
+
+
+# simple function definition (the type we're used to)
+def add_two_numbers(a, b):
+  return a + b
+
+# type annotated function definition (both inputs and output)
+def add_two_numbers(a: int, b: int) -> int:
+  return a + b
+```
+
+## Numpy Introduction
+
+This section will serve as a brief intro to some common numpy tools you'll be expected to use throughout the class. While this section will explain some of these common tools, the numpy documentation goes into much greater detail and is always the go-to resource whenever unsure how to use a specific function. 
+
+### Numpy Arrays
+
+Numpy arrays are generally preferred over lists because you can conduct highly performant operations on them to accomplish any task. This is specifically important in a class like Numerical Methods. The following are ways you can initialize different types of numpy arrays: 
+
+```python
+
+# creates a 2d array of zeros (conceptually a matrix) that has shape 2 x 2
+np.zeros((2, 2))
+
+# creates a 2d array of ones (conceptually a matrix) that has shape 2 x 2
+np.ones((2, 2))
+
+# creates an array of numbers that are evenly spaced between 2 and 3 (4 numbers in this case)
+np.linspace(2, 3, 4)
+
+# creates a 2d array of random numbers between 0 and 1 that has shape 2 x 2
+np.random.rand(2, 2)
+
+# creates an empty 2d array (conceptually a matrix) that has shape 2 x 2
+np.empty((2, 2))
+```
+
+We can find out additional information about our numpy array and do more with them with the following functions:
+
+```python
+a = np.zeros((2, 2))
+
+# we can get the shape of our numpy array with the following function
+print(a.shape)        # will return (2, 2)
+
+# this will give us the data type of the array elements
+print(a.dtype)        # returns float
+
+# If we want to convert each element in the array to an int instead of float, we can perform the following operation: 
+a = a.astype(int)
+print(a.dtype)        # returns int
+
+# this creates a deep copy of the array, so changing one won't affect the other
+b = a.copy()
+```
+
+### Indexing and Slicing
+
+We can use indexing and slicing on numpy arrays in order to extract the specific information we need from arrays/matrices. This will be a constant part of the class, so it's better to get used to indexing/slicing now! Note that this section is similar to the above indexing section. A numpy array a will follow the standard: ```a[i:j:k]```, where i is the starting index of our iteration, j is the stopping index (exclusive) of our iteration, and k is the step size.
+
+```python
+a = np.array([3, 7, 9, 10, 3, 5])
+b = np.array([[1, 2, 3], [4, 5, 6]])
+
+# basic indexing for both 1d and 2d numpy arrays (for 2d arrays we specify both the row and col)
+print(a[2])     # prints 9
+print(b[0, 0])  # prints 1
+
+# slicing examples for both 1d and 2d numpy arrays (for 2d arrays we specify both the row and col)
+print(a[1:3])     # prints [7, 9]
+print(b[0:1, 2])  # prints [3]
+
+# If we leave the row/col index empty or use a colon(:) then we're saying that we select the entire row/col
+print(b[:1])      # this assumes the starting index of the row is 0, so we select the entire first row, prints [[1, 2, 3]]
+```
+
+### Array Manipulation
+
+Array manipulation is particularly useful when certain formulas in later chapters require us to build matrices or perform certain operations on matrices (transpose for instance). Let's take a look at a couple of the operations numpy has provided us with: 
+
+```python
+a = np.array([3, 7, 9, 10, 3, 5])
+b = np.array([[1, 2, 3], [4, 5, 6]])
+
+# we can reshape an array as long as the new shape has the same number of elements as the original shape
+b = np.reshape(b, (6, 1))
+a = np.reshape(a, (3, 2))
+
+# we can flatten an array so that all the elements are collapsed into one dimension
+a = a.flatten()
+
+# we can get the transpose of a numpy array via the following commands:
+a_transpose = np.transpose(a)
+a_transpose = a.T
+```
+
+### Array Mathematics
+
+Numpy provides several math functions that can be performed on each element in the array. Rather than iterating through each element, these functions will do the operation over the entire array and are hence extremely convenient. Which math functions might be relevant in Numerical Methods? Let's take a look: 
+
+```python
+a = np.array([[8, 9]])
+b = np.array([[1, 2, 3], [4, 5, 6]]) 
+
+# The most important operation you'll do is matrix multiplication, we can do this easily in 2 ways
+c = np.dot(a, b)
+# or
+c = a @ b
+
+# We can do a lot of other operations
+d = np.sin(a)
+e = np.cos(a)
+f = np.exp(a)
+g = np.sum(a)
+h = np.mean(a)
+i = np.min(a)
+
+# You get the idea
+```
+
+### Linear Algebra
+
+As we get to the later chapters you'll be tasked with performing linear algebra operations on vectors/matrices. This is when the numpy.linalg library and the following functions it provides will be useful:
+
+```python
+import numpy.linalg as la
+
+# To take the matrix inverse of a matrix A: 
+matrix_inv = la.inv(A)
+
+# To get the eigenvalues/eigenvectors of a matrix A:
+eigval, eigvec = la.eig(A)
+
+# To calculate the norm of a vector or a matrix A:
+vec_norm = la.norm(A)   # can specify what type of norm as an additional param
+
+# To solve linear equations for an equation Ax = b
+x = la.solve(A, b)
+```
+
+
+### Random Numbers
+
+Random numbers are always an integral part of Numerical Methods. Numpy has provided several functions that makes it super easy to use random numbers, and this will be key during chapters like Monte Carlo. Let's dive into what numpy has to offer for random numbers: 
+
+```python
+# Generating random numbers from 0 to 1:
+a = np.random.rand(3, 2)    # creates a 3 x 2 array that is populated with random nums from 0 to 1
+
+# Generating a random integer from 0 to 100:
+b = np.random.randint(100)
+
+# Generate a random value based on an array of values:
+c = np.random.choice([1, 2, 3, 4])      # will randomly return one of the values within the array
+```
+
+Python also has a random module that is separate from numpy but can be used to do a lot of similar operations as the ones introduced above. 
+
+### Broadcasting
+
+Broadcasting is a powerful technique in Python that allows us to perform arithmetic between two differently-shaped arrays. 
+
+Say we have a smaller array <strong>A</strong> (with a shape of 1 x 5) and a larger array <strong>B</strong> (with a shape of 4 x 5), and we want to add these arrays together. 
+
+Without broadcasting, only the first row in B would be modified by A. With broadcasting however, A's values are added to each row of B. Hence, array A is broadcasted onto array B. The dimension sizes need to cooperate as they did in this example, or we'll receive some error when performing this arithmetic. 
 
 ## External Links
 Here are some links to some packages we will be using in CS 357.
