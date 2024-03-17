@@ -77,9 +77,11 @@ changelog:
 
 ## Learning objectives
 
+- Recognize the goal of optimization: finding an approximation of the minimum of a function
 - Understand basic optimization approaches
 - Set up a problem as an *optimization* problem
-- Use a method to find an approximation of the minimum
+- Understand two methods of 1-D optimization: *Golden Section Search* and *Newton's Method (1D)*
+- Understand two methods of N-D optimization: *Steepest Descent* and *Newton's Method (N-D)*
 - Identify challenges in optimization
 
 ## Optimization: Finding Minima of a Function
@@ -95,8 +97,8 @@ There are two types of optimization:
 
 * Unconstrained Optimization: find $$\boldsymbol{x}^*$$ such that $$f(\boldsymbol{x}^*) = \underset{\boldsymbol{x}}{\mathrm{min}}\hspace{1mm}f(\boldsymbol{x})$$
 * Constrained Optimization: find $$\boldsymbol{x}^*$$ such that $$f(\boldsymbol{x}^*) = \underset{\boldsymbol{x}}{\mathrm{min}}\hspace{1mm}f(\boldsymbol{x})$$\\
-$$\hspace{2cm} \text{such that: } \boldsymbol{g}(\boldsymbol{x}) = 0 \hspace{5mm} \leftarrow \hspace{5mm} \text{\small "Equality Constraints"}$$
-$$\hspace{2cm} \text{and / or: } \boldsymbol{h}(\boldsymbol{x}) \leq 0 \hspace{5mm} \leftarrow \hspace{5mm} \text{\small "Inequality Constraints"}$$\\
+$$\hspace{2cm} \text{such that: } \boldsymbol{g}(\boldsymbol{x}) = 0 \hspace{5mm} \leftarrow \hspace{5mm} \text{\small ``Equality Constraints"}$$
+$$\hspace{2cm} \text{and / or: } \boldsymbol{h}(\boldsymbol{x}) \leq 0 \hspace{5mm} \leftarrow \hspace{5mm} \text{\small ``Inequality Constraints"}$$\\
 for some other functions $$\boldsymbol{g}$$ and/or $$\boldsymbol{h}$$.
 
 Notice that a solution is not guaranteed to exist for an optimization problem if the domain $$S$$ is infinite.
@@ -104,7 +106,7 @@ Notice that a solution is not guaranteed to exist for an optimization problem if
 For the rest of this topic we try to find the _minimizer_ of a function. Notice that if we want a _maximizer_ $$\boldsymbol{y}^*$$ of a function $$\boldsymbol{f}$$ such that $$f(\boldsymbol{y}^{*}) = \underset{\boldsymbol{y}}{\mathrm{max}}\hspace{1mm}f(\boldsymbol{y})$$, we can instead solve the minimization problem to find the _minimizer_ $$\boldsymbol{x}^*$$ where $$\boldsymbol{x}^*$$ such that $$f(\boldsymbol{x}^*) = \underset{\boldsymbol{x}}{\mathrm{min}}(\hspace{1mm}-f(\boldsymbol{x}))$$.
 
 ### Example:  Calculus problem
-Given two $$d_1, d_2 \gt 0$$, find:  
+Given $$d_1, d_2 \gt 0$$, find:  
 
 $$
 \boxed{
@@ -115,18 +117,35 @@ $$
 }
 $$
 
-In fact, this question asked for maximization the rectangle area subject to perimeter constraint. The red region below gives a demo:
+Notice that $$\underset{\boldsymbol{d \in \mathbb{R}^2}}{\mathrm{max}}\hspace{1mm}f(d_1, d_2) = \underset{\boldsymbol{d \in \mathbb{R}^2}}{\mathrm{min}}\hspace{1mm}(-f(d_1, d_2))$$, so we can instead solve the following optimization problem:
+
+$$
+\boxed{
+\begin{aligned}
+\underset{\boldsymbol{d \in \mathbb{R}^2}}{\mathrm{min}}\hspace{1mm}(-f(d_1, d_2)) &= -(d_1 \times d_2) \\
+\text{\small such that} \quad g(d_1, d_2) &= 2(d_1+d_2) - 20 \leq 0
+\end{aligned}
+}
+$$
+
+
+<details>
+    <summary><strong>More Details</strong></summary>
+
+In fact, this question asked for minimizing maximizing the rectangle area subject to perimeter constraint (20). The red region below gives a demo:
 <br/>
 
 <div class="figure"> <img src="{{ site.baseurl }}/assets/img/figs/calculus_area.png" width=600/> </div>
 
 <br/>
-Here's a visualization of the relationship between $$d_1$$ and $$d_2$$ in terms of area and perimeter:
+Here's a visualization of the relationship between <span>\(d_1\)</span> and <span>\(d_2\)</span> in terms of area and perimeter:
 <br/>
 
 <div class="figure"> <img src="{{ site.baseurl }}/assets/img/figs/area_perimeter_visualization.png" width=600/> </div>
 
 <br/>
+
+</details>
 
 ## Local vs. Global Minima
 
@@ -289,7 +308,7 @@ Now, observe that:<br>
 
 ## Criteria for N-D Local Minima
 
-n the case of n-dimensional optimization, we need to find the minima of a continuous and smooth function $$f:\;\mathbb{R^n} \to \mathbb{R}$$. We can tell if a point $$x^* \in S$$ is a local minimum by considering the values of the gradients and Hessians. Notice that N-D gradient is equivalent to 1-D derivative, and the Hessian matrix has following properties at points of zero gradient:
+In the case of n-dimensional optimization, we need to find the minima of a continuous and smooth function $$f:\;\mathbb{R^n} \to \mathbb{R}$$. We can tell if a point $$x^* \in S$$ is a local minimum by considering the values of the gradients and Hessians. Notice that N-D gradient is equivalent to 1-D derivative, and the Hessian matrix has following properties at points of zero gradient:
 
 <table class="table">
   <thead>
