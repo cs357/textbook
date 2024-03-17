@@ -5,6 +5,13 @@ sort: 16
 author:
   - CS 357 Course Staff
 changelog:
+  
+  - 
+    name: Kaiyao Ke
+    netid: kaiyaok2
+    date: 2024-03-17
+    message: changed the order of the notes
+  
   - 
     name: Kaiyao Ke
     netid: kaiyaok2
@@ -166,67 +173,13 @@ Also, note that a function can always have more than 1 minima.
 
 <div class="figure"> <img src="{{ site.baseurl }}/assets/img/figs/globalvslocal.png" width=400/> </div>
 
-## Definiton of Gradient and Hessian Matrix
+## Two Types of Methods to Resolve 1-Dimensional Optimization Problems
 
-Given  $$f:\mathbb{R}^n\to \mathbb{R}$$ we define the gradient function $$\nabla
-f: \mathbb{R}^n\to\mathbb{R}^n$$ as:
+First, let's learn about some techniques to resolve 1-D optimization problems.
 
-$$ \nabla f(\boldsymbol{x}) =
-\begin{bmatrix}
-\dfrac{\partial f}{\partial x_1} \\
-\dfrac{\partial f}{\partial x_2} \\
-\vdots \\
-\dfrac{\partial f}{\partial x_n} \\
-\end{bmatrix} $$
-
-Given  $$f:\mathbb{R}^n\to \mathbb{R}$$ we define the Hessian matrix $${\bf H}_f:
-\mathbb{R}^n\to\mathbb{R}^{n\times n}$$ as:
-
-$${\bf H}_f(\boldsymbol{x}) = 
-\begin{bmatrix}
-\dfrac{\partial^2 f}{\partial x_1^2} & \dfrac{\partial^2 f}{\partial x_1 \partial x_2} & \ldots & \dfrac{\partial^2 f}{\partial x_1 \partial x_n} \\
-\dfrac{\partial^2 f}{\partial x_2 \partial x_1} & \dfrac{\partial^2 f}{\partial x_2^2} & \ldots & \dfrac{\partial^2 f}{\partial x_2 \partial x_n} \\
-\vdots & \vdots & \ddots & \vdots \\
-\dfrac{\partial^2 f}{\partial x_n \partial x_1} & \dfrac{\partial^2 f}{\partial x_n \partial x_2} & \ldots & \dfrac{\partial^2 f}{\partial x_n^2}
-\end{bmatrix}$$
-
-## Different Types of Methods to Resolve Optimization Problems
-
-Given a nonlinear, continuous and smooth function $$f:\;\mathbb{R}^n\to \mathbb{R}$$ and the optimization problem $$f(\boldsymbol{x}^*) = \underset{\boldsymbol{x \in S}}{\mathrm{min}}\hspace{1mm}f(\boldsymbol{x})$$, there are several types of methods which we'll cover in this class:
-* Gradient-free methods: Only requiring the evaluation of $$f(\boldsymbol{x})$$ on a set of $$x \in S$$.
-* Gradient (first-derivative) methods: Requiring the evaluation of $$f(\boldsymbol{x})$$ and $$\nabla f(\boldsymbol{x})$$ on a set of $$x \in S$$.
-* Second-derivative methods: Requiring the evaluation of $$f(\boldsymbol{x})$$, $$\nabla f(\boldsymbol{x})$$, and $${\nabla}^2 f(\boldsymbol{x})$$ and on a set of $$x \in S$$.
-
-where:
-
-$$
-\boldsymbol{x} = \begin{bmatrix}x_1, x_2, \ldots, x_n\end{bmatrix}
-$$
-
-$$
-f(\boldsymbol{x}) = f(\begin{bmatrix}x_1, x_2, \ldots, x_n\end{bmatrix})
-$$
-
-$$
-\nabla f(\boldsymbol{x}) = \text{\small gradient} (x) = 
-\begin{bmatrix}
-\dfrac{\partial f}{\partial x_1} \\
-\dfrac{\partial f}{\partial x_2} \\
-\vdots \\
-\dfrac{\partial f}{\partial x_n} \\
-\end{bmatrix}
-$$
-
-$$
-{\nabla}^2 f(\boldsymbol{x}) = {\bf H}_f(\boldsymbol{x}) =
-\begin{bmatrix}
-\dfrac{\partial^2 f}{\partial x_1^2} & \dfrac{\partial^2 f}{\partial x_1 \partial x_2} & \ldots & \dfrac{\partial^2 f}{\partial x_1 \partial x_n} \\
-\dfrac{\partial^2 f}{\partial x_2 \partial x_1} & \dfrac{\partial^2 f}{\partial x_2^2} & \ldots & \dfrac{\partial^2 f}{\partial x_2 \partial x_n} \\
-\vdots & \vdots & \ddots & \vdots \\
-\dfrac{\partial^2 f}{\partial x_n \partial x_1} & \dfrac{\partial^2 f}{\partial x_n \partial x_2} & \ldots & \dfrac{\partial^2 f}{\partial x_n^2}
-\end{bmatrix}
-$$
-
+Given a nonlinear, continuous and smooth function $$f:\;\mathbb{R}\to \mathbb{R}$$ and the optimization problem $$f(\boldsymbol{x}^*) = \underset{\boldsymbol{x \in S}}{\mathrm{min}}\hspace{1mm}f(\boldsymbol{x})$$, there are two types of methods which we'll cover in this class:
+* Derivative-free methods: Only requiring the evaluation of $$f(\boldsymbol{x})$$ on a set of $$x \in S$$. In particular, we cover the **Golden Section Search** method.
+* Second-derivative methods: Requiring the evaluation of $$f(\boldsymbol{x})$$, $$f'(\boldsymbol{x})$$, and $$f''(\boldsymbol{x})$$ and on a set of $$x \in S$$. In particular, we cover **Newton's Method for 1-D**.
 
 ## Criteria for 1-D Local Minima
 
@@ -283,7 +236,7 @@ being a local minimum.
 
 ### Example: Find All Stationary Points of a 1-D Function
 Consider the function
-$$f(x_1, x_2) = 2x_1^3 + 4x_2^2 + 2x_2 - 24x_1$$
+$$f(x) = \frac{x^4}{4} - \frac{x^3}{3} - 11x^2 + 40x$$
 
 Find the stationary points and check the sufficient conditions.
 
@@ -306,116 +259,11 @@ Now, observe that:<br>
 (3) \(f''(x_3) = 3 \times (4)^2 - 2 \times 4 - 22 \gt 0\) \(\rightarrow\) \(\bf{x_3 = 4}\) is a local \(\textbf{minimum}\). <br>
 </details>
 
-## Criteria for N-D Local Minima
-
-In the case of n-dimensional optimization, we need to find the minima of a continuous and smooth function $$f:\;\mathbb{R^n} \to \mathbb{R}$$. We can tell if a point $$x^* \in S$$ is a local minimum by considering the values of the gradients and Hessians. Notice that N-D gradient is equivalent to 1-D derivative, and the Hessian matrix has following properties at points of zero gradient:
-
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">\( H_f(x^*) \)</th>
-      <th scope="col">Eigenvalues of \( H_f(x^*) \)</th>
-      <th scope="col">Critical Point \( x^* \)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Positive Definite</td>
-      <td>All Positive</td>
-      <td>Minimizer</td>
-    </tr>
-    <tr>
-      <td>Negative Definite</td>
-      <td>All Negative</td>
-      <td>Maximizer</td>
-    </tr>
-    <tr>
-      <td>Indefinite</td>
-      <td>Indefinite</td>
-      <td>Saddle Point</td>
-    </tr>
-  </tbody>
-</table> 
-
-Therefore, below are the conditions to find $$\boldsymbol{x}^*$$ such that $$f(\boldsymbol{x}^*) = \underset{\boldsymbol{x}}{\mathrm{min}}\hspace{1mm}f(\boldsymbol{x})$$:
-
-1. Necessary condition:
-   the gradient $$\nabla f(\boldsymbol{x}^*) = \boldsymbol{0}$$
-2. Sufficient condition:
-   the gradient $$\nabla f(\boldsymbol{x}^*) = \boldsymbol{0}$$
-   and the Hessian matrix $$H_f(\boldsymbol{x^*})$$ is positive definite.
-
-### Example: Find All Stationary Points of a N-D Function
-Consider the function
-$$f(x) = \frac{x^4}{4} - \frac{x^3}{3} - 11x^2 + 40x$$
-
-Find the stationary points and check the sufficient conditions.
-
-<details>
-    <summary><strong>Answer</strong></summary>
-
-The gradient is as follows:
-
-\[
-\nabla f(\boldsymbol{x}) = \text{\small gradient} (x) = 
-\begin{bmatrix}
-6x_1^2 - 24 \\
-8x_2 + 2 \\
-\end{bmatrix}
-\]
-
-Solving for  \(\nabla f = 0 \text{  gives  }6x_1^2 - 24 = 0\text{  and  }8x_2 + 2 = 0\text{,  so  }x_1 = \pm 2 \text{  and  } x_2 = -0.25\). <br>
-
-The Hessian matrix is as follows:
-
-\[
-{\bf H}_f(\boldsymbol{x}) =
-\begin{bmatrix}
-12x_1 & 0\\
-0 & 8 \\
-\end{bmatrix}
-\]
-
-\(\textbf{Situation 1:}\) <br>
-\[
-x^* = 
-\begin{bmatrix}
-2 \\
--0.25 \\
-\end{bmatrix} \rightarrow {\bf H}_f =
-\begin{bmatrix}
-24 & 0 \\
-0 & 8 \\
-\end{bmatrix}
-\]
-The Hessian is positive definite (contains only positive eigenvalues), so that \(x^* = 
-\begin{bmatrix}
-2 \\
--0.25 \\
-\end{bmatrix}\) is a \(\textbf{local minimum}\). <br>
-
-\(\textbf{Situation 2:}\) <br>
-\[
-x^* = 
-\begin{bmatrix}
--2 \\
--0.25 \\
-\end{bmatrix} \rightarrow {\bf H}_f =
-\begin{bmatrix}
--24 & 0 \\
-0 & 8 \\
-\end{bmatrix}
-\]
-The Hessian is indefinite, so that \(x^* = 
-\begin{bmatrix}
-2 \\
--0.25 \\
-\end{bmatrix}\) is a \(\textbf{saddle point}\). <br>
-</details>
-
 ## Unimodal Functions
 
-A function $$f:\mathbb{R}\to \mathbb{R}$$ is unimodal on an interval $$[a,b]$$ if this function has a unique (global) minimum on that interval $$[a,b]$$
+Let us consider a special family of functions that makes the optimization task easier:
+
+A function $$f:\mathbb{R}\to \mathbb{R}$$ is **unimodal** on an interval $$[a,b]$$ if this function has a unique (global) minimum on that interval $$[a,b]$$
 
 More rigidly, a 1-dimensional function $$f: S\to\mathbb{R}$$, is said to be unimodal on an interval $$[a,b]$$ if there is a unique $$\bf{x}^* \in [a, b]$$ such that $$f(\bf{x}^*)$$ is the minimum in $$[a, b]$$, and that for all $$x_1, x_2 \in [a, b]$$ where $$x_1 \lt x_2$$, the following two properties hold: 
 
@@ -577,6 +425,178 @@ Hence
 
 Finally, apply Newton's method formula:
 \[ x_1 = 2 - \frac{61}{52} \approx 0.827 \]
+</details>
+
+## Definiton of Gradient and Hessian Matrix
+
+Now let us revise some key concepts useful in solving N-dimensional optimization problems:
+
+Given  $$f:\mathbb{R}^n\to \mathbb{R}$$ we define the gradient function $$\nabla
+f: \mathbb{R}^n\to\mathbb{R}^n$$ as:
+
+$$ \nabla f(\boldsymbol{x}) =
+\begin{bmatrix}
+\dfrac{\partial f}{\partial x_1} \\
+\dfrac{\partial f}{\partial x_2} \\
+\vdots \\
+\dfrac{\partial f}{\partial x_n} \\
+\end{bmatrix} $$
+
+Given  $$f:\mathbb{R}^n\to \mathbb{R}$$ we define the Hessian matrix $${\bf H}_f:
+\mathbb{R}^n\to\mathbb{R}^{n\times n}$$ as:
+
+$${\bf H}_f(\boldsymbol{x}) = 
+\begin{bmatrix}
+\dfrac{\partial^2 f}{\partial x_1^2} & \dfrac{\partial^2 f}{\partial x_1 \partial x_2} & \ldots & \dfrac{\partial^2 f}{\partial x_1 \partial x_n} \\
+\dfrac{\partial^2 f}{\partial x_2 \partial x_1} & \dfrac{\partial^2 f}{\partial x_2^2} & \ldots & \dfrac{\partial^2 f}{\partial x_2 \partial x_n} \\
+\vdots & \vdots & \ddots & \vdots \\
+\dfrac{\partial^2 f}{\partial x_n \partial x_1} & \dfrac{\partial^2 f}{\partial x_n \partial x_2} & \ldots & \dfrac{\partial^2 f}{\partial x_n^2}
+\end{bmatrix}$$
+
+
+## Two Types of Methods to Resolve N-Dimensional Optimization Problems
+
+Given a nonlinear, continuous and smooth function $$f:\;\mathbb{R}^n\to \mathbb{R}$$ and the optimization problem $$f(\boldsymbol{x}^*) = \underset{\boldsymbol{x \in S}}{\mathrm{min}}\hspace{1mm}f(\boldsymbol{x})$$, there are two types of methods which we'll cover in this class:
+* Gradient (first-derivative) methods: Requiring the evaluation of $$f(\boldsymbol{x})$$ and $$\nabla f(\boldsymbol{x})$$ on a set of $$x \in S$$. In particular, we cover the **Steepest Descent** method.
+* Hessian (second-derivative) methods: Requiring the evaluation of $$f(\boldsymbol{x})$$, $$\nabla f(\boldsymbol{x})$$, and $${\nabla}^2 f(\boldsymbol{x})$$ and on a set of $$x \in S$$. In particular, we cover **Newton's Method for N-D**.
+
+where:
+
+$$
+\boldsymbol{x} = \begin{bmatrix}x_1, x_2, \ldots, x_n\end{bmatrix}
+$$
+
+$$
+f(\boldsymbol{x}) = f(\begin{bmatrix}x_1, x_2, \ldots, x_n\end{bmatrix})
+$$
+
+$$
+\nabla f(\boldsymbol{x}) = \text{\small gradient} (x) = 
+\begin{bmatrix}
+\dfrac{\partial f}{\partial x_1} \\
+\dfrac{\partial f}{\partial x_2} \\
+\vdots \\
+\dfrac{\partial f}{\partial x_n} \\
+\end{bmatrix}
+$$
+
+$$
+{\nabla}^2 f(\boldsymbol{x}) = {\bf H}_f(\boldsymbol{x}) =
+\begin{bmatrix}
+\dfrac{\partial^2 f}{\partial x_1^2} & \dfrac{\partial^2 f}{\partial x_1 \partial x_2} & \ldots & \dfrac{\partial^2 f}{\partial x_1 \partial x_n} \\
+\dfrac{\partial^2 f}{\partial x_2 \partial x_1} & \dfrac{\partial^2 f}{\partial x_2^2} & \ldots & \dfrac{\partial^2 f}{\partial x_2 \partial x_n} \\
+\vdots & \vdots & \ddots & \vdots \\
+\dfrac{\partial^2 f}{\partial x_n \partial x_1} & \dfrac{\partial^2 f}{\partial x_n \partial x_2} & \ldots & \dfrac{\partial^2 f}{\partial x_n^2}
+\end{bmatrix}
+$$
+
+
+## Criteria for N-D Local Minima
+
+In the case of n-dimensional optimization, we need to find the minima of a continuous and smooth function $$f:\;\mathbb{R^n} \to \mathbb{R}$$. We can tell if a point $$x^* \in S$$ is a local minimum by considering the values of the gradients and Hessians. Notice that N-D gradient is equivalent to 1-D derivative, and the Hessian matrix has following properties at points of zero gradient:
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">\( H_f(x^*) \)</th>
+      <th scope="col">Eigenvalues of \( H_f(x^*) \)</th>
+      <th scope="col">Critical Point \( x^* \)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Positive Definite</td>
+      <td>All Positive</td>
+      <td>Minimizer</td>
+    </tr>
+    <tr>
+      <td>Negative Definite</td>
+      <td>All Negative</td>
+      <td>Maximizer</td>
+    </tr>
+    <tr>
+      <td>Indefinite</td>
+      <td>Indefinite</td>
+      <td>Saddle Point</td>
+    </tr>
+  </tbody>
+</table> 
+
+Therefore, below are the conditions to find $$\boldsymbol{x}^*$$ such that $$f(\boldsymbol{x}^*) = \underset{\boldsymbol{x}}{\mathrm{min}}\hspace{1mm}f(\boldsymbol{x})$$:
+
+1. Necessary condition:
+   the gradient $$\nabla f(\boldsymbol{x}^*) = \boldsymbol{0}$$
+2. Sufficient condition:
+   the gradient $$\nabla f(\boldsymbol{x}^*) = \boldsymbol{0}$$
+   and the Hessian matrix $$H_f(\boldsymbol{x^*})$$ is positive definite.
+
+### Example: Find All Stationary Points of a N-D Function
+Consider the function
+
+$$f(x_1, x_2) = 2x_1^3 + 4x_2^2 + 2x_2 - 24x_1$$
+
+Find the stationary points and check the sufficient conditions.
+
+<details>
+    <summary><strong>Answer</strong></summary>
+
+The gradient is as follows:
+
+\[
+\nabla f(\boldsymbol{x}) = \text{\small gradient} (x) = 
+\begin{bmatrix}
+6x_1^2 - 24 \\
+8x_2 + 2 \\
+\end{bmatrix}
+\]
+
+Solving for  \(\nabla f = 0 \text{  gives  }6x_1^2 - 24 = 0\text{  and  }8x_2 + 2 = 0\text{,  so  }x_1 = \pm 2 \text{  and  } x_2 = -0.25\). <br>
+
+The Hessian matrix is as follows:
+
+\[
+{\bf H}_f(\boldsymbol{x}) =
+\begin{bmatrix}
+12x_1 & 0\\
+0 & 8 \\
+\end{bmatrix}
+\]
+
+\(\textbf{Situation 1:}\) <br>
+\[
+x^* = 
+\begin{bmatrix}
+2 \\
+-0.25 \\
+\end{bmatrix} \rightarrow {\bf H}_f =
+\begin{bmatrix}
+24 & 0 \\
+0 & 8 \\
+\end{bmatrix}
+\]
+The Hessian is positive definite (contains only positive eigenvalues), so that \(x^* = 
+\begin{bmatrix}
+2 \\
+-0.25 \\
+\end{bmatrix}\) is a \(\textbf{local minimum}\). <br>
+
+\(\textbf{Situation 2:}\) <br>
+\[
+x^* = 
+\begin{bmatrix}
+-2 \\
+-0.25 \\
+\end{bmatrix} \rightarrow {\bf H}_f =
+\begin{bmatrix}
+-24 & 0 \\
+0 & 8 \\
+\end{bmatrix}
+\]
+The Hessian is indefinite, so that \(x^* = 
+\begin{bmatrix}
+2 \\
+-0.25 \\
+\end{bmatrix}\) is a \(\textbf{saddle point}\). <br>
 </details>
 
 
