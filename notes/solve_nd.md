@@ -98,14 +98,15 @@ When $$C$$ is close to 1 convergence is slow.
 
 What is the convergence rate of **Power Iteration**?
 
-<details>
-    <summary><strong>Answer</strong></summary>
+<details markdown="1">
+    
+<summary><strong>Answer</strong></summary>
 
 Recall from the power iteration method
 
 $$\lim_{k\to\infty} \frac{\|e_{k + 1}\|}{\|e_{k}\|^{\mathbf 1}} = |\frac{\lambda_{2}} {\lambda_{1}}| = C$$
 
-We see that when <strong>r</strong> = 1, we get a constant for the ratio between two consecutive iterations. Therefore power iteration has linear convergence.
+We see that when $${\mathbf r} = 1$$, we get a constant for the ratio between two consecutive iterations. Therefore power iteration has linear convergence.
 
 
 </details>
@@ -168,18 +169,14 @@ $$x^2$$, as it never crosses the x-axis and becomes negative.
 
 $$f(x) = x^3 - x - 1$$
 
-<details>
-    <summary><strong>Answer</strong></summary>
+<details markdown="1">
+    
+<summary><strong>Answer</strong></summary>
 
 <p align=center> <img src="{{ site.baseurl }}/assets/img/figs/cubic.png" width=500 /> </p>
 
-From the graph above, we can see that the function has a root somewhere between 1 and 2.
-It is difficult to tell exactly what the root is, but we can use the bisection
-method to approximate it. Specifically, we can set 
-$$\begin{flalign*}
-a = 1\\
-b = 2
-\end{flalign*}$$
+From the graph above, we can see that $$f(x)$$ has a root somewhere between 1 and 2.
+It is difficult to tell exactly what the root is, but we can use the bisection method to approximate it. Specifically, we can set $$a = 1$$ and $$b = 2$$.
 
 <br>
 <br>
@@ -191,8 +188,7 @@ $$\begin{flalign*}
 &c = \frac{a + b}{2} = \frac{3}{2} = 1.5 \hspace{3.67cm} f(c) = f(1.5) = 1.5^3 - 1.5 - 1 = 0.875&
 \end{flalign*}$$
 
-Since f(b) and f(c) are both positive, we will replace b with c and
-further narrow our interval.
+Since $$f(b)$$ and $$f(c)$$ are both positive, we will replace $$b$$ with $$c$$ and further narrow our interval.
 
 <br>
 <br>
@@ -205,11 +201,9 @@ $$\begin{flalign*}
 \end{flalign*}$$
 
 
-Since f(a) and f(c) are both negative, we will replace a with c and
-further narrow our interval.
+Since $$f(a)$$ and $$f(c)$$ are both negative, we will replace $$a$$ with $$c$$ and further narrow our interval.
 
-Note that as described above, we didn't need to recalculate f(a) or f(b)
-as we had already calculated them during the previous iteration.
+Note that as described above, we didn't need to recalculate $$f(a)$$ or $$f(b)$$ as we had already calculated them during the previous iteration.
 Reusing these values can be a significant cost savings.
 
 <br>
@@ -222,9 +216,9 @@ $$\begin{flalign*}
 &\hspace{0.4cm}c = \frac{a + b}{2} = \frac{1.25 + 1.5}{2} = 1.375 \hspace{0.9cm} f(c) = f(1.375) = 1.375^3 - 1.375 - 1 = 0.224609375&
 \end{flalign*}$$
 
-Since f(b) and f(c) are both positive, we will replace b with c and
-further narrow our interval.<br>
+Since $$f(b)$$ and $$f(c)$$ are both positive, we will replace $$b$$ with $$c$$ and further narrow our interval.
 
+<br>
 <br>
 <strong>...</strong>
 <br>
@@ -233,22 +227,22 @@ further narrow our interval.<br>
 <br>
 <br>
 When running the code for bisection method given below, the resulting
-approximate root determined is 1.324717957244502.  With bisection,
+approximate root determined is $$1.324717957244502$$.  With bisection,
 we can approximate the root to a desired tolerance (the value above is
 for the default tolerances).
 <br>
 <br> <strong> Code </strong> <br>
 
-The following Python code calls SciPy's <code>bisect</code> method:
+The following Python code calls SciPy's `bisect` method:
 
-<pre><code>
+```python
 import scipy.optimize as opt
 
 def f(x):
     return x**3 - x - 1
 
 root = opt.bisect(f, a=1, b=2)
-</code></pre>
+```
 
 </details>
 
@@ -314,12 +308,13 @@ f(x)  &= x^3 - x - 1 \\
 f'(x) &= 3x^2 - 1
 \end{align*}$$
 
-<details>
-    <summary><strong>Answer</strong></summary>
+<details markdown="1">
+    
+<summary><strong>Answer</strong></summary>
 
 <p align=center> <img src="{{ site.baseurl }}/assets/img/figs/cubic.png" width=500 /> </p>
 From the graph above, we can see that the root is somewhere near
-$$x = 1.$$ We will use x<sub>0</sub> as our starting position.
+$$x = 1$$. We will use $$x_0$$ as our starting position.
 
 <br>
 <br>
@@ -366,14 +361,14 @@ faster than the Bisection Method.
 <br>
 <br>
 When running the code for Newton's method given below, the resulting
-approximate root determined is 1.324717957244746.
+approximate root determined is $$1.324717957244746$$.
 <br>
 <br>
 <strong> Code </strong> <br>
 
-The following Python code calls SciPy's <code>newton</code> method:
+The following Python code calls SciPy's `newton` method:
 
-<pre><code>
+```python
 import scipy.optimize as opt
 
 def f(x):
@@ -383,7 +378,7 @@ def fprime(x):
     return 3 * x**2 - 1
 
 root = opt.newton(f, x0=1, fprime=fprime)
-</code></pre>
+```
 
 
 </details>
@@ -431,14 +426,13 @@ Newton's Method. It also requires two starting guesses near the root.
 
 $$f(x) = x^3 - x - 1$$
 
-<details>
-    <summary><strong>Answer</strong></summary>
+<details markdown="1">
+    
+<summary><strong>Answer</strong></summary>
 
 <p align=center> <img src="{{ site.baseurl }}/assets/img/figs/cubic.png" width=500 /> </p>
 
-Let's start with 
-$$x_0 = 1$$ 
-$$x_{-1} = 2$$
+Let's start with $$x_0 = 1$$ and $$x_{-1} = 2$$.
 
 <br>
 <strong> Iteration 1 </strong>
@@ -447,7 +441,7 @@ $$x_{-1} = 2$$
 First, find an approximate for the derivative (slope):
 
 $$\begin{flalign*}
-\hspace{2cm}f'(x_0) &\approx \frac{f(x_0) - f(x_{-1})}{x_0 - x_{-1}} \\
+\hspace{0.5cm}f'(x_0) &\approx \frac{f(x_0) - f(x_{-1})}{x_0 - x_{-1}} \\
     &= \frac{f(1) - f(2)}{1 - 2} &\\
     &= \frac{(1^3 - 1 - 1) - (2^3 - 2 - 1)}{1 - 2} \\
     &= \frac{(-1) - (5)}{1 - 2} \\
@@ -457,7 +451,7 @@ $$\begin{flalign*}
 Then, use this for Newton's Method:
 
 $$\begin{flalign*}
-\hspace{2cm}x_1 &= x_0 - \frac{f(x_0)}{f'(x_0)} \\
+\hspace{0.5cm}x_1 &= x_0 - \frac{f(x_0)}{f'(x_0)} \\
     &= 1   - \frac{f(1)}{f'(1)} &\\
     &= 1   - \frac{1^3 - 1 - 1}{6} \\
     &= 1   + \frac{1}{6} \\
@@ -468,7 +462,7 @@ $$\begin{flalign*}
 <strong> Iteration 2 </strong>
 
 $$\begin{flalign*}
-\hspace{2cm}f'(x_1) &\approx \frac{f(x_1) - f(x_0)}{x_1 - x_0} \\
+\hspace{0.5cm}f'(x_1) &\approx \frac{f(x_1) - f(x_0)}{x_1 - x_0} \\
     &= \frac{f(1.1666666666666667) - f(1)}{1.1666666666666667 - 1} &\\
     &= \frac{(1.1666666666666667^3 - 1.1666666666666667 - 1) - (1^3 - 1 - 1)}{1.1666666666666667 - 1} \\
     &= \frac{(-0.5787037037037035) - (-1)}{1.1666666666666667 - 1} \\
@@ -476,7 +470,7 @@ $$\begin{flalign*}
 \end{flalign*}$$
 
 $$\begin{flalign*}
-\hspace{2cm}x_2 &= x_1 - \frac{f(x_1)}{f'(x_1)} \\
+\hspace{0.5cm}x_2 &= x_1 - \frac{f(x_1)}{f'(x_1)} \\
     &= 1.1666666666666667 - \frac{f(1.1666666666666667)}{f'(1.1666666666666667)} &\\
     &= 1.1666666666666667 - \frac{1.1666666666666667^3 - 1.1666666666666667 - 1}{2.5277777777777777} \\
     &= 1.1666666666666667 - \frac{-0.5787037037037035}{2.5277777777777777} \\
@@ -487,7 +481,7 @@ $$\begin{flalign*}
 <strong> Iteration 3 </strong>
 
 $$\begin{flalign*}
-\hspace{2cm}f'(x_2) &\approx \frac{f(x_2) - f(x_1)}{x_2 - x_1} \\
+\hspace{0.5cm}f'(x_2) &\approx \frac{f(x_2) - f(x_1)}{x_2 - x_1} \\
     &= \frac{f(1.3956043956043955) - f(1.1666666666666667)}{1.3956043956043955 - 1.1666666666666667} &\\
     &= \frac{(1.3956043956043955^3 - 1.3956043956043955 - 1) - (1.1666666666666667^3 - 1.1666666666666667 - 1)}{1.3956043956043955 - 1.1666666666666667} \\
     &= \frac{(0.3226305152401032) - (-0.5787037037037035)}{1.3956043956043955 - 1.1666666666666667} \\
@@ -495,7 +489,7 @@ $$\begin{flalign*}
 \end{flalign*}$$
 
 $$\begin{flalign*}
-\hspace{2cm}x_3 &= x_2 - \frac{f(x_2)}{f'(x_2)} \\
+\hspace{0.5cm}x_3 &= x_2 - \frac{f(x_2)}{f'(x_2)} \\
     &= 1.3956043956043955 - \frac{f(1.3956043956043955)}{f'(1.3956043956043955)} &\\
     &= 1.3956043956043955 - \frac{1.3956043956043955^3 - 1.3956043956043955 - 1}{3.9370278683465503} \\
     &= 1.3956043956043955 - \frac{0.3226305152401032}{3.9370278683465503} \\
@@ -511,25 +505,25 @@ $$\begin{flalign*}
 <br>
 <br>
 When running the code for secant method given below, the resulting
-approximate root determined is 1.324717957244753.
+approximate root determined is $$1.324717957244753$$.
 
 <br>
 <br>
 <strong> Code </strong>
 <br>
 <br>
-SciPy's <code>newton</code> method serves double-duty. If given a function f and a
-first derivative f', it will use Newton's Method. If it is not given a
+SciPy's `newton` method serves double-duty. If given a function $$f$$ and a
+first derivative $$f'$$, it will use Newton's Method. If it is not given a
 derivative, it will instead use the Secant Method to approximate it:
 
-<pre><code>
+```python
 import scipy.optimize as opt
 
 def f(x):
     return x**3 - x - 1
 
 root = opt.newton(f, x0=1)
-</code></pre>
+```
 </details>
 
 ### 1D Summary
@@ -620,8 +614,9 @@ x^2 + 4y^2 - 4
 \end{bmatrix}$$
 
 
-<details>
-    <summary><strong>Answer</strong></summary>
+<details markdown="1">
+    
+<summary><strong>Answer</strong></summary>
 
 The corresponding Jacobian and inverse Jacobian are:
 
@@ -635,7 +630,7 @@ $${\bf J}_f^{-1} = \frac{1}{x - 2y} \begin{bmatrix}
 \frac{x}{2} & - \frac{1}{4}
 \end{bmatrix}$$
 
-In this example, as the Jacobian is a 2 x 2 matrix with
+In this example, as the Jacobian is a $$2 \times 2$$ matrix with
 a simple inverse, we work explicitly with the inverse, even though
 we would not explicitly compute the inverse for a real problem.
 
@@ -684,20 +679,15 @@ $$\begin{flalign*}
 <br>
 <br>
 <strong> Iteration n </strong>
-<br>
-<br>
 
-
-<br>
-<br>
-<strong> Code </strong>
-<br>
-<br>
 When running the code for Newton's method given below, the resulting
 approximate root determined is
 $$\begin{bmatrix}-2.74060567 \cdot 10^{-16} & 1\end{bmatrix}^\top.$$
+<br>
+<br>
+<strong> Code </strong>
 
-<pre><code>
+```python
 import numpy as np
 import scipy.optimize as opt
 
@@ -717,7 +707,7 @@ def Jf(xvec):
 
 sol = opt.root(f, x0=[1, 1], jac=Jf)
 root = sol.x
-</code></pre>
+```
 </details>
 ## Review Questions
 
