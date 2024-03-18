@@ -2,6 +2,30 @@
 title: Solving Nonlinear Equations
 description: Finding the root
 sort: 15
+author:
+  - CS 357 Course Staff
+changelog:
+  - 
+    name: Apramey Hosahalli
+    netid: apramey2
+    date: 2024-02-24
+    message: aligned equations, added description of convergence from lecture, and added summary image 
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2017-12-02
+    message: adds review questions, adds a little more cost information, a few other minor fixes
+  - 
+    name: Adam Stewart
+    netid: adamjs5@illinois.edu
+    date: 2017-12-25
+    message: first complete draft
+  - 
+    name: Luke Olson
+    netid: lukeo
+    date: 2017-10-17
+    message: outline
+
 ---
 
 
@@ -11,8 +35,8 @@ sort: 15
 
 ## Learning objectives
 
-- Set up a problem with one parameter
-- Solve a problem with one parameter
+- Evaluate the bisection, newton, and secant methods to solve nonlinear equations in 1D
+- Apply Newton's method to solve a nonlinear system of equations
 
 ## Root of a Function
 
@@ -30,17 +54,8 @@ $$\tilde{f}(x) = f(x) - y = 0$$
 
 The new function $$\tilde{f}(x)$$ has a root at the solution to the original equation $$f(x) = y$$.
 
-## Definition of Jacobian Matrix
 
-Given $$\boldsymbol{f} : \mathbb{R}^n \to \mathbb{R}^n$$ we define the Jacobian matrix $${\bf J}_f$$ as:
-
-$${\bf J}_f(\boldsymbol{x}) = \begin{bmatrix}
-\frac{\partial f_1}{\partial x_1} & \ldots & \frac{\partial f_1}{\partial x_n} \\
-\vdots                            & \ddots & \vdots                            \\
-\frac{\partial f_n}{\partial x_1} & \ldots & \frac{\partial f_n}{\partial x_n}
-\end{bmatrix}$$
-
-## Solving One Equation
+## Nonlinear Equations in 1D
 
 Linear functions are trivial to solve, as are quadratic functions if you have
 the quadratic formula memorized. However, polynomials of higher degree and
@@ -74,6 +89,41 @@ With this algorithm we successively half the length of the interval known to
 contain the root each time.  We can repeat this process until the length of the
 interval is less than the tolerance to which we want to know the root.
 
+
+#### Error
+
+The bisection method does not estimate $$x_{k}$$, the approximation of the desired root $$x$$. It instead finds an interval (smaller than a given tolerance), that contains the root.
+
+Therefore, the error at iteration k is defined to be the length of the interval at k iterations
+
+
+#### Convergence
+
+An iterative method converges with rate $$\mathbf r$$ if:
+
+$$\lim_{k\to\infty} \frac{\|e_{k + 1}\|}{\|e_{k}\|^{\mathbf r}} = C, \quad 0 < C < \infty$$
+
+$$\begin{eqnarray}
+\mathbf{r} &=& 1: linear\ convergence\\
+\\
+\mathbf{r} &>& 1: superlinear\ convergence\\
+\\
+\mathbf{r} &=& 2: quadratic\ convergence\\
+\end{eqnarray}$$ 
+
+
+**Linear convergence** gains a constant number of accurate digits each step and C < 1 matters! 
+
+**Quadratic convergence** doubles the number of accurate digits in each step. However it only starts making sense once $$\|e^k\|$$ is small, and C does not matter much.
+
+
+
+Considering the bisection method, the length of the interval at iteration k is $$\frac{(b - a)}{2^k} $$.
+
+$$\lim_{k\to\infty} \frac{\|e_{k + 1}\|}{\|e_{k}\|^{\mathbf r}} = \lim_{k\to\infty} \frac{\|\frac{(b - a)}{2^{k + 1}}\|}{\|\frac{(b - a)}{2^k}\|}  = 0.5$$
+
+Which gives us linear convergence, with a constant of $$\frac{1}{2}$$.
+
 #### Computational Cost
 
 Conceptually bisection method uses 2 function evaluations
@@ -83,10 +133,6 @@ $$f(b)$$ was computed during the previous iteration.  Therefore,
 bisection method requires only one new function evaluation per iteration.
 Depending on how costly the function is to evaluate, this can be a significant
 cost savings.
-
-#### Convergence
-
-Bisection method has linear convergence, with a constant of 1/2.
 
 #### Drawbacks
 
@@ -110,34 +156,24 @@ method to approximate it. Specifically, we can set $$a = 1$$ and $$b = 2$$.
 
 ##### Iteration 1
 
-$$\begin{align*}
-a &= 1 \\
-b &= 2 \\
-c &= \frac{a + b}{2} = \frac{3}{2} = 1.5
-\end{align*}$$
 
-$$\begin{align*}
-f(a) &= f(1)   &= 1^3   - 1   - 1 &= -1    \\
-f(b) &= f(2)   &= 2^3   - 2   - 1 &= 5     \\
-f(c) &= f(1.5) &= 1.5^3 - 1.5 - 1 &= 0.875
-\end{align*}$$
+$$\begin{flalign*}
+& a = 1 \hspace{5.5cm} f(a) = f(1) = 1^3 - 1 - 1 = -1 &\\
+& b = 2 \hspace{5.5cm} f(b) = f(2) = 2^3 - 2 - 1 = 5 & \\
+& c = \frac{a + b}{2} = \frac{3}{2} = 1.5 \hspace{2.1cm} f(c) = f(1.5) = 1.5^3 - 1.5 - 1 = 0.875&
+\end{flalign*}$$
 
 Since $$f(b)$$ and $$f(c)$$ are both positive, we will replace $$b$$ with $$c$$ and
 further narrow our interval.
 
 ##### Iteration 2
 
-$$\begin{align*}
-a &= 1 \\
-b &= 1.5 \\
-c &= \frac{a + b}{2} = \frac{2.5}{2} = 1.25
-\end{align*}$$
+$$\begin{flalign*}
+&a = 1 \hspace{5.5cm} f(a) = f(1) = -1&\\
+&b = 1.5 \hspace{5.1cm} f(b) = f(1.5)  = 0.875&\\
+&c = \frac{a + b}{2} = \frac{2.5}{2} = 1.25 \hspace{1.45cm} f(c) = f(1.25) = 1.25^3 - 1.25 - 1 = -0.296875&
+\end{flalign*}$$
 
-$$\begin{align*}
-f(a) &= f(1)    &= -1    \\
-f(b) &= f(1.5)  &= 0.875 \\
-f(c) &= f(1.25) &= 1.25^3 - 1.25 - 1 = -0.296875
-\end{align*}$$
 
 Since $$f(a)$$ and $$f(c)$$ are both negative, we will replace $$a$$ with $$c$$ and
 further narrow our interval.
@@ -148,17 +184,11 @@ Reusing these values can be a significant cost savings.
 
 ##### Iteration 3
 
-$$\begin{align*}
-a &= 1.25 \\
-b &= 1.5 \\
-c &= \frac{a + b}{2} = \frac{1.25 + 1.5}{2} = 1.375
-\end{align*}$$
-
-$$\begin{align*}
-f(a) &= f(1.25)  &= -0.296875 \\
-f(b) &= f(1.5)   &= 0.875     \\
-f(c) &= f(1.375) &= 1.375^3 - 1.375 - 1 = 0.224609375
-\end{align*}$$
+$$\begin{flalign*}
+&a = 1.25 \hspace{6.5cm} f(a) = f(1.25)  = -0.296875&\\
+&b = 1.5 \hspace{6.8cm} f(b) = f(1.5)   = 0.875&\\
+&c = \frac{a + b}{2} = \frac{1.25 + 1.5}{2} = 1.375 \hspace{1.5cm} f(c) = f(1.375) = 1.375^3 - 1.375 - 1 = 0.224609375&
+\end{flalign*}$$
 
 Since $$f(b)$$ and $$f(c)$$ are both positive, we will replace $$b$$ with $$c$$ and
 further narrow our interval.
@@ -243,33 +273,33 @@ f(x)  &= x^3 - x - 1 \\
 f'(x) &= 3x^2 - 1
 \end{align*}$$
 
-##### Iteration 1
-
 From the graph above, we can see that the root is somewhere near
 $$x = 1$$. We will use this as our starting position, $$x_0$$.
 
-$$\begin{align*}
-x_1 &= x_0 - \frac{f(x_0)}{f'(x_0)} \\
-    &= 1   - \frac{f(1)}{f'(1)} \\
+##### Iteration 1
+
+$$\begin{flalign*}
+\hspace{2cm} x_1 &= x_0 - \frac{f(x_0)}{f'(x_0)} \\
+    &= 1   - \frac{f(1)}{f'(1)} &\\
     &= 1   - \frac{1^3 - 1 - 1}{3 \cdot 1^2 - 1} \\
     &= 1   + \frac{1}{2} \\
     &= 1.5
-\end{align*}$$
+\end{flalign*}$$
 
 ##### Iteration 2
 
-$$\begin{align*}
-x_2 &= x_1 - \frac{f(x_1)}{f'(x_1)} \\
-    &= 1.5 - \frac{f(1.5)}{f'(1.5)} \\
+$$\begin{flalign*}
+\hspace{2cm} x_2 &= x_1 - \frac{f(x_1)}{f'(x_1)} \\
+    &= 1.5 - \frac{f(1.5)}{f'(1.5)} &\\
     &= 1.5 - \frac{1.5^3 - 1.5 - 1}{3 \cdot 1.5^2 - 1} \\
     &= 1.5 - \frac{0.875}{5.75} \\
     &= 1.3478260869565217
-\end{align*}$$
+\end{flalign*}$$
 
 ##### Iteration 3
 
 $$\begin{align*}
-x_3 &= x_2 - \frac{f(x_2)}{f'(x_2)} \\
+\hspace{1cm} x_3 &= x_2 - \frac{f(x_2)}{f'(x_2)} \\
     &= 1.3478260869565217 - \frac{f(1.3478260869565217)}{f'(1.3478260869565217)} \\
     &= 1.3478260869565217 - \frac{1.3478260869565217^3 - 1.3478260869565217 - 1}{3 \cdot 1.3478260869565217^2 - 1} \\
     &= 1.3478260869565217 - \frac{0.10068217309114824}{4.449905482041588} \\
@@ -426,8 +456,10 @@ def f(x):
 
 root = opt.newton(f, x0=1)
 ```
-
-## Solving Many Equations
+<center>
+<img src="../assets/img/figs/1Dsummaries.png" alt="1D methods" class="center"/>
+</center>
+## Nonlinear System of Equations
 
 Similar to root-finding in 1 dimension, we can also perform root-finding
 for multiple equations in $$n$$ dimensions. Mathematically, we are trying to
@@ -455,6 +487,16 @@ We can think of each equation as a function that describes a surface.
 We are looking for vectors that describe the intersection of these
 surfaces.
 
+### Definition of Jacobian Matrix
+
+Given $$\boldsymbol{f} : \mathbb{R}^n \to \mathbb{R}^n$$ we define the Jacobian matrix $${\bf J}_f$$ as:
+
+$${\bf J}_f(\boldsymbol{x}) = \begin{bmatrix}
+\frac{\partial f_1}{\partial x_1} & \ldots & \frac{\partial f_1}{\partial x_n} \\
+\vdots                            & \ddots & \vdots                            \\
+\frac{\partial f_n}{\partial x_1} & \ldots & \frac{\partial f_n}{\partial x_n}
+\end{bmatrix}$$
+
 ### Newton's Method
 
 The multi-dimensional equivalent of Newton's Method involves approximating
@@ -479,7 +521,7 @@ instead solve the linear system in $$(1)$$ to determine the step.
 Similar to the way we solved for $$x_{k+1}$$ in 1 dimension, we can solve for:
 
 $$\boldsymbol{x_{k+1}} = \boldsymbol{x_k} + \boldsymbol{s_k}$$
-where $\boldsymbol{s_k}$
+where $$\boldsymbol{s_k}$$
 is determined by solving the linear system
 $${\bf J}_f(\boldsymbol{x_k})\boldsymbol{s_k} = -\boldsymbol{f(x_k)}.$$
 
@@ -587,9 +629,4 @@ root = sol.x
 
 - See this [review link](/cs357/fa2020/reviews/rev-14-solve_nd.html)
 
-## ChangeLog
 
-* 2017-12-02 Erin Carrier <ecarrie2@illinois.edu>: adds review questions,
-  adds a little more cost information, a few other minor fixes
-* 2017-12-25 Adam Stewart <adamjs5@illinois.edu>: first complete draft
-* 2017-10-17 Luke Olson <lukeo@illinois.edu>: outline
