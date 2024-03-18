@@ -362,7 +362,7 @@ $$(10 - (-10)) \times \tau \approx 12.36$$
 </details>
 
 
-## Newton's Method in 1-D
+## Newton's Method (1-D)
 Using Taylor Expansion, we can approximate the function $$f$$ with a quadratic
 function about $$x_0$$:
 
@@ -431,7 +431,7 @@ Finally, apply Newton's method formula:
 
 Now let us revise some key concepts useful in solving N-dimensional optimization problems:
 
-Given  $$f:\mathbb{R}^n\to \mathbb{R}$$ we define the gradient function $$\nabla
+Given  $$f:\mathbb{R}^n\to \mathbb{R}$$, we define the gradient function $$\nabla
 f: \mathbb{R}^n\to\mathbb{R}^n$$ as:
 
 $$ \nabla f(\boldsymbol{x}) =
@@ -442,7 +442,7 @@ $$ \nabla f(\boldsymbol{x}) =
 \dfrac{\partial f}{\partial x_n} \\
 \end{bmatrix} $$
 
-Given  $$f:\mathbb{R}^n\to \mathbb{R}$$ we define the Hessian matrix $${\bf H}_f:
+Given  $$f:\mathbb{R}^n\to \mathbb{R}$$, we define the Hessian matrix $${\bf H}_f:
 \mathbb{R}^n\to\mathbb{R}^{n\times n}$$ as:
 
 $${\bf H}_f(\boldsymbol{x}) = 
@@ -493,7 +493,7 @@ $$
 
 ## Criteria for N-D Local Minima
 
-In the case of n-dimensional optimization, we need to find the minima of a continuous and smooth function $$f:\;\mathbb{R^n} \to \mathbb{R}$$. We can tell if a point $$x^* \in S$$ is a local minimum by considering the values of the gradients and Hessians. Notice that N-D gradient is equivalent to 1-D derivative, and the Hessian matrix has following properties at points of zero gradient:
+In the case of n-dimensional optimization, we need to find the minima of a continuous and smooth function $$f:\;\mathbb{R}^n \to \mathbb{R}$$. We can tell if a point $$x^* \in S$$ is a local minimum by considering the values of the gradients and Hessians. Notice that N-D gradient is equivalent to 1-D derivative, and the Hessian matrix has following properties at points of zero gradient:
 
 <table class="table">
   <thead>
@@ -600,9 +600,9 @@ The Hessian is indefinite, so that \(x^* =
 </details>
 
 
-## Steepest Descent in N Dimensions
+## Steepest Descent (N-D)
 
-The negative of the gradient of a differentiable function $$f: \mathbb{R}^n\to\mathbb{R}$$ points downhill (i.e. towards points in the domain having lower values). In other words, given a function $$f:\mathbb{R^n}\to \mathbb{R}$$ at a point $$\bf{x}$$, the function will decrease its value in the direction of "steepest descent" $$\bf{-\nabla f}$$.
+The negative of the gradient of a differentiable function $$f: \mathbb{R}^n\to\mathbb{R}$$ points downhill (i.e. towards points in the domain having lower values). In other words, given a function $$f:\mathbb{R}^n\to \mathbb{R}$$ at a point $$\bf{x}$$, the function will decrease its value in the direction of "steepest descent" $$\bf{-\nabla f}$$.
 
 This hints us to move in the direction of $$-\nabla
 f$$ while searching for the minimum until we reach the point where $$\nabla
@@ -635,7 +635,7 @@ $$
 $$
 * Update: $$\bf{x_{k+1} = x_k + \alpha _k s_k}$$
 
-Generally, the _steepest descent_ method **converges _linearly_**.
+Generally, the _steepest descent_ method **converges linearly**.
 
 To translate this algorithm to Python:
 ```python
@@ -784,7 +784,7 @@ So with \(\bf{\alpha = 0.5}\), Steepest Descent algorithm converge to the minimu
 
 </details>
 
-## Newton's Method for N Dimensions
+## Newton's Method (N-D)
 
 Newton's Method in $$n$$ dimensions is similar to Newton's method for root
 finding in $$n$$ dimensions, except we just replace the $$n$$-dimensional function
@@ -895,7 +895,7 @@ Reason: Notice that Newton's Method for N-D Optimization is derived from Taylor 
 ## Review Questions
 <ol>
   <li> What are the necessary and sufficient conditions for a point to be a local minimum in one dimension?</li>
-  <li> What are the necessary and sufficient conditions for a point to be a local minimum in <span>\({\bf n}\)</span> dimensions?</li>
+  <li> What are the necessary and sufficient conditions for a point to be a local minimum in <span>\({n}\)</span> dimensions?</li>
   <li> How do you classify extrema as minima, maxima, or saddle points?</li>
   <li> What is the difference between a local and a global minimum?</li>
   <li> What does it mean for a function to be unimodal?</li>
@@ -907,11 +907,11 @@ Reason: Notice that Newton's Method for N-D Optimization is derived from Taylor 
   <li> Find the search direction in steepest/gradient descent.</li>
   <li> Why must you perform a line search each step of gradient descent?</li>
   <li> Run one step of Newton's method in one dimension.</li>
-  <li> Run one step of Newton's method in <span>\({\bf n}\)</span> dimensions.</li>
+  <li> Run one step of Newton's method in <span>\({n}\)</span> dimensions.</li>
   <li> When does Newton's method fail to converge to a minimum?</li>
   <li> What operations do you need to perform each iteration of golden section search?</li>
   <li> What operations do you need to perform each iteration of Newton's method in one dimension?</li>
-  <li> What operations do you need to perform each iteration of Newton's method in <span>\({\bf n}\)</span> dimensions?</li>
+  <li> What operations do you need to perform each iteration of Newton's method in <span>\({n}\)</span> dimensions?</li>
   <li> What is the convergence rate of Newton's method?</li>
 </ol>
 
