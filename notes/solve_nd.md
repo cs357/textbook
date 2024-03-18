@@ -711,6 +711,24 @@ root = sol.x
 </details>
 ## Review Questions
 
-- See this [review link](/cs357/fa2020/reviews/rev-14-solve_nd.html)
+<ol>
+<li> How do you use methods for root-finding to solve a nonlinear equation for some value other than the root?</li>
+<li> For a given nonlinear equation (1D), you should be able to run a couple steps of:<br>
+ 1) Bisection method <br>
+ 2) Secant method <br>
+ 3)  Newton's method <br> </li>
+<li> How many function evaluations are required per iteration for bisection?</li>
+<li> What is the convergence rate of bisection method?  Will it always converge?</li>
+<li> Using the bisection method, given a specific initial interval \([a,b]\) and a given tolerance \(tol\), how many iterations would be required for the approximate root to be accurate to the given tolerance?</li>
+<li> How many function evaluations are required per iteration for 1D Newton's method for root-finding?  Which functions must be evaluated?</li>
+<li> What is the convergence rate of Newton's method for 1D rootfinding?</li>
+<li> How many function evaluations are required per iteration for secant method?</li>
+<li> What is the convergence rate of secant method?  Will it always converge?</li>
+<li> What are the advantages and disadvantages of bisection, Newton's method, and secant method?  (e.g. why would you use one over the other?)</li>
+<li> For a given vector-valued function \(\mathbf{f}(\mathbf{x})\), what is the Jacobian (both in general and evaluated at a specific point).</li>
+<li> For a simple system of nonlinear equations, you should be able to run one step of \(n\)-dimensional Newton's method.</li>
+<li> What is the convergence rate of Newton's method for rootfinding in \(n\) dimensions?  Will it always converge?</li>
+<li> What operations are required per iteration for Newton's method in \(n\) dimensions?</li>
+</ol>
 
 
