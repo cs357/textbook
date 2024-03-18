@@ -57,7 +57,9 @@ changelog:
 
 ## Learning Objectives
 
-*   **TODO**
+* Create adjacency matrices for undirected, directed, and weighted graphs.
+* Identify and represent stochastic models as Markov chains.
+* Implement the PageRank algorithm.
 
 ## Graphs
 
@@ -91,7 +93,7 @@ The adjacency matrix, <span>\\({\bf A}\\)</span>, for directed graphs is defined
 
 <div>\[ a_{ij} = \begin{cases} 1 \quad \mathrm{if} \ \mathrm{node}_i \leftarrow \mathrm{node}_j \\ 0 \quad \mathrm{otherwise} \end{cases}, \]</div>
 
-where <span>\\(a_{ij}\\)</span> is the <span>\\((i,j)\\)</span> element of <span>\\({\bf A}\\)</span>. This matrix is typically asymmetric, so it is important to adhere to the definition. The adjacency matrix which describes the example graph above is:
+where <span>\\(a_{ij}\\)</span> is the <span>\\((i,j)\\)</span> element of <span>\\({\bf A}\\)</span>. This matrix is typically asymmetric, so it is important to adhere to the definition. **Note** that while we effectively use columns to represent the "from" nodes and rows to represent the "to" nodes, this is not necessarily standard and you may encounter the reverse direction. The adjacency matrix which describes the example graph above is:
 
 <div>\[ {\bf A} = \begin{bmatrix} 0 & 0 & 0 & 1 & 0 & 0 \\ 1 & 1 & 0 & 0 & 0 & 0 \\ 1 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 1 & 0 & 1 \end{bmatrix}.\]</div>
 
@@ -115,13 +117,16 @@ Typically, when we discuss weighted directed graphs it is in the context of tran
 
 A **_Markov chain_** is a stochastic model where the probability of future (next) state depends only on the most recent (current) state. This memoryless property of a stochastic process is called **_Markov property_**. From a probability perspective, the Markov property implies that the conditional probability distribution of the future state (conditioned on both past and current states) depends only on the current state.
 
+The **_Markov property_**, more formally can be written as:
+<div>\[P(X_{n+1} = x_{n+1} | X_0 = x_0, X_1 = x_1, ..., X_n = x_n) = P(X_{n+1} = x_{n+1} | X_n = x_n)\]</div>
+
 ## Markov Matrix
 
 A **_Markov/Transition/Stochastic matrix_** is a square matrix used to describe the transitions of a Markov chain. Each of its entries is a non-negative real number representing a probability. Based on Markov property, next state vector \\({\bf x}_{k+1}\\) is obtained by left-multiplying the Markov matrix <span>\\({\bf M}\\)</span> with the current state vector \\({\bf x}_k\\).
 <div>\[ {\bf x}_{k+1} = {\bf M} {\bf x}_k \]</div>
-In this course, unless specifically stated otherwise, we define the transition matrix <span>\\({\bf M}\\)</span> as a left Markov matrix where each column sums to <span>\\(1\\)</span>.
+In this course, unless specifically stated otherwise, we define the transition matrix <span>\\({\bf M}\\)</span> as a left Markov matrix where each column sums to <span>\\(1\\)</span>. Alternatively, we can say the <span>\\(1\text{-}norm\\)</span> of each column is <span>\\(1\\)</span>.
 
-_Note_: Alternative definitions in outside resources may present <span>\\({\bf M}\\)</span> as a right markov matrix where each row of <span>\\({\bf M}\\)</span> sums to <span>\\(1\\)</span> and the next state is obtained by right-multiplying by <span>\\({\bf M}\\)</span>, i.e. \\({\bf x}_{k+1}^T = {\bf x}_k^T {\bf M}\\).
+**Note**: Alternative definitions in outside resources may present <span>\\({\bf M}\\)</span> as a right markov matrix where each row of <span>\\({\bf M}\\)</span> sums to <span>\\(1\\)</span> and the next state is obtained by right-multiplying by <span>\\({\bf M}\\)</span>, i.e. \\({\bf x}_{k+1}^T = {\bf x}_k^T {\bf M}\\).
 
 A steady state vector \\({\bf x}^*\\) is a probability vector (entries are non-negative and sum to <span>\\(1\\)</span>) that is unchanged by the operation with the Markov matrix <span>\\(M\\)</span>, i.e.
 <div>\[ {\bf M} {\bf x}^* = {\bf x}^* \]</div>
@@ -167,7 +172,7 @@ Let the above graph represent websites as nodes and outgoing links as directed e
 1 & 0 & 1 & 0 & 1 & 0 \\
 \end{bmatrix} \]</div>
 
-Next, we take the accumulated weight (influence) going into a given page, and redistribute it evenly across each outgoing link. This is a Markov matrix. As before, we can perform repeated iteration on a random state vector until steady-state to find what page the user will most likely end up at. 
+Next, we take the accumulated weight (influence) going into a given page, and redistribute it evenly across each outgoing link. This is a Markov matrix. As before, we can perform repeated iteration on a random state vector until steady-state in order to find what page the user will most likely end up at. 
 
 <div>\[ {\bf A} = \begin{bmatrix}
 0 & 0 & 0 & 1.0 & 0 & 1.0 \\
@@ -178,6 +183,8 @@ Next, we take the accumulated weight (influence) going into a given page, and re
 0.5 & 0 & 0.33 & 0 & 1.0 & 0 \\
 \end{bmatrix} \]</div>
 
+Sites therefore become "important" if they're linked to by other "important" sites. The intuition roughly follows that if a site <span>\\(s\\)</span> is linked within another site that is rarely embedded, then the rank of site <span>\\(s\\)</span> will not increase much. Conversely, if site <span>\\(s\\)</span> is linked within more popular sites, its rank will increase.
+
 #### Naive Page Rank: Shortcomings
 A weakpoint of this naive implementation of Page Rank is that a unique solution is not guaranteed. **Brin-Page (1990s)** proposed:
 > "PageRank can be thought of as a model of user behavior
@@ -185,10 +192,11 @@ A weakpoint of this naive implementation of Page Rank is that a unique solution 
 > page at random and keeps clicking on links, never
 > hitting "back", **but eventually gets bored and starts on another random page**."   
 
-<div>\[{\bf{M}} = 0.85 {\bf{A}} + \frac{0.15}{n}\bf{1} \]</div>
+<div>\[{\bf{M}} = d{\bf{A}} + \frac{1-d}{n}\bf{1} \]</div>
 
-We choose abitrary constants which sum to 1. Here, a surfer clicks on a link on the current page with probability 0.85 and opens a random page with probability 0.15. This model makes all entries of M greater than zero, and guarantees a unique solution.
+We introduce a constant, or damping factor, <span>\\(d\\)</span> in order to model the random jump. Let <span>\\(n\\)</span> by the number of nodes in the graph. Here, a surfer clicks on a link on the current page with probability <span>\\(d\\)</span> and opens a random page with probability <span>\\(1-d\\)</span>. This model makes all entries of M greater than zero, and guarantees a unique solution.
 
 ## Review Questions
 
-- See this [review link](/cs357/fa2020/reviews/rev-13-markov.html)
+- Given an undirected or directed graph (weighted or unweighted), determine the adjacency matrix for the graph.
+- What is a transition matrix? Given a graph representing the transitions or a description of the problem, determine the transition matrix.
