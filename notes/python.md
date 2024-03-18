@@ -6,9 +6,14 @@ author:
   - CS 357 Course Staff
 changelog:
   - 
+    name: Dev Singh
+    netid: dsingh14
+    date: 2024-03-17
+    message: modified notes content for clarity
+  - 
     name: Arnav Aggarwal
     netid: arnava4
-    date: 2024-03-17
+    date: 2024-03-16
     message: aligned notes with slides and added additional examples
 ---
 
@@ -18,13 +23,18 @@ changelog:
 
 ## Learning Objectives
 
-*   Get familiar with the language of Python 3
+*   Get familiar with the Python 3 syntax
 *   Understand the difference between mutable and immutable objects
-*   Remember, the most efficient way to study a language is to practice!
-*   Google is a great resource for any programming language
+*   Understand the purpose of NumPy and learn about common operations with NumPy datatypes.
+
+
+## Notes
+1. Remember, the most efficient way to learn a programming language is to practice!
+
+2. Google is a great resource for any programming language.
 
 ## Types
-  Just like any other language, variables can store data of different types in Python, such as int, float, or str. We can use the type() function to find the type of an expression.
+  Just like any other language, variables can store data of different types in Python, such as `int`, `float`, or `str`. We can use the `type()` function to find the type of an expression.
 
 ### Example
 
@@ -35,18 +45,18 @@ c = a + b
 d = 2 * a
 ```
 
-What is the correct choice?
+What are the correct types for variables `c` and `d`?
 
 $$
 \begin{flalign} 
 
- & \text{A) } \text{c is float, d is float} \\ 
+ & \text{A) } \text{c is a float, d is a float} \\ 
 
- & \text{B) } \text{c is float, d is int} \\ 
+ & \text{B) } \text{c is a float, d is an int} \\ 
 
- & \text{C) } \text{c is int, d is int} \\ 
+ & \text{C) } \text{c is an int, d is an int} \\ 
 
- & \text{D) } \text{c is int, d is float} \\ 
+ & \text{D) } \text{c is an int, d is a float} \\ 
 
 \end{flalign}
 $$
@@ -55,9 +65,7 @@ $$
     <summary><strong>Answer</strong></summary>
 
 <br>
-
-\(\bf B\)
-
+<b>B.</b>
 <br>
 <br> 
 
@@ -74,7 +82,7 @@ a = [1, 2, 3]
 b = a
 ```
 
-In this case, a and b are not separate entities, even though they are different variables. The list ```[1, 2, 3]``` is an object, and both variable names a and b are bounded to the same list. 
+In this case, `a` and `b` are not separate entities, even though they are different variables. The list ```[1, 2, 3]``` is an object, and both variable names a and b are bounded to the same list. 
 
 ### Modifying an Object
 Now let's consider another example:
@@ -129,7 +137,7 @@ b = a
 
 ### Mutable and Immutable Objects
 
-In Python, objects are divided into **mutable** and **immutable**. Mutable objects can be modified after they are first created, including lists, dictionaries, numpy arrays, etc. Immutable objects cannot be modified once they are created, including tuples, strings, floats, etc. 
+In Python, objects are divided into **mutable** and **immutable**. Mutable objects can be modified after they are first created, including lists, dictionaries, NumPy arrays, etc. Immutable objects cannot be modified once they are created, including tuples, strings, floats, etc. 
 
 For example,
 
@@ -182,7 +190,7 @@ a is b      # evaluates to True
 
 Which of the following code snippets result in ```print(a==c) -> True```:
 
-A
+A:
 ```python
 a = ['hello','goodbye']
 b = 'hey'
@@ -190,7 +198,7 @@ a.append(b)
 c = a + [b]
 ```
 
-B
+B:
 ```python
 a = ['hello','goodbye']
 b = 'hey'
@@ -198,7 +206,7 @@ c = a + [b]
 a += b
 ```
 
-C
+C:
 ```python
 a = ['hello','goodbye']
 b = 'hey'
@@ -206,17 +214,14 @@ c = a + [b]
 a.append(b)
 ```
 
-<details>
-    <summary><strong>Answer</strong></summary>
+<details markdown="1">
 
-<br>
+<summary><strong>Answer</strong></summary>
 
-\(\bf C\)
+<br />
+**C**
 
-<br>
-<br> 
-
-A is incorrect because c ends up having two "hey" elements in its list, and B is incorrect because \(a += b\) adds each character of "hey" as its own element. Hence, C must be the correct choice. 
+A is incorrect because `c` ends up having two "hey" elements in its list. B is incorrect because `a += b` adds each character of "hey" as its own element. Hence, C must be the correct choice. 
 
 </details>
 
@@ -254,36 +259,34 @@ Julie += ['physics']
 print(John, Anna)
 ```
 
-A
+A:
 ```computer_science, math ['electrical', 'physics']```
 
-B
+B:
 ```computer_science, math ['electrical']```
 
-C
+C:
 ```computer_science ['electrical', 'physics']```
 
-D
+D:
 ```computer_science ['electrical']```
 
-<details>
-    <summary><strong>Answer</strong></summary>
+<details markdown="1">
+    
+<summary><strong>Answer</strong></summary>
 
 <br>
 
-\(\bf C\)
+**C**
 
-<br>
-<br> 
-
-In the above code snippet, John and Tim refer to separate objects since strings are immutable in Python, and so the variable John is equal to 'computer_science'. Lists are mutable and so Julie and Anna are equal to the same list: ['electrical', 'physics']. Hence, C is the correct choice. 
+In the above code snippet, John and Tim refer to separate objects since strings are immutable in Python, and so the variable John is equal to `'computer_science'`. Lists are mutable, so Julie and Anna are equal to the same list: `['electrical', 'physics']`. Hence, C is the correct choice. 
 
 </details>
 
 
 ## Indexing
 
-Indexing is important for us to be able to iterate through for loops in a variety of ways in Python. Say we have an array a, the formatting for indexing follows this standard: ```a[i:j:k]```, where i is the starting index of our iteration, j is the stopping index (exclusive) of our iteration, and k is the step size.
+Indexing is important to iterate through for loops in a variety of ways in Python. Given a list `a`, the formatting for indexing follows this standard: ```a[i:j:k]```. Here, `i` is the starting index of the iteration, `j` is the stopping index (exclusive) of the iteration, and `k` is the step size.
 
 ### Example
 ```python
@@ -322,7 +325,7 @@ $$
 The first step is to get the resulting array of a[1::2]. The start index is 1 in a zero-indexed array, and the step size is 1 until the end of the array (since no stop index was given here). Hence, the resulting array is [1, 3, 5, 7, 9], which we'll call array b for now. 
 <br>
 <br>
-The final step is to get the resulting array of b[::-1]. There is not start or stop index given, but the step size is -1. This means that we simply need to reverse the array b, as a negative step size means we start the iteration from the end of the array rather than the start. Hence, our final array will be [9, 7, 5, 3, 1], which happens to be the answer choice E. 
+The final step is to get the resulting array of b[::-1]. There is not start or stop index given, but the step size is -1. This means that we simply need to reverse the array b, as a negative step size means we start the iteration from the end of the array rather than the start. Hence, the final array will be [9, 7, 5, 3, 1], which equals answer choice E. 
 
 </details>
 
@@ -423,20 +426,17 @@ def do_stuff(a, b):
 do_stuff(a, b)
 ```
 
-<details>
-    <summary><strong>Answer</strong></summary>
+<details markdown="1">
+
+<summary><strong>Answer</strong></summary>
 
 <br>
 
-\(\bf B\)
+**B**
 
+B is the correct answer because `ints` in Python are immutable. This means that incrementing `a` by 1 and `b` by 2 inside the function just creates new objects for both a and b. These new objects will be restricted to the scope of this function, and as a result the variables will not be modified. 
 <br>
-<br> 
-
-B is the correct answer because ints in Python are immutable. This means that incrementing a by 1 and b by 2 inside the function just creates new objects for both a and b. These new objects will be restricted to the scope of this function, and as a result the variables will not be modified. 
-<br>
-However, lists are mutable objects and when we append values to them we're not creating new objects. We're simply updating the variables that already have global scope, and so these variables are modified. 
-
+However, lists are mutable objects, and appending values to them does not create new objects. The function simply updates the variables that already have global scope, and so these variables are modified. 
 </details>
 
 
@@ -496,16 +496,16 @@ def add_two_numbers(a: int, b: int) -> int:
   return a + b
 ```
 
-## Numpy Introduction
+## NumPy
 
-This section will serve as a brief intro to some common numpy tools you'll be expected to use throughout the class. While this section will explain some of these common tools, the numpy documentation goes into much greater detail and is always the go-to resource whenever unsure how to use a specific function. 
+NumPy is a Python library used for numerical computing. Developed almost entirely in C and C++, it is highly performant and can easily support operations on large amounts of data. This section will serve as a brief intro to some common NumPy tools you'll be expected to use throughout the class. While this section will explain some of these common tools, the [NumPy documentation](https://NumPy.org/doc/) goes into much greater detail and is always the go-to resource whenever unsure how to use a specific function.
 
-### Numpy Arrays
+### NumPy Arrays
 
-Numpy arrays are generally preferred over lists because you can conduct highly performant operations on them to accomplish any task. This is specifically important in a class like Numerical Methods. The following are ways you can initialize different types of numpy arrays: 
+NumPy arrays are generally preferred over lists because you can conduct highly performant operations on them to accomplish any task. This is specifically important in a class like Numerical Methods. The following are ways you can initialize different types of NumPy arrays: 
 
 ```python
-
+import numpy as np
 # creates a 2d array of zeros (conceptually a matrix) that has shape 2 x 2
 np.zeros((2, 2))
 
@@ -522,12 +522,13 @@ np.random.rand(2, 2)
 np.empty((2, 2))
 ```
 
-We can find out additional information about our numpy array and do more with them with the following functions:
+We can find out additional information about the NumPy array and do more with them with the following functions:
 
 ```python
+import numpy as np
 a = np.zeros((2, 2))
 
-# we can get the shape of our numpy array with the following function
+# we can get the shape of our NumPy array with the following function
 print(a.shape)        # will return (2, 2)
 
 # this will give us the data type of the array elements
@@ -543,17 +544,18 @@ b = a.copy()
 
 ### Indexing and Slicing
 
-We can use indexing and slicing on numpy arrays in order to extract the specific information we need from arrays/matrices. This will be a constant part of the class, so it's better to get used to indexing/slicing now! Note that this section is similar to the above indexing section. A numpy array a will follow the standard: ```a[i:j:k]```, where i is the starting index of our iteration, j is the stopping index (exclusive) of our iteration, and k is the step size.
+We can use indexing and slicing on NumPy arrays in order to extract specific information from arrays/matrices. This will be a constant part of the class, so it's better to get used to indexing/slicing now! Note that this section is similar to the above indexing section. A NumPy array a will follow the standard: ```a[i:j:k]```, where `i` is the starting index of the iteration, `j` is the stopping index (exclusive) of the iteration, and `k` is the step size.
 
 ```python
+import numpy as np
 a = np.array([3, 7, 9, 10, 3, 5])
 b = np.array([[1, 2, 3], [4, 5, 6]])
 
-# basic indexing for both 1d and 2d numpy arrays (for 2d arrays we specify both the row and col)
+# basic indexing for both 1d and 2d NumPy arrays (for 2d arrays we specify both the row and col)
 print(a[2])     # prints 9
 print(b[0, 0])  # prints 1
 
-# slicing examples for both 1d and 2d numpy arrays (for 2d arrays we specify both the row and col)
+# slicing examples for both 1d and 2d NumPy arrays (for 2d arrays we specify both the row and col)
 print(a[1:3])     # prints [7, 9]
 print(b[0:1, 2])  # prints [3]
 
@@ -563,9 +565,10 @@ print(b[:1])      # this assumes the starting index of the row is 0, so we selec
 
 ### Array Manipulation
 
-Array manipulation is particularly useful when certain formulas in later chapters require us to build matrices or perform certain operations on matrices (transpose for instance). Let's take a look at a couple of the operations numpy has provided us with: 
+Array manipulation is particularly useful when certain formulas in later chapters require building matrices or perform certain operations on matrices (for instance, transposing a matrix). Below are some examples:
 
 ```python
+import numpy as np
 a = np.array([3, 7, 9, 10, 3, 5])
 b = np.array([[1, 2, 3], [4, 5, 6]])
 
@@ -576,16 +579,16 @@ a = np.reshape(a, (3, 2))
 # we can flatten an array so that all the elements are collapsed into one dimension
 a = a.flatten()
 
-# we can get the transpose of a numpy array via the following commands:
-a_transpose = np.transpose(a)
+# we can get the transpose of a NumPy array via the following command
 a_transpose = a.T
 ```
 
 ### Array Mathematics
 
-Numpy provides several math functions that can be performed on each element in the array. Rather than iterating through each element, these functions will do the operation over the entire array and are hence extremely convenient. Which math functions might be relevant in Numerical Methods? Let's take a look: 
+NumPy provides several math functions that can be performed on each element in the array. Rather than iterating through each element, these functions will do the operation over the entire array and are hence extremely convenient. Which math functions might be relevant in Numerical Methods? Let's take a look: 
 
 ```python
+import numpy as np
 a = np.array([[8, 9]])
 b = np.array([[1, 2, 3], [4, 5, 6]]) 
 
@@ -601,13 +604,11 @@ f = np.exp(a)
 g = np.sum(a)
 h = np.mean(a)
 i = np.min(a)
-
-# You get the idea
 ```
 
 ### Linear Algebra
 
-As we get to the later chapters you'll be tasked with performing linear algebra operations on vectors/matrices. This is when the numpy.linalg library and the following functions it provides will be useful:
+This class will often ask you to perform linear algebra operations on vectors/matrices. This is when the `numpy.linalg` library and the following functions it provides will be useful:
 
 ```python
 import numpy.linalg as la
@@ -628,9 +629,10 @@ x = la.solve(A, b)
 
 ### Random Numbers
 
-Random numbers are always an integral part of Numerical Methods. Numpy has provided several functions that makes it super easy to use random numbers, and this will be key during chapters like Monte Carlo. Let's dive into what numpy has to offer for random numbers: 
+Random numbers are always an integral part of Numerical Methods. NumPy has provided several functions that makes it super easy to use random numbers, and this will be key during chapters like Monte Carlo. Let's dive into what NumPy has to offer for random numbers: 
 
 ```python
+import numpy as np
 # Generating random numbers from 0 to 1:
 a = np.random.rand(3, 2)    # creates a 3 x 2 array that is populated with random nums from 0 to 1
 
@@ -641,21 +643,45 @@ b = np.random.randint(100)
 c = np.random.choice([1, 2, 3, 4])      # will randomly return one of the values within the array
 ```
 
-Python also has a random module that is separate from numpy but can be used to do a lot of similar operations as the ones introduced above. 
+Python also has a random module that is separate from NumPy but can be used to do a lot of similar operations as the ones introduced above. 
 
 ### Broadcasting
 
 Broadcasting is a powerful technique in Python that allows us to perform arithmetic between two differently-shaped arrays. 
 
-Say we have a smaller array <strong>A</strong> (with a shape of 1 x 5) and a larger array <strong>B</strong> (with a shape of 4 x 5), and we want to add these arrays together. 
+Say we have a smaller array **A** (with a shape of 1 x 5) and a larger array **B** (with a shape of 4 x 5), and we want to add these arrays together. 
 
-Without broadcasting, only the first row in B would be modified by A. With broadcasting however, A's values are added to each row of B. Hence, array A is broadcasted onto array B. The dimension sizes need to cooperate as they did in this example, or we'll receive some error when performing this arithmetic. 
+Without broadcasting, only the first row in **B** would be modified by **A**. With broadcasting, however, **A**'s values are added to each row of **B**. Hence, **A** is broadcasted onto **B**. The dimension sizes need to cooperate as they did in this example, or we'll receive some error when performing this arithmetic. 
+
+Here is an example illustrating the concept:
+```python
+import numpy as np
+
+A = np.array([[1, 2, 3, 4, 5]])
+B = np.array([
+    [10, 20, 30, 40, 50],
+    [60, 70, 80, 90, 100],
+    [110, 120, 130, 140, 150],
+    [160, 170, 180, 190, 200]
+])
+
+# Add A to B using broadcasting
+C = B + A
+
+# C = np.array([[ 11,  22,  33,  44,  55],
+#        [ 61,  72,  83,  94, 105],
+#        [111, 122, 133, 144, 155],
+#        [161, 172, 183, 194, 205]])
+
+print(C)
+```
+
+This result demonstrates how the values from array A were added to each row of array B, thanks to broadcasting. The dimension of A (1 x 5) was compatible with B (4 x 5), allowing A to be "stretched" across B to perform the element-wise addition. ​​
+
 
 ## External Links
-Here are some links to some packages we will be using in CS 357.
+Here is some documentation for other packages we will be using in CS 357.
 
-- Documentation for [numpy](https://numpy.org/doc/stable/).
+- [SciPy, a scientific computing package used to solve mathematical problems.](https://docs.scipy.org/doc/scipy/reference/)
 
-- Docementation for [scipy](https://docs.scipy.org/doc/scipy/reference/).
-
-- Documentation for [matplotlib.pyplot](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.html#module-matplotlib.pyplot).
+- [MatPlotLib, a visualizaion and graphing package.](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.html#module-matplotlib.pyplot)
