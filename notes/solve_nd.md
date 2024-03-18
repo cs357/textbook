@@ -183,9 +183,9 @@ It is difficult to tell exactly what the root is, but we can use the bisection m
 <strong> Iteration 1 </strong>
 
 $$\begin{flalign*}
-&a = 1 \hspace{7.0cm} f(a) = f(1) = 1^3 - 1 - 1 = -1 &\\
-&b = 2 \hspace{7.02cm} f(b) = f(2) = 2^3 - 2 - 1 = 5 & \\
-&c = \frac{a + b}{2} = \frac{3}{2} = 1.5 \hspace{3.67cm} f(c) = f(1.5) = 1.5^3 - 1.5 - 1 = 0.875&
+&\hspace{0.4cm}a = 1 \hspace{6.5cm} f(a) = f(1) = -1&\\
+&\hspace{0.4cm}b = 2 \hspace{6.5cm} f(b) = f(2) = 5&\\
+&\hspace{0.4cm}c = \frac{a + b}{2} = \frac{3}{2} = 1.5 \hspace{3cm} f(c) = f(1.5) = 1.5^3 - 1.5 - 1 = 0.875&
 \end{flalign*}$$
 
 Since $$f(b)$$ and $$f(c)$$ are both positive, we will replace $$b$$ with $$c$$ and further narrow our interval.
