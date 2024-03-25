@@ -194,7 +194,7 @@ A weakpoint of this naive implementation of Page Rank is that a unique solution 
 
 <div>\[{\bf{M}} = d{\bf{A}} + \frac{1-d}{n}\bf{1} \]</div>
 
-We introduce a constant, or damping factor, <span>\\(d\\)</span> in order to model the random jump. Let <span>\\(n\\)</span> by the number of nodes in the graph. Here, a surfer clicks on a link on the current page with probability <span>\\(d\\)</span> and opens a random page with probability <span>\\(1-d\\)</span>. This model makes all entries of M greater than zero, and guarantees a unique solution.
+We introduce a constant, or damping factor, <span>\\(d\\)</span> in order to model the random jump. Let <span>\\(n\\)</span> be the number of nodes in the graph. Here, a surfer clicks on a link on the current page with probability <span>\\(d\\)</span> and opens a random page with probability <span>\\(1-d\\)</span>. This model makes all entries of M greater than zero, and guarantees a unique solution.
 
 ## Review Questions
 
