@@ -2,6 +2,69 @@
 title: Errors and Complexity
 description: Different types of error, Big-O and complexities.
 sort: 3
+author: 
+  - CS 357 Course Staff
+changelog:
+  -
+    name: Kriti Chandak
+    netid: kritic3
+    date: 2024-03-30
+    message: added information from slides and added examples
+  - 
+    name: Victor Zhao
+    netid: chenyan4
+    date: 2022-01-27
+    message: fix terminology for accurate significant digits, fix the rule-of-thumb inequality
+  -
+    name: Victor Zhao
+    netid: chenyan4
+    date: 2022-01-20
+    message: change notation for true value
+  -
+    name: Mariana Silva
+    netid: mfsilva
+    date: 2020-04-25
+    message: small text revisions
+  - 
+    name: Peter Sentz
+    netid: sentz2
+    date: 2020-02-19
+    message: add section on role of constants, change Big-Oh's to "mathcal"
+  -
+    name: Wanjun Jiang
+    netid: wjiang24
+    date: 2020-01-26
+    message: add scientific notations, digits and figures
+  - 
+    name: Aming Ni
+    netid: amingni2
+    date: 2018-01-31
+    message: changed three graphs
+  -
+    name: Yu Meng
+    netid: yumeng5
+    date: 2018-01-16
+    message: minor fixes throughout
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2017-11-02
+    message: adds changelog
+  -
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2017-10-26
+    message: adds review questions, minor changes throughout to better match termiology in class notes
+  -
+    name: John Doherty
+    netid: jjdoher2
+    date: 2017-10-23
+    message: first complete draft
+  - 
+    name: Luke Olson
+    netid: lukeo
+    date: 2017-10-17
+    message: outline
 ---
 
 <br/><br/>
@@ -20,6 +83,16 @@ sort: 3
 
 - Numerical algorithms are distinguished by their **_cost_** and **_error_**, and the tradeoff between them.
 - The algorithms or methods introduced in this course  indicate their error and cost whenever possible. These might be exact expressions or asymptotic bounds like \\(\mathcal{O}(h^2)\\) as \\(h \to 0\\) or \\(\mathcal{O}(n^3)\\) as \\(n \to \infty\\). For asymptotics we always indicate the limit.
+
+## Scientific Notation
+
+Using scientific notation, a number can be expressed in the form
+
+$$
+x = \pm r \times 10^{m}
+$$
+
+where \\(r\\) is a coefficient in the range \\(1 \geq r < 10 \\) and \\(m\\) is the exponent.
 
 ## Absolute and Relative Error
 
@@ -47,10 +120,14 @@ However, absolute error can become an unsatisfactory and
 misleading representation of the error depending on the magnitude of $$x$$.
 
 <table class="table">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
 <thead>
 <tr class="header">
-<th>Case 1</th>
-<th>Case 2</th>
+<th style="color: black;">Case 1</th>
+<th style="color: black;">Case 2</th>
 </tr>
 </thead>
 <tbody>
@@ -79,17 +156,17 @@ $$
 \end{equation}
 $$
 
-If we consider the two cases again, we can see that the relative error will be much lower in the second case.
+If we consider the two cases again, we can see that the relative error will be much lower in the second case, since relative error is independent of magnitude.
 
 <table class="table">
 <colgroup>
-<col width="55%" />
-<col width="44%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>Case 1</th>
-<th>Case 2</th>
+<th style="color: black;">Case 1</th>
+<th style="color: black;">Case 2</th>
 </tr>
 </thead>
 <tbody>
@@ -103,7 +180,6 @@ If we consider the two cases again, we can see that the relative error will be m
 </tr>
 </tbody>
 </table>
-
 ## Significant Digits/Figures
 
 **Significant figures** of a number are digits that carry meaningful information. They are digits beginning from the leftmost nonzero digit and ending with the rightmost "correct" digit, including final zeros that are exact. For example:
@@ -111,8 +187,9 @@ If we consider the two cases again, we can see that the relative error will be m
 *   The number 3.14159 has six significant digits.
 *   The number 0.00035 has two significant digits.
 *   The number 0.000350 has three significant digits.
-
 <br/>
+The number of significant figures tells us about how many positions of $$x$$ and $$\hat{x}$$ agree.
+
 An approximate result $$\hat{x}$$ has $$n$$ **significant figures** of a true value $$x$$ if the absolute error, $$\vert x - \hat{x}\vert$$, has zeros in the first $$n$$ decimal places counting from the leftmost nonzero (leading) digit of $$x$$, followed by a digit from 0 to 4.
 
 
@@ -145,6 +222,7 @@ $$
 ## Absolute and Relative Error of Vectors
 If our calculated quantities are vectors then instead of using the absolute
 value function, we can use the norm instead. Thus, our formulas become
+
 $$
 \begin{equation}
 \text{Absolute Error} = \|\mathbf{x} - \mathbf{\hat{x}}\|
@@ -166,10 +244,10 @@ norm to find the length of that difference vector.
 
 ## Truncation Error vs. Rounding Error
 
-Rounding error is the error that occurs from rounding values in a computation. This occurs constantly since computers use finite precision. Approximating $$\frac{1}{3} = 0.33333\dots$$ with a finite decimal expansion is an example of rounding error.
+**Rounding error** is the error that occurs from rounding values in a computation. This occurs constantly since computers use finite precision and have a limit on the memory available for storing one numerical value. Approximating $$\frac{1}{3} = 0.33333\dots$$ with a finite decimal expansion is an example of rounding error.
 
 
-Truncation error is the error from using an approximate algorithm in place of an exact mathematical procedure or function. For example, in the case of evaluating functions, we may represent our function by a finite Taylor series up to degree $$n$$. The truncation error is the error that is incurred by not using the $$n+1$$ term and above.
+**Truncation error** is the error from using an approximate algorithm in place of an exact mathematical procedure or function. For example, in the case of evaluating functions, we may represent our function by a finite Taylor series up to degree $$n$$. The truncation error is the error that is incurred by not using the $$n+1$$ term and above.
 
 
 ## Big-O Notation
@@ -199,6 +277,9 @@ $$f(x) = \mathcal{O}(g(x))$$ as $$x \rightarrow a$$
 if and only if there exists a value $$M$$ and some $$\delta$$ such that
 $$|f(x)| \leq M|g(x)|$$ $$\forall x$$ where $$0 < |x − a| < \delta$$
 
+For example, consider the function $$f(x) = 2x^2 + 27x + 1000$$
+
+When $$x \rightarrow \infty$$, the term $$x^2$$ is the most significant, and hence $$f(x) = O(x^2)$$
 
 ## Big-O Examples - Time Complexity
 
@@ -325,25 +406,39 @@ York, 2001.</p>
 
 ## Review Questions
 
-- See this [review link](/cs357/fa2020/reviews/rev-3-error.html)
+1. What is the formula for relative error?
+
+2. What is the formula for absolute error?
+
+3. Which is usually the better way to calculate error?
+
+4. If you have \\(k\\) accurate significant digits, what is the tightest bound on your relative error?
+
+5. Given a maximum relative error, what is the largest (or smallest) value you could have?
+
+6. How do you compute relative and absolute error for vectors?
+
+7. What is truncation error?
+
+8. What is rounding error?
+
+9. What does it mean for an algorithm to take \\(O(n^3)\\) time?
+
+10. Can you give an example of an operation that takes \\(O(n^2)\\) time?
+
+11. What does it mean for error to follow \\(O(h^4)\\)?
+
+12. Can you simplify \\(O(h^5 + h^2 + h)\\)? What assumption do you need to make?
+
+13. If you know an operation is \\(O(n^4)\\), can you predict its time/error on unseen inputs from inputs that you already have?
+
+14. If you are given runtime or error data for an operation, can you find the best \\(x\\) such that the operation is \\(O(n^x)\\)?
+
+15. What is algebraic growth/convergence?
+
+16. What is exponential growth/convergence?
 
 
 ## Links to other resources
 
-- [Big-O Notation](https://faculty.math.illinois.edu/~hildebr/595ama/ama-ch2.pdf)
-
-
-## ChangeLog
-
-* 2022-01-27 Victor Zhao [chenyan4@illinois.edu](mailto:chenyan4@illinois.edu): Fix terminology for accurate significant digits, fix the rule-of-thumb inequality
-* 2022-01-20 Victor Zhao [chenyan4@illinois.edu](mailto:chenyan4@illinois.edu): change notation for true value
-* 2020-04-25 Mariana Silva [mfsilva@illinois.edu](mailto:mfsilva@illinois.edu): small text revisions
-* 2020-02-19 Peter Sentz [sentz2@illinois.edu](mailto:sentz2@illinois.edu): Add section on role of constants, change Big-Oh's to "mathcal"
-* 2020-01-26 Wanjun Jiang [wjiang24@illinois.edu](mailto:wjiang24@illinois.edu): add scientific notations, digits and figures
-* 2018-01-31 Aming Ni <amingni2@illinois.edu>: changed three graphs
-* 2018-01-16 Yu Meng <yumeng5@illinois.edu>: minor fixes throughout
-* 2017-11-02 Erin Carrier <ecarrie2@illinois.edu>: adds changelog
-* 2017-10-26 Erin Carrier <ecarrie2@illinois.edu>: adds review questions,
-  minor changes throughout to better match termiology in class notes
-* 2017-10-23 John Doherty <jjdoher2@illinois.edu>: first complete draft
-* 2017-10-17 Luke Olson <lukeo@illinois.edu>: outline
+- [Big-O Notation](https://www.stat.rice.edu/~dobelman/notes_papers/math/big_O.little_o.pdf)
