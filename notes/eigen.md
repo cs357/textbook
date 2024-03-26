@@ -388,12 +388,12 @@ $$ \mathbf{e}_{k+1} \approx \frac{|\lambda_\text{closest} - \sigma|}{|\lambda_\t
 | Shifted Inverse Power Method   | $$(\mathbf{A} - \sigma \mathbf{I}) \boldsymbol{x}_{k+1} = \boldsymbol{x}_{k}$$          | $$n^{3} + kn^2$$ | $$\left\|\frac{\lambda_c-\sigma}{\lambda_{c2}-\sigma}\right\|$$ |
 
 
-$$\lambda_1$$: largest eigenvector (in magnitude) \\
-$$\lambda_2$$: second largest eigenvector (in magnitude) \\
-$$\lambda_n$$: smallest eigenvector (in magnitude) \\
-$$\lambda_{n-1}$$: second smallest eigenvector (in magnitude) \\
-$$\lambda_c$$: closest eigenvector to $$\sigma$$ \\
-$$\lambda_{c2}$$: second closest eigenvector to $$\sigma$$
+$$\lambda_1$$: largest eigenvalue (in magnitude) \\
+$$\lambda_2$$: second largest eigenvalue (in magnitude) \\
+$$\lambda_n$$: smallest eigenvalue (in magnitude) \\
+$$\lambda_{n-1}$$: second smallest eigenvalue (in magnitude) \\
+$$\lambda_c$$: closest eigenvalue to $$\sigma$$ \\
+$$\lambda_{c2}$$: second closest eigenvalue to $$\sigma$$
 
 ## Orthogonal Matrices
 
