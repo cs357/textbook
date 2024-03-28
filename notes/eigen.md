@@ -356,7 +356,7 @@ For large <span>$$k$$</span>, $$\lambda^{-k}\mathbf{A}\mathbf{x}_0$$ approximate
 To obtain an eigenvector corresponding to the **_smallest_** eigenvalue $$\lambda_n$$ of a non-singular matrix, we can apply power iteration to $$\mathbf{A}^{-1}$$. The following recurrence relationship describes inverse iteration algorithm:
 $$\boldsymbol{x}_{k+1} = \frac{\mathbf{A}^{-1} \boldsymbol{x}_k}{\|\mathbf{A}^{-1} \boldsymbol{x}_k\|}.$$ Do not forget to nomalize each $$\boldsymbol{x}_{k+1}.$$
 
-In practice, instead of taking the inverse and using it for power iteration, we perform the LU factorization of $$\mathbf{A}$$ and perform an LU factorization for each iteration, decreasing our runtime from $$O(n^3)$$ per iteration to $$O(n^2)$$ per iteration, still with $$O(n^3)$$ preprocessing.
+In practice, instead of taking the inverse and using it for power iteration, we perform the LU factorization of $$\mathbf{A}$$ and perform an LU solve for each iteration, decreasing our runtime from $$O(n^3)$$ per iteration to $$O(n^2)$$ per iteration, still with $$O(n^3)$$ preprocessing.
 
 ## Inverse Iteration with Shift
 
