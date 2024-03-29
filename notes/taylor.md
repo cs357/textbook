@@ -7,6 +7,11 @@ author:
   - CS 357 Course Staff
 changelog:
   - 
+    name: Dev Singh
+    netid: dsingh14
+    date: 2024-03-29
+    message: added clarifications on taylor series error bound and approximations
+  - 
     name: Arnav Aggarwal
     netid: arnava4
     date: 2024-03-27
@@ -70,7 +75,7 @@ changelog:
 
 ## Polynomial Overview
 
-### Degree <span>\\(n\\)</span> Polynomial
+### Degree *n* Polynomial
 
 A polynomial in a variable <span>\\(x\\)</span> can always be written (or rewritten) in the form
 
@@ -83,7 +88,7 @@ Using the summation notation, we can express the polynomial concisely by
 
 If \\(a_n \neq 0\\), the polynomial is called an <span>\\(n\\)</span>-th degree polynomial.
 
-### Degree <span>\\(n\\)</span> Polynomial as a Linear Combination of Monomials
+### Degree *n* Polynomial as a Linear Combination of Monomials
 
 A monomial in a variable <span>\\(x\\)</span> is a power of <span>\\(x\\)</span> where the exponent is a nonnegative integer (i.e. <span>\\(x^n\\)</span> where <span>\\(n\\)</span> is a nonnegative integer). You might see another definition of monomial which allows a nonzero constant as a coefficient in the monomial (i.e. <span>\\(a x^n\\)</span> where <span>\\(a\\)</span> is nonzero and <span>\\(n\\)</span> is a nonnegative integer). Then an <span>\\(n\\)</span>-th degree polynomial
 
@@ -93,7 +98,7 @@ can be seen as a linear combination of monomials \\(\{x^i\ |\ 0 \le i \le n\}\\)
 
 ## Taylor Series Expansion
 
-### Taylor Series Expansion, Infinite
+### Taylor Series Expansion: Infinite
 
 A Taylor series is a representation of a function as an infinite sum of terms that are calculated from the values of the function's derivatives at a single point. The Taylor series expansion about <span>\\(x=x_0\\)</span> of a function <span>\\(f(x)\\)</span> that is infinitely differentiable at <span>\\(x_0\\)</span> is the power series
 
@@ -104,16 +109,20 @@ Using the summation notation, we can express the Taylor series concisely by
 <div>\[ \sum_{k=0}^{\infty} \frac{f^{(k)}(x_0)}{k!}(x-x_0)^k .\]</div>
 (Recall that <span>\\(0! = 1\\)</span>)
 
-### Taylor Series Expansion, Finite
+The infinite Taylor series expansion of any polynomial is the polynomial itself.
+
+### Taylor Series Expansion: Finite
 
 In practice, however, we often cannot compute the (infinite) Taylor series of the function, or the function is not infinitely differentiable at some points. Therefore, we often have to truncate the Taylor series (use a finite number of terms) to approximate the function.
 
-### Taylor Series Approximation of Degree <span>\\(n\\)</span>
+### Taylor Series Approximation of Degree *n*
 
 If we use the first <span>\\(n+1\\)</span> terms of the Taylor series, we will get
 
 <div>\[ T_n(x) = \sum_{k=0}^{n} \frac{f^{(k)}(x_0)}{k!}(x-x_0)^k ,\]</div>
 which is called a Taylor polynomial of degree <span>\\(n\\)</span>.
+
+The finite Taylor series expansion of degree <span>\\(n\\)</span> for any polynomial is the polynomial itself truncated to degree <span>\\(n\\)</span>.
 
 ### Examples
 
@@ -184,7 +193,7 @@ Suppose that <span>\\(f(x)\\)</span> is an <span>\\(n+1\\)</span> times differen
 \left|f(x)-T_n(x)\right|\le C \cdot h^{n+1} = O(h^{n+1})
 \\]
 
-We will see the exact expression of <span>\\(C\\)</span> in the next section: Taylor Remainder Theorem.
+We will see the exact expression of <span>\\(C\\)</span> in the next section: *Taylor Remainder Theorem*.
 
 ### Taylor Remainder Theorem
 
@@ -195,6 +204,8 @@ Suppose that <span>\\(f(x)\\)</span> is an <span>\\(n+1\\)</span> times differen
 for some \\(\xi\\) between <span>\\(x\\)</span> and <span>\\(x_0\\)</span>. Thus, the constant <span>\\(C\\)</span> mentioned above is
 
 <div>\[ \max\limits_{\xi} \frac{\vert f^{(n+1)}(\xi)\vert }{(n+1)!}\]</div>.
+
+Note that this value is equivalent to the next term of the Taylor series.
 
 ### Asymptotic behavior of the error
 
@@ -224,14 +235,14 @@ for some \\(\xi\\) between <span>\\(x_0\\)</span> and <span>\\(x\\)</span>.
 
 If we want to find the upper bound for the absolute error, we are looking for an upper bound for $$\vert f^{(5)}(\xi)\vert $$
 
-Since \(f^{(5)}(x)\) = cos \(x\), we have \(|f^{(5)}(\xi)|\le 1\). Then
+Since \(f^{(5)}(x)\) = cos \(x\), we have \(|f^{(5)}(\xi)|\le \cos(0) \rightarrow |f^{(5)}(\xi)|\le 1\). Then
 \[
 |R_4(x)| = \left|\frac{f^{(5)}(\xi)}{5!} (x-x_0)^{5}\right| = \frac{|f^{(5)}(\xi)|}{5!} |x|^{5} \le \frac{1}{120} |x|^{5}
 \]
 
 </details>
 
-#### Example of error predictions
+#### Example of Error Predictions
 
 Suppose you expand $$\sqrt{x - 10}$$ in a Taylor polynomial of degree 3 about the center $$x_0 = 12$$. For $$h_1 = 0.5$$, you find that the Taylor truncation error is about $$10^{-4}$$. How would you find the Taylor truncation error for $$h_2 = 0.25$$?
 
