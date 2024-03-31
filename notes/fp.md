@@ -2,17 +2,105 @@
 title: Floating Point Representation
 description: A way to store approximations of real numbers in silicons.
 sort: 4
+author:
+  - CS 357 Course Staff
+changelog:
+  - 
+    name: Mariana Silva
+    netid: mfsilva
+    date: 2020-04-28
+    message: moved rounding content to a separate page
+  - 
+    name: Wanjun Jiang
+    netid: wjiang24
+    date: 2020-01-26
+    message: add normalized fp numbers, and some examples
+
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2018-01-14
+    message: removes demo links
+
+  - 
+    name: Adam Stewart
+    netid: adamjs5
+    date: 2017-12-13
+    message: fix incorrect formula under number systems and bases
+
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2017-12-08
+    message: specifies UFL is positive
+
+  - 
+    name: Matthew West
+    netid: mwest
+    date: 2017-11-19
+    message: addition of machine epsilon diagrams
+
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2017-11-18
+    message: updates machine eps def
+
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2017-11-15
+    message: fixes typo in converting integers
+
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2017-11-14
+    message: clarifies when stored normalized
+  
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2017-11-13
+    message: updates machine epsilon definition, fixes inconsistent capitalization
+  
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2017-11-13
+    message: updates machine epsilon
+
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2017-11-12
+    message: minor fixes throughout, adds changelog, adds section on number systems in different bases
+
+  - 
+    name: Adam Stewart
+    netid: adamjs5
+    date: 2017-11-01
+    message: first complete draft
+
+  - 
+    name: Luke Olson
+    netid: lukeo
+    date: 2017-10-16
+    message: outline
+
 ---
+
 # Floating Point Representation
 
 * * *
 
 ## Learning Objectives
 
-*   Represent a real number in a floating point system
-*   Compute the memory requirements of storing integers versus double precision
+*   Represent numbers in floating point systems
+*   Evaluate the range, precision, and accuracy of different representations
 *   Define Machine Epsilon
-*   Identify the smallest representable floating point number
+*   Identify the smallest and largest representable floating point number
+*   Handle special cases and subnormal numbers
 
 
 ## Number Systems and Bases
@@ -80,6 +168,35 @@ Not all fractions can be represented in binary using a finite number of digits. 
 As you can see, the decimal 0.1 will be represented in binary as the infinitely repeating series <span>\\((0.00011001100110011...)_2\\)</span>. The exact number of digits that get stored in a floating point number depends on whether we are using single precision or double precision.
 
 <!-- Another resource for review: [Decimal Fraction to Binary](http://cs.furman.edu/digitaldomain/more/ch6/dec_frac_to_bin.htm) -->
+
+## (Unsigned) Fixed-Point Representation
+
+In fixed-point representation, numbers are stored with a fixed number of bits for the integer part and a fixed number of bits for the fractional part.
+
+Suppose we have 64 bits to store a real number, where 32 bits store the integer part and 32 bits store the fractional part.
+
+$$ (a_{31}...a_2a_1a_0.b_1b_2b_3...b_{32}) = \sum_{k=0}^{31} a_k 2^k + \sum_{k=1}^{32} b_k 2^{-k} $$
+
+$$\begin{eqnarray}
+ = &a_{31}& \times 2^{31}\ + ... + a_1 \times 2^1 + a_0 \times 2^0 \\
++ &b_1& \times 2^{-1} + b_2 \times 2^{-2}+ ... +\ b_{32} \times 2^{-32}
+\end{eqnarray}$$
+
+**Smallest Number** \\
+We get the smallest representable number when all values of $$a_i$$ and $$b_i$$ are $$0$$, except for $$b_{32}$$.
+
+$$\begin{eqnarray}
+&a_i =& 0 \ \forall i,\ b_1,\ b_2, ...,\ b_{31} = 0,\ and \ b_{32} = 1 \\
+&\implies& 2^{-32} \approx 10^{-10}
+\end{eqnarray}$$
+
+**Largest Number** \\
+We get the largest representable number when all values of $$a_i$$ and $$b_i$$ are $$1$$.
+
+$$\begin{eqnarray}
+&a_i =& 1 \ \forall i \ and \ b_i = 1 \ \forall i \\
+&\implies&  2^{31}\ + ... + 2^1 + 2^0 + 2^{-1} + 2^{-2}+ ... +\ 2^{-32}
+\end{eqnarray}$$
 
 
 ## Floating Point Numbers
@@ -267,22 +384,3 @@ _Note:_ There are many definitions of machine epsilon that are used in various r
 ## Review Questions
 
 - See this [review link](/cs357/fa2020/reviews/rev-4-fp.html)
-
-
-## ChangeLog
-
-* 2020-04-28 Mariana Silva <mfsilva@illinois.edu>: moved rounding content to a separate page
-* 2020-01-26 Wanjun Jiang <wjiang24@illinois.edu>: add normalized fp numbers, and some examples
-* 2018-01-14 Erin Carrier <ecarrie2@illinois.edu>: removes demo links
-* 2017-12-13 Adam Stewart <adamjs5@illinois.edu>: fix incorrect formula under number systems and bases
-* 2017-12-08 Erin Carrier <ecarrie2@illinois.edu>: specifies UFL is positive
-* 2017-11-19 Matthew West <mwest@illinois.edu>: addition of machine epsilon diagrams
-* 2017-11-18 Erin Carrier <ecarrie2@illinois.edu>: updates machine eps def
-* 2017-11-15 Erin Carrier <ecarrie2@illinois.edu>: fixes typo in converting integers
-* 2017-11-14 Erin Carrier <ecarrie2@illinois.edu>: clarifies when stored normalized
-* 2017-11-13 Erin Carrier <ecarrie2@illinois.edu>: updates machine epsilon
-  definition, fixes inconsistent capitalization
-* 2017-11-12 Erin Carrier <ecarrie2@illinois.edu>: minor fixes throughout,
-  adds changelog, adds section on number systems in different bases
-* 2017-11-01 Adam Stewart <adamjs5@illinois.edu>: first complete draft
-* 2017-10-16 Luke Olson <lukeo@illinois.edu>: outline
