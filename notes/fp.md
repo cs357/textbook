@@ -6,6 +6,26 @@ author:
   - CS 357 Course Staff
 changelog:
   - 
+    name: Apramey Hosahalli
+    netid: apramey2
+    date: 2024-04-02
+    message: adjust examples, reorder sections to match slides
+  - 
+    name: Apramey Hosahalli
+    netid: apramey2
+    date: 2024-04-02
+    message: add integer range section and fixed machine epsilon
+  - 
+    name: Apramey Hosahalli
+    netid: apramey2
+    date: 2024-03-31
+    message: add binary point location section
+  - 
+    name: Apramey Hosahalli
+    netid: apramey2
+    date: 2024-03-27
+    message: update learning objectives and add section for fixed-point representation
+  - 
     name: Mariana Silva
     netid: mfsilva
     date: 2020-04-28
@@ -110,15 +130,6 @@ There are a variety of number systems in which a number can be represented. In t
 For a given \\(\beta\\), in the \\(\beta\\)-system we have:
 <div>\[(a_n \ldots a_2 a_1 a_0 . b_1 b_2 b_3 b_4 \dots)_{\beta} = \sum_{k=0}^{n} a_k \beta^k + \sum_{k=1}^\infty b_k \beta^{-k}.\]</div>
 
-Example:
-
-*   Decimal base:
-
-$$\begin{equation}(426.97)_{10} = 4 \times 10^2 + 2 \times 10^1 + 6 \times 10^0 + 9 \times 10^{-1} + 7 \times 10^{-2} \end{equation} $$
-
-*   Binary base:
-
-$$(1011.001)_{2} = 1 \times 2^3 + 0 \times 2^2 + 1 \times 2^1 + 1 \times 2^0 + 0 \times 2^{-1} + 0 \times 2^{-2} + 1 \times 2^{-3} = (11.125)_{10}$$
 
 Some common bases used for numbering systems are:
 
@@ -126,6 +137,25 @@ Some common bases used for numbering systems are:
 *   binary: \\(\beta=2\\)
 *   octal: \\(\beta=8\\)
 *   hexadecimal \\(\beta=16\\)
+
+### Example:
+
+Decimal base: $$(426.97)_{10} $$
+
+<details markdown="1">
+
+<summary><strong>Answer</strong></summary>
+$$\begin{equation}(426.97)_{10} = 4 \times 10^2 + 2 \times 10^1 + 6 \times 10^0 + 9 \times 10^{-1} + 7 \times 10^{-2} \end{equation} $$
+</details>
+
+Binary base:$$(1011.001)_{2}$$
+
+<details markdown="1">
+
+<summary><strong>Answer</strong></summary>
+$$(1011.001)_{2} = 1 \times 2^3 + 0 \times 2^2 + 1 \times 2^1 + 1 \times 2^0 + 0 \times 2^{-1} + 0 \times 2^{-2} + 1 \times 2^{-3} = (11.125)_{10}$$
+</details>
+
 
 ## Converting Integers Between Decimal and Binary
 
@@ -139,9 +169,7 @@ Converting an integer from decimal to binary is a similar process, except instea
 
 <div>\[\begin{align} 23 // 2 &= 11\ \mathrm{rem}\ 1 \\ 11 // 2 &= 5\ \mathrm{rem}\ 1 \\ 5 // 2 &= 2\ \mathrm{rem}\ 1 \\ 2 // 2 &= 1\ \mathrm{rem}\ 0 \\ 1 // 2 &= 0\ \mathrm{rem}\ 1 \\ \end{align}\]</div>
 
-Thus,
-<div>\[(23)_{10}\]</div>
-becomes <span>\\((10111)_2\\)</span> in binary.
+Thus, $$(23)_{10}$$ becomes <span>\\((10111)_2\\)</span> in binary.
 
 
 You may find these additional resources helpful for review: [Decimal to Binary 1](https://www.wikihow.com/Convert-from-Decimal-to-Binary) and [Decimal to Binary 2](http://interactivepython.org/courselib/static/pythonds/BasicDS/ConvertingDecimalNumberstoBinaryNumbers.html)
@@ -183,55 +211,112 @@ $$\begin{eqnarray}
 \end{eqnarray}$$
 
 **Smallest Number** \\
-We get the smallest representable number when all values of $$a_i$$ and $$b_i$$ are $$0$$, except for $$b_{32}$$.
+We get the smallest representable number when all of the values of $$a_i$$ and $$b_i$$ are $$0$$, except for $$b_{32}$$.
 
 $$\begin{eqnarray}
 &a_i =& 0 \ \forall i,\ b_1,\ b_2, ...,\ b_{31} = 0,\ and \ b_{32} = 1 \\
-&\implies& 2^{-32} \approx 10^{-10}
+&\implies& 2^{-32} \approx 10^{-9}
 \end{eqnarray}$$
 
 **Largest Number** \\
-We get the largest representable number when all values of $$a_i$$ and $$b_i$$ are $$1$$.
+We get the largest representable number when all of the values of $$a_i$$ and $$b_i$$ are $$1$$.
 
 $$\begin{eqnarray}
 &a_i =& 1 \ \forall i \ and \ b_i = 1 \ \forall i \\
-&\implies&  2^{31}\ + ... + 2^1 + 2^0 + 2^{-1} + 2^{-2}+ ... +\ 2^{-32}
+&\implies&  2^{31}\ + ... + 2^1 + 2^0 + 2^{-1} + 2^{-2}+ ... +\ 2^{-32} \approx 10^9
 \end{eqnarray}$$
 
+### Binary Point Placement
+
+We consider the range and precision when evaluating a representation.
+
+**Range:** Difference between the largest and smallest numbers possible.
+
+**Precision:** Smallest possible difference between any two numbers.
+
+Consider an 8 bit system where 6 bits store the integer part and 2 bits store the fractional part. What are its range and precision?
+
+<details markdown="1">
+
+<summary><strong>Answer</strong></summary>
+
+**Smallest Numbers** \\
+$$000000.01 = 0.25$$ \\
+$$000000.10 = 0.5$$
+
+**Largest Numbers** \\
+$$111111.10 = 63.5$$ \\
+$$111111.11 = 63.75 $$
+
+**Range** \\
+$$63.75 - 0.25 = 63.5$$
+
+**Precision** \\
+$$0.5 - 0.25 = 63.75 - 63.5 = 0.25$$
+
+</details>
+
+
+How about for an 8 bit system where 2 bits store the integer part and 6 bits store the fractional part?
+
+<details markdown="1">
+
+<summary><strong>Answer</strong></summary>
+
+**Smallest Numbers** \\
+$$00.000001 = 0.015625$$ \\
+$$00.000010 = 0.03125$$
+
+**Largest Numbers** \\
+$$11.111110 = 3.96875$$ \\
+$$11.111111 = 3.984375 $$
+
+**Range** \\
+$$3.984375 - 0.015625 = 3.96875$$
+
+**Precision** \\
+$$0.03125 - 0.015625 = 3.984375 - 3.96875 = 0.015625$$
+
+</details>
+
+We see that having more **integer** bits increases **range** and more bits for the **fractional** part increases **precision**.
+It can be hard to decide how much precision and range you need.
+
+**Fix: Let the binary point "float"**
 
 ## Floating Point Numbers
 
-The floating point representation of a binary number is similar to scientific notation for decimals. Much like you can represent 23.375 as:
+The floating point representation of a binary number is similar to scientific notation for decimals. Much like you can represent 23.375 as,
 
 <div>\[2.3375 \cdot 10^1\]</div>
 
-you can represent <span>\\((10111.011)_2\\)</span> as:
+you can represent <span>\\((10111.011)_2\\)</span> as,
 
-<div>\[1.0111011 \cdot 2^4\]</div>
+<div>\[1.0111011 \cdot 2^4\]</div>.
 
 A floating-point number can represent numbers of different orders of magnitude(very large and very small) with the same number of fixed digits.
 
-More formally, we can define a floating point number <span>\\(x\\)</span> as:
+More formally, we can define a floating point number <span>\\(x\\)</span> as,
 
 <div>\[x = \pm q \cdot 2^m\]</div>
 
-where:
+where,
 
 *   \\(\pm\\) is the sign
 *   <span>\\(q\\)</span> is the significand
-*   <span>\\(m\\)</span> is the exponent
+*   <span>\\(m\\)</span> is the exponent.
 
 <br/>
-Aside from the special case of zero and subnormal numbers (discussed below), the significand is always in normalized form:
+Aside from the special case of zero and subnormal numbers (discussed below), the significand is always in normalized form,
 
 <div>\[q = 1.f\]</div>
 
-where:
+where,
 
-*   <span>\\(f\\)</span> is the fractional part of the significand
+*   <span>\\(f\\)</span> is the fractional part of the significand.
 
 <br/>
-Whenever we store a normalized floating point number, the 1 is assumed. We don't store the entire significand, just the fractional part. This is called the "hidden bit representation", which gives one additional bit of precision.s
+Whenever we store a normalized floating point number, the 1 is assumed. We don't store the entire significand, just the fractional part. This is called the "hidden bit representation", which gives one additional bit of precision.
 
 ## Properties of Normalized Floating-Point Systems
 
@@ -245,16 +330,72 @@ A number <span>\\(x\\)</span> in a normalized binary floating-point system has t
 *   **Largest positive normalized floating-point number:** <span>\\( 2^{U+1}(1-2^{-p})\\)</span>
 
 <br/>
-#### Example
+
+### Example
 
 <div>\[\begin{equation} x = \pm 1.b_1b_2 \times 2^m \text{ for } m \in [-4,4] \text{ and } b_i \in \{0,1\} \end{equation} \]</div>
 
+<details markdown="1">
+
+<summary><strong>Answer</strong></summary>
 *   Smallest normalized positive number:
 <div>\[ \begin{equation} (1.00)_2 \times 2^{-4} = 0.0625 \end{equation} \]</div>
 *   Largest normalized positive number:
 <div>\[ \begin{equation} (1.11)_2 \times 2^4 = 28.0 \end{equation} \]</div>
 *   Any number <span>\\(x\\)</span> closer to zero than 0.0625 would underflow to zero.
 *   Any number <span>\\(x\\)</span> outside the range -28.0 and +28.0 would overflow to infinity.
+
+</details>
+
+### Machine Epsilon
+
+**_Machine epsilon_** (\\(\epsilon_m\\)) is defined as the distance (gap) between $$1$$ and the next largest floating point number.
+
+$$\pm 1.b_1b_2 \times 2^m\ for \ m \subset [-4,4]\ and\ b_i \subset {0, 1}$$
+
+$$(1.00)_2 \times 2^0 = 1 \hspace{1.8cm} (1.01)_2 \times 2^0 = 1.25 $$
+
+$$ \epsilon_m = (0.01)_2 \times 2^0 = 0.25 $$
+
+Or for a general normalized floating point system $$1.f \times 2^m$$, where $$f$$ is represented with $$n$$ bits, machine epsilon is defined as:
+
+$$ \epsilon_m = 2^{-n} $$
+
+In programming languages these values are typically available as predefined constants.
+For example, in C, these constants are `FLT_EPSILON` and `DBL_EPSILON` and are defined in the `float.h` library.
+In Python you can access these values with the code snippet below.
+
+```python
+import numpy as np
+# Single Precision
+eps_single = np.finfo(np.float32).eps
+print("Single precision machine eps = {}".format(eps_single))
+# Double Precision
+eps_double = np.finfo(np.float64).eps
+print("Double precision machine eps = {}".format(eps_double))
+```
+
+_Note:_ There are many definitions of machine epsilon that are used in various resources, such as the smallest number such that \\(\text{fl}(1 + \epsilon_m) \ne 1\\). These other definitions may give slightly different values from the definition above depending on the rounding mode (next topic). In this course, we will always use the values from the "gap" definition above.
+
+### Range of Integer Numbers
+
+What is the range of integer numbers that can be represented exactly in this representation?
+
+$$\pm 1.b_1b_2 \times 2^m\ for \ m \subset [-4,4]\ and\ b_i \subset {0, 1}$$
+
+$$(1)_2 = 1.00 \times 2^0 = 1_{10}$$ \\
+$$(10)_2 = 1.00 \times 2^1 = 2_{10}$$ \\
+$$(11)_2 = 1.10 \times 2^1 = 3_{10}$$ \\
+$$(100)_2 = 1.00 \times 2^2 = 4_{10}$$ \\
+$$(101)_2 = 1.00 \times 2^2 = 5_{10}$$ \\
+$$(110)_2 = 1.00 \times 2^2 = 6_{10}$$ \\
+$$(111)_2 = 1.00 \times 2^2 = 7_{10}$$ \\
+$$(1000)_2 = 1.00 \times 2^3 = 8_{10}$$ \\
+$$\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ = 9_{10}$$ \\
+$$(1001)_2 = 1.00 \times 2^3 = 10_{10}$$
+
+The limit in precision causes skips in integers above an integer range. The upper bound of this range is given by $$2^p$$.
+
 
 ## IEEE-754 Single Precision
 
@@ -264,23 +405,34 @@ A number <span>\\(x\\)</span> in a normalized binary floating-point system has t
 *   1-bit sign, s = 0: positive sign, s = 1: negative sign
 *   8-bit exponent <span>\\(c\\)</span>, where <span>\\(c = m + 127\\)</span>, we need to reserve exponent number for special cases <span>\\( c = (11111111)_2 = 255, c = (00000000)_2 = 0\\)</span>, therefore <span class="math"><span>\\(0 < c < 255\\)</span></span>
 *   23-bit fractional part <span>\\(f\\)</span>
-*   Machine epsilon: \\(\epsilon = 2^{-23} \approx 1.2 \times 10^{-7}\\)
+*   Machine epsilon: 
+    * For IEEE-754 **single precision**, \\(\epsilon_m = 2^{-23}\\), as shown by:
+
+        $$
+           \epsilon_m = 1.\underbrace{000000...000}_{\text{22 bits}}{\bf 1} - 1.\underbrace{000000...000}_{\text{22 bits}}{\bf 0} = 2^{-23}
+        $$
 *   Smallest positive normalized FP number: \\(UFL = 2^L = 2^{-126} \approx 1.2 \times 10^{-38}\\)
 *   Largest positive normalized FP number: \\(OFL = 2^{U+1}(1 - 2^{-p}) = 2^{128}(1 - 2^{-24}) \approx 3.4 \times 10^{38}\\)
+
 
 <br/>
 The exponent is shifted by 127 to avoid storing a negative sign. Instead of storing <span>\\(m\\)</span>, we store <span>\\(c = m + 127\\)</span>. Thus, the largest possible exponent is 127, and the smallest possible exponent is -126.
 
-#### Example:
+### Example:
 
-Convert the binary number to the normalized FP representation \\(1.f \times 2^m \\)
+Convert the binary number $$(100101.101)_2$$ to the normalized FP representation
 
+$$1.f \times 2^m$$
+
+<details markdown="1">
+
+<summary><strong>Answer</strong></summary>
 $$(100101.101)_2 = (1.00101101)_2 \times 2^5 $$
 $$ s = 0,\quad f = 00101101…00,\quad m = 5 $$
 $$ c=m + 127 = 132 = (10000100)_2 $$
 
-Answer:  $$ 0 \; 10000100 \; 00101101000000000000000  $$
-
+Normalized FP representations:  $$ 0 \; 10000100 \; 00101101000000000000000  $$ 
+</details>
 For additional reading about [IEEE Floating Point Numbers](http://steve.hollasch.net/cgindex/coding/ieeefloat.html)
 
 ## IEEE-754 Double Precision
@@ -291,14 +443,19 @@ For additional reading about [IEEE Floating Point Numbers](http://steve.hollasch
 *   1-bit sign, s = 0: positive sign, s = 1: negative sign
 *   11-bit exponent <span>\\(c\\)</span>, where <span>\\( c = m + 1023\\)</span>, we need to reserve exponent number for special cases <span>\\( c = (11111111111)_2 = 2047, c = (00000000000)_2 = 0\\)</span>, therefore <span class="math"><span>\\(0 < c < 2047\\)</span></span>
 *   52-bit fractional part <span>\\(f\\)</span>
-*   Machine epsilon: \\(\epsilon = 2^{-52} \approx 2.2 \times 10^{-16}\\)
+*   Machine epsilon:
+    * For IEEE-754 **double precision**, \\(\epsilon_m = 2^{-52}\\), as shown by:
+
+    $$
+    \epsilon_m = 1.\underbrace{000000...000}_{\text{51 bits}}{\bf 1} - 1.\underbrace{000000...000}_{\text{51 bits}}{\bf 0} = 2^{-52}
+    $$
 *   Smallest positive normalized FP number: \\(UFL = 2^L = 2^{-1022} \approx 2.2 \times 10^{-308}\\)
 *   Largest positive normalized FP number: \\(OFL = 2^{U+1}(1 - 2^{-p}) = 2^{1024}(1 - 2^{-53}) \approx 1.8 \times 10^{308}\\)
 
 <br/>
 The exponent is shifted by 1023 to avoid storing a negative sign. Instead of storing <span>\\(m\\)</span>, we store <span>\\(c = m + 1023\\)</span>. Thus, the largest possible exponent is 1023, and the smallest possible exponent is -1022.
 
-## Corner Cases in IEEE-754
+## Special Cases in IEEE-754
 
 There are several corner cases that arise in floating point representations.
 
@@ -345,42 +502,25 @@ It is important to note that subnormal numbers do not have as many significant d
 The use of subnormal numbers allows for more gradual underflow to zero (however subnormal numbers don't have as many accurate bits as normalized numbers).
 
 
-## Machine Epsilon
-
-**_Machine epsilon_** (\\(\epsilon_m\\)) is defined as the distance (gap) between $$1$$ and the next largest floating point number.
-
-For IEEE-754 **single precision**, \\(\epsilon_m = 2^{-23}\\), as shown by:
-
-$$
-\epsilon_m = 1.\underbrace{000000...000}_{\text{22 bits}}{\bf 1} - 1.\underbrace{000000...000}_{\text{22 bits}}{\bf 0} = 2^{-23}
-$$
-
-For IEEE-754 **double precision**, \\(\epsilon_m = 2^{-52}\\), as shown by:
-
-$$
-\epsilon_m = 1.\underbrace{000000...000}_{\text{51 bits}}{\bf 1} - 1.\underbrace{000000...000}_{\text{51 bits}}{\bf 0} = 2^{-52}
-$$
-
-Or for a general normalized floating point system $$1.f \times 2^m$$, where $$f$$ is represented with $$n$$ bits, machine epsilon is defined as:
-
-$$ \epsilon_m = 2^{-n} $$
-
-In programming languages these values are typically available as predefined constants.
-For example, in C, these constants are `FLT_EPSILON` and `DBL_EPSILON` and are defined in the `float.h` library.
-In Python you can access these values with the code snippet below.
-
-```python
-import numpy as np
-# Single Precision
-eps_single = np.finfo(np.float32).eps
-print("Single precision machine eps = {}".format(eps_single))
-# Double Precision
-eps_double = np.finfo(np.float64).eps
-print("Double precision machine eps = {}".format(eps_double))
-```
-
-_Note:_ There are many definitions of machine epsilon that are used in various resources, such as the smallest number such that \\(\text{fl}(1 + \epsilon_m) \ne 1\\). These other definitions may give slightly different values from the definition above depending on the rounding mode (next topic). In this course, we will always use the values from the "gap" definition above.
 
 ## Review Questions
 
-- See this [review link](/cs357/fa2020/reviews/rev-4-fp.html)
+<ol class="review">
+<li> Convert a decimal number to binary.</li>
+<li> Convert a binary number to decimal.</li>
+<li> What are the differences between floating point and fixed point representation?</li>
+<li> Given a real number, how would you store it as a machine number?</li>
+<li> Given a real number, what is the rounding error involved in storing it as a machine number? What is the relative error?</li>
+<li> Explain the different parts of a floating-point number: sign, significand, and exponent.</li>
+<li> How is the exponent of a machine number actually stored?</li>
+<li> What is machine epsilon?</li>
+<li> What is underflow (UFL)?</li>
+<li> What is overflow?</li>
+<li> Why is underflow sometimes not a problem?</li>
+<li> Given a toy floating-point system, determine machine epsilon and UFL for that system.</li>
+<li> How do you store zero as a machine number?</li>
+<li> What are subnormal numbers?</li>
+<li> How are subnormal numbers represented in a machine?</li>
+<li> Why are subnormal numbers sometimes helpful?</li>
+<li> What are some drawbacks to using subnormal numbers?</li>
+</ol>
