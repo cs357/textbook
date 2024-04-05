@@ -71,8 +71,8 @@ Previously, we explored a class of vectors whos directions were left unchanged b
 
 A more general factorization is, for __any__ $$m \times n$$ matrix, there exists a singular value decomposition in the form $$\bf{AV = U{\Sigma}}$$ or $$\bf{A=U{\Sigma}V^T}$$. To result in this composition, we need $$\bf V$$ as an orthogonal basis of $$\mathbb{R}^n$$, $$\bf U$$ as an orthogonal basis of $$\mathbb{R}^m$$, and $$\bf{\Sigma}$$ as an $$m \times n$$ diagonal matrix, where $$\bf{Av_i = \sigma_iu_i}$$. 
 
-* $$\bf U$$ is composed of the eigenvectors of $$\bf{AA^T}$$ as its columns
-* $$\bf V$$ is composed of the eigenvectors of $$\bf{A^TA}$$ as its columns
+* $$\bf U$$ is composed of the eigenvectors of $$\bf{AA^T}$$ as its columns.
+* $$\bf V$$ is composed of the eigenvectors of $$\bf{A^TA}$$ as its columns.
 * $$\bf \Sigma$$ is a diagonal matrix composed of square roots of the eigenvalues of $$\bf{A^TA}$$, called singular values.
 * The diagonal of $$\bf \Sigma$$ is ordered by non-increasing singular values and the columns of $$\bf U$$, $$\bf V$$ are ordered respectively.
 
