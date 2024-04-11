@@ -607,28 +607,36 @@ The negative of the gradient of a differentiable function $$f: \mathbb{R}^n\to\m
 This hints us to move in the direction of $$-\nabla
 f$$ while searching for the minimum until we reach the point where $$\nabla
 f(\boldsymbol{x}) = \boldsymbol{0}$$. Rigidly, a point $$\boldsymbol{x}$$ the
-direction ''$$-\nabla f(\boldsymbol{x})$$'' is called the direction of steepest descent.
+direction ''$$-\nabla f(\boldsymbol{x})$$'' is called the direction of steepest descent. If we resolve this problem in an iterative approach, then in the $$\bf{k^{th}}$$ iteration, we define the current steepest descent direction for the current approximation $$\boldsymbol{x_k}$$:
+
+$$
+\boldsymbol{s_{k}} = -\nabla f(\boldsymbol{x_k})
+$$
 
 We know the direction we need to move to approach the minimum but we
 still do not know the distance we need to move in order to approach the
-minimum. If $$\boldsymbol{x_k}$$ was our earlier point then we select the next
+minimum. We need to perform a "line search" among the steepest descent direction. If $$\boldsymbol{x_k}$$ was our earlier point then we select the next
 guess by moving it in the direction of the negative gradient:
 
 $$\boldsymbol{x_{k+1}} = \boldsymbol{x_k} + \alpha(-\nabla
 f(\boldsymbol{x_k})).$$
 
-The next problem would be to find the $$\alpha$$, and we use the 1-dimensional
-optimization algorithms to find the required $$\alpha$$. Hence, the problem
-translates to:
+The next problem would be to find the $$\boldsymbol{\alpha}$$, and we use the 1-dimensional
+optimization algorithms to find the required $$\boldsymbol{\alpha}$$. With current $$\boldsymbol{x_k}$$, the following equation defines $$\boldsymbol{\alpha_k}$$, the optimal choice of $$\boldsymbol{\alpha}$$ that brings $$\boldsymbol{x_{k+1}}$$ to the minimal point in the line search:
 
 $$
-\boldsymbol{s} = -\nabla f(\boldsymbol{x_k}) \\
-\min_{\alpha}\left( f\left(\boldsymbol{x_k} + \alpha \boldsymbol{s}\right)\right)
+\boldsymbol{\alpha_k} = \underset{\alpha}{\mathrm{argmin}}\left( f\left(\boldsymbol{x_k} + \alpha \boldsymbol{s_k}\right)\right)
+$$
+
+Hence in each iteration we calculate:
+
+$$
+\bf{x_{k+1} = x_k + \alpha _k s_k}
 $$
 
 The Steepest Descent algorithm can be formalized as:
 * Initial Guess: $$\bf{x_0}$$
-* Evaluate Deepest Descent: $$\bf{s_k = -\nabla f(x_k)}$$
+* Evaluate Steepest Descent: $$\bf{s_k = -\nabla f(x_k)}$$
 * Perform a line search to obtain $$\alpha _k$$ (for example, Golden Section Search):
 $$
 \alpha_k = \underset{\alpha}{\mathrm{argmin}} f(\bf{x_k} + \alpha \bf{s_k})
@@ -810,7 +818,7 @@ Which becomes a system of linear equations where we need to solve for
 the Newton step $$\boldsymbol{s}$$.
 
 The steps of the N-Dimensional Newton's Method for optimization can be formally described as follows:
-* Initial Guess: $$\boldsymbol{s}$$
+* Initial Guess: $$\boldsymbol{x_0}$$
 * Solve: $${\bf H}_f(\boldsymbol{x_k})\boldsymbol{s_k} = -\nabla f(\boldsymbol{x_k})$$
 * Update: $$\bf{x_{k+1}} = \bf{x_k} + \bf{s_k}$$
 
