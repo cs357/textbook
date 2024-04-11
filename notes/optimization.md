@@ -393,7 +393,7 @@ $$\bf{x_0} = \textbf{starting guess}$$
 $$\bf{x_{k+1}} = x_k - \frac{f'(x_k)}{f''(x_k)}$$
 
 The method typically **converges quadratically**, provided that $$x_k$$ is
-sufficiently close to the local minimum. In other words, Newton's method has local convergence, and may ay fail to converge, or converge to a maximum or point of inflection.
+sufficiently close to the local minimum. In other words, Newton's method has local convergence, and may fail to converge, or converge to a maximum or point of inflection.
 
 For Newton's method for optimization
 in 1-D, we evaluate $$f'(x_k)$$ and $$f''(x_k)$$, so it requires 2 function
