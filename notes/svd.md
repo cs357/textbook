@@ -7,7 +7,7 @@ changelog:
     name: Pascal Adhikary
     netid: pascala2
     date: 2024-04-05
-    message: add/rewrite intro/summary, proof, solve linear systems
+    message: add/rewrite overview, proof, solve linear systems
   - 
     name: Yuxuan Chen
     netid: yuxuan19
@@ -67,9 +67,9 @@ changelog:
 *   Use an SVD to solve a problem
 
 ## Overview
-Previously, we explored a class of vectors whos directions were left unchanged by a matrix. We found that, for any __square__ matrix, if there existed $$n$$ linearly independent eigenvectors, we could diagonalize $$\bf A$$ into the form $$\bf{AV = VD}$$, where $$\bf V$$ is a basis of $$\mathbb{R}^n$$, where $$\bf{Av_i = \lambda_iv_i}$$.
+Previously, we explored a class of vectors whose directions were left unchanged by a matrix. We found that, for any __square__ matrix, if there existed $$n$$ linearly independent eigenvectors, we could diagonalize $$\bf A$$ into the form $$\bf{AX = XD}$$, where $$\bf X$$ is a basis of $$\mathbb{R}^n$$, where $$\bf{Ax_i = \lambda_ix_i}$$.
 
-A more general factorization is, for __any__ $$m \times n$$ matrix, there exists a singular value decomposition in the form $$\bf{AV = U{\Sigma}}$$ or $$\bf{A=U{\Sigma}V^T}$$. To result in this composition, we need $$\bf V$$ as an orthogonal basis of $$\mathbb{R}^n$$, $$\bf U$$ as an orthogonal basis of $$\mathbb{R}^m$$, and $$\bf{\Sigma}$$ as an $$m \times n$$ diagonal matrix, where $$\bf{Av_i = \sigma_iu_i}$$. 
+A more general factorization is, for __any__ $$m \times n$$ matrix, there exists a singular value decomposition in the form $$\bf{AV = U{\Sigma}}$$ or $$\bf{A=U{\Sigma}V^T}$$. To result in this composition, we require $$\bf V$$ as an orthogonal basis of $$\mathbb{R}^n$$, $$\bf U$$ as an orthogonal basis of $$\mathbb{R}^m$$, and $$\bf{\Sigma}$$ as an $$m \times n$$ diagonal matrix, where $$\bf{Av_i = \sigma_iu_i}$$. 
 
 * $$\bf U$$ is composed of the eigenvectors of $$\bf{AA^T}$$ as its columns.
 * $$\bf V$$ is composed of the eigenvectors of $$\bf{A^TA}$$ as its columns.
@@ -89,7 +89,7 @@ $$ {\bf A} = {\bf U} {\bf \Sigma} {\bf V}^T$$
 
 where $${\bf U}$$ is an \\(m \times m\\) orthogonal matrix, $${\bf V}$$ is an \\(n \times n\\) orthogonal matrix, and $${\bf \Sigma}$$ is an \\(m \times n\\) diagonal matrix. Specifically,
 
-*   <span>\\({\bf U}\\)</span> is an \\(m \times m\\) orthogonal matrix whose columns are eigenvectors of \\({\bf A} {\bf A}^T\\), called the _left singular vectors_ of <span>\\({\bf A}\\)</span>.
+*   <span>\\({\bf U}\\)</span> is an \\(m \times m\\) orthogonal matrix whose columns are eigenvectors of \\({\bf A} {\bf A}^T\\), called the **left singular vectors** of <span>\\({\bf A}\\)</span>.
 
 $$\mathbf{A}\mathbf{A}^T = ({\bf U} {\bf \Sigma} {\bf V}^T)({\bf U} {\bf \Sigma} {\bf V}^T)^T$$ 
 
@@ -99,15 +99,15 @@ $$\hspace{2cm} ({\bf U} {\bf \Sigma} {\bf V}^T) ({\bf V}^T)^T {\bf \Sigma}^T {\b
 
 = {\bf U} ({\bf \Sigma} {\bf \Sigma}^T) {\bf U}^T$$ 
 
-Hence, $$\bf{AA^T=U\Sigma^2U^T}$$, which is a diagonalization.   
+Hence, $$\bf{AA^T=U\Sigma^2U^T}$$, which is a diagonalization, where the columns of U are linearly independent.   
 
-*   <span>\\({\bf V}\\)</span> is an \\(n \times n\\) orthogonal matrix whose columns are eigenvectors of \\({\bf A}^T {\bf A}\\), called the _right singular vectors_ of <span>\\({\bf A}\\)</span>.
+*   <span>\\({\bf V}\\)</span> is an \\(n \times n\\) orthogonal matrix whose columns are eigenvectors of \\({\bf A}^T {\bf A}\\), called the **right singular vectors** of <span>\\({\bf A}\\)</span>.
 
 $$\mathbf{A}^T\mathbf{A} = ({\bf U} {\bf \Sigma} {\bf V}^T)^T ({\bf U} {\bf \Sigma} {\bf V}^T)$$ 
 
 $$= {\bf V} ({\bf \Sigma}^T {\bf \Sigma}) {\bf V}^T$$ 
 
-Hence, $$\bf{A^TA=V\Sigma^2V^T}$$, which is a diagonalization.   
+Hence, $$\bf{A^TA=V\Sigma^2V^T}$$, which is a diagonalization, where the columns of V are linearly independent.      
 
 *   \\({\bf \Sigma}\\) is an \\(m \times n\\) diagonal matrix, composed of the square root of the eigenvalues of $$A^TA$$, in the form:
 
@@ -136,9 +136,9 @@ $$\mathbf{A}^T\mathbf{A}(\mathbf{A}^T\mathbf{x}) = \lambda (\mathbf{A}^T\mathbf{
 
 The time-complexity for computing the SVD factorization of an arbitrary \\(m \times n\\) matrix is $$\alpha (m^2n + n^3)$$, where the constant $$\alpha$$ ranges from 4 to 10 (or more) depending on the algorithm.
 
-In general, we can define the cost as:
+In general, we can define the cost as: $$\mathcal{O}(m^2n + n^3)$$
 
-$$\mathcal{O}(m^2n + n^3)$$
+<div class="figure"> <img src="{{ site.baseurl }}/assets/img/figs/svd_graph.png" height=300 width=600/> </div>
 
 ## Reduced SVD
 
