@@ -69,7 +69,7 @@ changelog:
 ## Overview
 Previously, we explored a class of vectors whose directions were left unchanged by a matrix. We found that, for any __square__ matrix, if there existed $$n$$ linearly independent eigenvectors, we could diagonalize $$\bf A$$ into the form $$\bf{AX = XD}$$, where $$\bf X$$ is a basis of $$\mathbb{R}^n$$, where $$\bf{Ax_i = \lambda_ix_i}$$.
 
-A more general factorization is, for __any__ $$m \times n$$ matrix, there exists a singular value decomposition in the form $$\bf{AV = U{\Sigma}}$$ or $$\bf{A=U{\Sigma}V^T}$$. To result in this composition, we require $$\bf U$$ as an orthogonal basis of $$\mathbb{R}^m$$,  $$\bf V$$ as an orthogonal basis of $$\mathbb{R}^n$$, and $$\bf{\Sigma}$$ as an $$m \times n$$ diagonal matrix, where $$\bf{Av_i = \sigma_iu_i}$$. 
+A more general factorization is, for __any__ $$m \times n$$ matrix, there exists a singular value decomposition in the form $$\bf{AV = U{\Sigma}}$$ or $$\bf{A=U{\Sigma}V^T}$$. To result in this composition, we require $$\bf U$$ as an orthogonal basis of $$\mathbb{R}^m$$, $$\bf V$$ as an orthogonal basis of $$\mathbb{R}^n$$, and $$\bf{\Sigma}$$ as an $$m \times n$$ diagonal matrix, where $$\bf{Av_i = \sigma_iu_i}$$. 
 
 * $$\bf U$$ is composed of the eigenvectors of $$\bf{AA^T}$$ as its columns.
 * $$\bf V$$ is composed of the eigenvectors of $$\bf{A^TA}$$ as its columns.
