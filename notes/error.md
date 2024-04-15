@@ -92,7 +92,22 @@ $$
 x = \pm r \times 10^{m}
 $$
 
-where \\(r\\) is a coefficient in the range \\(1 \geq r < 10 \\) and \\(m\\) is the exponent.
+where \\(r\\) is a coefficient in the range \\(1 \leq r < 10 \\) and \\(m\\) is the exponent.
+
+**Examples:** Let us convert these numbers into scientific notation:
+
+
+$$
+\begin{equation}
+-165.73 = -1.6573 \times 10^{2}
+\end{equation}
+$$
+
+$$
+\begin{equation}
+0.00432 = 4.32 \times 10^{-3}
+\end{equation}
+$$
 
 ## Absolute and Relative Error
 
@@ -180,47 +195,10 @@ If we consider the two cases again, we can see that the relative error will be m
 </tr>
 </tbody>
 </table>
-## Significant Digits/Figures
-
-**Significant figures** of a number are digits that carry meaningful information. They are digits beginning from the leftmost nonzero digit and ending with the rightmost "correct" digit, including final zeros that are exact. For example:
-
-*   The number 3.14159 has six significant digits.
-*   The number 0.00035 has two significant digits.
-*   The number 0.000350 has three significant digits.
-<br/>
-The number of significant figures tells us about how many positions of $$x$$ and $$\hat{x}$$ agree.
-
-An approximate result $$\hat{x}$$ has $$n$$ **significant figures** of a true value $$x$$ if the absolute error, $$\vert x - \hat{x}\vert$$, has zeros in the first $$n$$ decimal places counting from the leftmost nonzero (leading) digit of $$x$$, followed by a digit from 0 to 4.
 
 
-**Example:** Assume $$x = 3.141592653$$ and suppose $$\hat{x}$$ is the approximate result:
-
-$$
-\hat{x} = 3.14159 \longrightarrow |x - \hat{x}| = 0.00000\mathbf{2}653 \longrightarrow \hat{x} \text{ has 6 significant figures.}
-$$
-
-$$
-\hat{x} = 3.1415 \longrightarrow |x - \hat{x}| = 0.0000\mathbf{9}2653 \longrightarrow \hat{x} \text{ has 4 significant figures.}
-$$
-
-The number of accurate significant digits can be estimated by the relative error. If
-
-$$
-\text{Relative Error} = \frac{|x - \hat{x}|}{|x|} \geq 10^{-n + 1}
-$$
-
-then $$\hat{x}$$ has **at most** $$n$$ accurate significant digits. 
-
-In general, we will use the rule-of-thumb for calculating an upper bound of the relative error: if an approximation has $$n$$ accurate significant digits, then the relative error is
-
-$$
-\frac{|x - \hat{x}|}{|x|} \leq 10^{-n+1}
-$$
-
-
-
-## Absolute and Relative Error of Vectors
-If our calculated quantities are vectors then instead of using the absolute
+### Absolute and Relative Error of Vectors
+If our calculated quantities are vectors, then instead of using the absolute
 value function, we can use the norm instead. Thus, our formulas become
 
 $$
@@ -238,9 +216,75 @@ $$
 
 We take the norm of the difference (and not the difference of the norms),
 because we are interested in how far apart these two quantities are.
-This formula is similar to finding that difference then using the vector
+This way, we are calculating the difference vector, and then using the vector
 norm to find the length of that difference vector.
 
+
+## Significant Digits/Figures
+
+**Significant figures** of a number are digits that carry meaningful information. They are digits beginning from the leftmost nonzero digit and ending with the rightmost "correct" digit, including final zeros that are exact. For example:
+
+*   The number 3.14159 has six significant digits.
+*   The number 0.00035 has two significant digits.
+*   The number 0.000350 has three significant digits.
+<br/>
+
+#### Significant Figures of an Approximation
+An approximate result $$\hat{x}$$ has $$n$$ **significant figures** of a true value $$x$$ if the absolute error, $$\vert x - \hat{x}\vert$$, has zeros in the first $$n$$ decimal places counting from the leftmost nonzero (leading) digit of $$x$$, followed by a digit from 0 to 4.
+
+
+**Example:** Assume $$x = 3.141592653$$ and suppose $$\hat{x}$$ is the approximate result:
+
+$$
+\hat{x} = 3.14159 \longrightarrow |x - \hat{x}| = 0.00000\mathbf{2}653 = 2.653 \times 10^{-6} \longrightarrow \hat{x} \text{ has 6 significant figures.}
+$$
+
+$$
+\hat{x} = 3.1415 \longrightarrow |x - \hat{x}| = 0.0000\mathbf{9}2653 = 0.92653 \times 10^{-4} \longrightarrow \hat{x} \text{ has 4 significant figures.}
+$$
+
+In other words, the number of significant figures tells us about how many positions of $$x$$ and $$\hat{x}$$ agree.
+
+Therefore, we can observe that the absolute error is bounded by:
+
+$$
+|x - \hat{x}| \leq 5 \times 10^{-n}
+$$
+
+To find the bound on the relative error, let us define $$x$$ and $$\hat{x}$$ as:
+
+$$
+\begin{equation}
+x = q \times 10^p
+\end{equation}
+$$
+
+$$
+\begin{equation}
+\hat{x} = \hat{q} \times 10^p
+\end{equation}
+$$
+
+
+The absolute error can be stated as:
+
+$$
+|x - \hat{x}| = |q - \hat{q}| \times 10^p
+$$
+
+
+Because of scientific notation we know that $$1 \leq q < 10$$, so:
+
+$$
+\text{Relative Error} = \frac{|x - \hat{x}|}{|x|} = \frac{|q - \hat{q}| \times 10^p}{|q| \times 10^p} \leq \frac{5 \times 10^{-n}}{|q|}  \leq 5 \times 10^{-n}
+$$
+
+
+In general, we will use the rule-of-thumb for calculating an upper bound of the relative error: if an approximation has $$n$$ accurate significant digits, then the relative error is
+
+$$
+\frac{|x - \hat{x}|}{|x|} \leq 10^{-n+1}
+$$
 
 ## Truncation Error vs. Rounding Error
 
@@ -277,18 +321,40 @@ $$f(x) = \mathcal{O}(g(x))$$ as $$x \rightarrow a$$
 if and only if there exists a value $$M$$ and some $$\delta$$ such that
 $$|f(x)| \leq M|g(x)|$$ $$\forall x$$ where $$0 < |x − a| < \delta$$
 
+
+
+### Big-O Analysis
+
+Since Big-O notation is used to understand asymptotic behavior, we are interested in faster-growing terms that define the limiting behavior of the function.
+
 For example, consider the function $$f(x) = 2x^2 + 27x + 1000$$
 
-When $$x \rightarrow \infty$$, the term $$x^2$$ is the most significant, and hence $$f(x) = O(x^2)$$
+When $$x \rightarrow \infty$$, the term $$x^2$$ is the fastest-growing, so it is the most significant, and hence $$f(x) = O(x^2)$$.
 
-## Big-O Examples - Time Complexity
+The hierarchy of fastest to slowest growing common terms, where $$c$$ is a constant is:
+
+$$
+         \mathcal{O}(n!) >
+         \mathcal{O}(c^n) >
+         \mathcal{O}(n^c) >
+         \mathcal{O}(n^2) >
+         \mathcal{O}(n log(n)) >
+         \mathcal{O}(n) >
+         \mathcal{O}(log(n)) >
+         \mathcal{O}(c)
+$$
+
+### Big-O Examples - Time Complexity
 
 We can use Big-O to describe the time complexity of our algorithms.
 
 Consider the case of matrix-matrix multiplication.
-If the size of each of our matrices is $$n \times n$$,
-then the time it will take to multiply the matrices is $$\mathcal{O}(n^3)$$ meaning
-that $$\text{Run time} \approx C \cdot n^3$$.  Suppose we know that for $$n_1=1000$$,
+If the size of each of our matrices is $$n \times n$$, to multiply the matrices, we have to compute the inner product at each entry, which requires $$n$$ multiplications and $$n$$ summations. In an $$n \times n$$ matrix, there are $$n^2$$ entries, meaning that there are $$n^2 (2n) = 2n^3$$ operations, so the time taken to multiply the matrices is proportional to $$2n^3$$. 
+
+However, when trying to understand time complexity, we care about the asymptotic growth rate of our algorithm based on input size, so we can say the time it will take to multiply the matrices is $$\mathcal{O}(n^3)$$ meaning
+that $$\text{Run time} \approx C \cdot n^3$$.  
+
+Suppose we know that for $$n_1=1000$$,
 the matrix-matrix multiplication takes 5 seconds.  Estimate how much time
 it would take if we double the size of our matrices to $$2n \times 2n$$.
 
@@ -307,14 +373,41 @@ So, when we double the size of our our matrices to
 $$2n \times 2n$$, the time becomes $$(2n)^3 = 8n^3$$.
 Thus, the runtime will be roughly 8 times as long.
 
-## Big-O Examples - Truncation Errors
+### Big-O Examples - Truncation Errors
 
 We can also use Big-O notation to describe the truncation error. A numerical method is called $$n$$-th order accurate if its
 truncation error $$E(h)$$ obeys $$E(h) = \mathcal{O}(h^n)$$.
 
+#### Example 1
+The sine function can be expressed as an infinite series:
+
+$$
+f(h) = sin(h) = h - \frac{h^3}{6} + \frac{h^5}{120} - \frac{h^7}{5040} + \dots
+$$
+
+Suppose we take an approximation:
+
+$$
+\hat{f(h)} = h
+$$
+
+We can define the truncation error as:
+
+$$
+E = |f(h) - \hat{f(h)} | = | - \frac{h^3}{6} + \frac{h^5}{120} - \frac{h^7}{5040} + \dots|
+$$
+
+Instead, using the Big-O notation, we define the truncation error as:
+
+$$
+E =  \mathcal{O}(h^3)
+$$
+
+#### Example 2
+
 Consider solving an interpolation problem. We have an interval of
 length $$h$$ where our interpolant is valid and we know that our approximation
-is order $$\mathcal{O}(h^2)$$. What this means is that as we decrease h (the interval
+is order $$\mathcal{O}(h^2)$$. What this means is that as we decrease $$h$$ (the interval
 length), our error will decrease quadratically. Using the definition of Big-O,
 we know that $$\text{Error} = C \cdot h^2$$ where $$C$$ is some constant.
 
@@ -338,7 +431,7 @@ $$
 Solving this equation for $$n$$, we obtain $$n = 3$$.
 
 
-## Big-O Example - Role of Constants
+### Big-O Example - Role of Constants
 
 It is important that one does not place too much importance on the constant $$M$$ in the definition of Big-O notation; it is essentially arbitrary.
 
