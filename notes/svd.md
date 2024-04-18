@@ -1,5 +1,5 @@
 ---
-title: Singular Value Decompositions
+title: Singular Value Decomposition (SVD)
 description:
 sort: 18
 changelog:
