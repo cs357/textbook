@@ -1,6 +1,6 @@
 ---
 title: Singular Value Decomposition (SVD)
-description:
+description: A method to decompose a matrix into 3 matrices that expose interesting properties about the original matrix.
 sort: 18
 changelog:
   - 
