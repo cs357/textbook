@@ -5,6 +5,10 @@ sort: 19
 author:
   - CS 357 Course Staff
 changelog:
+  - name: Dev Singh
+    netid: dsingh14
+    date: 2024-04-18
+    message: fix a typo in the explanation
   - 
     name: Bhargav Chandaka
     netid: bhargav9
