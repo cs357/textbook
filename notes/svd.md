@@ -1,8 +1,60 @@
 ---
 title: Singular Value Decompositions
-description: Add description here...
+description:
 sort: 18
+changelog:
+  - 
+    name: Pascal Adhikary
+    netid: pascala2
+    date: 2024-04-05
+    message: add/rewrite overview, proof, solve linear systems
+  - 
+    name: Yuxuan Chen
+    netid: yuxuan19
+    date: 2022-04-10
+    message: added svd proof, changed svd cost, included svd summary
+  - 
+    name: Mariana Silva
+    netid: mfsilva
+    date: 2020-04-26
+    message: adding more details to sections
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2018-11-14
+    message: spelling fix
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2018-10-18
+    message: correct svd cost
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2018-01-14
+    message: removes demo links
+  - 
+    name: Arun Lakshmanan
+    netid: lakshma2
+    date: 2017-12-04
+    message: fix best rank approx, svd image
+  - 
+    name: Erin Carrier
+    netid: ecarrie2
+    date: 2017-11-15
+    message: adds review questions, adds cond num sec, removes normal equations, minor corrections and clarifications
+  - 
+    name: Arun Lakshmanan
+    netid: lakshma2
+    date: 2017-11-13
+    message: first complete draft
+  - 
+    name: Luke Olson
+    netid: lukeo
+    date: 2017-10-17
+    message: outline
 ---
+
 
 # Singular Value Decompositions
 
@@ -14,6 +66,20 @@ sort: 18
 *   Identify pieces of an SVD
 *   Use an SVD to solve a problem
 
+## Overview
+Previously, we explored a class of vectors whose directions were left unchanged by a matrix. We found that, for any __square__ matrix, if there existed $$n$$ linearly independent eigenvectors, we could diagonalize $$\bf A$$ into the form $$\bf{AX = XD}$$, where $$\bf X$$ is a basis of $$\mathbb{R}^n$$, where $$\bf{Ax_i = \lambda_ix_i}$$.
+
+A more general factorization is, for __any__ $$m \times n$$ matrix, there exists a singular value decomposition in the form $$\bf{AV = U{\Sigma}}$$ or $$\bf{A=U{\Sigma}V^T}$$. To result in this composition, we require $$\bf U$$ as an orthogonal basis of $$\mathbb{R}^m$$, $$\bf V$$ as an orthogonal basis of $$\mathbb{R}^n$$, and $$\bf{\Sigma}$$ as an $$m \times n$$ diagonal matrix, where $$\bf{Av_i = \sigma_iu_i}$$. 
+
+* $$\bf U$$ is composed of the eigenvectors of $$\bf{AA^T}$$ as its columns.
+* $$\bf V$$ is composed of the eigenvectors of $$\bf{A^TA}$$ as its columns.
+* $$\bf \Sigma$$ is a diagonal matrix composed of square roots of the eigenvalues of $$\bf{A^TA}$$, called singular values.
+* The diagonal of $$\bf \Sigma$$ is ordered by non-increasing singular values and the columns of $$\bf U$$, $$\bf V$$ are ordered respectively.
+
+In addition, we define a reduced form: $$ {\bf A} = {\bf U_{R}} {\bf \Sigma_{R}} {\bf V_R}^T$$ where $${\bf U_R}$$ is an \\(m \times k\\) matrix, $${\bf V_R}$$ is an \\(n \times k\\) matrix, and $${\bf \Sigma_{R}}$$ is an \\(k \times k\\) diagonal matrix. Here, $$k = \min(m,n)$$.
+
+
+The proof of these claims follows:
 
 ## Singular Value Decomposition
 
@@ -23,31 +89,27 @@ $$ {\bf A} = {\bf U} {\bf \Sigma} {\bf V}^T$$
 
 where $${\bf U}$$ is an \\(m \times m\\) orthogonal matrix, $${\bf V}$$ is an \\(n \times n\\) orthogonal matrix, and $${\bf \Sigma}$$ is an \\(m \times n\\) diagonal matrix. Specifically,
 
-*   <span>\\({\bf U}\\)</span> is an \\(m \times m\\) orthogonal matrix whose columns are eigenvectors of \\({\bf A} {\bf A}^T\\). The columns of <span>\\({\bf U}\\)</span> are called the _left singular vectors_ of <span>\\({\bf A}\\)</span>.
+*   <span>\\({\bf U}\\)</span> is an \\(m \times m\\) orthogonal matrix whose columns are eigenvectors of \\({\bf A} {\bf A}^T\\), called the **left singular vectors** of <span>\\({\bf A}\\)</span>.
 
 $$\mathbf{A}\mathbf{A}^T = ({\bf U} {\bf \Sigma} {\bf V}^T)({\bf U} {\bf \Sigma} {\bf V}^T)^T$$ 
 
-$$\hspace{2cm}= ({\bf U} {\bf \Sigma} {\bf V}^T) (({\bf V}^T)^T {\bf \Sigma}^T {\bf U}^T)$$ 
+$$\hspace{2cm} ({\bf U} {\bf \Sigma} {\bf V}^T) ({\bf V}^T)^T {\bf \Sigma}^T {\bf U}^T
 
-$$\hspace{0.8cm}= {\bf U} {\bf \Sigma} ({\bf V}^T {\bf V}) {\bf \Sigma}^T {\bf U}^T$$ 
+= {\bf U} {\bf \Sigma} ({\bf V}^T {\bf V}) {\bf \Sigma}^T {\bf U}^T
 
-$$({\bf V} \text{ is an orthogonal matrix}, {\bf V^T} = {\bf V^{-1}} \text{ and } {\bf V}^T {\bf V} = \mathbf{I})$$
+= {\bf U} ({\bf \Sigma} {\bf \Sigma}^T) {\bf U}^T$$ 
 
-$$= {\bf U} ({\bf \Sigma} {\bf \Sigma}^T) {\bf U}^T$$ 
+Hence, $$\bf{AA^T=U\Sigma^2U^T}$$, which is a diagonalization, where the columns of U are linearly independent.   
 
-$${\bf U}$$ is also an orthogonal matrix, we can apply diagonalization ($${\bf B} = \mathbf{X} \mathbf{D} \mathbf{X^{-1}}$$).
-
-We have the columns of $${\bf U}$$ are the eigenvectors of $$\mathbf{A}\mathbf{A}^T$$, with eigenvalues in the diagonal entries of $${\bf \Sigma} {\bf \Sigma}^T$$.
-
-*   <span>\\({\bf V}\\)</span> is an \\(n \times n\\) orthogonal matrix whose columns are eigenvectors of \\({\bf A}^T {\bf A}\\). The columns of <span>\\( {\bf V}\\)</span> are called the _right singular vectors_ of <span>\\({\bf A}\\)</span>.
+*   <span>\\({\bf V}\\)</span> is an \\(n \times n\\) orthogonal matrix whose columns are eigenvectors of \\({\bf A}^T {\bf A}\\), called the **right singular vectors** of <span>\\({\bf A}\\)</span>.
 
 $$\mathbf{A}^T\mathbf{A} = ({\bf U} {\bf \Sigma} {\bf V}^T)^T ({\bf U} {\bf \Sigma} {\bf V}^T)$$ 
 
 $$= {\bf V} ({\bf \Sigma}^T {\bf \Sigma}) {\bf V}^T$$ 
 
-Similar to above, we have the columns of $${\bf V}$$ as the eigenvectors of $$\mathbf{A}^T \mathbf{A}$$, with eigenvalues in the diagonal entries of $${\bf \Sigma}^T {\bf \Sigma}$$.
+Hence, $$\bf{A^TA=V\Sigma^2V^T}$$, which is a diagonalization, where the columns of V are linearly independent.      
 
-*   \\({\bf \Sigma}\\) is an \\(m \times n\\) diagonal matrix of the form:
+*   \\({\bf \Sigma}\\) is an \\(m \times n\\) diagonal matrix, composed of the square root of the eigenvalues of $$A^TA$$, in the form:
 
 $$
 \begin{eqnarray}
@@ -55,29 +117,28 @@ $$
 \end{eqnarray}
 $$
 
-where $$s = \min(m,n)$$ and \\(\sigma_1 \ge \sigma_2 \dots \ge \sigma_s \ge 0\\) are the square roots of the eigenvalues values of \\({\bf A}^T {\bf A}\\). The diagonal entries are called the _singular_ values of <span>\\({\bf A}\\)</span>.
+where $$k = \min(m,n)$$ and \\(\sigma_1 \ge \sigma_2 \dots \ge \sigma_s \ge 0\\). The diagonal entries are called the _singular_ values of <span>\\({\bf A}\\)</span>.
 
-Note that if $$\mathbf{A}^T\mathbf{x} \ne 0$$, then $$\mathbf{A}^T\mathbf{A}$$ and $$\mathbf{A}\mathbf{A}^T$$ both have the same eigenvalues:
+#### Obtaining Singular Values
+
+Note that the matrices $$\bf{A^TA}$$ and $$\bf{AA^T}$$ always have the same non-zero eigenvalues. In addition, they are both positive semi-definite (defined: $$\mathbf{x^{T}Bx} \geq 0 \quad \forall \mathbf{x} \neq 0 $$). As the eigenvalues of positive semi-definite matrices are always non-negative, **singular values are always non-negative**.
+
+If $$\mathbf{A}^T\mathbf{x} \ne 0$$, then $$\mathbf{A}^T\mathbf{A}$$ and $$\mathbf{A}\mathbf{A}^T$$ both have the same eigenvalues:
 
 $$\mathbf{A}\mathbf{A}^T\mathbf{x} = \lambda \mathbf{x}$$ 
-
-$$\hspace{13cm}$$(left-multiply both sides by $$\mathbf{A}^T$$)
 
 $$\mathbf{A}^T\mathbf{A}\mathbf{A}^T\mathbf{x} = \mathbf{A}^T \lambda \mathbf{x}$$ 
 
 $$\mathbf{A}^T\mathbf{A}(\mathbf{A}^T\mathbf{x}) = \lambda (\mathbf{A}^T\mathbf{x})$$ 
 
 
-<!-- why is it that singular values must always be nonnegative? Is this due to convention? -->
-
-
 ## Time Complexity
 
 The time-complexity for computing the SVD factorization of an arbitrary \\(m \times n\\) matrix is $$\alpha (m^2n + n^3)$$, where the constant $$\alpha$$ ranges from 4 to 10 (or more) depending on the algorithm.
 
-In general, we can define the cost as:
+In general, we can define the cost as: $$\mathcal{O}(m^2n + n^3)$$
 
-$$\mathcal{O}(m^2n + n^3)$$
+<div class="figure"> <img src="{{ site.baseurl }}/assets/img/figs/svd_graph.png" height=300 width=600/> </div>
 
 ## Reduced SVD
 
@@ -95,7 +156,7 @@ In general, we will represent the reduced SVD as:
 
 $$ {\bf A} = {\bf U}_R {\bf \Sigma}_R {\bf V}_R^T$$
 
-where $${\bf U}_R$$ is a $$m \times s$$ matrix, $${\bf V}_R$$ is a $$n \times s$$ matrix,  $${\bf \Sigma}_R$$ is a $$s \times s$$ matrix, and $$s = \min(m,n)$$.
+where $${\bf U}_R$$ is a $$m \times k$$ matrix, $${\bf V}_R$$ is a $$n \times k$$ matrix,  $${\bf \Sigma}_R$$ is a $$k \times k$$ matrix, and $$k = \min(m,n)$$.
 
 
 ## Example: Computing the SVD
@@ -285,31 +346,30 @@ The figure below show best rank-<span>\\(k\\)</span> approximations of an image 
 
 <div class="figure"> <img src="{{ site.baseurl }}/assets/img/figs/lowrank.png" /> </div>
 
-## SVD Summary
+## Using SVD to solve a square system of linear equations
 
-* The SVD is a factorization of an \\(m \times n\\) matrix $${\bf A}$$ into $$ {\bf A} = {\bf U} {\bf \Sigma} {\bf V}^T$$ where $${\bf U}$$ is an \\(m \times m\\) orthogonal matrix, $${\bf V}$$ is an \\(n \times n\\) orthogonal matrix, and $${\bf \Sigma}$$ is an \\(m \times n\\) diagonal matrix.
-* Reduced form: $$ {\bf A} = {\bf U_{R}} {\bf \Sigma_{R}} {\bf V_R}^T$$ where $${\bf U_R}$$ is an \\(m \times s\\) matrix, $${\bf V_R}$$ is an \\(n \times s\\) matrix, and $${\bf \Sigma_{R}}$$ is an \\(s \times s\\) diagonal matrix. Here, $$s = \min(m,n)$$.
-* The columns of $${\bf U}$$ are the eigenvectors of the matrix $$\mathbf{A}\mathbf{A}^T$$, and are called the left singular vectors of $$\mathbf{A}$$.
-* The columns of $${\bf V}$$ are the eigenvectors of the matrix $$\mathbf{A}^T \mathbf{A}$$, and are called the right singular vectors of $$\mathbf{A}$$.
-* The square roots of the eigenvalues of $$\mathbf{A}^T \mathbf{A}$$ are the diagonal entries of $${\bf \Sigma}$$, called the singular values $$\sigma_{i} = \sqrt{\lambda_{i}}$$.
-* The singular values $$\sigma_{i}$$ are always non-negative.
+If $$\bf A$$ is an $$n \times n$$ square matrix and we want to solve $$\bf{Ax=b}$$, we can use the svd for A such that
 
+$$\bf{U{\Sigma}V^Tx=b}$$
 
+$$\bf{ {\Sigma} V^Tx=U^Tb}$$
+
+Solve: $$\bf{\Sigma y=U^Tb}$$ (diagonal matrix, easy to solve)
+
+Evaluate: $$\bf{x=Vy}$$
+
+* Cost of solve: $$O(n^2)$$
+* Cost of decomposition $$O(n^3)$$. Recall that SVD and LU have the same asymptotic behavior, however the number of operations - the constant factor before the $$n^3$$ - for the SVD is larger.
 
 ## Review Questions
 
-- See this [review link](/cs357/fa2020/reviews/rev-16-svd.html)
+* For a matrix $$\bf A$$ with SVD decomposition $$\bf{A=U{\Sigma}V^T}$$, what are the columns of $$\bf U$$ and how can we find them? What are the columns of $$\bf V$$ and how can we find them? What are the entries of $$\bf{\Sigma}$$ and how can we find them?
+* What special properties are true of $$\bf U$$, $$\bf V$$ and $$\bf{\Sigma}$$?
+* What are the shapes of $$\bf U$$, $$\bf V$$ and $$\bf{\Sigma}$$ in the full SVD of an  matrix?
+* What are the shapes of $$\bf U$$, $$\bf V$$ and $$\bf{\Sigma}$$ and  in the reduced SVD of an  matrix?
+* What is the cost of computing the SVD?
+* Given an already computed SVD of a matrix $$\bf A$$, what is the cost of using the SVD to solve a linear system $$\bf{Ax=B}$$? How would you use the SVD to solve this system?
+* How do you use the SVD to compute a low-rank approximation of a matrix? For a small matrix, you should be able to compute a given low rank approximation (i.e. rank-one, rank-two).
+* Given the SVD of a matrix $$\bf A$$, what is the SVD of $$\mathbf{A}^+$$ (the psuedoinverse of $$\bf A$$)?
+* Given the SVD of a matrix $$\bf A$$, what is the 2-norm of the matrix? What is the 2-norm condition number of the matrix?
 
-## ChangeLog
-
-* 2022-04-10 Yuxuan Chen <yuxuan19@illinois.edu>: added svd proof, changed svd cost, included svd summary
-* 2020-04-26 Mariana Silva <mfsilva@illinois.edu>: adding more details to sections
-* 2018-11-14 Erin Carrier <ecarrie2@illinois.edu>: spelling fix
-* 2018-10-18 Erin Carrier <ecarrie2@illinois.edu>: correct svd cost
-* 2018-01-14 Erin Carrier <ecarrie2@illinois.edu>: removes demo links
-* 2017-12-04 Arun Lakshmanan <lakshma2@illinois.edu>: fix best rank approx, svd image
-* 2017-11-15 Erin Carrier <ecarrie2@illinois.edu>: adds review questions,
-  adds cond num sec, removes normal equations,
-  minor corrections and clarifications
-* 2017-11-13 Arun Lakshmanan <lakshma2@illinois.edu>: first complete draft
-* 2017-10-17 Luke Olson <lukeo@illinois.edu>: outline
