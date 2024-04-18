@@ -1,6 +1,6 @@
 ---
-title: PCA
-description: A way to measure how good a matrix is.
+title: Principal Component Analysis (PCA)
+description: A dimensionality-reduction method for large datasets.
 sort: 19
 author:
   - CS 357 Course Staff
