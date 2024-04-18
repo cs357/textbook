@@ -606,8 +606,7 @@ The negative of the gradient of a differentiable function $$f: \mathbb{R}^n\to\m
 
 This hints us to move in the direction of $$-\nabla
 f$$ while searching for the minimum until we reach the point where $$\nabla
-f(\boldsymbol{x}) = \boldsymbol{0}$$. Rigidly, a point $$\boldsymbol{x}$$ the
-direction ''$$-\nabla f(\boldsymbol{x})$$'' is called the direction of steepest descent. If we resolve this problem in an iterative approach, then in the $$\bf{k^{th}}$$ iteration, we define the current steepest descent direction for the current approximation $$\boldsymbol{x_k}$$:
+f(\boldsymbol{x}) = \boldsymbol{0}$$. Rigidly, for an arbitrary point $$\boldsymbol{x}$$, the direction ''$$-\nabla f(\boldsymbol{x})$$'' is called the direction of steepest descent. If we resolve this problem in an iterative approach, then in the $$\bf{k^{th}}$$ iteration, we define the current steepest descent direction for the current approximation $$\boldsymbol{x_k}$$:
 
 $$
 \boldsymbol{s_{k}} = -\nabla f(\boldsymbol{x_k})
