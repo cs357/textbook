@@ -2,6 +2,33 @@
 title: PCA
 description: A way to measure how good a matrix is.
 sort: 19
+author:
+  - CS 357 Course Staff
+changelog:
+  - name: Dev Singh
+    netid: dsingh14
+    date: 2024-04-18
+    message: fix a typo in the explanation
+  - 
+    name: Bhargav Chandaka
+    netid: bhargav9
+    date: 2024-04-03
+    message: major reorganziation to match up with content in slides/videos
+  - 
+    name: Yuxuan Chen
+    netid: yuxuan19
+    date: 2022-04-18
+    message: Added PCA definition, data centering, covariance matrix, diagonalization, svd, examples, summary, alternative def
+  - 
+    name: Yikai Teng
+    netid: yikait2
+    date: 2020-08-09
+    message: outline
+  - 
+    name: Jerry Yang
+    netid: jiayiy7
+    date: 2020-11-30
+    message: fix pca code 
 ---
 # Principal Component Analysis
 
@@ -23,25 +50,36 @@ In simpler words, it detects the directions for maximum variance and project the
 
 ### Example
 Consider a large dataset with $$m$$ samples and 30 different cell features. There are many variables that are highly correlated with each other. We can create an $$m \times$$30 matrix $$\bf A$$, with the columns $$\bf F_i$$ representing the different features.
-<div class="figure"> <img src="{{ site.baseurl }}/assets/img/figs/pca_ex1_1.png" width="250"/> </div>
+
+$$ A = \begin{bmatrix} \vdots & \vdots & \vdots \\ F_1 & \cdots & F_{30} \\ \vdots & \vdots & \vdots \end{bmatrix} $$
+
+<!-- <div class="figure"> <img src="{{ site.baseurl }}/assets/img/figs/pca_ex1_1.png" width="250"/> </div> -->
 Now suppose we want to reduce the feature space. One method is to directly remove some feature variables. For example, we could ignore the last 20 feature columns to obtain a reduced data matrix $$\bf A^*$$. This approach is simple and maintains the interpretation of the feature variables, but we have lost the dropped column information.
-<div class="figure"> <img src="{{ site.baseurl }}/assets/img/figs/pca_ex1_2.png" width="250"/> </div>
+
+$$ A = \begin{bmatrix} \vdots & \vdots & \vdots \\ F_1 & \cdots & F_{30} \\ \vdots & \vdots & \vdots \end{bmatrix} \implies 
+A^{*} = \begin{bmatrix} \vdots & \vdots & \vdots \\ F_1 & \cdots & F_{10} \\ \vdots & \vdots & \vdots \end{bmatrix} $$
+
+<!-- <div class="figure"> <img src="{{ site.baseurl }}/assets/img/figs/pca_ex1_2.png" width="250"/> </div> -->
 Another approach is to use PCA. We create "new feature variables" $$\bf F_i^*$$ from a specific linear combination of the original variables. Each of the new variables after PCA are all independent of one another. Now, we are able to use less variables, but still contain information of all features. The disadvantage here is that we have lost "meaningful" interpretation of the new feature variables.
-<div class="figure"> <img src="{{ site.baseurl }}/assets/img/figs/pca_ex1_3.png" width="280"/> </div>
+<!-- <div class="figure"> <img src="{{ site.baseurl }}/assets/img/figs/pca_ex1_3.png" width="280"/> </div> -->
+
+$$ A = \begin{bmatrix} \vdots & \vdots & \vdots \\ F_1 & \cdots & F_{30} \\ \vdots & \vdots & \vdots \end{bmatrix} \implies 
+A^{*} = \begin{bmatrix} \vdots & \vdots & \vdots \\ F_1^{*} & F_2^{*} & F_3^{*} \\ \vdots & \vdots & \vdots \end{bmatrix}$$
+
+$$F_1^{*} = \sum_{i=1}^n a_i F_i $$
 
 ## Data Centering
 
 The first step of PCA is to **_center the data_**. We carry out a data shift to our data columns of $$\bf A$$ such that each column has a mean of 0. For each feature column $$\bf F_i$$ of $$\bf A$$, we calculate the mean $$\bar{F_i}$$ and do a subtraction of $$\bar{F_i}$$ from each entry of the column $$\bf F_i$$. We do this procedure to each column, until we obtain a new centered data set $$\bf A$$.
 
 ### Example
-This is an example of data centering for a set of 6 data points $$p_0 = (8.6, 18.0)$$, $$p_1 = (3.4, 20.6)$$, $$p_2 = (4.6, 19.7)$$, $$p_3 = (3.4, 11.4)$$, $$p_4 = (5.4, 20.3)$$, $$p_5 = (2.2, 12.4)$$ on a 2d coordinate space. We first calculate the mean point $$\bar{p} = (4.6, 17.1)$$, then shift all of the data points such that our new mean point is centered at $$\bar{p}' = (0, 0)$$.
+This is an example of data centering for a set of 6 data points in 2d coordinate space:
+
+$$p_0 = (8.6, 18.0), p_1 = (3.4, 20.6), p_2 = (4.6, 19.7), p_3 = (3.4, 11.4), p_4 = (5.4, 20.3), p_5 = (2.2, 12.4)$$
+  
+We first calculate the mean point $$\bar{p} = (4.6, 17.1)$$, then shift all of the data points such that our new mean point is centered at $$\bar{p}' = (0, 0)$$.
 <div class="row">
-  <div class="column">
-    <div class="figure"> <img src="{{ site.baseurl }}/assets/img/figs/pca_center_1.png" width="330"/> </div>
-  </div>
-  <div class="column">
-    <div class="figure"> <img src="{{ site.baseurl }}/assets/img/figs/pca_center_2.png" width="330" hspace="100"/> </div>
-  </div>
+  <img src="{{ site.baseurl }}/assets/img/figs/pca_center_combined.png" width="600"/>
 </div>
 
 ## Covariance Matrix
@@ -58,6 +96,7 @@ Consider a covariance matrix in the form below. From this matrix, we can obtain:
  * $$a_{ii}$$ = the variance of each $$\bf F_i$$ (How $$\bf F_i$$ correlates with itself). Here $$i = 1, 2, 3$$.
  * $$a_{11} + a_{22} + a_{33}$$ = Overall variability (total variance).
  * $$\frac{a_{ii}}{a_{11} + a_{22} + a_{33}} \cdot$$ 100% = Percentage of the total variance that is explained by $$\bf F_i$$. Here $$i = 1, 2, 3$$.
+ 
 <div class="figure"> <img src="{{ site.baseurl }}/assets/img/figs/pca_covar_mat.png" width="250"/> </div>
 
 ## Diagonalization and Principal Components
@@ -120,8 +159,3 @@ var = A_new.T@A_new
 
 ``` -->
 <!-- commenting this part out for future modifications, the current code is incomplete-->
-
-## ChangeLog
-* 2022-04-18 Yuxuan Chen <yuxuan19@illinois.edu>: Added PCA definition, data centering, covariance matrix, diagonalization, svd, examples, summary, alternative def
-* 2020-08-09 Yikai Teng <yikait2@illinois.edu>: outline
-* 2020-11-30 Jerry Yang <jiayiy7@illinois.edu>: fix pca code
