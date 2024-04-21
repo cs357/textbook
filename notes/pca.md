@@ -1,10 +1,14 @@
 ---
-title: PCA
-description: A way to measure how good a matrix is.
+title: Principal Component Analysis (PCA)
+description: A dimensionality-reduction method for large datasets.
 sort: 19
 author:
   - CS 357 Course Staff
 changelog:
+  - name: Dev Singh
+    netid: dsingh14
+    date: 2024-04-18
+    message: fix a typo in the explanation
   - 
     name: Bhargav Chandaka
     netid: bhargav9
@@ -53,7 +57,7 @@ $$ A = \begin{bmatrix} \vdots & \vdots & \vdots \\ F_1 & \cdots & F_{30} \\ \vdo
 Now suppose we want to reduce the feature space. One method is to directly remove some feature variables. For example, we could ignore the last 20 feature columns to obtain a reduced data matrix $$\bf A^*$$. This approach is simple and maintains the interpretation of the feature variables, but we have lost the dropped column information.
 
 $$ A = \begin{bmatrix} \vdots & \vdots & \vdots \\ F_1 & \cdots & F_{30} \\ \vdots & \vdots & \vdots \end{bmatrix} \implies 
-A^{*} = \begin{bmatrix} \vdots & \vdots & \vdots \\ F_1 & \cdots & F_{30} \\ \vdots & \vdots & \vdots \end{bmatrix} $$
+A^{*} = \begin{bmatrix} \vdots & \vdots & \vdots \\ F_1 & \cdots & F_{10} \\ \vdots & \vdots & \vdots \end{bmatrix} $$
 
 <!-- <div class="figure"> <img src="{{ site.baseurl }}/assets/img/figs/pca_ex1_2.png" width="250"/> </div> -->
 Another approach is to use PCA. We create "new feature variables" $$\bf F_i^*$$ from a specific linear combination of the original variables. Each of the new variables after PCA are all independent of one another. Now, we are able to use less variables, but still contain information of all features. The disadvantage here is that we have lost "meaningful" interpretation of the new feature variables.

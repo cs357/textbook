@@ -139,7 +139,7 @@ import numpy.linalg as la
 def diagonalize(A):
     # A: nxn matrix
     m, n = np.shape(A)
-    if (m != n)
+    if (m != n):
       return None
 
     evals, evecs = la.eig(A) # eigenvectors as columns
