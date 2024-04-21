@@ -1114,7 +1114,7 @@ def lup_decomp(A):
        A is any matrix
        L will be a lower-triangular matrix with 1 on the diagonal, the same shape as A
        U will be an upper-triangular matrix, the same shape as A
-       U will be a permutation matrix, the same shape as A
+       P will be a permutation matrix, the same shape as A
     """
     n = A.shape[0]
     if n == 1:
