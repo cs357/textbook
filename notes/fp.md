@@ -8,6 +8,16 @@ changelog:
   - 
     name: Apramey Hosahalli
     netid: apramey2
+    date: 2024-04-23
+    message: add subnormal example
+  - 
+    name: Apramey Hosahalli
+    netid: apramey2
+    date: 2024-04-22
+    message: fix format and improve flow
+  - 
+    name: Apramey Hosahalli
+    netid: apramey2
     date: 2024-04-02
     message: adjust examples, reorder sections to match slides
   - 
@@ -286,13 +296,13 @@ It can be hard to decide how much precision and range you need.
 
 ## Floating Point Numbers
 
-The floating point representation of a binary number is similar to scientific notation for decimals. Much like you can represent 23.375 as,
+The floating point representation of a binary number is similar to scientific notation for decimals. Similar to how you can represent 23.375 as
 
-<div>\[2.3375 \cdot 10^1\]</div>
+<div>\[2.3375 \cdot 10^1,\]</div>
 
-you can represent <span>\\((10111.011)_2\\)</span> as,
+you can represent <span>\\((10111.011)_2\\)</span> as
 
-<div>\[1.0111011 \cdot 2^4\]</div>.
+<div>\[1.0111011 \cdot 2^4.\]</div>
 
 A floating-point number can represent numbers of different orders of magnitude(very large and very small) with the same number of fixed digits.
 
@@ -351,7 +361,7 @@ A number <span>\\(x\\)</span> in a normalized binary floating-point system has t
 
 **_Machine epsilon_** (\\(\epsilon_m\\)) is defined as the distance (gap) between $$1$$ and the next largest floating point number.
 
-$$\pm 1.b_1b_2 \times 2^m\ for \ m \subset [-4,4]\ and\ b_i \subset {0, 1}$$
+$$\pm 1.b_1b_2 \times 2^m\ for \ m \in [-4,4]\ and\ b_i \in {0, 1}$$
 
 $$(1.00)_2 \times 2^0 = 1 \hspace{1.8cm} (1.01)_2 \times 2^0 = 1.25 $$
 
@@ -381,7 +391,7 @@ _Note:_ There are many definitions of machine epsilon that are used in various r
 
 What is the range of integer numbers that can be represented exactly in this representation?
 
-$$\pm 1.b_1b_2 \times 2^m\ for \ m \subset [-4,4]\ and\ b_i \subset {0, 1}$$
+$$\pm 1.b_1b_2 \times 2^m\ for \ m \in [-4,4]\ and\ b_i \in {0, 1}$$
 
 $$(1)_2 = 1.00 \times 2^0 = 1_{10}$$ \\
 $$(10)_2 = 1.00 \times 2^1 = 2_{10}$$ \\
@@ -479,7 +489,7 @@ The above image shows the number line for the IEEE-754 floating point system.
 
 ## Subnormal Numbers
 
-A **_normal number_** is defined as a floating point number with a 1 at the start of the significand. Thus, the smallest normal number in double precision is \\(1.000... \times 2^{-1022}\\). The smallest representable _normal_ number is called the **_underflow level_**, or **_UFL_**.
+As mentioned above, a **_normal number_** is defined as a floating point number with a 1 at the start of the significand, and the smallest normal number in double precision is \\(1.000... \times 2^{-1022}\\). The smallest representable _normal_ number is called the **_underflow level_**, or **_UFL_**.
 
 However, we can go even smaller than this by removing the restriction that the first number of the significand must be a 1\. These numbers are known as **_subnormal_**, and are stored with all zeros in the exponent. Technically, zero is also a subnormal number.
 
@@ -500,6 +510,42 @@ It is important to note that subnormal numbers do not have as many significant d
 
 <br/>
 The use of subnormal numbers allows for more gradual underflow to zero (however subnormal numbers don't have as many accurate bits as normalized numbers).
+
+### Example:
+
+Suppose you are given a (binary) floating point system of the form 
+
+$$ (-1)^s(1.b_1b_2)_2 \times 2^E$$
+
+that has an exponent range from -2 to 5.
+
+We use this floating point system to represent the following subnormal number:
+
+$$s = 1$$
+
+$$b_1b_2 = (11)_2$$
+
+Convert this subnormal number into a decimal number.
+
+<details markdown="1">
+
+<summary><strong>Answer</strong></summary>
+
+In this floating point system, subnormal numbers will be represented as
+
+$$ x = (-1)^s(0.f)\times2^L.$$
+
+We convert the fractional part $$(11)_2$$ into a decimal number and use the lower bound of the exponent range $$L = -2$$.
+
+$$\begin{eqnarray}
+x &=& (-1)^1 \times (0.11)_2 \times 2^{-2} \\
+&=& (-1) \times (0.11)_2 \times 2^{-2} \\
+&=& (-1) \times (0.75)_{10} \times 2^{-2} \\
+&=& -0.1875
+\end{eqnarray}$$
+
+
+</details>
 
 
 
