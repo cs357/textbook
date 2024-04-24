@@ -218,16 +218,16 @@ Assume you are working with IEEE single-precision numbers. Find the smallest rep
     <summary><strong>Answer</strong></summary>
 
 In this class, to approximate the smallest number \(x\) such that \(2^n + x \neq 2^n\), we use the formula \(x = \epsilon_m \cdot 2^n\). <br>
-Therefore, given that \(\epsilon_m\) for IEEE single-precision is \(2^{-23}\), the answer is \(\bf{a = 2^{-23} \cdot 2^8 = 2^{-15}}\) <br>
+Therefore, given that \(\epsilon_m\) for IEEE single-precision is \(2^{-23}\), the answer is \(\bf{a = 2^{-23} \cdot 2^8 = 2^{-15}}\). <br>
 
 <div style="color: grey;">
   If you're interested in the \(\textbf{exact}\) smallest number, here's the solution (you do not need to know about this for CS 357, and please only use the formula above for all assignments in this class): <br>
   Notice that we use the default rounding mode - rounding to the nearest representable value. If the result is midway between two representable values, the even representable is chosen. "Even" means the lowest-order bit is zero. <br>
   The smallest representable number larger than \(2^8\) is \((2+\epsilon_m)\times 2^8\). <br>
   Let \(x_{-} = 2^8\) and \(x_{+} = (2+\epsilon_m)\times 2^8\). <br>
-  In order to have \(2^8 + a\) rounded to \(x_{+}\), we must have \(a \gt \frac{\vert x_{+} - x_{-} \vert}{2} = \frac{\epsilon_m\times 2^8}{2} = \frac{2^{-23}\times 2^8}{2} = 2^{-16}\)<br>
-  The smallest machine representable number greater than \(2^{-16}\) is \((1 + \epsilon_m) \times 2^{-16}\)<br>
-  Hence \(\bf{a = \bf{(1 + 2^{-23}) \times 2^{-16}}}\)
+  In order to have \(2^8 + a\) rounded to \(x_{+}\), we must have \(a \gt \frac{\vert x_{+} - x_{-} \vert}{2} = \frac{\epsilon_m\times 2^8}{2} = \frac{2^{-23}\times 2^8}{2} = 2^{-16}\). <br>
+  The smallest machine representable number greater than \(2^{-16}\) is \((1 + \epsilon_m) \times 2^{-16}\). <br>
+  Hence \(\bf{a = \bf{(1 + 2^{-23}) \times 2^{-16}}}\).
 </div>
 </details>
 
@@ -488,6 +488,6 @@ error due to the rounding, which is: <br>
   <li> Given a real number, what is the rounding error involved in storing it as a machine number? What is the relative error?</li>
   <li> How can we bound the relative error of representing a real number as a normalized machine number?</li>
   <li> What is cancellation? Why is it a problem?</li>
-  <li> What types of operations lead to catostrophic cancellation?</li>
+  <li> What types of operations lead to catastrophic cancellation?</li>
   <li> Given two different equations for evaluating the same value, can you identify which is more accurate for certain x and why?</li>
 </ol>
