@@ -158,7 +158,7 @@ Decimal base: $$(426.97)_{10} $$
 $$\begin{equation}(426.97)_{10} = 4 \times 10^2 + 2 \times 10^1 + 6 \times 10^0 + 9 \times 10^{-1} + 7 \times 10^{-2} \end{equation} $$
 </details>
 
-Binary base:$$(1011.001)_{2}$$
+Binary base: $$(1011.001)_{2}$$
 
 <details markdown="1">
 
@@ -306,24 +306,24 @@ you can represent <span>\\((10111.011)_2\\)</span> as
 
 A floating-point number can represent numbers of different orders of magnitude(very large and very small) with the same number of fixed digits.
 
-More formally, we can define a floating point number <span>\\(x\\)</span> as,
+More formally, we can define a floating point number <span>\\(x\\)</span> as
 
-<div>\[x = \pm q \cdot 2^m\]</div>
+<div>\[x = \pm q \cdot 2^m,\]</div>
 
-where,
+where:
 
 *   \\(\pm\\) is the sign
 *   <span>\\(q\\)</span> is the significand
-*   <span>\\(m\\)</span> is the exponent.
+*   <span>\\(m\\)</span> is the exponent
 
 <br/>
-Aside from the special case of zero and subnormal numbers (discussed below), the significand is always in normalized form,
+Aside from the special case of zero and subnormal numbers (discussed below), the significand is always in normalized form
 
-<div>\[q = 1.f\]</div>
+<div>\[q = 1.f,\]</div>
 
-where,
+where:
 
-*   <span>\\(f\\)</span> is the fractional part of the significand.
+*   <span>\\(f\\)</span> is the fractional part of the significand
 
 <br/>
 Whenever we store a normalized floating point number, the 1 is assumed. We don't store the entire significand, just the fractional part. This is called the "hidden bit representation", which gives one additional bit of precision.
@@ -361,7 +361,7 @@ A number <span>\\(x\\)</span> in a normalized binary floating-point system has t
 
 **_Machine epsilon_** (\\(\epsilon_m\\)) is defined as the distance (gap) between $$1$$ and the next largest floating point number.
 
-$$\pm 1.b_1b_2 \times 2^m\ for \ m \in [-4,4]\ and\ b_i \in {0, 1}$$
+$$\pm 1.b_1b_2 \times 2^m\ for \ m \in [-4,4]\ and\ b_i \in \{0, 1\}$$
 
 $$(1.00)_2 \times 2^0 = 1 \hspace{1.8cm} (1.01)_2 \times 2^0 = 1.25 $$
 
@@ -391,9 +391,10 @@ _Note:_ There are many definitions of machine epsilon that are used in various r
 
 What is the range of integer numbers that can be represented exactly in this representation?
 
-$$\pm 1.b_1b_2 \times 2^m\ for \ m \in [-4,4]\ and\ b_i \in {0, 1}$$
+$$\pm 1.b_1b_2 \times 2^m\ for \ m \in [-4,4]\ and\ b_i \in \{0, 1\}$$
 
-$$(1)_2 = 1.00 \times 2^0 = 1_{10}$$ \\
+
+<!-- $$(1)_2 = 1.00 \times 2^0 = 1_{10}$$ \\
 $$(10)_2 = 1.00 \times 2^1 = 2_{10}$$ \\
 $$(11)_2 = 1.10 \times 2^1 = 3_{10}$$ \\
 $$(100)_2 = 1.00 \times 2^2 = 4_{10}$$ \\
@@ -401,10 +402,25 @@ $$(101)_2 = 1.00 \times 2^2 = 5_{10}$$ \\
 $$(110)_2 = 1.00 \times 2^2 = 6_{10}$$ \\
 $$(111)_2 = 1.00 \times 2^2 = 7_{10}$$ \\
 $$(1000)_2 = 1.00 \times 2^3 = 8_{10}$$ \\
-$$\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ = 9_{10}$$ \\
-$$(1001)_2 = 1.00 \times 2^3 = 10_{10}$$
+$$(1001)_2 = \_\_?\_\_ = 9_{10}$$ \\
+$$(1010)_2 = 1.00 \times 2^3 = 10_{10}$$ -->
 
-The limit in precision causes skips in integers above an integer range. The upper bound of this range is given by $$2^p$$.
+$$\begin{eqnarray}
+(1)_2 &=& 1.00 \times 2^0 &=& 1_{10} \\
+(10)_2 &=& 1.00 \times 2^1 &=& 2_{10} \\
+(11)_2 &=& 1.10 \times 2^1 &=& 3_{10} \\
+(100)_2 &=& 1.00 \times 2^2 &=& 4_{10} \\
+(101)_2 &=& 1.01 \times 2^2 &=& 5_{10} \\
+(110)_2 &=& 1.10 \times 2^2 &=& 6_{10} \\
+(111)_2 &=& 1.11 \times 2^2 &=& 7_{10} \\
+(1000)_2 &=& 1.00 \times 2^3 &=& 8_{10} \\
+(1001)_2 &=& \_\_\_\_?\_\_\_\_ &=& 9_{10} \\
+(1010)_2 &=& 1.01 \times 2^3 &=& 10_{10} \\
+\end{eqnarray}$$
+
+We see that we can represent every integer from $$(1)_{10}$$ to $$(8)_{10}$$ in this floating point system. However, in order to represent $$(9)_{10}$$ or $$(1001)_{2}$$, we would need more than two bits in the fractional part. This limit in precision causes skips in integers above an integer range. 
+
+Notice the upper bound of this range assumes the form $$1.00 \times 2^3$$, where $$3$$ represents the precision of the floating point system. Therefore, this upper bound is given by $$2^p$$.
 
 
 ## IEEE-754 Single Precision
