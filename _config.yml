@@ -4,7 +4,7 @@ title: "CS 357 Textbook"
 lang: "en-US"
 name: "CS 357 Textbook"
 description: "CS 357 @ UIUC Textbook"
-url: "cs357.github.io"
+url: "cs357.cs.illinois.edu"
 baseurl: "/textbook"
 repository: "cs357/textbook"
 edit: false
