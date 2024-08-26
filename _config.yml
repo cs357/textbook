@@ -14,7 +14,7 @@ issuesUrl: https://github.com/cs357/textbook/issues
 theme: cs357-rtd-theme
 
 semester: fa2024
-courseUrl: https://courses.engr.illinois.edu/cs357
+courseUrl: https://cs357.cs.illinois.edu
 
 addons:
   - gems
