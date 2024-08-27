@@ -2,8 +2,6 @@
 sort: 2
 ---
 
-# Slides
-
 Here are all the slides from each topic in the class.
 
 
