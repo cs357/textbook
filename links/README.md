@@ -11,7 +11,7 @@ changelog:
 ---
 * **[Discord]({{site.discordUrl}})**
 
-* **[Course Syllabus](https://courses.grainger.illinois.edu/cs357/sp2024/pages/syllabus.html)**
+* **[Course Syllabus](https://cs357.cs.illinois.edu/pages/syllabus.html)**
 
 * **[PrairieLearn]({{site.prairielearnUrl}})**
 
