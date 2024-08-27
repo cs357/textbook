@@ -55,11 +55,6 @@ changelog:
     message: outline
 ---
 
-
-# Singular Value Decompositions
-
-* * *
-
 ## Learning Objectives
 
 *   Construct an SVD of a matrix

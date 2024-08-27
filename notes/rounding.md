@@ -24,10 +24,6 @@ changelog:
     date: 2020-04-28
     message: started from content out of FP page; added new rounding text
 ---
-# Rounding
-
-* * *
-
 ## Learning Objectives
 
 *   Understand the rounding options of a non-representable number using the IEEE-754 floating pont standard.

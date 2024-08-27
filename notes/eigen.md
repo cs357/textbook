@@ -57,10 +57,6 @@ changelog:
     message: outline
 ---
 
-# Eigenvalues and Eigenvectors
-
-* * *
-
 ## Learning Objectives
 
 *   Compute eigenvalue/eigenvector for various applications.

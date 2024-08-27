@@ -66,9 +66,6 @@ changelog:
     date: 2017-10-17
     message: outline
 ---
-# Least Squares Fitting
-
-* * *
 
 ## Learning Objectives
 

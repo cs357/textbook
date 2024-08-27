@@ -26,9 +26,6 @@ changelog:
     message: outline
 
 ---
-# Random Number Generators and Monte Carlo Method
-
-* * *
 
 ## Learning Objectives
 

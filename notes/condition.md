@@ -32,9 +32,6 @@ changelog:
     message: outline
 
 ---
-# Condition Numbers
-
-* * *
 
 ## Learning Objectives
 

@@ -33,12 +33,6 @@ changelog:
     message: outline
 
 ---
-
-
-# Solving Nonlinear Equations
-
-* * *
-
 ## Learning objectives
 
 - Evaluate the bisection, newton, and secant methods to solve nonlinear equations in 1D

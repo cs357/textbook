@@ -4,6 +4,7 @@ description: Different types of error, Big-O and complexities.
 sort: 3
 author: 
   - CS 357 Course Staff
+slidesPdf: 03-Errors.pdf
 changelog:
   -
     name: Kriti Chandak
@@ -66,11 +67,6 @@ changelog:
     date: 2017-10-17
     message: outline
 ---
-
-<br/><br/>
-
-# Errors and Complexity
-----
 
 ## Learning objectives
 

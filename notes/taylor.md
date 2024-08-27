@@ -63,10 +63,6 @@ changelog:
     message: outline
 ---
 
-# Taylor Series
-
----
-
 ## Learning Objectives
 
 - Approximate a function using a Taylor series

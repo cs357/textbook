@@ -21,11 +21,6 @@ changelog:
     date: 2020-03-01
     message: extracted material from previous reference pages
 ---
-
-# Sparse Matrices
-
-* * *
-
 ## Dense Matrices
 
 A dense matrix stores all values including zeros. So, a \\(m \times n\\) matrix would have to store <span>\\(O(m \times n)\\)</span> entries. For example:

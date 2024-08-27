@@ -92,10 +92,6 @@ changelog:
 
 ---
 
-# Vectors, Matrices, and Norms
-
-* * *
-
 ## Learning Objectives
 
 * Understand vector spaces

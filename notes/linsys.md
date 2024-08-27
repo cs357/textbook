@@ -90,9 +90,6 @@ changelog:
     message: first draft complete
 
 ---
-# Linear System of Equations and LU Factorization Algorithm
-
-* * *
 
 ## Learning Objectives
 - Understand the use of linear system of equations.
