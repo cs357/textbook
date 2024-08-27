@@ -1,5 +1,6 @@
 ---
 sort: 2
+title: Slides
 ---
 
 Here are all the slides from each topic in the class.
