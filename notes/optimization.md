@@ -78,10 +78,6 @@ changelog:
     date: 2017-10-17
     message: outline
 ---
-# Optimization
-
-* * *
-
 ## Learning objectives
 
 - Recognize the goal of optimization: finding an approximation of the minimum of a function

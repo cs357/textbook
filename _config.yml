@@ -4,17 +4,24 @@ title: "CS 357 Textbook"
 lang: "en-US"
 name: "CS 357 Textbook"
 description: "CS 357 @ UIUC Textbook"
-url: "cs357.github.io"
+url: "cs357.cs.illinois.edu"
 baseurl: "/textbook"
 repository: "cs357/textbook"
 edit: false
 author: "CS 357 @ UIUC Course Staff"
 issuesUrl: https://github.com/cs357/textbook/issues
 
+# taken from website config
+zoomLinkLargeClassroom: https://illinois.zoom.us/j/82020014275?pwd=dlBxRGY0QXFUVmZVSHU5S2oxeXBBUT09
+prairielearnUrl: https://us.prairielearn.com/pl/course_instance/157792
+prairietest: https://www.prairietest.org/
+discordUrl: https://discord.gg/zwQeRm9XWc
+
+
 theme: cs357-rtd-theme
 
 semester: fa2024
-courseUrl: https://courses.engr.illinois.edu/cs357
+courseUrl: https://cs357.cs.illinois.edu
 
 addons:
   - gems

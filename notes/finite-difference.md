@@ -17,10 +17,6 @@ changelog:
     message: moved FD content from Taylor to this new section
 ---
 
-# Finite Difference Methods
-
-* * *
-
 ## Learning Objectives
 
 * Approximate derivatives using the Finite Difference Method

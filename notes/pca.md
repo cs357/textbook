@@ -30,10 +30,6 @@ changelog:
     date: 2020-11-30
     message: fix pca code 
 ---
-# Principal Component Analysis
-
-* * *
-
 ## Learning Objectives
 
 - Understand why Principal Component Analysis is an important tool in analyzing data sets

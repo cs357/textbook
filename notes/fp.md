@@ -4,6 +4,7 @@ description: A way to store approximations of real numbers in silicons.
 sort: 4
 author:
   - CS 357 Course Staff
+slidesPdf: 94-Floating-Point.pdf
 changelog:
   - 
     name: Apramey Hosahalli
@@ -119,10 +120,6 @@ changelog:
     message: outline
 
 ---
-
-# Floating Point Representation
-
-* * *
 
 ## Learning Objectives
 

@@ -1,8 +1,7 @@
 ---
-sort: 2
+sort: 3
+title: Slides
 ---
-
-# Slides
 
 Here are all the slides from each topic in the class.
 

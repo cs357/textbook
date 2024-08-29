@@ -4,6 +4,7 @@ description: An elementary introduction to Python.
 sort: 2
 author:
   - CS 357 Course Staff
+slidesPdf: 02-Python.pdf
 changelog:
   - 
     name: Dev Singh
@@ -16,10 +17,6 @@ changelog:
     date: 2024-03-16
     message: aligned notes with slides and added additional examples
 ---
-
-# Python
-
-* * *
 
 ## Learning Objectives
 

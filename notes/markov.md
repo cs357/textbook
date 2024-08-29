@@ -51,9 +51,6 @@ changelog:
     date: 2017-10-16
     message: outline
 ---
-# Graphs and Markov chains
-
-* * *
 
 ## Learning Objectives
 
