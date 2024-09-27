@@ -52,3 +52,6 @@ server: dist
 
 server_quick:  dist_quick
 	@${DEBUG} bundle exec jekyll server --safe --livereload
+
+server_noreload: dist
+	@${DEBUG} bundle exec jekyll server --safe
