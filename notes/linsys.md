@@ -8,6 +8,11 @@ changelog:
   - 
     name: Kaiyao Ke
     netid: kaiyaok2
+    date: 2024-09-30
+    message: minor bug fix
+  - 
+    name: Kaiyao Ke
+    netid: kaiyaok2
     date: 2024-02-13
     message: aligned notes with slides, added examples and refactored existing notes
 
@@ -306,15 +311,15 @@ $$
 $$
 
 $$
-6x_3 + 4x_4 = 6 \Rightarrow x_3 = \frac{6 - 4(2)}{6} = -\frac{2}{3}
+6x_3 + 4x_4 = 6 \Rightarrow x_3 = \frac{6 - 4(2)}{6} = -\frac{1}{3}
 $$
 
 $$
-2x_2 + 2x_3 + 3x_4 = 2 \Rightarrow x_2 = \frac{2 - 2(-\frac{2}{3}) - 3(2)}{2} = -\frac{10}{3}
+2x_2 + 2x_3 + 3x_4 = 2 \Rightarrow x_2 = \frac{2 - 2(-\frac{1}{3}) - 3(2)}{2} = -\frac{5}{3}
 $$
 
 $$
-2x_1 + 3x_2 + x_3 + x_4 = 2 \Rightarrow x_1 = \frac{2 - 3(-\frac{10}{3}) + (-\frac{2}{3}) + 2}{2} = \frac{22}{3}
+2x_1 + 3x_2 + x_3 + x_4 = 2 \Rightarrow x_1 = \frac{2 - 3(-\frac{5}{3}) - (-\frac{1}{3}) - 2}{2} = \frac{8}{3}
 $$
 </details>
 
@@ -1291,7 +1296,7 @@ $$
 1 & 0 & 0 & 0 \\
 \textbf{0.75} & 1 & 0 & 0 \\
 0.25 & \textbf{-0.428} & 1 & 0 \\
-\textbf{0.75} & \textbf{-0.285} & ? & 1
+\textbf{0.5} & \textbf{-0.285} & ? & 1
 \end{bmatrix}; \hspace{5mm}
 \textbf{U} =
 \begin{bmatrix}
