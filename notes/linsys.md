@@ -5,6 +5,10 @@ sort: 9
 author:
   - CS 357 Course Staff
 changelog:
+  - name: Dev Singh
+    netid: dsingh14
+    date: 2024-10-02
+    message: fix lu_decomp
   - 
     name: Kaiyao Ke
     netid: kaiyaok2
