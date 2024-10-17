@@ -301,7 +301,7 @@ $$\begin{eqnarray}
 \\
 &=& \begin{bmatrix} 1 + 14 + 0 -16 \\ -5 + 6 + 0 - 8\\ 0 + 10 + 0 - 24\end{bmatrix} \\
 \\
-&=& \begin{bmatrix} -1 \\ -13\\ -14\end{bmatrix}
+&=& \begin{bmatrix} -1 \\ -7\\ -14\end{bmatrix}
 \end{eqnarray}$$
 
 </details>

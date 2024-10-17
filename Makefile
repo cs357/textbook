@@ -38,6 +38,9 @@ clean:
 dist: format clean
 	@cd cs357-rtd-theme &&  yarn build
 
+dist_quick: clean
+	@cd cs357-rtd-theme &&  yarn build
+
 status: format clean checkout
 	@git status
 
@@ -46,3 +49,9 @@ build: dist
 
 server: dist
 	@${DEBUG} bundle exec jekyll server --safe --livereload
+
+server_quick:  dist_quick
+	@${DEBUG} bundle exec jekyll server --safe --livereload
+
+server_noreload: dist
+	@${DEBUG} bundle exec jekyll server --safe

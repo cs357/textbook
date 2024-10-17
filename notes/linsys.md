@@ -5,6 +5,15 @@ sort: 9
 author:
   - CS 357 Course Staff
 changelog:
+  - name: Dev Singh
+    netid: dsingh14
+    date: 2024-10-02
+    message: fix lu_decomp
+  - 
+    name: Kaiyao Ke
+    netid: kaiyaok2
+    date: 2024-09-30
+    message: minor bug fix
   - 
     name: Kaiyao Ke
     netid: kaiyaok2
@@ -306,15 +315,15 @@ $$
 $$
 
 $$
-6x_3 + 4x_4 = 6 \Rightarrow x_3 = \frac{6 - 4(2)}{6} = -\frac{2}{3}
+6x_3 + 4x_4 = 6 \Rightarrow x_3 = \frac{6 - 4(2)}{6} = -\frac{1}{3}
 $$
 
 $$
-2x_2 + 2x_3 + 3x_4 = 2 \Rightarrow x_2 = \frac{2 - 2(-\frac{2}{3}) - 3(2)}{2} = -\frac{10}{3}
+2x_2 + 2x_3 + 3x_4 = 2 \Rightarrow x_2 = \frac{2 - 2(-\frac{1}{3}) - 3(2)}{2} = -\frac{5}{3}
 $$
 
 $$
-2x_1 + 3x_2 + x_3 + x_4 = 2 \Rightarrow x_1 = \frac{2 - 3(-\frac{10}{3}) + (-\frac{2}{3}) + 2}{2} = \frac{22}{3}
+2x_1 + 3x_2 + x_3 + x_4 = 2 \Rightarrow x_1 = \frac{2 - 3(-\frac{5}{3}) - (-\frac{1}{3}) - 2}{2} = \frac{8}{3}
 $$
 </details>
 
@@ -566,6 +575,17 @@ Given a matrix $${\bf A}$$ there are many different algorithms to find the matri
 
 <br/>
 
+<div class="toasts warning mb-4">
+  <div class="title px-2 py-1">
+      <i class="fa fa-info-circle"></i>
+        Errata
+  </div>
+  <div class="content px-2 py-3">
+      The diagram above is actually broken (we're fixing it). It should be that U11 = A11 and U12 = A12.
+  </div>
+</div>
+
+
 Use a similar idea to write $${\bf A}$$ in block form when $${\bf A}$$ is an $$n\times n$$ matrix:
 
 <br/>
@@ -639,45 +659,28 @@ The code for the **_recursive leading-row-column LU algorithm_** to find $${\bf 
 import numpy as np
 def lu_decomp(A):
     """(L, U) = lu_decomp(A) is the LU decomposition A = L U
-       A is any matrix
-       L will be a lower-triangular matrix with 1 on the diagonal, the same shape as A
-       U will be an upper-triangular matrix, the same shape as A
+       A is any square matrix
+       L will be a lower-triangular matrix with 1 on the diagonal
+       U will be an upper-triangular matrix
     """
     n = A.shape[0]
-    if n == 1:
-        L = np.array([[1]])
-        U = A.copy()
-        return (L, U)
+    
+    # Initialize L and U as zero matrices of the same shape as A
+    L = np.eye(n)  # L is initialized with 1s on the diagonal
+    U = np.zeros((n, n))
+    
+    for i in range(n):
+        # Compute the U matrix (upper triangular)
+        for j in range(i, n):
+            U[i, j] = A[i, j] - np.dot(L[i, :i], U[:i, j])
+        
+        # Compute the L matrix (lower triangular)
+        for j in range(i + 1, n):
+            if U[i, i] == 0:
+                raise ZeroDivisionError("Zero pivot encountered. Cannot factorize.")
+            L[j, i] = (A[j, i] - np.dot(L[j, :i], U[:i, i])) / U[i, i]
 
-    A11 = A[0,0]
-    A12 = A[0,1:]
-    A21 = A[1:,0]
-    A22 = A[1:,1:]
-
-    L11 = 1
-    U11 = A11
-
-    L12 = np.zeros(n-1)
-    U12 = A12.copy()
-
-    L21 = A21.copy() / U11
-    U21 = np.zeros(n-1)
-
-    S22 = A22 - np.outer(L21, U12)
-    (L22, U22) = lu_decomp(S22)
-
-    L = np.zeros(A.shape)
-    L[0, 0] = L11
-    L[0, 1:] = L12
-    L[1:, 0] = L21
-    L[1:, 1:] = L22
-    U = np.zeros(A.shape)
-    U[0, 0] = U11
-    U[0, 1:] = U12
-    U[1:, 0] = U21
-    U[1:, 1:] = U22
-
-    return (L, U)
+    return L, U
 ```
 
 Number of divisions: $$(n-1)+(n-2)+\ldots+1=\frac{n(n-1)}{2}$$
@@ -1291,7 +1294,7 @@ $$
 1 & 0 & 0 & 0 \\
 \textbf{0.75} & 1 & 0 & 0 \\
 0.25 & \textbf{-0.428} & 1 & 0 \\
-\textbf{0.75} & \textbf{-0.285} & ? & 1
+\textbf{0.5} & \textbf{-0.285} & ? & 1
 \end{bmatrix}; \hspace{5mm}
 \textbf{U} =
 \begin{bmatrix}
