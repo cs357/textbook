@@ -575,6 +575,17 @@ Given a matrix $${\bf A}$$ there are many different algorithms to find the matri
 
 <br/>
 
+<div class="toasts warning mb-4">
+  <div class="title px-2 py-1">
+      <i class="fa fa-info-circle"></i>
+        Errata
+  </div>
+  <div class="content px-2 py-3">
+      The diagram above is actually broken (we're fixing it). It should be that U11 = A11 and U12 = A12.
+  </div>
+</div>
+
+
 Use a similar idea to write $${\bf A}$$ in block form when $${\bf A}$$ is an $$n\times n$$ matrix:
 
 <br/>
