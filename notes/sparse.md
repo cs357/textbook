@@ -6,6 +6,11 @@ author:
   - CS 357 Course Staff
 changelog:
   - 
+    name: Kaiyao Ke
+    netid: kaiyaok2
+    date: 2024-10-31
+    message: minor bug fix
+  - 
     name: Kriti Chandak
     netid: kritic3
     date: 2024-02-14
@@ -42,9 +47,9 @@ A \\(m \times n\\) matrix is called sparse if it has <span>\\(O(min(m, n))\\)</s
 
 A sparse matrix aims to store large matrices efficiently without storing many zeros, which allows for more economical computations. It also saves storage space, which can reduce memory overhead on a system. 
 
-The number of operations required to add two dense matrices <span>\\(\mathbf{P}\\)</span>, <span>\\(\mathbf{Q}\\)</span> is  <span>\\(O(n(\mathbf{P}) \times n(\mathbf{Q}))\\)</span> where <span>\\((n(\mathbf{X}))\\)</span> is the number of elements in <span>\\(\mathbf{X}\\)</span>.
+The number of operations required to add two dense matrices <span>\\(\mathbf{P}\\)</span>, <span>\\(\mathbf{Q}\\)</span> is  <span>\\(O(n(\mathbf{P}) + n(\mathbf{Q}))\\)</span> where <span>\\((n(\mathbf{X}))\\)</span> is the number of elements in <span>\\(\mathbf{X}\\)</span>.
 
-The number of operations required to add two sparse matrices <span>\\(\mathbf{P}\\)</span>, <span>\\(\mathbf{Q}\\)</span> is  <span>\\(O(nnz(\mathbf{P}) \times nnz(\mathbf{Q}))\\)</span> where <span>\\((nnz(\mathbf{X}))\\)</span> is the number of non-zero elements in <span>\\(\mathbf{X}\\)</span>.
+The number of operations required to add two sparse matrices <span>\\(\mathbf{P}\\)</span>, <span>\\(\mathbf{Q}\\)</span> is  <span>\\(O(nnz(\mathbf{P}) + nnz(\mathbf{Q}))\\)</span> where <span>\\((nnz(\mathbf{X}))\\)</span> is the number of non-zero elements in <span>\\(\mathbf{X}\\)</span>.
 
 ## Storage Solutions
 
