@@ -5,7 +5,12 @@ sort: 16
 author:
   - CS 357 Course Staff
 changelog:
-  
+
+  - name: Dev Singh
+    netid: dsingh14
+    date: 2024-10-31
+    message: fixed gradient calculation
+
   - 
     name: Kaiyao Ke
     netid: kaiyaok2
