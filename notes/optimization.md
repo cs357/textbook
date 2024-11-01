@@ -684,7 +684,7 @@ x_1 \\
 x_2 \\
 \end{bmatrix}}) = -
 \begin{bmatrix}
-30x_1 + 1 \\
+30x_1^2 + 1 \\
 -2x_2 \\
 \end{bmatrix}
 \]
@@ -695,11 +695,11 @@ x_2 \\
 2 \\
 \end{bmatrix}}) = -
 \begin{bmatrix}
-30 \times 2 + 1 \\
+30 \times 4 + 1 \\
 -2 \times 2 \\
 \end{bmatrix} = 
 \bf{\begin{bmatrix}
--61 \\
+-121 \\
 4 \\
 \end{bmatrix}}
 \]
