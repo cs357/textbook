@@ -4,6 +4,11 @@ description: A method to decompose a matrix into 3 matrices that expose interest
 sort: 18
 changelog:
   - 
+    name: Dev Singh
+    netid: dsingh14
+    date: 2024-11-20
+    message: add more details on singular values
+  - 
     name: Pascal Adhikary
     netid: pascala2
     date: 2024-04-05
@@ -68,7 +73,8 @@ A more general factorization is, for __any__ $$m \times n$$ matrix, there exists
 
 * $$\bf U$$ is composed of the eigenvectors of $$\bf{AA^T}$$ as its columns.
 * $$\bf V$$ is composed of the eigenvectors of $$\bf{A^TA}$$ as its columns.
-* $$\bf \Sigma$$ is a diagonal matrix composed of square roots of the eigenvalues of $$\bf{A^TA}$$, called singular values.
+* $$\bf \Sigma$$ is a diagonal matrix composed of square roots of the eigenvalues of $$\bf{A^TA}$$ (or $$\bf{AA^T}$$), called singular values.
+  * $$\bf{A^TA}$$ and $$\bf{AA^T}$$ have the same positive eigenvalues, so the square roots of the eigenvalues are also the same.<sub><a href="#footnote-1">1</a></sub>
 * The diagonal of $$\bf \Sigma$$ is ordered by non-increasing singular values and the columns of $$\bf U$$, $$\bf V$$ are ordered respectively.
 
 In addition, we define a reduced form: $$ {\bf A} = {\bf U_{R}} {\bf \Sigma_{R}} {\bf V_R}^T$$ where $${\bf U_R}$$ is an \\(m \times k\\) matrix, $${\bf V_R}$$ is an \\(n \times k\\) matrix, and $${\bf \Sigma_{R}}$$ is an \\(k \times k\\) diagonal matrix. Here, $$k = \min(m,n)$$.
@@ -355,6 +361,9 @@ Evaluate: $$\bf{x=Vy}$$
 
 * Cost of solve: $$O(n^2)$$
 * Cost of decomposition $$O(n^3)$$. Recall that SVD and LU have the same asymptotic behavior, however the number of operations - the constant factor before the $$n^3$$ - for the SVD is larger.
+
+## Footnotes
+<p id="footnote-1">1. See <a href="https://web.archive.org/web/20241120230934/https://math.stackexchange.com/questions/1087064/non-zero-eigenvalues-of-aat-and-ata">this Math Stack Exchange post</a> for a brief explanation.</p>
 
 ## Review Questions
 
