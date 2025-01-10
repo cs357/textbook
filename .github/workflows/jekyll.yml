@@ -77,7 +77,7 @@ jobs:
         uses: addnab/docker-run-action@v3
         with:
           image: ghcr.io/cs357/textbook-devel:latest
-          options: -v ${{ github.workspace }}:/srv/jekyll
+          options: -v ${{ github.workspace }}:/srv/jekyll -e JEKYLL_BUILD_REVISION=${{ github.sha }}
           shell: bash
           run: cd /srv/jekyll && ls && make install && make build
       - name: Upload artifact
