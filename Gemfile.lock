@@ -223,6 +223,8 @@ GEM
       racc (~> 1.4)
     nokogiri (1.13.10-arm64-darwin)
       racc (~> 1.4)
+    nokogiri (1.13.10-x86_64-darwin)
+      racc (~> 1.4)
     nokogiri (1.13.10-x86_64-linux)
       racc (~> 1.4)
     octokit (4.25.1)
@@ -276,6 +278,7 @@ PLATFORMS
 DEPENDENCIES
   cs357-rtd-theme!
   github-pages
+  jekyll-github-metadata
   webrick (~> 1.8)
 
 BUNDLED WITH

@@ -20,12 +20,14 @@ discordUrl: https://discord.gg/zwQeRm9XWc
 
 theme: cs357-rtd-theme
 
-semester: fa2024
+# NOTE: the semester tag is no longer used.
+# semester: fa2024
 courseUrl: https://cs357.cs.illinois.edu
 
 addons:
   - gems
   - analytics
+  - "jekyll-github-metadata"
 
 # Reading Files
 exclude:
