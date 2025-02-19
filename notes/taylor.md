@@ -6,6 +6,10 @@ sort: 6
 author:
   - CS 357 Course Staff
 changelog:
+  - name: Kaiyao Ke
+    netid: kaiyaok2
+    date: 2025-02-18
+    message: fix rendering bugs
   - 
     name: Dev Singh
     netid: dsingh14
@@ -227,16 +231,28 @@ Suppose we want to approximate \\(f(x) = \sin x\\) using a degree-4 Taylor polyn
 for some \\(\xi\\) between <span>\\(x_0\\)</span> and <span>\\(x\\)</span>.
 
 <details>
-    <summary><strong>Answer</strong></summary>
+  <summary><strong>Answer</strong></summary>
 
-If we want to find the upper bound for the absolute error, we are looking for an upper bound for $$\vert f^{(5)}(\xi)\vert $$
+  If we want to find the upper bound for the absolute error, we are looking for an upper bound for 
 
-Since \(f^{(5)}(x)\) = cos \(x\), we have \(|f^{(5)}(\xi)|\le \cos(0) \rightarrow |f^{(5)}(\xi)|\le 1\). Then
-\[
-|R_4(x)| = \left|\frac{f^{(5)}(\xi)}{5!} (x-x_0)^{5}\right| = \frac{|f^{(5)}(\xi)|}{5!} |x|^{5} \le \frac{1}{120} |x|^{5}
-\]
+  \(
+  \vert f^{(5)}(\xi)\vert
+  \).<br><br>
+
+  Since \( f^{(5)}(x) = \cos x \)<br> <br> 
+
+  \(
+  |f^{(5)}(\xi)|\le \cos(0) \rightarrow |f^{(5)}(\xi)|\le 1
+  \) <br><br>
+
+  Then: <br><br>
+
+  \(
+  |R_4(x)| = \left|\frac{f^{(5)}(\xi)}{5!} (x-x_0)^{5}\right| = \frac{|f^{(5)}(\xi)|}{5!} |x|^{5} \le \frac{1}{120} |x|^{5}
+  \)
 
 </details>
+
 
 #### Example of Error Predictions
 
