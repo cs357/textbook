@@ -7,6 +7,11 @@ author:
 slidesPdf: 94-Floating-Point.pdf
 changelog:
   - 
+    name: Dev Singh
+    netid: dsingh14
+    date: 2025-09-01
+    message: add image sources
+  - 
     name: Apramey Hosahalli
     netid: apramey2
     date: 2024-04-23
@@ -423,6 +428,9 @@ Notice the upper bound of this range assumes the form $$1.00 \times 2^3$$, where
 ## IEEE-754 Single Precision
 
 ![Single Precision]({{ site.baseurl }}/assets/img/figs/ieee_single.png)
+<sup>Image source: [Fresheneesz at the English Wikipedia project](https://commons.wikimedia.org/wiki/File:Float_example.svg).</sup>
+
+
 
 *   \\(x = (-1)^s 1.f \times 2^m\\)
 *   1-bit sign, s = 0: positive sign, s = 1: negative sign
@@ -461,6 +469,8 @@ For additional reading about [IEEE Floating Point Numbers](http://steve.hollasch
 ## IEEE-754 Double Precision
 
 ![Double Precision]({{ site.baseurl }}/assets/img/figs/ieee_double.png)
+<sup>Image source: [Codekaizen](https://commons.wikimedia.org/wiki/File:IEEE_754_Double_Floating_Point_Format.svg).</sup>
+
 
 *   \\(x = (-1)^s 1.f \times 2^m\\)
 *   1-bit sign, s = 0: positive sign, s = 1: negative sign
@@ -497,8 +507,11 @@ Arithmetic operations that result in something that is not a number are represen
 ## Floating Point Number Line
 
 ![Number Line]({{ site.baseurl }}/assets/img/figs/floatingpoints.png)
+<sup>Image source: [Unavoidable Errors in Computing](https://www.physics.udel.edu/~bnikolic/teaching/phys660/PDF/unavoidable_errors.pdf).</sup>
+
 
 The above image shows the number line for the IEEE-754 floating point system.
+
 
 ## Subnormal Numbers
 
