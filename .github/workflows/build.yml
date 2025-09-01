@@ -32,6 +32,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          submodules: 'true'
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
@@ -90,6 +92,10 @@ jobs:
     permissions:
       contents: read
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: 'true'
       - name: Run build
         uses: addnab/docker-run-action@v3
         with:
