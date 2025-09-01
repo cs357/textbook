@@ -1,46 +1,99 @@
-name: Test build Jekyll site without deploying
+name: Build and Push Multi-Arch Docker Images
 
 on:
-  # Runs on pushes targeting the default branch
-  pull_request:
-    branches: ["main"]
+  push:
+    branches:
+      - main
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "build_pr"
-  cancel-in-progress: false
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: cs357/textbook-devel
 
 jobs:
-  # Build job
   build:
-    runs-on: ubuntu-latest
+    name: Build for ${{ matrix.arch }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+            platform: linux/amd64
+            runner: ubuntu-latest
+          - arch: arm64
+            platform: linux/arm64
+            runner: ubuntu-24.04-arm
+    
+    # Run each job on its specified native runner
+    runs-on: ${{ matrix.runner }}
+    permissions:
+      packages: write
+      contents: read
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
         with:
-          submodules: 'true'
-      - uses: docker/setup-buildx-action@v2
-      - uses: docker/build-push-action@v4
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push architecture-specific image
+        uses: docker/build-push-action@v5
         with:
           context: .
           file: "Dockerfile.devel"
-          tags: cs357:local
-          load: true
+          platforms: ${{ matrix.platform }}
+          # Tag each arch-specific image with the commit SHA and architecture
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest-${{ matrix.arch }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           push: false
+          load: true
+
+      - name: Push the architecture-specific image
+        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest-${{ matrix.arch }}
+
+  push-manifest:
+    name: Push multi-arch manifest
+    # This job runs only after all 'build' jobs have succeeded
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+
+    steps:
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create and push manifest
+        run: |
+          # Create and push a multi-arch manifest tagged with 'latest'
+          docker manifest create ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
+            --amend ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest-amd64 \
+            --amend ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest-arm64
+          docker manifest push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+
+  build-website:
+    name: Build textbook
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
       - name: Run build
         uses: addnab/docker-run-action@v3
         with:
-          image: cs357:local
+          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest-amd64
           options: -v ${{ github.workspace }}:/srv/jekyll
           shell: bash
           run: cd /srv/jekyll && ls && make install && make build
