@@ -20,8 +20,9 @@ cp -r node_modules/@primer/css/markdown   _sass/lib/@primer/css
 cp -r node_modules/@primer/css/utilities  _sass/lib/@primer/css
 
 # font-awesome
-cp node_modules/font-awesome/scss/_variables.scss _sass/lib/font-awesome
-cp node_modules/font-awesome/scss/_icons.scss     _sass/lib/font-awesome
+cp node_modules/@fortawesome/fontawesome-free/scss/_variables.scss _sass/lib/font-awesome
+cp node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss _sass/lib/font-awesome
+cp node_modules/@fortawesome/fontawesome-free/scss/_icons.scss     _sass/lib/font-awesome
 
 # rouge
 rougify style github | sass-convert --to scss > _sass/lib/rouge/github.scss
@@ -48,7 +49,7 @@ cp node_modules/roboto-fontface/fonts/roboto-slab/Roboto-Slab-Regular.woff   ass
 cp node_modules/roboto-fontface/fonts/roboto-slab/Roboto-Slab-Regular.woff2  assets/css/fonts
 
 # font-awesome
-cp -r node_modules/font-awesome/fonts/* assets/css/fonts && rm -f assets/css/fonts/FontAwesome.otf
+cp -r node_modules/@fortawesome/fontawesome-free/fonts/* assets/css/fonts && rm -f assets/css/fonts/FontAwesome.otf
 
 # jquery
 rm -f assets/js/jquery.min.js
