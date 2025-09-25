@@ -148,12 +148,11 @@ where \\(N(0, \sigma^2)\\) is a normal distribution; \\(\mu = \mathbb{E}[f(X)]\\
 
 ### Error/Convergence
 
-Let <span>\\(Z\\)</span> be a random variable with normal distribution \\(N(0, \sigma^2)\\). Then the error of Monte Carlo estimate, \\(err = S_n - \mu\\), can be written as
-<div>\[ err \to \frac{1}{\sqrt{n}} \sigma \]</div>
-when \\(n \to \infty\\).
+Unlike deterministic approximation algorithms, we **never have a guarantee** that the error will be lower than a certain quantity; we could be arbitrarily unlucky, e.g., we could get tails \\(n\\) times in a row on a truly fair die for any \\(n\\). Nevertheless, the probability of doing so decreases with the number of samples.
 
-Therefore, the asymptotic behavior of the Monte Carlo method is \\(\mathcal{O}(\frac{1}{\sqrt{n}})\\), where <span>\\(n\\)</span> is the number of samples.
+Let <span>\\(Z\\)</span> be a random variable with some finite standard deviation \\(\sigma\\). <!-- The old text asserted Z was normal; this is an unnecessary assumption. --> Then according to the [central limit theorem](https://en.wikipedia.org/wiki/Central_limit_theorem), the Monte Carlo estimate, \\(S_n\\), will be normally distributed around the true value, \\(\mu\\), with standard deviation \\(\sigma / \sqrt{n}\\).
 
+That is to say, **for a given probability level** \\(p\\), the narrowest interval in which \\(S_n\\) falls with probability \\(p\\) will shrink the more samples we collect. The _rate_ of this decrease is \\(\mathcal{O}(1/\sqrt{n})\\), but the constant of proportionality (and therefore absolute error bound) depends on the choice of \\(p\\). A rule of thumb we will use in this course is to choose \\(p = 68.3%\\), also called "1 sigma". With 68% probability, the absolute error, \\(|S_n - \mu|\\) will be less than \\(\sigma / \sqrt{n}\\). A table of \\(k\\)-sigma probabilities can be found on [Wikipedia](https://en.wikipedia.org/wiki/68%E2%80%9395%E2%80%9399.7_rule).
 
 ### Example: Applying Monte Carlo
  We can use Monte Carlo to efficiently approximate the definite integral of a complicated function, which is especially useful in higher dimensions when other numerical integration techniques are extremely costly.  Below is the Python code for approximating the intergral of a function <span>\\(f(x,y) = x+y\\)</span> over the domain \\([x_{min}, x_{max}] \times [y_{min}, y_{max}]\\):
