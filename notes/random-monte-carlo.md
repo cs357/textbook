@@ -149,7 +149,7 @@ where \\(N(0, \sigma^2)\\) is a normal distribution; \\(\mu = \mathbb{E}[f(X)]\\
 ### Error/Convergence
 
 Let <span>\\(Z\\)</span> be a random variable with normal distribution \\(N(0, \sigma^2)\\). Then the error of Monte Carlo estimate, \\(err = S_n - \mu\\), can be written as
-<div>\[ err \to \frac{1}{\sqrt{n}} Z \]</div>
+<div>\[ err \to \frac{1}{\sqrt{n}} \sigma \]</div>
 when \\(n \to \infty\\).
 
 Therefore, the asymptotic behavior of the Monte Carlo method is \\(\mathcal{O}(\frac{1}{\sqrt{n}})\\), where <span>\\(n\\)</span> is the number of samples.
