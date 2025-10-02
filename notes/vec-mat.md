@@ -8,6 +8,11 @@ changelog:
   - 
     name: Dev Singh
     netid: dsingh14
+    date: 2025-10-02
+    message: fix mistake in norm calculation
+  - 
+    name: Dev Singh
+    netid: dsingh14
     date: 2024-02-20
     message: add warning about additivity of norms 
   - 
@@ -486,9 +491,9 @@ Relative\ Error &=& \frac{\left\|\begin{bmatrix} 0 \\ 6 \\ -4 \end{bmatrix} - \b
 \\
 &=& \frac{2}{|0| + |6| + |-4|}\\
 \\
-&=& \frac{2}{2}\\
+&=& \frac{2}{10}\\
 \\
-&=& 1
+&=& \frac{1}{5}\\
 \\
 \end{eqnarray}$$
 
