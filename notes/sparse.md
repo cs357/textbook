@@ -6,6 +6,11 @@ author:
   - CS 357 Course Staff
 changelog:
   - 
+    name: Dev Singh
+    netid: dsingh14
+    date: 2025-10-28
+    message: fix dense matrix example
+  - 
     name: Kaiyao Ke
     netid: kaiyaok2
     date: 2024-10-31
@@ -29,13 +34,13 @@ changelog:
 ## Dense Matrices
 
 A dense matrix stores all values including zeros. So, a \\(m \times n\\) matrix would have to store <span>\\(O(m \times n)\\)</span> entries. For example:
-<div>\[A = \begin{bmatrix} 1.0 & 0 & 0 & 2.0 & 0 \\ 3.0 & 4.0 & 0 & 5.0 & 0 \\ 6.0 & 0 & 7.0 & 8.0 & 9.0 \\ 0 & 0 & 10.0 & 11.0 & 0 \\ 0 & 0 & 0 & 0 & 12.0 \end{bmatrix}.\]</div>
+<div>\[A = \begin{bmatrix} 1.0 & 0 & 0 \\ 3.0 & 4.0 & 0  \\ 6.0 & 0 & 7.0  \\ 0 & 0 & 10.0 \end{bmatrix}.\]</div>
 
 To store the matrix, all components are generally saved in row-major order.  For <span>\\(\mathbf{A}\\)</span> given above, we would store:
-<div>\[A_{dense} = \begin{bmatrix} 1.0 & 2.0 & 3.0 & 4.0 & 5.0 & 6.0 & 7.0 & 8.0 & 9.0 & 10.0 & 11.0 & 12.0 \end{bmatrix}.\]</div>
+<div>\[A_{dense} = \begin{bmatrix} 1.0 & 0 & 0 & 3.0 & 4.0 & 0 & 6.0 & 0 & 7.0 & 0 & 0 & 10.0 \end{bmatrix}.\]</div>
 
 The dimensions of the matrix are stored separately:
-<div>\[A_{shape} = \\((nrow, ncol)\\).\]</div>
+<div>\[A_{shape} = \\(n_{row}, n_{col})\\ = \\(4, 3)\\.\]</div>
 
 ## Sparse Matrices
 
