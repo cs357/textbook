@@ -6,6 +6,11 @@ author:
   - CS 357 Course Staff
 changelog:
   - 
+    name: Dev Singh
+    netid: dsingh14
+    date: 2025-10-28
+    message: fix eigenvector computation
+  - 
     name: Pascal Adhikary
     netid: pascala2
     date: 2024-02-13
@@ -93,11 +98,11 @@ We define the nullspace of $$A$$ as the span, or set of all linear combinations,
 
 If the matrix is reasonably small, we can find the determinant and solve for the characteristic polynomial efficiently. 
 
-$$ \bf{A}=\begin{bmatrix} 2 & 1 \\ 4 & 2 \end{bmatrix} \qquad \text{det}(\bf{A}- \bf{I}\lambda)=p(\lambda)=(2-\lambda)^2-4 \rightarrow \lambda_1=4, \lambda_2=0$$
+$$ \bf{A}=\begin{bmatrix} 2 & 1 \\ 4 & 2 \end{bmatrix} \qquad \text{det}(\bf{A}- \bf{I}\lambda)=p(\lambda)=(2-\lambda)^2-4 \rightarrow \lambda_1=0, \lambda_2=4$$
 
 Second, we find the eigenvectors for each eigenvalue by solving for the trivial solution (the nullspace) of $$\bf A-\bf I\lambda$$. **Note** any multiple of $$\bf x$$ below is a valid eigenvector to its eigenvalue.
 
-$$\lambda_1: \begin{bmatrix} 2 & 1 \\ 4 & 2 \end{bmatrix}\bf x=0 \rightarrow \bf{x}=\begin{bmatrix} 1  \\  2 \end{bmatrix} \qquad \lambda_1: \begin{bmatrix} -2 & 1 \\ 4 & -2 \end{bmatrix}\bf{x}=0 \rightarrow \bf{x}=\begin{bmatrix} 1  \\  -2 \end{bmatrix}$$
+$$\lambda_1: \begin{bmatrix} 2 & 1 \\ 4 & 2 \end{bmatrix}\bf x=0 \rightarrow \bf{x}=\begin{bmatrix} 1  \\  -2 \end{bmatrix} \qquad \lambda_2: \begin{bmatrix} -2 & 1 \\ 4 & -2 \end{bmatrix}\bf{x}=0 \rightarrow \bf{x}=\begin{bmatrix} 1  \\  2 \end{bmatrix}$$
 
 ## Diagonalizability
 
