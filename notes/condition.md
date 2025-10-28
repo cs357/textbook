@@ -5,6 +5,10 @@ sort: 11
 author:
   - CS 357 Course Staff
 changelog:
+  - name: Samuel Grayson
+    netid: grayson5
+    date: 2025-10-22
+    message: Add response to student question, cond(A) = 1.
   - 
     name: Arnav Aggarwal
     netid: arnava4
@@ -194,7 +198,65 @@ $$
 \end{align}
 $$
 
-Hence, this means that orthogonal matrices have optimal conditioning.
+Hence, this means that orthogonal matrices have optimal conditioning. The converse is also true.
+<details>
+<summary markdown="span">**Proof**</summary>
+<div markdown=1>
+<!-- See https://github.com/gettalong/kramdown/issues/155#issuecomment-1643570226 -->
+
+First, I will prove three lemmas:
+
+1. The transpose doesn't change the matrix norm. Proof:
+
+   $$
+   \begin{aligned}[t]
+   \| \mathbf{A} \| & = \max_{\mathbf{x}} \frac{\| \mathbf{A} \mathbf{x} \|}{\| \mathbf{x} \|} \\
+                & = \max_{\mathbf{x}, \mathbf{y}} \frac{| \mathbf{y}^\mathsf{T} \mathbf{A} \mathbf{x} |}{\| \mathbf{y} \| \| \mathbf{x} \|} \\
+                & = \max_{\mathbf{x}, \mathbf{y}} \frac{| \left( \mathbf{y}^\mathsf{T} \mathbf{A} \mathbf{x} \right)^\mathsf{T} |}{\| \mathbf{y} \| \| \mathbf{x} \|} \\
+                & = \max_{\mathbf{x}, \mathbf{y}} \frac{| \mathbf{x}^\mathsf{T} \mathbf{A}^\mathsf{T} \mathbf{y} |}{\| \mathbf{y} \| \| \mathbf{x} \|} \\
+                & = \max_{\mathbf{y}} \frac{\| \mathbf{A}^\mathsf{T} \mathbf{y} \|}{\| \mathbf{y} \|} \\
+                & = \|\mathbf{A}^\mathsf{T}\| \\
+   \end{aligned}
+   $$
+
+2. The transpose of the inverse is the inverse of the transpose. Proof: $$\mathbf{I} = \mathbf{I}^\mathsf{T} = (\mathbf{A}^{-1} \mathbf{A})^\mathsf{T} = \mathbf{A}^\mathsf{T} {\mathbf{A}^{-1}}^\mathsf{T}$$. By definition, $${\mathbf{A}^{-1}}^\mathsf{T} = {\mathbf{A}^\mathsf{T}}^{-1}$$.
+
+3. Transpose doesn't change the condition number. Proof:
+
+   $$
+   \begin{aligned}[t]
+   \mathrm{cond}(\mathbf{A}) & = \|\mathbf{A}\| \|\mathbf{A}^{-1}\| \\
+                    & = \|\mathbf{A}^\mathsf{T}\| \|{\mathbf{A}^{-1}}^\mathsf{T}\| \\
+                    & = \|\mathbf{A}^\mathsf{T}\| \|{\mathbf{A}^\mathsf{T}}^{-1}\| \\
+                    & = \mathrm{cond}(\mathbf{A}) \\
+   \end{aligned}
+   $$
+
+On to the main result. Given $$\mathrm{cond}(\mathbf{A}) = 1$$, I will show that $$\mathbf{A}$$ is orthogonal in three steps.
+
+1. Let $$m := \|\mathbf{A}\|$$. Usually, $$m$$ is the _maximum_ scale factor, but in this case, the input is _always_ scaled by $$m$$. Assume for the sake of contradiction that some input, call it $$\mathbf{x}$$ is scaled by _less_ than $$m$$, i.e., $$\| \mathbf{A} \mathbf{x} \| < m \| x \|$$. However, $$\mathbf{A}^{-1}$$ can only scale the input by a factor not greater than $$\|\mathbf{A}^{-1}\| = 1 / \|\mathbf{A}\| = 1/m$$, which is not enough to fully undo the input, given $$\|\mathbf{x}\| = \| \mathbf{A}^{-1} (\mathbf{A} \mathbf{x}) \| < \| \mathbf{A}^{-1} m \mathbf{x} \| \leq \| \mathbf{x} \|$$, which is a contradiction.
+
+2. We will need to determine the norm of the $$i$$th column of $$\mathbf{A}$$, denoted $$\mathbf{A}_i$$. Let $$\mathbf{e}_i$$ be the $$i$$th basis vector, $$[0, \dotsc, 0, 1, 0, \dotsc, 0].$$ $$\| \mathbf{A} \mathbf{e}_i \| = m \|\mathbf{e}_i\| = m$$, but also $$\mathbf{e}_i$$ is a "getter" for the $$i$$th column, so $$\|\mathbf{A}_i\| = m$$.
+
+3. To show orthogonality, I will show that every column dotted with every _other_ column is zero (i.e., the columns are orthogonal). Note that $$ \mathbf{A}_{i,j} $$ denotes the entry in the $$i$$th row and $$j$$th column of $$\mathbf{A}$$. Let us consider $$ \|\mathbf{A}^\mathsf{T}\mathbf{A}_i \| $$, which we will see contains $$\mathbf{A}_i$$ dotted with every column of $$y \mathbf{A} $$.
+
+  $$
+  \begin{aligned}[t]
+  \| \mathbf{A}^\mathsf{T} \mathbf{A}_i \| & = \left\| \left[\sum_{k=0}^n \mathbf{A}^\mathsf{T}_{0,k} \mathbf{A}_{k,i},\quad \sum_{k=0}^n \mathbf{A}^\mathsf{T}_{1,k} \mathbf{A}_{k,i}, \quad \dotsb \right] \right\| \\
+                & = \left\| \left[\sum_{k=0}^n \mathbf{A}_{k,0} \mathbf{A}_{k,i}, \quad \sum_{k=0}^n \mathbf{A}_{k,1} \mathbf{A}_{k,i}, \quad \dotsb \right] \right\| \\
+                & = \| [\mathbf{A}_0 \cdot \mathbf{A}_i, \quad \mathbf{A}_1 \cdot \mathbf{A}_i, \quad \dotsb] \| \\
+                & = \sqrt{\sum_{m=0}^n (\mathbf{A}_m \cdot \mathbf{A}_i)^2} \\
+                & = \sqrt{(\mathbf{A}_0 \cdot \mathbf{A}_i)^2 + (\mathbf{A}_1 \cdot \mathbf{A}_i)^2 + \dotsb + (\mathbf{A}_i \cdot \mathbf{A}_i)^2 + \dotsb + (\mathbf{A}_{n-1} \cdot \mathbf{A}_{n-1})^2} \\
+                & = \sqrt{(\mathbf{A}_0 \cdot \mathbf{A}_i)^2 + (\mathbf{A}_1 \cdot \mathbf{A}_i)^2 + \dotsb + m^4 + \dotsb + (\mathbf{A}_{n-1} \cdot \mathbf{A}_{n-1})^2} \\
+  \end{aligned}
+  $$
+
+  On the other hand, from step 2 we know $$\| \mathbf{A}^\mathsf{T} \mathbf{A}_i \| = \| \mathbf{A}^\mathsf{T} \| \| \mathbf{A}_i \| = m^2$$, but we just got $$\sqrt{m^4 + \textrm{other non-negative terms}}$$. Therefore all of the other non-negative terms in the radical have to be 0. Therefore $$\mathbf{A}_i \cdot \mathbf{A}_m = 0$$ when $$i \neq m$$. The columns are orthogonal.
+
+
+</div>
+</details>
+
 
 ### Things to Remember About Condition Numbers
 *   For any matrix $${\bf A}$$, $$\text{cond}({\bf A}) \geq 1.$$
