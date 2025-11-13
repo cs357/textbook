@@ -5,91 +5,83 @@ sort: 16
 author:
   - CS 357 Course Staff
 changelog:
-
+  - name: Dev Singh
+    netid: dsingh14
+    date: 2025-11-12
+    message: fix code snippet
   - name: Dev Singh
     netid: dsingh14
     date: 2024-10-31
     message: fixed gradient calculation
 
-  - 
-    name: Kaiyao Ke
+  - name: Kaiyao Ke
     netid: kaiyaok2
     date: 2024-03-17
     message: changed the order of the notes
-  
-  - 
-    name: Kaiyao Ke
+
+  - name: Kaiyao Ke
     netid: kaiyaok2
     date: 2024-03-01
     message: aligned notes with slides, added examples and refactored existing notes
 
-  - 
-    name: Jerry Yang
+  - name: Jerry Yang
     netid: jiayiy7
     date: 2020-08-08
     message: adds unimodal examples
 
-  - 
-    name: Mariana Silva
+  - name: Mariana Silva
     netid: mfsilva
     date: 2020-04-26
     message: small text revision
 
-  - 
-    name: Adam Stewart
+  - name: Adam Stewart
     netid: adamjs5
     date: 2018-04-25
     message: fixes missing parenthesis in `newtons_method`
 
-  - 
-    name: Adam Stewart
+  - name: Adam Stewart
     netid: adamjs5
     date: 2017-11-25
     message: fixes missing partial in Hessian matrix
 
-  - 
-    name: Kaushik Kulkarni
+  - name: Kaushik Kulkarni
     netid: kgk2
     date: 2017-11-20
     message: fixes table formatting
 
-  - 
-    name: Nate Bowman
+  - name: Nate Bowman
     netid: nlbowma2
     date: 2017-11-20
     message: adds review questions
 
-  - 
-    name: Erin Carrier
+  - name: Erin Carrier
     netid: ecarrie2
     date: 2017-11-20
     message: removes Gauss-Newton/LM, minor rewording and small changes throughout
 
-  - 
-    name: Kaushik Kulkarni
+  - name: Kaushik Kulkarni
     netid: kgk2
     date: 2017-10-25
     message: first full draft
 
-  - 
-    name: Arun Lakshmanan
+  - name: Arun Lakshmanan
     netid: lakshma2
     date: 2017-10-25
     message: first full draft
 
-  - 
-    name: Luke Olson
+  - name: Luke Olson
     netid: lukeo
     date: 2017-10-17
     message: outline
 ---
+
 ## Learning objectives
 
 - Recognize the goal of optimization: finding an approximation of the minimum of a function
 - Understand basic optimization approaches
-- Set up a problem as an *optimization* problem
-- Understand two methods of 1-D optimization: *Golden Section Search* and *Newton's Method (1D)*
-- Understand two methods of N-D optimization: *Steepest Descent* and *Newton's Method (N-D)*
+- Set up a problem as an _optimization_ problem
+- Understand two methods of 1-D optimization: _Golden Section Search_ and _Newton's Method (1D)_
+- Understand two methods of N-D optimization: _Steepest Descent_ and _Newton's Method (N-D)_
 - Identify challenges in optimization
 
 ## Optimization: Finding Minima of a Function
@@ -101,20 +93,21 @@ point $$\boldsymbol{x}^*\in S$$ is called the _minimizer_ or _minimum_ of
 $$f$$ if $$f(\boldsymbol{x}^*)\leq f(\boldsymbol{x}) \, \forall
 x\in S$$.
 
-There are two types of optimization: 
+There are two types of optimization:
 
-* Unconstrained Optimization: find $$\boldsymbol{x}^*$$ such that $$f(\boldsymbol{x}^*) = \underset{\boldsymbol{x}}{\mathrm{min}}\hspace{1mm}f(\boldsymbol{x})$$
-* Constrained Optimization: find $$\boldsymbol{x}^*$$ such that $$f(\boldsymbol{x}^*) = \underset{\boldsymbol{x}}{\mathrm{min}}\hspace{1mm}f(\boldsymbol{x})$$\\
-$$\hspace{2cm} \text{such that: } \boldsymbol{g}(\boldsymbol{x}) = 0 \hspace{5mm} \leftarrow \hspace{5mm} \text{\small ``Equality Constraints"}$$
-$$\hspace{2cm} \text{and / or: } \boldsymbol{h}(\boldsymbol{x}) \leq 0 \hspace{5mm} \leftarrow \hspace{5mm} \text{\small ``Inequality Constraints"}$$\\
-for some other functions $$\boldsymbol{g}$$ and/or $$\boldsymbol{h}$$.
+- Unconstrained Optimization: find $$\boldsymbol{x}^*$$ such that $$f(\boldsymbol{x}^*) = \underset{\boldsymbol{x}}{\mathrm{min}}\hspace{1mm}f(\boldsymbol{x})$$
+- Constrained Optimization: find $$\boldsymbol{x}^*$$ such that $$f(\boldsymbol{x}^*) = \underset{\boldsymbol{x}}{\mathrm{min}}\hspace{1mm}f(\boldsymbol{x})$$\\
+  $$\hspace{2cm} \text{such that: } \boldsymbol{g}(\boldsymbol{x}) = 0 \hspace{5mm} \leftarrow \hspace{5mm} \text{\small ``Equality Constraints"}$$
+  $$\hspace{2cm} \text{and / or: } \boldsymbol{h}(\boldsymbol{x}) \leq 0 \hspace{5mm} \leftarrow \hspace{5mm} \text{\small ``Inequality Constraints"}$$\\
+  for some other functions $$\boldsymbol{g}$$ and/or $$\boldsymbol{h}$$.
 
 Notice that a solution is not guaranteed to exist for an optimization problem if the domain $$S$$ is infinite.
 
 For the rest of this topic we try to find the _minimizer_ of a function. Notice that if we want a _maximizer_ $$\boldsymbol{y}^*$$ of a function $$\boldsymbol{f}$$ such that $$f(\boldsymbol{y}^{*}) = \underset{\boldsymbol{y}}{\mathrm{max}}\hspace{1mm}f(\boldsymbol{y})$$, we can instead solve the minimization problem to find the _minimizer_ $$\boldsymbol{x}^*$$ where $$\boldsymbol{x}^*$$ such that $$f(\boldsymbol{x}^*) = \underset{\boldsymbol{x}}{\mathrm{min}}(\hspace{1mm}-f(\boldsymbol{x}))$$.
 
-### Example:  Calculus problem
-Given $$d_1, d_2 \gt 0$$, find:  
+### Example: Calculus problem
+
+Given $$d_1, d_2 \gt 0$$, find:
 
 $$
 \boxed{
@@ -135,7 +128,6 @@ $$
 \end{aligned}
 }
 $$
-
 
 <details>
     <summary><strong>More Details</strong></summary>
@@ -159,10 +151,10 @@ Here's a visualization of the relationship between <span>\(d_1\)</span> and <spa
 
 Consider a domain $$S\subset\mathbb{R}^n$$, and $$f:S\to\mathbb{R}$$.
 
-* **Local Minima**: $$\boldsymbol{x}^*$$ is a _local minimum_ if $$f(\boldsymbol{x}^*)\leq
+- **Local Minima**: $$\boldsymbol{x}^*$$ is a _local minimum_ if $$f(\boldsymbol{x}^*)\leq
     f(\boldsymbol{x})$$ for all feasible $$\boldsymbol{x}$$ in some neighborhood of $$\boldsymbol{x}^*$$.
 
-* **Global Minima**: $$\boldsymbol{x}^*$$ is a _global minimum_ if $$f(\boldsymbol{x}^*)\leq
+- **Global Minima**: $$\boldsymbol{x}^*$$ is a _global minimum_ if $$f(\boldsymbol{x}^*)\leq
     f(\boldsymbol{x})$$ for all $$\boldsymbol{x}\in S$$.
 
 Note that it is easier to find the local
@@ -179,18 +171,19 @@ Also, note that a function can always have more than 1 minima.
 First, let's learn about some techniques to resolve 1-D optimization problems.
 
 Given a nonlinear, continuous and smooth function $$f:\;\mathbb{R}\to \mathbb{R}$$ and the optimization problem $$f(\boldsymbol{x}^*) = \underset{\boldsymbol{x \in S}}{\mathrm{min}}\hspace{1mm}f(\boldsymbol{x})$$, there are two types of methods which we'll cover in this class:
-* Derivative-free methods: Only requiring the evaluation of $$f(\boldsymbol{x})$$ on a set of $$x \in S$$. In particular, we cover the **Golden Section Search** method.
-* Second-derivative methods: Requiring the evaluation of $$f(\boldsymbol{x})$$, $$f'(\boldsymbol{x})$$, and $$f''(\boldsymbol{x})$$ and on a set of $$x \in S$$. In particular, we cover **Newton's Method for 1-D**.
+
+- Derivative-free methods: Only requiring the evaluation of $$f(\boldsymbol{x})$$ on a set of $$x \in S$$. In particular, we cover the **Golden Section Search** method.
+- Second-derivative methods: Requiring the evaluation of $$f(\boldsymbol{x})$$, $$f'(\boldsymbol{x})$$, and $$f''(\boldsymbol{x})$$ and on a set of $$x \in S$$. In particular, we cover **Newton's Method for 1-D**.
 
 ## Criteria for 1-D Local Minima
 
 In the case of 1-D optimization, we need to find the minima of a continuous and smooth function $$f:\;\mathbb{R} \to \mathbb{R}$$. Recall from calculus that when $$f'(x^*) = 0$$, we get a local maximum if $$f''(x^*) < 0$$, and a local minimum if $$f''(x^*) > 0$$. (Notice that we cannot conclude anything if $$f''(x^*) = 0$$). We can then tell if a point $$x^* \in S$$ is a local minimum (i.e., find $$\boldsymbol{x}^*$$ such that $$f(\boldsymbol{x}^*) = \underset{\boldsymbol{x}}{\mathrm{min}}\hspace{1mm}f(\boldsymbol{x})$$) by getting the values of the first and second derivatives. Specifically,
 
-1. (First-order) Necessary condition:  $$f'(x^*) = 0$$
+1. (First-order) Necessary condition: $$f'(x^*) = 0$$
 2. (Second-order) Sufficient condition: $$f'(x^*) = 0$$ and $$f''(x^*) > 0$$.
 
-
 ### Example: 1-D Optimization Problem
+
 Consider the function
 $$f(x) = x^3 - 6x^2 + 9x -6$$
 
@@ -236,6 +229,7 @@ being a local minimum.
 </details>
 
 ### Example: Find All Stationary Points of a 1-D Function
+
 Consider the function
 $$f(x) = \frac{x^4}{4} - \frac{x^3}{3} - 11x^2 + 40x$$
 
@@ -258,6 +252,7 @@ Now, observe that:<br>
 (2) \(f''(x_2) = 3 \times (2)^2 - 2 \times 2 - 22 \lt 0\) \(\rightarrow\) \(\bf{x_2 = 2}\) is a local \(\textbf{maximum}\).<br>
 
 (3) \(f''(x_3) = 3 \times (4)^2 - 2 \times 4 - 22 \gt 0\) \(\rightarrow\) \(\bf{x_3 = 4}\) is a local \(\textbf{minimum}\). <br>
+
 </details>
 
 ## Unimodal Functions
@@ -266,7 +261,7 @@ Let us consider a special family of functions that makes the optimization task e
 
 A function $$f:\mathbb{R}\to \mathbb{R}$$ is **unimodal** on an interval $$[a,b]$$ if this function has a unique (global) minimum on that interval $$[a,b]$$
 
-More rigidly, a 1-dimensional function $$f: S\to\mathbb{R}$$, is said to be unimodal on an interval $$[a,b]$$ if there is a unique $$\bf{x}^* \in [a, b]$$ such that $$f(\bf{x}^*)$$ is the minimum in $$[a, b]$$, and that for all $$x_1, x_2 \in [a, b]$$ where $$x_1 \lt x_2$$, the following two properties hold: 
+More rigidly, a 1-dimensional function $$f: S\to\mathbb{R}$$, is said to be unimodal on an interval $$[a,b]$$ if there is a unique $$\bf{x}^* \in [a, b]$$ such that $$f(\bf{x}^*)$$ is the minimum in $$[a, b]$$, and that for all $$x_1, x_2 \in [a, b]$$ where $$x_1 \lt x_2$$, the following two properties hold:
 
 $$x_2 < x^*\Rightarrow f(x_1)>f(x_2)$$
 
@@ -278,8 +273,8 @@ Some examples of unimodal functions on an interval:
 
 2. $$f(x) = \begin{cases} x, \text{ for } x \geq 0, \\ 0, \text{ for } x < 0 \end{cases}$$ is not unimodal on $$[-1,1]$$ because the global minimum is not unique. This is an example of a convex function that is not unimodal.
 
-3. $$f(x) = \begin{cases} x, \text{ for } x > 0, \\ -100, \text{ for } x = 0,\\ 0 \text{ for } x < 0\end{cases}$$ is not unimodal on $$[-1,1]$$.  It has a unique minimum at $$x=0$$ but does not steadily decrease(i.e., monotonically decrease) as you move 
-from $$-1$$ to $$0$$.
+3. $$f(x) = \begin{cases} x, \text{ for } x > 0, \\ -100, \text{ for } x = 0,\\ 0 \text{ for } x < 0\end{cases}$$ is not unimodal on $$[-1,1]$$.  It has a unique minimum at $$x=0$$ but does not steadily decrease(i.e., monotonically decrease) as you move
+   from $$-1$$ to $$0$$.
 
 4. $$f(x) = cos(x)$$ is not unimodal on the interval $$[-\pi/2, 2\pi]$$ because it increases on $$[-\pi/2, 0]$$.
 
@@ -297,12 +292,12 @@ Notice that a given a unimodal function $$f$$ and a domain $$[a, b]$$, we can pa
 However, notice that such method would in general require 2 new function evaluations per iteration. Lets see how Golden Section Search can refine this algorithm to require only one function evaluation per step.
 
 ## Golden Section Search (1-D)
+
 Inspired by the algorithm above, we define an _interval reduction_
 method for finding the minimum of a function. As in bisection (for root finding) where we
 reduce the interval such that the reduced interval always contains the root, in
 _Golden Section Search_ we reduce our interval such that it always has a
-unique minimizer in our domain. 
-
+unique minimizer in our domain.
 
 **Algorithm to find the minima of $$f: [a, b] \to \mathbb{R}$$**:
 
@@ -312,10 +307,11 @@ Our goal is to introduce "interior" points $$x_1$$ and $$x_2$$, and reduce the d
 2. If $$f(x_1) \leq f(x_2)$$ our new interval would be $$[a, x_2]$$
 
 Since we do not want two function evaluations per step, we need to ensure that in the next step:
-* If the input domain is $$[a, x_2]$$, reuse $$x_1$$ as one of the 2 new "interior" points, since it lies between $$[a, x_2]$$, and $$f(x_1)$$ has already been evaluated.
-* Similarly, f the input domain is $$[x_1, b]$$, reuse $$x_2$$ as one of the 2 new "interior" points, since it lies between $$[x_1, b]$$, and $$f(x_2)$$ has already been evaluated.
 
-Set $$h_0 = b - a$$ and $$h_1 = b - x_1 = x_2 - a$$. 
+- If the input domain is $$[a, x_2]$$, reuse $$x_1$$ as one of the 2 new "interior" points, since it lies between $$[a, x_2]$$, and $$f(x_1)$$ has already been evaluated.
+- Similarly, f the input domain is $$[x_1, b]$$, reuse $$x_2$$ as one of the 2 new "interior" points, since it lies between $$[x_1, b]$$, and $$f(x_2)$$ has already been evaluated.
+
+Set $$h_0 = b - a$$ and $$h_1 = b - x_1 = x_2 - a$$.
 
 Since we want to make sure that the intervals to be examined "shrinks" at a consistent rate, we need a constant $$\tau$$ such that $$h_1 = \tau h_0$$ (or in general $$h_{k+1} = \tau h_k$$ for all $$k \in \mathbb{N}$$).
 
@@ -351,19 +347,21 @@ the inverse of the "Golden-Ratio" and hence this algorithm is named Golden Secti
 Search.
 
 In golden section search, we do not need to evaluate any derivatives
-of $$f(x)$$.  At each iteration we need $$f(x_1)$$ and $$f(x_2)$$, one of $$x_1$$
+of $$f(x)$$. At each iteration we need $$f(x_1)$$ and $$f(x_2)$$, one of $$x_1$$
 or $$x_2$$ will be the same as the previous iteration, so it only requires
 1 additional function evaluation per iteration (after the first iteration).
 
 ### Example: Golden Section Search "Bracket Length"
+
 Consider running Golden Section search on a function that is unimodal. If golden section search is started with an initial bracket of $$[-10, 10]$$, what is the length of the new bracket after 1 iteration?
+
 <details>
     <summary><strong>Answer</strong></summary>
 $$(10 - (-10)) \times \tau \approx 12.36$$
 </details>
 
-
 ## Newton's Method (1-D)
+
 Using Taylor Expansion, we can approximate the function $$f$$ with a quadratic
 function about $$x_0$$:
 
@@ -401,7 +399,9 @@ in 1-D, we evaluate $$f'(x_k)$$ and $$f''(x_k)$$, so it requires 2 function
 evaluations per iteration.
 
 ### Example: Newton's Method for 1-D
+
 Consider the function $$f(x) = 4x^3 + 2x^2 + 5x + 40$$. If we use the initial guess $$x_0 = 2$$, what would be the value of $$x$$ after one iteration of the Newton’s method?
+
 <details>
     <summary><strong>Answer</strong></summary>
 To apply the first step Newton's method for optimization, we use the iterative formula to get:
@@ -426,40 +426,45 @@ Hence
 
 Finally, apply Newton's method formula:
 \[ x_1 = 2 - \frac{61}{52} \approx 0.827 \]
+
 </details>
 
 ## Definiton of Gradient and Hessian Matrix
 
 Now let us revise some key concepts useful in solving N-dimensional optimization problems:
 
-Given  $$f:\mathbb{R}^n\to \mathbb{R}$$, we define the gradient function $$\nabla
+Given $$f:\mathbb{R}^n\to \mathbb{R}$$, we define the gradient function $$\nabla
 f: \mathbb{R}^n\to\mathbb{R}^n$$ as:
 
-$$ \nabla f(\boldsymbol{x}) =
+$$
+\nabla f(\boldsymbol{x}) =
 \begin{bmatrix}
 \dfrac{\partial f}{\partial x_1} \\
 \dfrac{\partial f}{\partial x_2} \\
 \vdots \\
 \dfrac{\partial f}{\partial x_n} \\
-\end{bmatrix} $$
+\end{bmatrix}
+$$
 
-Given  $$f:\mathbb{R}^n\to \mathbb{R}$$, we define the Hessian matrix $${\bf H}_f:
+Given $$f:\mathbb{R}^n\to \mathbb{R}$$, we define the Hessian matrix $${\bf H}_f:
 \mathbb{R}^n\to\mathbb{R}^{n\times n}$$ as:
 
-$${\bf H}_f(\boldsymbol{x}) = 
+$$
+{\bf H}_f(\boldsymbol{x}) =
 \begin{bmatrix}
 \dfrac{\partial^2 f}{\partial x_1^2} & \dfrac{\partial^2 f}{\partial x_1 \partial x_2} & \ldots & \dfrac{\partial^2 f}{\partial x_1 \partial x_n} \\
 \dfrac{\partial^2 f}{\partial x_2 \partial x_1} & \dfrac{\partial^2 f}{\partial x_2^2} & \ldots & \dfrac{\partial^2 f}{\partial x_2 \partial x_n} \\
 \vdots & \vdots & \ddots & \vdots \\
 \dfrac{\partial^2 f}{\partial x_n \partial x_1} & \dfrac{\partial^2 f}{\partial x_n \partial x_2} & \ldots & \dfrac{\partial^2 f}{\partial x_n^2}
-\end{bmatrix}$$
-
+\end{bmatrix}
+$$
 
 ## Two Types of Methods to Resolve N-Dimensional Optimization Problems
 
 Given a nonlinear, continuous and smooth function $$f:\;\mathbb{R}^n\to \mathbb{R}$$ and the optimization problem $$f(\boldsymbol{x}^*) = \underset{\boldsymbol{x \in S}}{\mathrm{min}}\hspace{1mm}f(\boldsymbol{x})$$, there are two types of methods which we'll cover in this class:
-* Gradient (first-derivative) methods: Requiring the evaluation of $$f(\boldsymbol{x})$$ and $$\nabla f(\boldsymbol{x})$$ on a set of $$x \in S$$. In particular, we cover the **Steepest Descent** method.
-* Hessian (second-derivative) methods: Requiring the evaluation of $$f(\boldsymbol{x})$$, $$\nabla f(\boldsymbol{x})$$, and $${\nabla}^2 f(\boldsymbol{x})$$ and on a set of $$x \in S$$. In particular, we cover **Newton's Method for N-D**.
+
+- Gradient (first-derivative) methods: Requiring the evaluation of $$f(\boldsymbol{x})$$ and $$\nabla f(\boldsymbol{x})$$ on a set of $$x \in S$$. In particular, we cover the **Steepest Descent** method.
+- Hessian (second-derivative) methods: Requiring the evaluation of $$f(\boldsymbol{x})$$, $$\nabla f(\boldsymbol{x})$$, and $${\nabla}^2 f(\boldsymbol{x})$$ and on a set of $$x \in S$$. In particular, we cover **Newton's Method for N-D**.
 
 where:
 
@@ -472,7 +477,7 @@ f(\boldsymbol{x}) = f(\begin{bmatrix}x_1, x_2, \ldots, x_n\end{bmatrix})
 $$
 
 $$
-\nabla f(\boldsymbol{x}) = \text{\small gradient} (x) = 
+\nabla f(\boldsymbol{x}) = \text{\small gradient} (x) =
 \begin{bmatrix}
 \dfrac{\partial f}{\partial x_1} \\
 \dfrac{\partial f}{\partial x_2} \\
@@ -490,7 +495,6 @@ $$
 \dfrac{\partial^2 f}{\partial x_n \partial x_1} & \dfrac{\partial^2 f}{\partial x_n \partial x_2} & \ldots & \dfrac{\partial^2 f}{\partial x_n^2}
 \end{bmatrix}
 $$
-
 
 ## Criteria for N-D Local Minima
 
@@ -521,7 +525,7 @@ In the case of n-dimensional optimization, we need to find the minima of a conti
       <td>Saddle Point</td>
     </tr>
   </tbody>
-</table> 
+</table>
 
 Therefore, below are the conditions to find $$\boldsymbol{x}^*$$ such that $$f(\boldsymbol{x}^*) = \underset{\boldsymbol{x}}{\mathrm{min}}\hspace{1mm}f(\boldsymbol{x})$$:
 
@@ -532,6 +536,7 @@ Therefore, below are the conditions to find $$\boldsymbol{x}^*$$ such that $$f(\
    and the Hessian matrix $$H_f(\boldsymbol{x^*})$$ is positive definite.
 
 ### Example: Find All Stationary Points of a N-D Function
+
 Consider the function
 
 $$f(x_1, x_2) = 2x_1^3 + 4x_2^2 + 2x_2 - 24x_1$$
@@ -544,19 +549,19 @@ Find the stationary points and check the sufficient conditions.
 The gradient is as follows:
 
 \[
-\nabla f(\boldsymbol{x}) = \text{\small gradient} (x) = 
+\nabla f(\boldsymbol{x}) = \text{\small gradient} (x) =
 \begin{bmatrix}
 6x_1^2 - 24 \\
 8x_2 + 2 \\
 \end{bmatrix}
 \]
 
-Solving for  \(\nabla f = 0 \text{  gives  }6x_1^2 - 24 = 0\text{  and  }8x_2 + 2 = 0\text{,  so  }x_1 = \pm 2 \text{  and  } x_2 = -0.25\). <br>
+Solving for \(\nabla f = 0 \text{ gives }6x_1^2 - 24 = 0\text{ and }8x_2 + 2 = 0\text{, so }x_1 = \pm 2 \text{ and } x_2 = -0.25\). <br>
 
 The Hessian matrix is as follows:
 
 \[
-{\bf H}_f(\boldsymbol{x}) =
+{\bf H}\_f(\boldsymbol{x}) =
 \begin{bmatrix}
 12x_1 & 0\\
 0 & 8 \\
@@ -565,17 +570,17 @@ The Hessian matrix is as follows:
 
 \(\textbf{Situation 1:}\) <br>
 \[
-x^* = 
+x^_ =
 \begin{bmatrix}
 2 \\
 -0.25 \\
-\end{bmatrix} \rightarrow {\bf H}_f =
+\end{bmatrix} \rightarrow {\bf H}\_f =
 \begin{bmatrix}
 24 & 0 \\
 0 & 8 \\
 \end{bmatrix}
 \]
-The Hessian is positive definite (contains only positive eigenvalues), so that \(x^* = 
+The Hessian is positive definite (contains only positive eigenvalues), so that \(x^_ =
 \begin{bmatrix}
 2 \\
 -0.25 \\
@@ -583,23 +588,23 @@ The Hessian is positive definite (contains only positive eigenvalues), so that \
 
 \(\textbf{Situation 2:}\) <br>
 \[
-x^* = 
+x^_ =
 \begin{bmatrix}
 -2 \\
 -0.25 \\
-\end{bmatrix} \rightarrow {\bf H}_f =
+\end{bmatrix} \rightarrow {\bf H}\_f =
 \begin{bmatrix}
 -24 & 0 \\
 0 & 8 \\
 \end{bmatrix}
 \]
-The Hessian is indefinite, so that \(x^* = 
+The Hessian is indefinite, so that \(x^_ =
 \begin{bmatrix}
 2 \\
 -0.25 \\
 \end{bmatrix}\) is a \(\textbf{saddle point}\). <br>
-</details>
 
+</details>
 
 ## Steepest Descent (N-D)
 
@@ -618,8 +623,10 @@ still do not know the distance we need to move in order to approach the
 minimum. We need to perform a "line search" among the steepest descent direction. If $$\boldsymbol{x_k}$$ was our earlier point then we select the next
 guess by moving it in the direction of the negative gradient:
 
-$$\boldsymbol{x_{k+1}} = \boldsymbol{x_k} + \alpha(-\nabla
-f(\boldsymbol{x_k})).$$
+$$
+\boldsymbol{x_{k+1}} = \boldsymbol{x_k} + \alpha(-\nabla
+f(\boldsymbol{x_k})).
+$$
 
 The next problem would be to find the $$\boldsymbol{\alpha}$$, and we use the 1-dimensional
 optimization algorithms to find the required $$\boldsymbol{\alpha}$$. With current $$\boldsymbol{x_k}$$, the following equation defines $$\boldsymbol{\alpha_k}$$, the optimal choice of $$\boldsymbol{\alpha}$$ that brings $$\boldsymbol{x_{k+1}}$$ to the minimal point in the line search:
@@ -635,17 +642,19 @@ $$
 $$
 
 The Steepest Descent algorithm can be formalized as:
-* Initial Guess: $$\bf{x_0}$$
-* Evaluate Steepest Descent: $$\bf{s_k = -\nabla f(x_k)}$$
-* Perform a line search to obtain $$\alpha _k$$ (for example, Golden Section Search):
-$$
-\alpha_k = \underset{\alpha}{\mathrm{argmin}} f(\bf{x_k} + \alpha \bf{s_k})
-$$
-* Update: $$\bf{x_{k+1} = x_k + \alpha _k s_k}$$
+
+- Initial Guess: $$\bf{x_0}$$
+- Evaluate Steepest Descent: $$\bf{s_k = -\nabla f(x_k)}$$
+- Perform a line search to obtain $$\alpha _k$$ (for example, Golden Section Search):
+  $$
+  \alpha_k = \underset{\alpha}{\mathrm{argmin}} f(\bf{x_k} + \alpha \bf{s_k})
+  $$
+- Update: $$\bf{x_{k+1} = x_k + \alpha _k s_k}$$
 
 Generally, the _steepest descent_ method **converges linearly**.
 
 To translate this algorithm to Python:
+
 ```python
 import numpy.linalg as la
 import scipy.optimize as opt
@@ -670,6 +679,7 @@ def steepest_descent(x_init):
 
     return x_new
 ```
+
 Side Note: Observe that $$x_{k+1} = \bf{x_k} - \alpha _k \nabla f(x_k)$$, so $$\frac{dx_{k+1}}{d\alpha} = -\nabla f(x_k)$$.
 Since $$\alpha_k = \underset{\alpha}{\mathrm{argmin}} f(\bf{x_k} + \alpha \bf{s_k})$$, one necessary condition of the line search is $$\frac{df}{d\alpha} = 0$$. Then according to chain rule:
 
@@ -680,7 +690,9 @@ $$
 So $$\nabla f(x_{k+1})$$ is **orthogonal** to $$\nabla f(x_k)$$.
 
 ### Example: Steepest Descent Direction
+
 Consider the function $$f(x_1, x_2) = 10(x_1)^3 - (x_2)^2 + x_1 - 1$$. What is the steepest descent direction at the starting guess $$x_1 = 2, x_2 = 2$$?
+
 <details>
     <summary><strong>Answer</strong></summary>
 \[
@@ -702,17 +714,19 @@ x_2 \\
 \begin{bmatrix}
 30 \times 4 + 1 \\
 -2 \times 2 \\
-\end{bmatrix} = 
+\end{bmatrix} =
 \bf{\begin{bmatrix}
 -121 \\
 4 \\
 \end{bmatrix}}
 \]
+
 </details>
 
-
 ### Example: Steepest Descent Iteration
+
 Consider the function $$f(x_1, x_2) = (x_1 - 1)^2 + (x_2 - 1)^2$$. What is the steepest descent direction at the starting guess $$y_0 = [3, 3]^T$$? What will $$y_1$$ be if we choose $$\alpha_0 = 1$$?
+
 <details>
     <summary><strong>Answer</strong></summary>
 
@@ -725,7 +739,7 @@ y_1 = y_0 - \alpha_0 \nabla f(x_0)
 \begin{bmatrix}
 2(y_1 - 1) \\
 2(y_2 - 1) \\
-\end{bmatrix} = 
+\end{bmatrix} =
 \bf{\begin{bmatrix}
 -4 \\
 -4 \\
@@ -741,7 +755,7 @@ y_1 = -
 \bf{\begin{bmatrix}
 -4 \\
 -4 \\
-\end{bmatrix}} = 
+\end{bmatrix}} =
 \bf{\begin{bmatrix}
 -1 \\
 -1 \\
@@ -751,6 +765,7 @@ y_1 = -
 </details>
 
 ### Example: Step Size
+
 Consider the same function $$f(x_1, x_2) = (x_1 - 1)^2 + (x_2 - 1)^2$$ and the initial guess $$y_0 = [3, 3]^T$$. You're now given a contour map visualization of this function. What is the ideal choice of $$\alpha$$?
 <br/>
 
@@ -773,7 +788,7 @@ From the contour map, observe that \(f\) has a local minimum at \(
 \] <br>
 
 It is clear that with \(\alpha = 0.5\), \[
-\bf{y_1} = 
+\bf{y_1} =
 \begin{bmatrix}
 3 \\
 3 \\
@@ -781,7 +796,7 @@ It is clear that with \(\alpha = 0.5\), \[
 \begin{bmatrix}
 4 \\
 4 \\
-\end{bmatrix} = 
+\end{bmatrix} =
 \bf{\begin{bmatrix}
 1 \\
 1 \\
@@ -818,24 +833,28 @@ Which becomes a system of linear equations where we need to solve for
 the Newton step $$\boldsymbol{s}$$.
 
 The steps of the N-Dimensional Newton's Method for optimization can be formally described as follows:
-* Initial Guess: $$\boldsymbol{x_0}$$
-* Solve: $${\bf H}_f(\boldsymbol{x_k})\boldsymbol{s_k} = -\nabla f(\boldsymbol{x_k})$$
-* Update: $$\bf{x_{k+1}} = \bf{x_k} + \bf{s_k}$$
+
+- Initial Guess: $$\boldsymbol{x_0}$$
+- Solve: $${\bf H}_f(\boldsymbol{x_k})\boldsymbol{s_k} = -\nabla f(\boldsymbol{x_k})$$
+- Update: $$\bf{x_{k+1}} = \bf{x_k} + \bf{s_k}$$
 
 Note that the Hessian is related to the curvature and therefore contains the
 information about how large the step should be.
 
 Some properties of this algorithm:
-* Quadratic convergence in normal circumstances.
-* Need second derivatives L.
-* Local convergence (requires start guess to be close to solution).
-* Works poorly when Hessian is nearly indefinite.
-* Cost per iteration: $$O(n^3)$$.
+
+- Quadratic convergence in normal circumstances.
+- Need second derivatives L.
+- Local convergence (requires start guess to be close to solution).
+- Works poorly when Hessian is nearly indefinite.
+- Cost per iteration: $$O(n^3)$$.
 
 This algorithm can be expressed as a Python function as follows:
 
 ```python
 import numpy as np
+import numpy.linalg as la
+
 def hessian(x):
     # Computes the hessian matrix corresponding the given objective function
     return hessian_matrix_at_x
@@ -855,7 +874,9 @@ def newtons_method(x_init):
 ```
 
 ### Example: One Step of Newton's Method for N-D Optimization
+
 To find a minimum of the function $$f(x, y) = 3x^2 +2y^2$$, what is the expression for one step of Newton’s method?
+
 <details>
     <summary><strong>Answer</strong></summary>
 
@@ -869,15 +890,15 @@ And the Hessian matrix of \( f(x, y) \) is given by:
 
 The solving step of Newton's algorithm of N-D optimization is:
 
-\[ H_f(x_k, y_k)\boldsymbol{s_k} = -\nabla f(x_{k}, y_{k})\]
+\[ H*f(x_k, y_k)\boldsymbol{s_k} = -\nabla f(x*{k}, y\_{k})\]
 
 This is mathematically equivalent to:
 
-\[{\bf{s_k}} =  - H_f(x_k, y_k)^{-1} \nabla f(x_k, y_k) \]
+\[{\bf{s_k}} = - H_f(x_k, y_k)^{-1} \nabla f(x_k, y_k) \]
 
 Therefore, the update step of Newton's algorithm of N-D optimization is:
 
-\[ \begin{bmatrix} x_{k+1} \\ y_{k+1} \end{bmatrix} = \begin{bmatrix} x_k \\ y_k \end{bmatrix} - H_f(x_k, y_k)^{-1} \nabla f(x_k, y_k) \]
+\[ \begin{bmatrix} x*{k+1} \\ y*{k+1} \end{bmatrix} = \begin{bmatrix} x_k \\ y_k \end{bmatrix} - H_f(x_k, y_k)^{-1} \nabla f(x_k, y_k) \]
 
 Given the function \( f(x, y) = 3x^2 + 2y^2 \), its gradient \( \nabla f(x_k, y_k) \) and Hessian matrix \( H_f(x_k, y_k) \) are:
 
@@ -886,21 +907,25 @@ Given the function \( f(x, y) = 3x^2 + 2y^2 \), its gradient \( \nabla f(x_k, y_
 \[ H_f(x_k, y_k) = \begin{bmatrix} \frac{\partial^2 f}{\partial {x_k}^2} & \frac{\partial^2 f}{\partial x_k \partial y_k} \\ \frac{\partial^2 f}{\partial y_k \partial x_k} & \frac{\partial^2 f}{\partial {y_k}^2} \end{bmatrix} = \begin{bmatrix} 6 & 0 \\ 0 & 4 \end{bmatrix} \]
 
 So the answer is:
-\[ \begin{bmatrix} x_{k+1} \\ y_{k+1} \end{bmatrix} = \begin{bmatrix} x_k \\ y_k \end{bmatrix} -  {\begin{bmatrix} 6 & 0 \\ 0 & 4 \end{bmatrix}}^{-1} \begin{bmatrix} 6x_k \\ 4y_k \end{bmatrix} \]
+\[ \begin{bmatrix} x*{k+1} \\ y*{k+1} \end{bmatrix} = \begin{bmatrix} x_k \\ y_k \end{bmatrix} - {\begin{bmatrix} 6 & 0 \\ 0 & 4 \end{bmatrix}}^{-1} \begin{bmatrix} 6x_k \\ 4y_k \end{bmatrix} \]
 
 </details>
 
 ### Example: Convergence of Newton's Method for N-D Optimization
+
 When using the Newton’s Method to find the minimizer of the function $$f(x, y) = 0.5x^2 +2.5y^2$$, estimate the number of iterations it would take for convergence?
+
 <details>
     <summary><strong>Answer</strong></summary>
 
 Answer: \(\textbf{1}\).<br>
 
-Reason: Notice that Newton's Method for N-D Optimization is derived from Taylor series truncated after quadratic terms (i.e,.\(\frac{1}{2}s^T {\bf H}_f(\boldsymbol{x})s\)). This means that it is accurate for quadratic functions.
+Reason: Notice that Newton's Method for N-D Optimization is derived from Taylor series truncated after quadratic terms (i.e,.\(\frac{1}{2}s^T {\bf H}\_f(\boldsymbol{x})s\)). This means that it is accurate for quadratic functions.
+
 </details>
 
 ## Review Questions
+
 <ol>
   <li> What are the necessary and sufficient conditions for a point to be a local minimum in one dimension?</li>
   <li> What are the necessary and sufficient conditions for a point to be a local minimum in <span>\({n}\)</span> dimensions?</li>
@@ -922,6 +947,3 @@ Reason: Notice that Newton's Method for N-D Optimization is derived from Taylor 
   <li> What operations do you need to perform each iteration of Newton's method in <span>\({n}\)</span> dimensions?</li>
   <li> What is the convergence rate of Newton's method?</li>
 </ol>
-
-
-
