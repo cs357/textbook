@@ -135,9 +135,7 @@ $$\mathbf{A}^T\mathbf{A}(\mathbf{A}^T\mathbf{x}) = \lambda (\mathbf{A}^T\mathbf{
 
 ## Time Complexity
 
-The time-complexity for computing the SVD factorization of an arbitrary \\(m \times n\\) matrix is $$\alpha (m^2n + n^3)$$, where the constant $$\alpha$$ ranges from 4 to 10 (or more) depending on the algorithm.
-
-In general, we can define the cost as: $$\mathcal{O}(m^2n + n^3)$$
+The number of floating-point operations used when computing the SVD factorization of an arbitrary \\(m \times n\\) matrix is $$\alpha (mn^2 + n^3)$$, where the constant $$\alpha$$ ranges from 4 to 10 (or more) depending on the algorithm. Thus, for square matrices, we have an algorithmic complexity of $$\mathcal{O}(n^3)$$.
 
 <div class="figure"> <img src="{{ site.baseurl }}/assets/img/figs/svd_graph.png" height=300 width=600/> </div>
 
