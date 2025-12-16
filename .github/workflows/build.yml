@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+    paths-ignore: # ignore updates to textbook content as they dont change the built image
+      - notes/**
+      - slides/**
+      - links/**
+      - assets/**
 
 env:
   REGISTRY: ghcr.io
