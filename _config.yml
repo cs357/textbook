@@ -11,17 +11,9 @@ edit: false
 author: "CS 357 @ UIUC Course Staff"
 issuesUrl: https://github.com/cs357/textbook/issues
 
-# taken from website config
-zoomLinkLargeClassroom: https://illinois.zoom.us/j/82020014275?pwd=dlBxRGY0QXFUVmZVSHU5S2oxeXBBUT09
-prairielearnUrl: https://us.prairielearn.com/pl/course_instance/171058
-prairietest: https://www.prairietest.org/
-discordUrl: https://discord.gg/fFudKaJ2d7
-
 
 theme: cs357-rtd-theme
 
-# NOTE: the semester tag is no longer used.
-# semester: fa2024
 courseUrl: https://cs357.cs.illinois.edu
 
 addons:
