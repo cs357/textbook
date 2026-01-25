@@ -232,7 +232,7 @@ where \\(df_i(x_j) \\) is the approximation of \\(f_i\\) at \\(x_j\\) using any 
 #### Example
 
 Assume \\(f = \begin{bmatrix}
-           f_1(x) = 2x^2 + 6x_1x_2 &
+           f_1(x) = 2x_1^2 + 6x_1x_2 &
            f_2(x) = 3x_1 + 7x_2
          \end{bmatrix}\\) and we are trying to find the forward finite difference gradient approximation at \\(x_1 = 3, x_2 = 7\\) when \\(h = 0.1\\).
 
@@ -245,9 +245,9 @@ Assume \\(f = \begin{bmatrix}
          \end{bmatrix} \]</div>
 
 <div>\[\ df_1(x_1) = \frac{f_1(x_1 + h, x_2) - f_1(x_1, x_2)}{h} = \frac{f_1(3 + 0.1, 7) - f_1(3, 7)}{0.1}  = 54.2 \]</div>
-<div>\[\ df(x_2) = \frac{f_1(x_1, x_2 + h) - f_1(x_1, x_2)}{h} = \frac{f_1(3, 7 + 0.1) - f_1(3, 7)}{0.1} = 18 \]</div>
-<div>\[\ df_1(x_1) = \frac{f_2(x_1 + h, x_2) - f_2(x_1, x_2)}{h} = \frac{f_2(3 + 0.1, 7) - f_2(3, 7)}{0.1}  = 3 \]</div>
-<div>\[\ df(x_2) = \frac{f_2(x_1, x_2 + h) - f_2(x_1, x_2)}{h} = \frac{f_2(3, 7 + 0.1) - f_2(3, 7)}{0.1} = 7 \]</div>
+<div>\[\ df_1(x_2) = \frac{f_1(x_1, x_2 + h) - f_1(x_1, x_2)}{h} = \frac{f_1(3, 7 + 0.1) - f_1(3, 7)}{0.1} = 18 \]</div>
+<div>\[\ df_2(x_1) = \frac{f_2(x_1 + h, x_2) - f_2(x_1, x_2)}{h} = \frac{f_2(3 + 0.1, 7) - f_2(3, 7)}{0.1}  = 3 \]</div>
+<div>\[\ df_2(x_2) = \frac{f_2(x_1, x_2 + h) - f_2(x_1, x_2)}{h} = \frac{f_2(3, 7 + 0.1) - f_2(3, 7)}{0.1} = 7 \]</div>
 
 We can find the absolute truncation error by:
 
