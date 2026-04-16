@@ -5,6 +5,10 @@ sort: 16
 author:
   - CS 357 Course Staff
 changelog:
+  - name: Jacob Levine
+    netid: jlevine4
+    date: 2026-04-16
+    message: fix broken latex
   - name: Dev Singh
     netid: dsingh14
     date: 2025-11-12
@@ -561,7 +565,7 @@ Solving for \(\nabla f = 0 \text{ gives }6x_1^2 - 24 = 0\text{ and }8x_2 + 2 = 0
 The Hessian matrix is as follows:
 
 \[
-{\bf H}\_f(\boldsymbol{x}) =
+{\bf H}_f(\boldsymbol{x}) =
 \begin{bmatrix}
 12x_1 & 0\\
 0 & 8 \\
@@ -570,17 +574,17 @@ The Hessian matrix is as follows:
 
 \(\textbf{Situation 1:}\) <br>
 \[
-x^_ =
+x^* =
 \begin{bmatrix}
 2 \\
 -0.25 \\
-\end{bmatrix} \rightarrow {\bf H}\_f =
+\end{bmatrix} \rightarrow {\bf H}_f =
 \begin{bmatrix}
 24 & 0 \\
 0 & 8 \\
 \end{bmatrix}
 \]
-The Hessian is positive definite (contains only positive eigenvalues), so that \(x^_ =
+The Hessian is positive definite (contains only positive eigenvalues), so that \(x^* =
 \begin{bmatrix}
 2 \\
 -0.25 \\
@@ -588,17 +592,17 @@ The Hessian is positive definite (contains only positive eigenvalues), so that \
 
 \(\textbf{Situation 2:}\) <br>
 \[
-x^_ =
+x^* =
 \begin{bmatrix}
 -2 \\
 -0.25 \\
-\end{bmatrix} \rightarrow {\bf H}\_f =
+\end{bmatrix} \rightarrow {\bf H}_f =
 \begin{bmatrix}
 -24 & 0 \\
 0 & 8 \\
 \end{bmatrix}
 \]
-The Hessian is indefinite, so that \(x^_ =
+The Hessian is indefinite, so that \(x^* =
 \begin{bmatrix}
 2 \\
 -0.25 \\
